@@ -9,7 +9,7 @@ const Page404 = (props) => {
 
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
-  return <MainContainer className="center">Page is not found</MainContainer>;
+  return <MainContainer className="center">Page not found</MainContainer>;
 };
 // exporting the page with parent container layout..
 export default Layout(Page404);
