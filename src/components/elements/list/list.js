@@ -1,0 +1,443 @@
+import { useEffect, useRef, useState } from "react";
+import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { RowContainer } from "../../styles/containers/styles";
+import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
+import { useNavigate } from "react-router-dom";
+import { deleteData, postData, putData } from "../../../backend/api";
+import CrudForm from "./create";
+import { useTranslation } from "react-i18next";
+import { addPageObject } from "../../../store/actions/pages";
+import FormInput from "../input";
+import Manage from "./manage";
+import Loader from "../loader";
+import Search from "../search";
+import SubPage from "./subPage";
+
+const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title" }) => {
+  const users = useSelector((state) =>
+    state.pages[`${api}`]
+      ? state.pages[`${api}`]
+      : {
+          data: null,
+          isLoading: true,
+          error: null,
+        }
+  );
+  const [showSublist, setShowSubList] = useState(false);
+  const [currentApi] = useState(`${api}`);
+  const [subAttributes, setSubAttributes] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [count, setCount] = useState(0);
+  const themeColors = useSelector((state) => state.themeColors);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [t] = useTranslation();
+  const [showLoader, setShowLoader] = useState(false);
+  /**
+   * Function to set the showLoader state.
+   * @param {boolean} status The status of the loader.
+   */
+  const setLoaderBox = (status) => {
+    setShowLoader(status);
+  };
+  // processing attributes
+  const [initialized, setInitialized] = useState(false);
+  const [prevCrud, setPrevCrud] = useState("");
+  const [formInput, setFormInput] = useState([]);
+  const [errroInput, setErrorInput] = useState([]);
+  const [addValues, setAddValues] = useState({});
+  const [updateId, setUpdateId] = useState("");
+  const [updateValues, setUpdateValues] = useState({});
+  const [udpateView, setUpdateView] = useState(() => {});
+  const [filterView, setFilterView] = useState({});
+  useEffect(() => {
+    const addValuesTemp = {
+      addValues: {},
+      updateValues: {},
+      viewValues: {},
+      errorValues: {},
+      filterValues: {},
+    };
+    let tempFilter = false;
+    let date = new Date();
+    attributes.forEach((item) => {
+      if (item.type === "checkbox") {
+        let bool = JSON.parse(item.default === "false" || item.default === "true" ? item.default : "false");
+        if (item.add) {
+          addValuesTemp.addValues[item.name] = bool;
+        }
+        addValuesTemp.updateValues[item.name] = bool;
+      } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
+        addValuesTemp.addValues[item.name] = date.toISOString();
+        if (item.add) {
+          addValuesTemp.updateValues[item.name] = date.toISOString();
+        }
+      } else if (item.type === "image" || item.type === "file") {
+        if (item.add) {
+          addValuesTemp.addValues[item.name] = "";
+          addValuesTemp.addValues["selected_" + item.name] = [];
+        }
+        addValuesTemp.updateValues[item.name] = "";
+        addValuesTemp.updateValues["selected_" + item.name] = [];
+      } else {
+        if (item.add) {
+          addValuesTemp.addValues[item.name] = item.default;
+        }
+        addValuesTemp.updateValues[item.name] = item.default;
+        if (item.type === "select") {
+          addValuesTemp.filterValues[item.name] = "";
+          tempFilter = true;
+        }
+      }
+      addValuesTemp.errorValues[item.name] = "";
+      addValuesTemp.filterValues["searchkey"] = "";
+    });
+    if (referenceId !== 0) {
+      addValuesTemp.filterValues[parentReference] = referenceId;
+    }
+    setFormInput(attributes);
+    setAddValues(addValuesTemp.addValues);
+    setErrorInput(addValuesTemp.errorValues);
+    setUpdateValues(addValuesTemp.updateValues);
+    setFilterView(addValuesTemp.filterValues);
+
+    setFilter(tempFilter);
+    setInitialized(true);
+  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
+
+  // end processing attributes
+  useEffect(() => {
+    setLoaderBox(users.isLoading);
+    if (currentIndex === 0 && users.data?.count) {
+      setCount(users.data.count);
+    }
+  }, [users, currentIndex]);
+
+  useEffect(() => {
+    if (initialized) {
+      dispatch(addPageObject(currentApi, currentIndex, filterView));
+    }
+  }, [initialized, currentApi, currentIndex, dispatch, filterView]);
+  const refreshView = (currentIndex) => {
+    try {
+      dispatch(addPageObject(currentApi, currentIndex, filterView));
+    } catch {}
+  };
+
+  //crud functions
+  const [isCreating, setIsCreating] = useState(false);
+  const isCreatingHandler = (value, callback) => {
+    if (isCreating) {
+      setUpdateView(() => callback);
+      setIsCreating(false);
+      navigate({}, "", window.location.pathname);
+    } else {
+      window.location.hash = "add";
+      setIsCreating(true);
+    }
+  };
+  const [isEditing, setIsEditing] = useState(false);
+  const isEditingHandler = (value, callback) => {
+    setLoaderBox(true);
+    if (!isEditing) {
+      setUpdateView(() => callback);
+      const updateValues = {};
+      setUpdateId(value._id);
+      formInput.forEach((item) => {
+        if (item.update) {
+          if (item.type === "checkbox") {
+            let bool = value[item.name].toString() === "true" ? true : false;
+            updateValues[item.name] = bool;
+          } else if (item.type === "select") {
+            console.log(typeof value[item.name]);
+            updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
+          } else if (item.type === "image") {
+            updateValues["selected_" + item.name] = [];
+            updateValues[item.name] = value[item.name] ? value[item.name] : "";
+          } else {
+            updateValues[item.name] = value[item.name] ? value[item.name] : "";
+          }
+        }
+      });
+      updateValues["_id"] = value._id;
+      console.log(updateValues);
+      setUpdateValues(updateValues);
+      setIsEditing(true);
+      window.location.hash = "edit";
+    } else {
+      setUpdateId("");
+      navigate({}, "", window.location.pathname);
+      setIsEditing(false);
+    }
+    setLoaderBox(false);
+  };
+  const deleteHandler = async (item, id = "") => {
+    await deleteData({ id }, currentApi)
+      .then((response) => {
+        if (response.status === 200) {
+          setMessage({ type: 1, content: `The '${item.title ? item.title : shortName}' deleted successfully!`, proceed: t("okay") });
+          setCount((count) => count - 1);
+          setIsCreating(false);
+          refreshView();
+          // udpateView(0);
+        } else if (response.status === 404) {
+          setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
+        } else {
+          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+        }
+        setLoaderBox(false);
+      })
+      .catch((error) => {
+        setMessage({ type: 1, content: error.message + "Something went wrong!", proceed: "Okay" });
+        setLoaderBox(false);
+      });
+  };
+  const [action, setActions] = useState([]);
+  const openAction = (item, data) => {
+    // Actions Window
+    setActions({ item, data });
+    // setMessage({ type: 1, content: item.title + " / " + data._id, proceed: "Okay" });
+  };
+  const submitHandler = async (data) => {
+    setLoaderBox(true);
+    const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
+    await postData(saveData, currentApi)
+      .then((response) => {
+        if (response.status === 200) {
+          setMessage({ type: 1, content: `The '${shortName}' saved successfully!`, proceed: "Okay" });
+          setIsCreating(false);
+          refreshView();
+          // udpateView(0);
+        } else if (response.status === 404) {
+          setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
+        } else {
+          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+        }
+        setLoaderBox(false);
+      })
+      .catch((error) => {
+        setMessage({ type: 1, content: error.message + "Something went wrong!", proceed: "Okay" });
+        setLoaderBox(false);
+      });
+  };
+
+  const updateHandler = async (data) => {
+    setLoaderBox(true);
+    data = { ...data, id: updateId };
+    await putData(data, `${currentApi}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setMessage({ type: 1, content: `The '${shortName}' updated successfully!`, proceed: "Okay" });
+          refreshView();
+          setIsEditing(false);
+        } else if (response.status === 404) {
+          setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
+        } else {
+          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+        }
+        setLoaderBox(false);
+      })
+      .catch((error) => {
+        alert(error);
+        setLoaderBox(false);
+      });
+  };
+
+  const filterChange = (option, name) => {
+    const udpateValue = {
+      ...filterView,
+      [name]: option.id,
+    };
+    // updating the formm values
+    setFilterView(udpateValue);
+  };
+  const closeManage = () => {
+    setActions([]);
+  };
+  const TableRowWithActions = ({ attributes, data }) => {
+    return (
+      <Tr key={`${shortName}-${data._id}`}>
+        {attributes.map((attribute) => attribute.view && <Td key={`${attribute.name}-${data._id}`}>{data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()}</Td>)}
+        <Td className="actions">
+          {delPrivilege && (
+            <Button
+              key={`delete-${data._id}`}
+              onClick={() => {
+                setMessage({
+                  type: 2,
+                  content: t("deleteRequest", { label: data[itemTitle] ? data[itemTitle].toString() : "Item" }),
+                  proceed: t("delete"),
+                  onProceed: deleteHandler,
+                  data: data,
+                });
+              }}
+              className="delete"
+            >
+              <span>{t("delete")}</span>
+              <GetIcon icon={"delete"} />
+            </Button>
+          )}
+          {updatePrivilege && (
+            <Button
+              key={`edit-${data._id}`}
+              onClick={() => {
+                isEditingHandler(data, udpateView);
+              }}
+              className="edit"
+            >
+              <span>{t("edit")}</span>
+              <GetIcon icon={"edit"} />
+            </Button>
+          )}
+          {actions.map((item) => {
+            return item.element === "button" ? (
+              <Button
+                key={`custom-${item.id}-${data._id}`}
+                onClick={() => {
+                  if (item.type === "callback") {
+                    item.callback(item, data);
+                  } else if (item.type === "call") {
+                    window.location.href = `tel:${data.mobileNumber}`;
+                  } else if (item.type === "subList") {
+                    setSubAttributes({ item, data });
+                    setShowSubList(true);
+                  } else {
+                    openAction(item, data);
+                  }
+                }}
+                className="edit"
+              >
+                <span>{t(item.title)}</span>
+                <GetIcon icon={item.title} />
+              </Button>
+            ) : (
+              <ToggleContainer key={`${item.id}-${data._id}`}>
+                <ToggleInput
+                  type="checkbox"
+                  checked={data[item.id]}
+                  onChange={async (event) => {
+                    // item.callback(item, data);
+                    setLoaderBox(true);
+                    await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
+                      .then((response) => {
+                        if (response.status === 200) {
+                          if (response.data?.message) {
+                            setMessage({ type: 1, content: t(response.data?.message), proceed: t("okay") });
+                          }
+                          //
+                          refreshView();
+                          // setIsEditing(false);
+                        } else if (response.status === 404) {
+                          refreshView();
+                          setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                        } else {
+                          refreshView();
+                          setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                        }
+                        // setLoaderBox(false);
+                      })
+                      .catch((error) => {
+                        alert(error);
+                        // setLoaderBox(false);
+                      });
+                  }}
+                />
+                <ToggleSlider />
+              </ToggleContainer>
+            );
+          })}
+        </Td>
+      </Tr>
+    );
+  };
+  const closeModal = () => {
+    setShowSubList(false);
+  };
+  const [searchValue, setSearchValue] = useState("");
+  const [filter, setFilter] = useState(false);
+  const searchTimeoutRef = useRef();
+  const handleChange = (event) => {
+    clearTimeout(searchTimeoutRef.current);
+    setSearchValue(event.target.value);
+    searchTimeoutRef.current = setTimeout(() => {
+      setFilterView({ ...filterView, searchkey: event.target.value });
+    }, 300);
+  };
+  useEffect(() => {
+    return () => {
+      clearTimeout(searchTimeoutRef.current);
+    };
+  }, []);
+  //end crud functions
+  return (
+    <RowContainer>
+      <ButtonPanel>
+        <FilterBox>
+          <Search theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
+          {filter && (
+            <Filter
+              theme={themeColors}
+              onClick={() => {
+                refreshView(currentIndex);
+              }}
+            >
+              <FilterIcon />
+            </Filter>
+          )}
+        </FilterBox>
+        <Filters>
+          {formInput.map((item, index) => {
+            return item.type === "select" && (item.filter ?? true) === true && <FormInput customClass={"filter"} placeholder={item.placeHolder} value={filterView[item.name]} key={`input` + index} id={item.name} {...item} onChange={filterChange} />;
+          })}
+        </Filters>
+        {(addPrivilege ? addPrivilege : false) && (
+          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+            <AddIcon></AddIcon>
+            {t("addNew", { label: t(shortName) })}
+          </AddButton>
+        )}
+      </ButtonPanel>
+      <ScrollLayout>
+        <Table>
+          <thead>
+            <Tr>
+              {attributes.map((attribute) => {
+                return attribute.view === true ? <Th key={attribute.name}>{t(attribute.label)}</Th> : "";
+              })}
+            </Tr>
+          </thead>
+          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item) => <TableRowWithActions key={item._id} attributes={attributes} data={item} />)}</tbody>
+        </Table>
+      </ScrollLayout>
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
+      {count > 10 && (
+        <Count>
+          <ArrowButton
+            theme={themeColors}
+            onClick={() => {
+              setCurrentIndex((prev) => (prev > 9 ? prev - 10 : 0));
+            }}
+          >
+            <PreviousIcon />
+          </ArrowButton>
+          {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count}`}
+          <ArrowButton
+            theme={themeColors}
+            onClick={() => {
+              setCurrentIndex((prev) => (prev + 10 > count ? currentIndex : currentIndex + 10));
+            }}
+          >
+            <NextIcon />
+          </ArrowButton>
+        </Count>
+      )}
+      {isCreating && <CrudForm api={api} formType={"post"} header={t("addNewTitle", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formValues={addValues} formErrors={errroInput} submitHandler={submitHandler} isOpenHandler={isCreatingHandler} isOpen={isCreating}></CrudForm>}
+      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
+      {showLoader && <Loader></Loader>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} subAttributes={subAttributes}></SubPage>}
+    </RowContainer>
+  );
+};
+export default ListTable;
