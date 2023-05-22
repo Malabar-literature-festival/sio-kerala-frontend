@@ -1,9 +1,8 @@
 import React from "react";
-import { logo } from "../../../../../images";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container, Logo, LogoContaner, Logout, MNav, Status, Title, User } from "./styels";
+import { Container, Logout, MNav, Status, Title, User } from "./styels";
 import { menuStatus } from "../../../../../store/actions/common";
 import { CloseIcon, LogoutIcon, MenuIcon } from "../../../../../icons";
 import LanguageTooltip from "../../../../elements/tooltip";

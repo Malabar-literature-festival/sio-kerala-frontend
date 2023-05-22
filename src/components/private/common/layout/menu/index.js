@@ -36,7 +36,7 @@ const Menu = (props) => {
           <div key={menuItem._id}>
             {menuItem.submenus.length > 0 ? (
               <React.Fragment>
-                <a
+                <div href="#"
                   onClick={() => {
                     // dispatch(menuStatus(false));
                     // dispatch(currentMenu(menuItem.label));
@@ -44,7 +44,7 @@ const Menu = (props) => {
                   className={location.pathname === menuItem.path ? "open active" : "open"}
                 >
                   <GetIcon icon={`home`} /> {t(menuItem.label)}
-                </a>
+                </div>
                 <SubMenu>
                   {menuItem.submenus?.map((submenu) => (
                     <Link

@@ -17,7 +17,7 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.secForeground};
-  a.main, a.open {
+  a.main, .open {
     text-decoration: none;
     color: ${(props) => props.theme.secForeground};
     padding-left: 1em;
@@ -44,7 +44,7 @@ export const Nav = styled.nav`
     background: rgb(82 103 96);
     margin-left: auto;
   }
-  a.main svg ,a.open svg{
+  a.main svg ,.open svg{
     margin-right: 10px;
     width: 30px;
   }
