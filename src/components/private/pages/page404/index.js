@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Layout from "../../common/layout";
 import {  MainContainer } from "../../common/layout/styels";
+//src/components/styles/page/index.js
+//if you want to write custom style wirte in above file
 const Page404 = (props) => {
   //to update the page title
   useEffect(() => {
