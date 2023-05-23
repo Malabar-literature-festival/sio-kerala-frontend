@@ -9,7 +9,13 @@ import { useSelector } from "react-redux";
 const PageRouter = () => {
   const user = useSelector((state) => state.login);
   const createRouter = (router) => {
-    return <Route key={`${router._id}`} path={`${router.path}`} element={<Switch key={`${router._id}`} page={router.element} />} />;
+    return (
+      <Route
+        key={`${router._id}`}
+        path={`${router.path}`}
+        element={<Switch key={`${router._id}`} page={router.element} />}
+      />
+    );
   };
 
   return (
@@ -33,7 +39,6 @@ const PageRouter = () => {
     </BrowserRouter>
   );
 };
-
 
 // Export PageRouter component as the default export of the module
 export default PageRouter;
