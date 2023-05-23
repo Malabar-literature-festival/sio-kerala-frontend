@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AutoForm from "../../elements/form";
 import Footer from "../footer";
 import { FormContainer, MainContainer } from "./styles";
-import banner from "../../../images/public/banner.png";
+import banner from "../../../images/public/banner.jpeg";
 //using translation
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";

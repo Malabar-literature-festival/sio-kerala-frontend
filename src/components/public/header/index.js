@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HeaderContainer, Nav, Right } from "./styles";
 import { useTranslation } from "react-i18next"; // react-i18next hook for translations
-import LanguageTooltip from "../../elements/tooltip";
 import { ColumnContainer } from "../../styles/containers/styles";
 import { logo } from "../../../images";
 const Header = () => {
@@ -17,11 +16,11 @@ const Header = () => {
         <Right>
           <Nav className="hm">
             {/* Link to the privacy page */}
-            <Link to="https://www.innopark24.de/help">{t("help")}</Link>
+            <Link to="https://www.example.com/help">{t("help")}</Link>
             {/* Link to the imprint page */}
-            <Link to="https://www.innopark24.de/faq">{t("faq")}</Link>
+            <Link to="https://www.example.com/faq">{t("faq")}</Link>
           </Nav>
-          <LanguageTooltip></LanguageTooltip>
+          {/* <LanguageTooltip></LanguageTooltip> */}
         </Right>
         {/* Navigation links */}
       </ColumnContainer>

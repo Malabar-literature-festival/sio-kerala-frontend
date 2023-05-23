@@ -13,13 +13,13 @@ const Footer = ({ fixed = true }) => {
     <FooterContainer className={fixed && "fixed"}>
       <ColumnContainer className="container">
         {/* Copyright information */}
-        <Copy>©{currentYear} VSH Security</Copy>
+        <Copy>©{currentYear} Diet Food Management System</Copy>
         {/* Navigation links */}
         <Nav>
           {/* Link to the privacy page */}
-          <Link to="https://www.vsh.de/datenschutz">{t("privacy")}</Link>
+          <Link to="https://www.example.com/privacy">{t("privacy")}</Link>
           {/* Link to the imprint page */}
-          <Link to="https://www.vsh.de/impressum">{t("imprint")}</Link>
+          <Link to="https://www.example.com/imprint">{t("imprint")}</Link>
         </Nav>
       </ColumnContainer>
     </FooterContainer>
