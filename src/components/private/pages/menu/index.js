@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
-const Menu = ({
-  addPrivilege = true,
-  // Privilege flag indicating whether the user can delete menu items
-  delPrivilege = true,
-  // Privilege flag indicating whether the user can update menu items
-  updatePrivilege = true,
-}) => {
+//src/components/styles/page/index.js
+//if you want to write custom style wirte in above file
+const Menu = (props) => {
   //to update the page title
   useEffect(() => {
     document.title = `Menu - Diet Food Management Portal`;
@@ -247,11 +243,7 @@ const Menu = ({
         // Short name or label for the menu
         shortName={`Menu`}
         // Privilege flag indicating whether the user can add menu items
-        addPrivilege={addPrivilege}
-        // Privilege flag indicating whether the user can delete menu items
-        delPrivilege={delPrivilege}
-        // Privilege flag indicating whether the user can update menu items
-        updatePrivilege={updatePrivilege}
+        {...props}
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>

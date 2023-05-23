@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
-const Franchise = ({
-  addPrivilege = true,
-  // Privilege flag indicating whether the user can delete menu items
-  delPrivilege = true,
-  // Privilege flag indicating whether the user can update menu items
-  updatePrivilege = true,
-}) => {
+//src/components/styles/page/index.js
+//if you want to write custom style wirte in above file
+const Franchise = (props) => {
   //to update the page title
   useEffect(() => {
     document.title = `Franchise - Diet Food Management Portal`;
@@ -258,14 +254,9 @@ const Franchise = ({
         itemTitle={`label`}
         // Short name or label for the menu
         shortName={`Franchise`}
-        // Privilege flag indicating whether the user can add menu items
-        addPrivilege={addPrivilege}
-        // Privilege flag indicating whether the user can delete menu items
-        delPrivilege={delPrivilege}
-        // Privilege flag indicating whether the user can update menu items
-        updatePrivilege={updatePrivilege}
         // Additional attributes related to the menu
         attributes={attributes}
+        {...props}
       ></ListTable>
     </Container>
   );
