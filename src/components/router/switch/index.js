@@ -3,17 +3,16 @@ import Menu from "../../private/pages/menu";
 import Login from "../../public/login";
 import Page404 from "../../private/pages/page404";
 import User from "../../private/pages/user";
-const Switch = ({ page, key }) => {
-  console.log(page)
+const Switch = ({ page, key, addPrivilege = true, delPrivilege = true, updatePrivilege = true }) => {
   switch (page) {
     case "login":
-      return <Login key={key}/>;
+      return <Login key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "menu":
-      return <Menu  key={key}/>;
+      return <Menu key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "user":
-      return <User  key={key}/>;
+      return <User key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     default:
-      return <Page404  key={key}>Invalid page</Page404>;
+      return <Page404 key={key}>Invalid page</Page404>;
   }
 };
 
