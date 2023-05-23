@@ -18,7 +18,7 @@ const Switch = ({ page, key, addPrivilege = true, delPrivilege = true, updatePri
     case "menu":
       return <Menu key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     default:
-      return <Page404 key={key}>Invalid page</Page404>;
+      return <Page404 key={key}></Page404>;
   }
 };
 
