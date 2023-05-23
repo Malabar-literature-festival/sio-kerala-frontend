@@ -23,7 +23,7 @@ navigator.serviceWorker.getRegistrations().then((registrations) => {
 });
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
-  lng: localStorage.getItem("_lang") !== null ? localStorage.getItem("_lang") : "de", // default language
+  lng: localStorage.getItem("_lang") !== null ? localStorage.getItem("_lang") : "en", // default language
   resources: {
     en: { translation: require("./locales/en.json") },
     de: { translation: require("./locales/de.json") },
