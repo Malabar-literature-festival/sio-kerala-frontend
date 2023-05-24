@@ -4,102 +4,20 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Menu = (props) => {
+const WeeklyMealPlan = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Menu - Diet Food Management Portal`;
+    document.title = `Weekly Meal Plan - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
-      type: "text",
-      // Placeholder text for the input field
-      placeholder: "Label",
-      // Name of the input field
-      name: "label",
-      // Validation rules for the input
-      validation: "",
-      // Default value for the input field
-      default: "",
-      // Label text for the input field
-      label: "Label",
-      // Indicates if the input field is required
-      required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
-      add: true,
-      // Indicates if the input field should be displayed in the update mode
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
+      type: "boolean",
+      placeholder: "Delete test",
+      name: "delete",
       validation: "",
       default: "",
-      label: "Sequence",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Icon",
-      name: "icon",
-      validation: "",
-      default: "",
-      label: "Icon",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Path",
-      name: "path",
-      validation: "",
-      default: "",
-      label: "Path",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Element Name",
-      name: "element",
-      validation: "",
-      default: "",
-      label: "Element Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
-      validation: "",
-      default: "true",
-      label: "Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
-      validation: "",
-      default: "false",
-      label: "Is Link",
+      label: "Delete test",
       required: true,
       view: true,
       add: true,
@@ -237,11 +155,11 @@ const Menu = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`menu`}
+        api={`weekly-meal-plan`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`weekly meal plan`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -251,4 +169,4 @@ const Menu = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(Menu);
+export default Layout(WeeklyMealPlan);

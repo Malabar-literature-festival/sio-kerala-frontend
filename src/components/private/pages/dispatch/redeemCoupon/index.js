@@ -4,10 +4,10 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Menu = (props) => {
+const RedeemCoupon = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Menu - Diet Food Management Portal`;
+    document.title = `Redeem Coupon - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -15,15 +15,15 @@ const Menu = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "Label",
+      placeholder: "Coupon",
       // Name of the input field
-      name: "label",
+      name: "title",
       // Validation rules for the input
       validation: "",
       // Default value for the input field
       default: "",
-      // Label text for the input field
-      label: "Label",
+      // Coupon text for the input field
+      label: "Coupon",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -35,11 +35,11 @@ const Menu = (props) => {
     },
     {
       type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
+      placeholder: "Coupon Code",
+      name: "code",
       validation: "",
       default: "",
-      label: "Sequence",
+      label: "Coupon Code",
       required: true,
       view: true,
       add: true,
@@ -47,11 +47,11 @@ const Menu = (props) => {
     },
     {
       type: "text",
-      placeholder: "Icon",
-      name: "icon",
+      placeholder: "Coupon Type",
+      name: "type",
       validation: "",
       default: "",
-      label: "Icon",
+      label: "Coupon Type",
       required: true,
       view: true,
       add: true,
@@ -59,11 +59,11 @@ const Menu = (props) => {
     },
     {
       type: "text",
-      placeholder: "Path",
-      name: "path",
+      placeholder: "Uses Count",
+      name: "usesCount",
       validation: "",
       default: "",
-      label: "Path",
+      label: "Uses Count",
       required: true,
       view: true,
       add: true,
@@ -71,35 +71,47 @@ const Menu = (props) => {
     },
     {
       type: "text",
-      placeholder: "Element Name",
-      name: "element",
+      placeholder: "Min Purchase",
+      name: "minPurchase",
       validation: "",
       default: "",
-      label: "Element Name",
+      label: "Min Purchase",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
+      type: "text",
+      placeholder: "Max Purchase",
+      name: "maxDiscount",
       validation: "",
-      default: "true",
-      label: "Status",
+      default: "",
+      label: "Max Purchase",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
+      type: "text",
+      placeholder: "Discount",
+      name: "discount",
       validation: "",
-      default: "false",
-      label: "Is Link",
+      default: "",
+      label: "Discount",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Customer Type",
+      name: "customerType",
+      validation: "",
+      default: "",
+      label: "Customer Type",
       required: true,
       view: true,
       add: true,
@@ -237,11 +249,11 @@ const Menu = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`menu`}
+        api={`redeem-coupon`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={`redeem coupon`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`redeem coupon`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -251,4 +263,4 @@ const Menu = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(Menu);
+export default Layout(RedeemCoupon);

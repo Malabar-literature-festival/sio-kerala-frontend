@@ -15,12 +15,18 @@ const postData = async (fields, ulr, dispatch, navigate) => {
           formData.append(key, value);
         }
       });
-      const response = await axios.post(`${process.env.REACT_APP_API}${ulr}`, formData, {
-        headers: {
-          "Content-Type": isUplaoding ? "multipart/form-data" : "application/json",
-          "x-access-token": token,
-        },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}${ulr}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": isUplaoding
+              ? "multipart/form-data"
+              : "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
       if (response.status === 401) {
         try {
           dispatch(clearLogin());
@@ -56,12 +62,18 @@ const putData = async (fields, ulr, dispatch, navigate) => {
           formData.append(key, value);
         }
       });
-      const response = await axios.put(`${process.env.REACT_APP_API}${ulr}`, formData, {
-        headers: {
-          "Content-Type": isUplaoding ? "multipart/form-data" : "application/json",
-          "x-access-token": token,
-        },
-      });
+      const response = await axios.put(
+        `${process.env.REACT_APP_API}${ulr}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": isUplaoding
+              ? "multipart/form-data"
+              : "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
       if (response.status === 401) {
         try {
           dispatch(clearLogin());
@@ -89,12 +101,15 @@ const getData = async (fields, ulr, dispatch, navigate) => {
         .map((key) => key + "=" + fields[key])
         .join("&");
       let token = GetAccessToken();
-      const response = await axios.get(`${process.env.REACT_APP_API}${ulr}?${queryString}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": token,
-        },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}${ulr}?${queryString}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
       if (response.status === 401) {
         try {
           localStorage.removeItem("user");
@@ -130,11 +145,14 @@ const deleteData = async (fields, ulr, dispatch, navigate) => {
     try {
       let token = GetAccessToken();
       let queryString = Object.keys(fields)
-      .map((key) => key + "=" + fields[key])
-      .join("&");
-      const response = await axios.delete(`${process.env.REACT_APP_API}${ulr}?${queryString}`, {
-        headers: { "x-access-token": token },
-      });
+        .map((key) => key + "=" + fields[key])
+        .join("&");
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API}${ulr}?${queryString}`,
+        {
+          headers: { "x-access-token": token },
+        }
+      );
       if (response.status === 401) {
         try {
           localStorage.removeItem("user");

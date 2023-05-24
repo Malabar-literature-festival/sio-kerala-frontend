@@ -7,12 +7,12 @@ import Meal from "../../private/pages/meal";
 import UserType from "../../private/pages/user/userType";
 import OrderStatus from "../../private/pages/dispatch/orderStatus";
 import UserList from "../../private/pages/user/userList";
-import ProteinCategory from "../../private/pages/mealSetting/proteinCategory";
-import MealTimeCategory from "../../private/pages/mealSetting/mealTimeCategory";
-import MealTag from "../../private/pages/mealSetting/mealTag";
-import VariantGroup from "../../private/pages/mealSetting/variantGroup";
-import VaraiantLevel from "../../private/pages/mealSetting/varaiantLevel";
-import DayOfWeek from "../../private/pages/mealSetting/dayOfWeek";
+import ProteinCategory from "../../private/pages/mealSettings/proteinCategory";
+import MealTimeCategory from "../../private/pages/mealSettings/mealTimeCategory";
+import MealTag from "../../private/pages/mealSettings/mealTag";
+import VariantGroup from "../../private/pages/mealSettings/variantGroup";
+import VaraiantLevel from "../../private/pages/mealSettings/varaiantLevel";
+import DayOfWeek from "../../private/pages/mealSettings/dayOfWeek";
 import AimOfProgram from "../../private/pages/registrationSettings/aimOfProgram";
 import MedicalCondition from "../../private/pages/registrationSettings/medicalCondition";
 import FoodlikeList from "../../private/pages/registrationSettings/foodlikeList";
@@ -21,6 +21,8 @@ import AddictionList from "../../private/pages/registrationSettings/addictionLis
 import DeliverySlot from "../../private/pages/dispatch/deliverySlot";
 import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstruction";
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
+import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
+import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -130,7 +132,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "mealtime-category": //element name
+    case "mealtime-category":
       return (
         <MealTimeCategory
           key={key}
@@ -140,7 +142,7 @@ const Switch = ({
         />
       );
 
-    case "meal-tag": //element name
+    case "meal-tag":
       return (
         <MealTag
           key={key}
@@ -149,7 +151,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "variant-group": //element name
+    case "variant-group":
       return (
         <VariantGroup
           key={key}
@@ -158,7 +160,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "variant-level": //element name
+    case "variant-level":
       return (
         <VaraiantLevel
           key={key}
@@ -167,7 +169,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "day-of-week": //element name
+    case "day-of-week":
       return (
         <DayOfWeek
           key={key}
@@ -176,7 +178,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "aimof-program": //element name
+    case "aimof-program":
       return (
         <AimOfProgram
           key={key}
@@ -185,7 +187,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "medical-condition": //element name
+    case "medical-condition":
       return (
         <MedicalCondition
           key={key}
@@ -194,7 +196,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "foodlike-list": //element name
+    case "foodlike-list":
       return (
         <FoodlikeList
           key={key}
@@ -203,7 +205,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "fooddislike-list": //element name
+    case "fooddislike-list":
       return (
         <FoodDislikeList
           key={key}
@@ -212,9 +214,28 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "addiction-list": //element name
+    case "addiction-list":
       return (
         <AddictionList
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "weekly-meal-plan":
+      return (
+        <WeeklyMealPlan
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+
+    case "redeem-coupon":
+      return (
+        <RedeemCoupen
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
