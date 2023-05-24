@@ -1,45 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../common/layout";
-import ListTable from "../../../elements/list/list";
-import { Container } from "../../common/layout/styels";
+import Layout from "../../../common/layout";
+import ListTable from "../../../../elements/list/list";
+import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const UserType = (props) => {
+const VariantGroup = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `User Type - Diet Food Management Portal`;
+    document.title = `Meal - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
-      placeholder: "Role",
-      // Name of the input field
-      name: "role",
-      // Validation rules for the input
-      validation: "",
-      // Default value for the input field
-      default: "",
-      // Label text for the input field
-      label: "Role",
-      // Indicates if the input field is required
-      required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
-      add: true,
-      // Indicates if the input field should be displayed in the update mode
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Display Name",
-      name: "roleDisplayName",
+      placeholder: "variantGroup",
+      name: "variantGroupName",
       validation: "",
       default: "",
-      label: "Display Name",
+      label: "VariantGroupName",
       required: true,
       view: true,
       add: true,
@@ -177,7 +155,7 @@ const UserType = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`franchise`}
+        api={`variant-group`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
@@ -191,4 +169,4 @@ const UserType = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(UserType);
+export default Layout(VariantGroup);
