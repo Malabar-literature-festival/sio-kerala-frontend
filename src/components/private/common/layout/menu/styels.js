@@ -17,6 +17,7 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.secForeground};
+   overflow-y:auto;
   a.main, .open {
     text-decoration: none;
     color: ${(props) => props.theme.secForeground};
