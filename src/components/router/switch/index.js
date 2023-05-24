@@ -6,6 +6,8 @@ import Page404 from "../../private/pages/page404";
 import Meal from "../../private/pages/meal";
 import UserType from "../../private/pages/userType";
 import DeliverySlot from "../../private/pages/dispatch/deliverySlot";
+import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstruction";
+import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -64,6 +66,24 @@ const Switch = ({
     case "delivery-slot":
       return (
         <DeliverySlot
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "delivery-instruction":
+      return (
+        <DeliveryInstruction
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "type-of-diet":
+      return (
+        <TypeOfDiet
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
