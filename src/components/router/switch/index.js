@@ -5,6 +5,7 @@ import Login from "../../public/login";
 import Page404 from "../../private/pages/page404";
 import Meal from "../../private/pages/meal";
 import UserType from "../../private/pages/userType";
+import DeliverySlot from "../../private/pages/dispatch/deliverySlot";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -54,6 +55,15 @@ const Switch = ({
     case "user":
       return (
         <UserType
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "delivery-slot":
+      return (
+        <DeliverySlot
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
