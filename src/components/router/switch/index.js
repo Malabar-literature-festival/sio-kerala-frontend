@@ -4,7 +4,9 @@ import Franchise from "../../private/pages/franchise";
 import Login from "../../public/login";
 import Page404 from "../../private/pages/page404";
 import Meal from "../../private/pages/meal";
-import UserType from "../../private/pages/userType";
+import UserType from "../../private/pages/user/userType";
+import OrderStatus from "../../private/pages/dispatch/orderStatus";
+import UserList from "../../private/pages/user/userList";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -42,7 +44,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "meal":
+    case "recepe":
       return (
         <Meal
           key={key}
@@ -51,9 +53,27 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "user":
+    case "user-role":
       return (
         <UserType
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "user-list":
+      return (
+        <UserList
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "order-status":
+      return (
+        <OrderStatus
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
