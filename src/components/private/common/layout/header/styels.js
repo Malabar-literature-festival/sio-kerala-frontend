@@ -10,6 +10,7 @@ export const Logo = styled.img`
   width: fit-content;
   padding-left: 1em;
   padding-top: 1em;
+  margin-bottom:20px;
 `;
 export const LogoContaner = styled.div`
   display: flex;
