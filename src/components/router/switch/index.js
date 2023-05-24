@@ -18,7 +18,9 @@ import MedicalCondition from "../../private/pages/registrationSettings/medicalCo
 import FoodlikeList from "../../private/pages/registrationSettings/foodlikeList";
 import FoodDislikeList from "../../private/pages/registrationSettings/foodDislikeList";
 import AddictionList from "../../private/pages/registrationSettings/addictionList";
-
+import DeliverySlot from "../../private/pages/dispatch/deliverySlot";
+import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstruction";
+import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -83,9 +85,36 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "delivery-slot":
+      return (
+        <DeliverySlot
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "protein-category":
       return (
         <ProteinCategory
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "delivery-instruction":
+      return (
+        <DeliveryInstruction
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "type-of-diet":
+      return (
+        <TypeOfDiet
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
