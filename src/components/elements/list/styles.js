@@ -209,6 +209,11 @@ export const NoData = styled.div`
   align-items: center;
   height: 100px;
 `;
+export const Img = styled.img`
+  height: 50px;
+  object-fit: cover;
+  width: 100px;
+`;
 export const ScrollLayout = styled.div`
   overflow: auto;
 `;
