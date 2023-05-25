@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
 export const SideBar = styled.div`
   display: flex;
   flex: 1 1 15em;
+  min-width: 15em;
   flex-direction: column;
   background-color: ${(props) => props.theme.themeBackground};
   color: white;

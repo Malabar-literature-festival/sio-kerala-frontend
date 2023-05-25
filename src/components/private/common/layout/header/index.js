@@ -12,19 +12,21 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const menuCurrentStatus = useSelector((state) => state.menuStatus);
   const currentMenu = useSelector((state) => state.currentMenu);
-  console.log("currentMenu",currentMenu)
+  const selectedMenuItem = useSelector((state) => state.selectedMenu);
+
+  console.log("currentMenu", currentMenu);
   const navigate = useNavigate();
   return (
     <Container>
-        <MNav
-          onClick={() => {
-            dispatch(menuStatus());
-          }}
-        >
-          {menuCurrentStatus ? <CloseIcon /> : <MenuIcon />}
-        </MNav>
+      <MNav
+        onClick={() => {
+          dispatch(menuStatus());
+        }}
+      >
+        {menuCurrentStatus ? <CloseIcon /> : <MenuIcon />}
+      </MNav>
       <Status>
-        <Title>{currentMenu}</Title>
+        <Title>{selectedMenuItem.label}</Title>
         <User>{props.user.user.email}</User>
         <Logout
           onClick={() => {

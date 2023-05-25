@@ -95,6 +95,7 @@ export const RowContainer = styled.div`
   margin-bottom:auto;
   &.content{
     flex: 1 1 calc(100% - 15em);
+    max-width: calc(100% - 15em);
     height:100vh;
   }
   &.marginright {
