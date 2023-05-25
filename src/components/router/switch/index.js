@@ -33,6 +33,7 @@ import ActivenessStatus from "../../private/pages/registrationSettings/activenes
 import DiscountTypeName from "../../private/pages/dispatch/discountType";
 import Banner from "../../private/pages/banner/banner";
 import BannerType from "../../private/pages/banner/bannerType";
+import MealIngredient from "../../private/pages/mealSettings/mealIngredient";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -337,6 +338,15 @@ const Switch = ({
     case "banner-type":
       return (
         <BannerType
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "meal-ingredient":
+      return (
+        <MealIngredient
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
