@@ -7,13 +7,13 @@ import { Container } from "../../../common/layout/styels";
 const MealTimeCategory = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `MealTimeCategory - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Protein Category",
+      placeholder: "MealtimeCategory",
       name: "mealtimeCategoriesName",
       validation: "",
       default: "",
@@ -153,13 +153,13 @@ const MealTimeCategory = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`mealtime-category`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Category`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

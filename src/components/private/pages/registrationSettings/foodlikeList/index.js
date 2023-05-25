@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const FoodlikeList = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `FoodlikeList - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -153,13 +153,13 @@ const FoodlikeList = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`foodlike-lists`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`List`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
