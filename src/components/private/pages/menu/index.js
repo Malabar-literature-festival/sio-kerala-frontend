@@ -109,11 +109,11 @@ const Menu = (props) => {
   const [timingAttributes] = useState([
     {
       type: "text",
-      placeholder: "Label",
+      placeholder: "test",
       name: "label",
       validation: "",
       default: "",
-      label: "Label",
+      label: "test",
       required: true,
       view: true,
       add: true,
@@ -243,6 +243,9 @@ const Menu = (props) => {
         // Short name or label for the menu
         shortName={`Menu`}
         // Privilege flag indicating whether the user can add menu items
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}

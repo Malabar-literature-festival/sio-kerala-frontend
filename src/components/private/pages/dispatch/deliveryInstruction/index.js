@@ -15,7 +15,7 @@ const DeliveryInstruction = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "DeliveryInstructionName",
+      placeholder: "Delivery Instruction Name",
       // Name of the input field
       name: "deliveryInstructionName",
       // Validation rules for the input
@@ -23,7 +23,7 @@ const DeliveryInstruction = (props) => {
       // Default value for the input field
       default: "",
       // Label text for the input field
-      label: "DeliveryInstructionName",
+      label: "Delivery Instruction Name",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -35,11 +35,11 @@ const DeliveryInstruction = (props) => {
     },
     {
       type: "number",
-      placeholder: "createdAt",
+      placeholder: "Created At",
       name: "sequence",
       validation: "",
       default: "",
-      label: "createdAt",
+      label: "Created At",
       required: true,
       view: true,
       add: true,
@@ -181,7 +181,7 @@ const DeliveryInstruction = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`Delivery Instruction`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

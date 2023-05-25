@@ -1,23 +1,95 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../common/layout";
-import ListTable from "../../../../elements/list/list";
-import { Container } from "../../../common/layout/styels";
+import Layout from "../../common/layout";
+import ListTable from "../../../elements/list/list";
+import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const ProteinCategory = (props) => {
+const PackageManagement = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Protein Category - Diet Food Management Portal`;
+    document.title = `PackageManagement - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Protein Category",
-      name: "proteinCategoriesName",
+      placeholder: "Package Name",
+      name: "packageName",
       validation: "",
       default: "",
-      label: "Protein Category",
+      label: "Package Name",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Description",
+      name: "description",
+      validation: "",
+      default: "",
+      label: "Description",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Calories",
+      name: "calories",
+      validation: "",
+      default: "",
+      label: "Calories",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Days",
+      name: "days",
+      validation: "",
+      default: "",
+      label: "Days",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Meal Time Category",
+      name: "mealTimeCategory",
+      validation: "",
+      default: "",
+      label: "Meal Time Category",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Rate",
+      name: "rate",
+      validation: "",
+      default: "",
+      label: "Rate",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Currency",
+      name: "currency",
+      validation: "",
+      default: "",
+      label: "Currency",
       required: true,
       view: true,
       add: true,
@@ -30,6 +102,18 @@ const ProteinCategory = (props) => {
       validation: "",
       default: "",
       label: "Image",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Is Active",
+      name: "isActive",
+      validation: "",
+      default: "",
+      label: "Is Active",
       required: true,
       view: true,
       add: true,
@@ -167,11 +251,11 @@ const ProteinCategory = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`protein-categories`}
+        api={`package`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Category`}
+        shortName={`Package`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -181,4 +265,4 @@ const ProteinCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(ProteinCategory);
+export default Layout(PackageManagement);
