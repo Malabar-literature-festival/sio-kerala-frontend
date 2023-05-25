@@ -1,8 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox, Img } from "./styles";
+import {
+  Table,
+  Th,
+  Button,
+  Td,
+  Tr,
+  Count,
+  ArrowButton,
+  AddButton,
+  ButtonPanel,
+  Filter,
+  Filters,
+  ToggleContainer,
+  ToggleInput,
+  ToggleSlider,
+  NoData,
+  ScrollLayout,
+  FilterBox,
+  Img,
+} from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
-import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
+import {
+  AddIcon,
+  FilterIcon,
+  GetIcon,
+  NextIcon,
+  PreviousIcon,
+} from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import { deleteData, postData, putData } from "../../../backend/api";
 import CrudForm from "./create";
@@ -15,7 +40,20 @@ import Search from "../search";
 import SubPage from "./subPage";
 import moment from "moment";
 import DateRangeSelector from "../daterange";
-const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title", datefilter = false }) => {
+const ListTable = ({
+  parentReference = "_id",
+  referenceId = 0,
+  actions = [],
+  api,
+  setMessage,
+  attributes = [],
+  addPrivilege = true,
+  delPrivilege = true,
+  updatePrivilege = true,
+  shortName = "Item",
+  itemTitle = "title",
+  datefilter = false,
+}) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -64,12 +102,20 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     let date = new Date();
     attributes.forEach((item) => {
       if (item.type === "checkbox") {
-        let bool = JSON.parse(item.default === "false" || item.default === "true" ? item.default : "false");
+        let bool = JSON.parse(
+          item.default === "false" || item.default === "true"
+            ? item.default
+            : "false"
+        );
         if (item.add) {
           addValuesTemp.addValues[item.name] = bool;
         }
         addValuesTemp.updateValues[item.name] = bool;
-      } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
+      } else if (
+        item.type === "datetime" ||
+        item.type === "date" ||
+        item.type === "time"
+      ) {
         addValuesTemp.addValues[item.name] = date.toISOString();
         if (item.add) {
           addValuesTemp.updateValues[item.name] = date.toISOString();
@@ -105,7 +151,18 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
 
     setFilter(tempFilter);
     setInitialized(true);
-  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
+  }, [
+    attributes,
+    dispatch,
+    setPrevCrud,
+    prevCrud,
+    setFormInput,
+    setAddValues,
+    setUpdateValues,
+    setFilterView,
+    parentReference,
+    referenceId,
+  ]);
 
   // end processing attributes
   useEffect(() => {
@@ -152,7 +209,15 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
             updateValues[item.name] = bool;
           } else if (item.type === "select") {
             console.log(typeof value[item.name]);
-            updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
+            updateValues[item.name] =
+              typeof value[item.name] === "undefined"
+                ? ""
+                : typeof value[item.name] === "string" ||
+                  typeof value[item.name] === "number"
+                ? value[item.name]
+                : value[item.name]?._id
+                ? value[item.name]._id
+                : "";
           } else if (item.type === "image") {
             updateValues["selected_" + item.name] = [];
             updateValues[item.name] = value[item.name] ? value[item.name] : "";
@@ -177,7 +242,13 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     await deleteData({ id }, currentApi)
       .then((response) => {
         if (response.status === 200) {
-          setMessage({ type: 1, content: `The '${item.title ? item.title : shortName}' deleted successfully!`, proceed: t("okay") });
+          setMessage({
+            type: 1,
+            content: `The '${
+              item.title ? item.title : shortName
+            }' deleted successfully!`,
+            proceed: t("okay"),
+          });
           setCount((count) => count - 1);
           setIsCreating(false);
           refreshView();
@@ -185,12 +256,20 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
         } else if (response.status === 404) {
           setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
         } else {
-          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+          setMessage({
+            type: 1,
+            content: "Something went wrong!",
+            proceed: "Okay",
+          });
         }
         setLoaderBox(false);
       })
       .catch((error) => {
-        setMessage({ type: 1, content: error.message + "Something went wrong!", proceed: "Okay" });
+        setMessage({
+          type: 1,
+          content: error.message + "Something went wrong!",
+          proceed: "Okay",
+        });
         setLoaderBox(false);
       });
   };
@@ -202,23 +281,38 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   };
   const submitHandler = async (data) => {
     setLoaderBox(true);
-    const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
+    const saveData =
+      referenceId === 0
+        ? { ...data }
+        : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
       .then((response) => {
         if (response.status === 200) {
-          setMessage({ type: 1, content: `The '${shortName}' saved successfully!`, proceed: "Okay" });
+          setMessage({
+            type: 1,
+            content: `The '${shortName}' saved successfully!`,
+            proceed: "Okay",
+          });
           setIsCreating(false);
           refreshView();
           // udpateView(0);
         } else if (response.status === 404) {
           setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
         } else {
-          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+          setMessage({
+            type: 1,
+            content: "Something went wrong!",
+            proceed: "Okay",
+          });
         }
         setLoaderBox(false);
       })
       .catch((error) => {
-        setMessage({ type: 1, content: error.message + "Something went wrong!", proceed: "Okay" });
+        setMessage({
+          type: 1,
+          content: error.message + "Something went wrong!",
+          proceed: "Okay",
+        });
         setLoaderBox(false);
       });
   };
@@ -229,13 +323,21 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     await putData(data, `${currentApi}`)
       .then((response) => {
         if (response.status === 200) {
-          setMessage({ type: 1, content: `The '${shortName}' updated successfully!`, proceed: "Okay" });
+          setMessage({
+            type: 1,
+            content: `The '${shortName}' updated successfully!`,
+            proceed: "Okay",
+          });
           refreshView();
           setIsEditing(false);
         } else if (response.status === 404) {
           setMessage({ type: 1, content: "User not found!", proceed: "Okay" });
         } else {
-          setMessage({ type: 1, content: "Something went wrong!", proceed: "Okay" });
+          setMessage({
+            type: 1,
+            content: "Something went wrong!",
+            proceed: "Okay",
+          });
         }
         setLoaderBox(false);
       })
@@ -288,17 +390,38 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           if (attribute.view) {
             switch (attribute.type) {
               case "minute":
-                return <Td key={index}>{convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0))}</Td>;
+                return (
+                  <Td key={index}>
+                    {convertMinutesToHHMM(
+                      parseFloat(data[attribute.name] ?? 0)
+                    )}
+                  </Td>
+                );
               case "image":
-                return <Td key={index}><Img src={data[attribute.name]} /> </Td>;
+                return (
+                  <Td key={index}>
+                    <Img src={data[attribute.name]} />{" "}
+                  </Td>
+                );
               case "datetime":
-                let userFriendlyDateTime = moment(data[attribute.name]).format("DD.MM.YYYY, H:mm");
+                let userFriendlyDateTime = moment(data[attribute.name]).format(
+                  "DD.MM.YYYY, H:mm"
+                );
                 return <Td key={index}>{userFriendlyDateTime}</Td>;
               case "date":
-                let userFriendlyDate = moment(data[attribute.name]).format("DD.MM.YYYY");
+                let userFriendlyDate = moment(data[attribute.name]).format(
+                  "DD.MM.YYYY"
+                );
                 return <Td key={index}>{userFriendlyDate}</Td>;
               case "textarea":
-                return <Td key={index} dangerouslySetInnerHTML={{ __html: data[attribute.name]?.substring(0, 200) }}></Td>;
+                return (
+                  <Td
+                    key={index}
+                    dangerouslySetInnerHTML={{
+                      __html: data[attribute.name]?.substring(0, 200),
+                    }}
+                  ></Td>
+                );
               case "icon":
                 return (
                   <Td key={index}>
@@ -310,22 +433,39 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                   case "undefined":
                     return <Td key={index}>Not Found</Td>;
                   case "object":
-                    return <Td key={index}>{data[attribute.name]?.[attribute.showItem] ?? "Nil"}</Td>;
+                    return (
+                      <Td key={index}>
+                        {data[attribute.name]?.[attribute.showItem] ?? "Nil"}
+                      </Td>
+                    );
                   case "boolean":
-                    return <Td key={index}>{data[attribute.name].toString()}</Td>;
+                    return (
+                      <Td key={index}>{data[attribute.name].toString()}</Td>
+                    );
                   case "string":
                   case "number":
                   default:
-                    if (attribute.type === "select" && attribute.apiType === "JSON") {
+                    if (
+                      attribute.type === "select" &&
+                      attribute.apiType === "JSON"
+                    ) {
                       return attribute.selectApi
-                        .filter((item) => item.id.toString() === data[attribute.name]?.toString())
+                        .filter(
+                          (item) =>
+                            item.id.toString() ===
+                            data[attribute.name]?.toString()
+                        )
                         .map((filteredItem) => (
                           <Td style={{ color: filteredItem.color }} key={index}>
                             {filteredItem.value}
                           </Td>
                         ));
                     } else {
-                      return <Td key={index}>{data[attribute.name]?.toString().substring(0, 200)}</Td>;
+                      return (
+                        <Td key={index}>
+                          {data[attribute.name]?.toString().substring(0, 200)}
+                        </Td>
+                      );
                     }
                 }
             }
@@ -340,7 +480,11 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
               onClick={() => {
                 setMessage({
                   type: 2,
-                  content: t("deleteRequest", { label: data[itemTitle] ? data[itemTitle].toString() : "Item" }),
+                  content: t("deleteRequest", {
+                    label: data[itemTitle]
+                      ? data[itemTitle].toString()
+                      : "Item",
+                  }),
                   proceed: t("delete"),
                   onProceed: deleteHandler,
                   data: data,
@@ -393,21 +537,36 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                   onChange={async (event) => {
                     // item.callback(item, data);
                     setLoaderBox(true);
-                    await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
+                    await postData(
+                      { status: event.target.checked },
+                      `${item.api}/${data._id}`
+                    )
                       .then((response) => {
                         if (response.status === 200) {
                           if (response.data?.message) {
-                            setMessage({ type: 1, content: t(response.data?.message), proceed: t("okay") });
+                            setMessage({
+                              type: 1,
+                              content: t(response.data?.message),
+                              proceed: t("okay"),
+                            });
                           }
                           //
                           refreshView();
                           // setIsEditing(false);
                         } else if (response.status === 404) {
                           refreshView();
-                          setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                          setMessage({
+                            type: 1,
+                            content: t("error"),
+                            proceed: "Okay",
+                          });
                         } else {
                           refreshView();
-                          setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                          setMessage({
+                            type: 1,
+                            content: t("error"),
+                            proceed: "Okay",
+                          });
                         }
                         // setLoaderBox(false);
                       })
@@ -448,7 +607,12 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     <RowContainer>
       <ButtonPanel>
         <FilterBox>
-          <Search theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
+          <Search
+            theme={themeColors}
+            placeholder="Search"
+            value={searchValue}
+            onChange={handleChange}
+          ></Search>
           {filter && (
             <Filter
               theme={themeColors}
@@ -460,11 +624,29 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
             </Filter>
           )}
 
-          {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
+          {datefilter && (
+            <DateRangeSelector
+              onChange={dateRangeChange}
+              themeColors={themeColors}
+            ></DateRangeSelector>
+          )}
         </FilterBox>
         <Filters>
           {formInput.map((item, index) => {
-            return item.type === "select" && (item.filter ?? true) === true && <FormInput customClass={"filter"} placeholder={item.placeHolder} value={filterView[item.name]} key={`input` + index} id={item.name} {...item} onChange={filterChange} />;
+            return (
+              item.type === "select" &&
+              (item.filter ?? true) === true && (
+                <FormInput
+                  customClass={"filter"}
+                  placeholder={item.placeHolder}
+                  value={filterView[item.name]}
+                  key={`input` + index}
+                  id={item.name}
+                  {...item}
+                  onChange={filterChange}
+                />
+              )
+            );
           })}
         </Filters>
         {(addPrivilege ? addPrivilege : false) && (
@@ -479,15 +661,32 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           <thead>
             <Tr>
               {attributes.map((attribute) => {
-                return attribute.view === true ? <Th key={shortName + attribute.name}>{t(attribute.label)}</Th> : "";
+                return attribute.view === true ? (
+                  <Th key={shortName + attribute.name}>{t(attribute.label)}</Th>
+                ) : (
+                  ""
+                );
               })}
             </Tr>
           </thead>
-          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} attributes={attributes} data={item} />)}</tbody>
+          <tbody>
+            {users.data?.response?.length > 0 &&
+              users.data.response.map((item, index) => (
+                <TableRowWithActions
+                  key={`${shortName}-${index}`}
+                  attributes={attributes}
+                  data={item}
+                />
+              ))}
+          </tbody>
         </Table>
       </ScrollLayout>
-      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
-      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
+      {!users.data && !users.data?.response && (
+        <NoData>No {t(shortName)} found!</NoData>
+      )}
+      {users.data?.response?.length === 0 && (
+        <NoData>No {t(shortName)} found!</NoData>
+      )}
       {count > 10 && (
         <Count>
           <ArrowButton
@@ -498,22 +697,67 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           >
             <PreviousIcon />
           </ArrowButton>
-          {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count}`}
+          {`Showing ${currentIndex + 1} - ${
+            currentIndex + 10 > count ? count : currentIndex + 10
+          } from ${count}`}
           <ArrowButton
             theme={themeColors}
             onClick={() => {
-              setCurrentIndex((prev) => (prev + 10 > count ? currentIndex : currentIndex + 10));
+              setCurrentIndex((prev) =>
+                prev + 10 > count ? currentIndex : currentIndex + 10
+              );
             }}
           >
             <NextIcon />
           </ArrowButton>
         </Count>
       )}
-      {isCreating && <CrudForm api={api} formType={"post"} header={t("addNewTitle", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formValues={addValues} formErrors={errroInput} submitHandler={submitHandler} isOpenHandler={isCreatingHandler} isOpen={isCreating}></CrudForm>}
-      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
-      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
+      {isCreating && (
+        <CrudForm
+          api={api}
+          formType={"post"}
+          header={t("addNewTitle", {
+            label: t(shortName ? shortName : "Form"),
+          })}
+          formInput={formInput}
+          formValues={addValues}
+          formErrors={errroInput}
+          submitHandler={submitHandler}
+          isOpenHandler={isCreatingHandler}
+          isOpen={isCreating}
+        ></CrudForm>
+      )}
+      {isEditing && (
+        <CrudForm
+          api={api}
+          formType={"put"}
+          updateId={updateId}
+          header={t("update", { label: t(shortName ? shortName : "Form") })}
+          formInput={formInput}
+          formErrors={errroInput}
+          formValues={updateValues}
+          submitHandler={updateHandler}
+          isOpenHandler={isEditingHandler}
+          isOpen={isEditing}
+        ></CrudForm>
+      )}
+      {action.data && (
+        <Manage
+          setMessage={setMessage}
+          setLoaderBox={setLoaderBox}
+          onClose={closeManage}
+          {...action}
+        ></Manage>
+      )}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} subAttributes={subAttributes}></SubPage>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && (
+        <SubPage
+          closeModal={closeModal}
+          setMessage={setMessage}
+          setLoaderBox={setLoaderBox}
+          subAttributes={subAttributes}
+        ></SubPage>
+      )}
     </RowContainer>
   );
 };
