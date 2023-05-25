@@ -159,7 +159,7 @@ const WeeklyMealPlan = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`weekly meal plan`}
+        shortName={`Plan`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

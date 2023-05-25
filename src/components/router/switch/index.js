@@ -23,6 +23,11 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
+import MedicationList from "../../private/pages/registrationSettings/medicationList";
+import PackageManagement from "../../private/pages/packageManagement";
+import Supplement from "../../private/pages/registrationSettings/supplement";
+import DeliveryStatus from "../../private/pages/dispatch/deliveryStatus";
+
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -242,7 +247,42 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-
+    case "medication-list":
+      return (
+        <MedicationList
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "package-management":
+      return (
+        <PackageManagement
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "supplement":
+      return (
+        <Supplement
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "delivery-status":
+      return (
+        <DeliveryStatus
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     default:
       return <Page404 key={key}></Page404>;
   }
