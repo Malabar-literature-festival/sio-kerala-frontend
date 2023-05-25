@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox } from "./styles";
+import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox, Img } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
@@ -13,8 +13,9 @@ import Manage from "./manage";
 import Loader from "../loader";
 import Search from "../search";
 import SubPage from "./subPage";
-
-const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title" }) => {
+import moment from "moment";
+import DateRangeSelector from "../daterange";
+const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title", datefilter = false }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -252,14 +253,87 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     // updating the formm values
     setFilterView(udpateValue);
   };
+  const dateRangeChange = (item) => {
+    const startDate = new Date(item.startDate);
+    startDate.setHours(0, 0, 0, 0); // Set start date to 00:00
+
+    const endDate = new Date(item.endDate);
+    endDate.setHours(23, 59, 59, 999); // Set end date to 23:59
+    const udpateValue = {
+      ...filterView,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+    };
+    // updating the formm values
+    setFilterView(udpateValue);
+  };
   const closeManage = () => {
     setActions([]);
   };
-  const TableRowWithActions = ({ attributes, data }) => {
+  function convertMinutesToHHMM(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = Math.floor(minutes % 60);
+
+    const hoursStr = hours.toString().padStart(2, "0");
+    const minsStr = mins.toString().padStart(2, "0");
+
+    return `${hoursStr}:${minsStr}`;
+  }
+
+  const TableRowWithActions = ({ attributes, data, slNo }) => {
+    // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
-      <Tr key={`${shortName}-${data._id}`}>
-        {attributes.map((attribute) => attribute.view && <Td key={`${attribute.name}-${data._id}`}>{data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()}</Td>)}
-        <Td className="actions">
+      <Tr key={`${shortName}-${slNo}`}>
+        {attributes.map((attribute, index) => {
+          if (attribute.view) {
+            switch (attribute.type) {
+              case "minute":
+                return <Td key={index}>{convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0))}</Td>;
+              case "image":
+                return <Td key={index}><Img src={data[attribute.name]} /> </Td>;
+              case "datetime":
+                let userFriendlyDateTime = moment(data[attribute.name]).format("DD.MM.YYYY, H:mm");
+                return <Td key={index}>{userFriendlyDateTime}</Td>;
+              case "date":
+                let userFriendlyDate = moment(data[attribute.name]).format("DD.MM.YYYY");
+                return <Td key={index}>{userFriendlyDate}</Td>;
+              case "textarea":
+                return <Td key={index} dangerouslySetInnerHTML={{ __html: data[attribute.name]?.substring(0, 200) }}></Td>;
+              case "icon":
+                return (
+                  <Td key={index}>
+                    <i className={`fa-light ${data[attribute.name]}`} />
+                  </Td>
+                );
+              default:
+                switch (typeof data[attribute.name]) {
+                  case "undefined":
+                    return <Td key={index}>Not Found</Td>;
+                  case "object":
+                    return <Td key={index}>{data[attribute.name]?.[attribute.showItem] ?? "Nil"}</Td>;
+                  case "boolean":
+                    return <Td key={index}>{data[attribute.name].toString()}</Td>;
+                  case "string":
+                  case "number":
+                  default:
+                    if (attribute.type === "select" && attribute.apiType === "JSON") {
+                      return attribute.selectApi
+                        .filter((item) => item.id.toString() === data[attribute.name]?.toString())
+                        .map((filteredItem) => (
+                          <Td style={{ color: filteredItem.color }} key={index}>
+                            {filteredItem.value}
+                          </Td>
+                        ));
+                    } else {
+                      return <Td key={index}>{data[attribute.name]?.toString().substring(0, 200)}</Td>;
+                    }
+                }
+            }
+          }
+          return null;
+        })}
+
+        <Td key={`actions-${shortName}-${data._id}`} className="actions">
           {delPrivilege && (
             <Button
               key={`delete-${data._id}`}
@@ -309,7 +383,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                 className="edit"
               >
                 <span>{t(item.title)}</span>
-                <GetIcon icon={item.title} />
+                <GetIcon icon={item.icon} />
               </Button>
             ) : (
               <ToggleContainer key={`${item.id}-${data._id}`}>
@@ -385,6 +459,8 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
               <FilterIcon />
             </Filter>
           )}
+
+          {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>
           {formInput.map((item, index) => {
@@ -403,13 +479,14 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           <thead>
             <Tr>
               {attributes.map((attribute) => {
-                return attribute.view === true ? <Th key={attribute.name}>{t(attribute.label)}</Th> : "";
+                return attribute.view === true ? <Th key={shortName + attribute.name}>{t(attribute.label)}</Th> : "";
               })}
             </Tr>
           </thead>
-          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item) => <TableRowWithActions key={item._id} attributes={attributes} data={item} />)}</tbody>
+          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} attributes={attributes} data={item} />)}</tbody>
         </Table>
       </ScrollLayout>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 10 && (
         <Count>
