@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const MealTag = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `Meal Tag Name - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "MealTagName",
+      placeholder: "Meat Tag Name",
       name: "mealTagName",
       validation: "",
       default: "",
-      label: "MeatTagName",
+      label: "Meal Tag Name",
       required: true,
       view: true,
       add: true,

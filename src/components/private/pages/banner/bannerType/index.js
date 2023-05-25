@@ -4,25 +4,71 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const VariantLevel = (props) => {
+const BannerType = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Variant Level - Diet Food Management Portal`;
+    document.title = `BannerType - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
+      // Type of input, in this case, a text input
       type: "text",
-      placeholder: "Variant Level",
-      name: "variantLevelName",
+      // Placeholder text for the input field
+      placeholder: "Banner Type ",
+      // Name of the input field
+      name: "bannerTypesName",
+      // Validation rules for the input
+      validation: "",
+      // Default value for the input field
+      default: "",
+      // Label text for the input field
+      label: "Banner Type",
+      // Indicates if the input field is required
+      required: true,
+      // Indicates if the input field should be displayed in the view mode
+      view: true,
+      // Indicates if the input field should be displayed in the add mode
+      add: true,
+      // Indicates if the input field should be displayed in the update mode
+      update: true,
+    },
+    {
+      type: "number",
+      placeholder: "Created At",
+      name: "createdAt",
       validation: "",
       default: "",
-      label: "Variant Level",
+      label: "Created At",
       required: true,
       view: true,
       add: true,
       update: true,
     },
+    // {
+    //   type: "checkbox",
+    //   placeholder: "Status",
+    //   name: "status",
+    //   validation: "",
+    //   default: "true",
+    //   label: "Status",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
+    // {
+    //   type: "checkbox",
+    //   placeholder: "Is Link",
+    //   name: "isLink",
+    //   validation: "",
+    //   default: "false",
+    //   label: "Is Link",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
   ]);
   const [timingAttributes] = useState([
     {
@@ -155,11 +201,11 @@ const VariantLevel = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`variant-level`}
+        api={`banner-type`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Banner Type`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -169,4 +215,4 @@ const VariantLevel = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(VariantLevel);
+export default Layout(BannerType);

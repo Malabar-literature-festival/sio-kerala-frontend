@@ -4,20 +4,42 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const VariantLevel = (props) => {
+const ActivenessStatus = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Variant Level - Diet Food Management Portal`;
+    document.title = `Activeness Status - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
+      // Type of input, in this case, a text input
       type: "text",
-      placeholder: "Variant Level",
-      name: "variantLevelName",
+      // Placeholder text for the input field
+      placeholder: "Activeness Status",
+      // Name of the input field
+      name: "activenessStatusName",
+      // Validation rules for the input
+      validation: "",
+      // Default value for the input field
+      default: "",
+      // Label text for the input field
+      label: "Activeness Status",
+      // Indicates if the input field is required
+      required: true,
+      // Indicates if the input field should be displayed in the view mode
+      view: true,
+      // Indicates if the input field should be displayed in the add mode
+      add: true,
+      // Indicates if the input field should be displayed in the update mode
+      update: true,
+    },
+    {
+      type: "number",
+      placeholder: "Created At",
+      name: "createdAt",
       validation: "",
       default: "",
-      label: "Variant Level",
+      label: "Created At",
       required: true,
       view: true,
       add: true,
@@ -122,7 +144,7 @@ const VariantLevel = (props) => {
       // Displayed item title
       itemTitle: "title",
       // Title of the submenu
-      title: "Order",
+      title: "Sub Menu",
       // Additional attributes for timing
       attributes: timingAttributes,
       // Parameters for API and submenu configuration
@@ -153,13 +175,13 @@ const VariantLevel = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
-        api={`variant-level`}
+        api={`activeness-status`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Activeness Status`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -169,4 +191,4 @@ const VariantLevel = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(VariantLevel);
+export default Layout(ActivenessStatus);

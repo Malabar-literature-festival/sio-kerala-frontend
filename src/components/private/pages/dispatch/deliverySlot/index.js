@@ -15,7 +15,7 @@ const DeliverySlot = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "slot",
+      placeholder: "Slot",
       // Name of the input field
       name: "slot",
       // Validation rules for the input
@@ -181,7 +181,7 @@ const DeliverySlot = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`Delivery Slot`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

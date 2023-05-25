@@ -23,6 +23,11 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
+import CuisineCategory from "../../private/pages/mealSettings/cuisineCategory";
+import ActivenessStatus from "../../private/pages/registrationSettings/activenessStatus";
+import DiscountTypeName from "../../private/pages/dispatch/discountType";
+import Banner from "../../private/pages/banner/banner";
+import BannerType from "../../private/pages/banner/bannerType";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -236,6 +241,51 @@ const Switch = ({
     case "redeem-coupon":
       return (
         <RedeemCoupen
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "Cuisine-Category":
+      return (
+        <CuisineCategory
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "activeness-Status":
+      return (
+        <ActivenessStatus
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "discount-type":
+      return (
+        <DiscountTypeName
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "banner":
+      return (
+        <Banner
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "banner-type":
+      return (
+        <BannerType
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
