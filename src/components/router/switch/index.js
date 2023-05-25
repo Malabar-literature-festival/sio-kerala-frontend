@@ -23,6 +23,7 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
+import Patient from "../../private/pages/user/patient";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -236,6 +237,16 @@ const Switch = ({
     case "redeem-coupon":
       return (
         <RedeemCoupen
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+
+    case "patient":
+      return (
+        <Patient
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

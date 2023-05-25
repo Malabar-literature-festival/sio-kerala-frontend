@@ -181,7 +181,7 @@ const UserType = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Role`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
