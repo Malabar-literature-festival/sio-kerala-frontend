@@ -54,4 +54,13 @@ export const SubMenu = styled.nav`
   margin-left: 2em;
   padding-left: 0em;
   border-left: 1px solid lightgrey;
+  &.close{
+    display:none;
+  }
+`;
+export const MenuGroup = styled.div`
+cursor: pointer;
+  svg:last-child{
+    margin-left: auto;
+  }
 `;

@@ -24,7 +24,7 @@ const ProteinCategory = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "image",
       placeholder: "Image",
       name: "image",
       validation: "",

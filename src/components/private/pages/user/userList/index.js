@@ -61,7 +61,7 @@ const UserList = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "image",
       placeholder: "User Image",
       name: "userImage",
       validation: "",
