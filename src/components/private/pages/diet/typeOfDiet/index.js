@@ -15,7 +15,7 @@ const TypeOfDiet = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "TypeOfDiet",
+      placeholder: "Type Of Diet",
       // Name of the input field
       name: "typeOfDietName",
       // Validation rules for the input
@@ -23,7 +23,7 @@ const TypeOfDiet = (props) => {
       // Default value for the input field
       default: "",
       // Label text for the input field
-      label: "TypeOfDiet",
+      label: "Type Of Diet",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -33,7 +33,7 @@ const TypeOfDiet = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
-    {
+      {
       type: "datetime",
       placeholder: "Created At",
       name: "createdAt",
@@ -193,7 +193,7 @@ const TypeOfDiet = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`Type Of Diet`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

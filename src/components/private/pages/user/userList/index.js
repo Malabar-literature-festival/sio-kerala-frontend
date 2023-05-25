@@ -49,6 +49,8 @@ const UserList = (props) => {
     },
     {
       type: "text",
+      apiType: "API",
+      selectApi: "",
       placeholder: "User Type",
       name: "userType",
       validation: "",
@@ -171,7 +173,7 @@ const UserList = (props) => {
       // Displayed item title
       itemTitle: "title",
       // Title of the submenu
-      title: "Sub Menu",
+      title: "Sub Menu1",
       // Additional attributes for timing
       attributes: timingAttributes,
       // Parameters for API and submenu configuration
@@ -183,7 +185,7 @@ const UserList = (props) => {
         // Property name for the submenu item title
         itemTitle: "label",
         // Short name for the submenu
-        shortName: "Sub Menu",
+        shortName: "Sub Menu2",
         // Privileges for adding submenu items
         addPrivilege: true,
         // Privileges for deleting submenu items
@@ -210,6 +212,9 @@ const UserList = (props) => {
         // Short name or label for the menu
         shortName={`User`}
         // Privilege flag indicating whether the user can add menu items
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}

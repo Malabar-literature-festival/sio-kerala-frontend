@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const VariantGroup = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `variant Group - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "variantGroup",
+      placeholder: "variant Group",
       name: "variantGroupName",
       validation: "",
       default: "",
-      label: "VariantGroupName",
+      label: "Variant Group Name",
       required: true,
       view: true,
       add: true,
@@ -153,13 +153,13 @@ const VariantGroup = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`variant-group`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Group`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

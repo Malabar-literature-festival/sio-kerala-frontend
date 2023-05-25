@@ -4,20 +4,80 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const ProteinCategory = (props) => {
+const MealIngredient = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Protein Category - Diet Food Management Portal`;
+    document.title = `Meal Ingredient - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      type: "text",
-      placeholder: "Protein Category",
-      name: "proteinCategoriesName",
+      type: "number",
+      placeholder: "Quantity",
+      name: "ingredientQuantity",
       validation: "",
       default: "",
-      label: "Protein Category",
+      label: "Quantity",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Meal",
+      name: "meal",
+      validation: "",
+      showItem: "mealName",
+      default: "",
+      label: "Meal",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Ingredient",
+      name: "ingredient",
+      validation: "",
+      showItem: "ingredientName",
+      default: "",
+      label: "Ingredient",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Description",
+      name: "meal",
+      validation: "",
+      showItem: "mealDescription",
+      default: "",
+      label: "Description",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Preparation Time",
+      name: "meal",
+      validation: "",
+      showItem: "mealPreparationTime",
+      default: "",
+      label: "Preparation Time",
       required: true,
       view: true,
       add: true,
@@ -25,11 +85,14 @@ const ProteinCategory = (props) => {
     },
     {
       type: "image",
-      placeholder: "Image",
-      name: "image",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Photo",
+      name: "meal",
       validation: "",
+      showItem: "mealPhoto",
       default: "",
-      label: "Image",
+      label: "Photo",
       required: true,
       view: true,
       add: true,
@@ -39,11 +102,11 @@ const ProteinCategory = (props) => {
   const [timingAttributes] = useState([
     {
       type: "text",
-      placeholder: "Label",
+      placeholder: "test",
       name: "label",
       validation: "",
       default: "",
-      label: "Label",
+      label: "test",
       required: true,
       view: true,
       add: true,
@@ -134,7 +197,7 @@ const ProteinCategory = (props) => {
       // Displayed item title
       itemTitle: "title",
       // Title of the submenu
-      title: "Order",
+      title: "Sub Menu",
       // Additional attributes for timing
       attributes: timingAttributes,
       // Parameters for API and submenu configuration
@@ -167,12 +230,15 @@ const ProteinCategory = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`protein-categories`}
+        api={`meal-ingredients`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Category`}
+        shortName={`Meal Ingredient`}
         // Privilege flag indicating whether the user can add menu items
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
@@ -181,4 +247,4 @@ const ProteinCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(ProteinCategory);
+export default Layout(MealIngredient);

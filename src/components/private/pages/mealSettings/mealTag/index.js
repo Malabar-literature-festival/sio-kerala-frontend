@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const MealTag = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `Meal Tag Name - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "MealTagName",
+      placeholder: "Meat Tag Name",
       name: "mealTagName",
       validation: "",
       default: "",
-      label: "MeatTagName",
+      label: "Meal Tag Name",
       required: true,
       view: true,
       add: true,
@@ -153,13 +153,13 @@ const MealTag = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`meal-tag`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Franchise`}
+        shortName={`Tag`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

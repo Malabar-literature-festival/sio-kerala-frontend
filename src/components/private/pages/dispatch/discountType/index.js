@@ -4,32 +4,42 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const ProteinCategory = (props) => {
+const DiscountType = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Protein Category - Diet Food Management Portal`;
+    document.title = `Discount Type - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
+      // Type of input, in this case, a text input
       type: "text",
-      placeholder: "Protein Category",
-      name: "proteinCategoriesName",
+      // Placeholder text for the input field
+      placeholder: "Discount Type",
+      // Name of the input field
+      name: "discountTypeName",
+      // Validation rules for the input
       validation: "",
+      // Default value for the input field
       default: "",
-      label: "Protein Category",
+      // Label text for the input field
+      label: "Discount Type",
+      // Indicates if the input field is required
       required: true,
+      // Indicates if the input field should be displayed in the view mode
       view: true,
+      // Indicates if the input field should be displayed in the add mode
       add: true,
+      // Indicates if the input field should be displayed in the update mode
       update: true,
     },
     {
-      type: "image",
-      placeholder: "Image",
-      name: "image",
+      type: "number",
+      placeholder: "Created At",
+      name: "createdAt",
       validation: "",
       default: "",
-      label: "Image",
+      label: "Created At",
       required: true,
       view: true,
       add: true,
@@ -134,7 +144,7 @@ const ProteinCategory = (props) => {
       // Displayed item title
       itemTitle: "title",
       // Title of the submenu
-      title: "Order",
+      title: "Sub Menu",
       // Additional attributes for timing
       attributes: timingAttributes,
       // Parameters for API and submenu configuration
@@ -167,11 +177,11 @@ const ProteinCategory = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`protein-categories`}
+        api={`discount-type`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Category`}
+        shortName={`Discount Type`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -181,4 +191,4 @@ const ProteinCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(ProteinCategory);
+export default Layout(DiscountType);

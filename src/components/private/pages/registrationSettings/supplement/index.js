@@ -4,32 +4,20 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const ProteinCategory = (props) => {
+const Supplement = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Protein Category - Diet Food Management Portal`;
+    document.title = `Supplement - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Protein Category",
-      name: "proteinCategoriesName",
+      placeholder: "SupplementName",
+      name: "usingAnySupplementName",
       validation: "",
       default: "",
-      label: "Protein Category",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "image",
-      placeholder: "Image",
-      name: "image",
-      validation: "",
-      default: "",
-      label: "Image",
+      label: "Supplement Name ",
       required: true,
       view: true,
       add: true,
@@ -167,11 +155,11 @@ const ProteinCategory = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`protein-categories`}
+        api={`using-any-supplement`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Category`}
+        shortName={`Supplement`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -181,4 +169,4 @@ const ProteinCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(ProteinCategory);
+export default Layout(Supplement);
