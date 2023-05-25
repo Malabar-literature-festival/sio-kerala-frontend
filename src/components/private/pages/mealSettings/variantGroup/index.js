@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const VariantGroup = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `VariantGroup - Diet Food Management Portal`;
+    document.title = `variant Group - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "variantGroup",
+      placeholder: "variant Group",
       name: "variantGroupName",
       validation: "",
       default: "",
-      label: "VariantGroupName",
+      label: "Variant Group Name",
       required: true,
       view: true,
       add: true,

@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const MealTimeCategory = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `MealTimeCategory - Diet Food Management Portal`;
+    document.title = `Meal time Category - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "MealtimeCategory",
+      placeholder: "Meal time Category",
       name: "mealtimeCategoriesName",
       validation: "",
       default: "",
-      label: "MealtimeCategory",
+      label: "Meal time Category",
       required: true,
       view: true,
       add: true,

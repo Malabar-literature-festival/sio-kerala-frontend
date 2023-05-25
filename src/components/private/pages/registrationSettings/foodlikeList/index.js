@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const FoodlikeList = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `FoodlikeList - Diet Food Management Portal`;
+    document.title = `Foodlike List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -159,7 +159,7 @@ const FoodlikeList = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`List`}
+        shortName={`Foodlike List`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

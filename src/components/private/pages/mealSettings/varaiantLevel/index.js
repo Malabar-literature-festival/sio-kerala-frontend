@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const VariantLevel = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `VariantLevel - Diet Food Management Portal`;
+    document.title = `Variant Level - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([

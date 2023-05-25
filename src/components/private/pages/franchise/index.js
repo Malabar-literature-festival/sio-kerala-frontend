@@ -247,7 +247,7 @@ const Franchise = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`franchise`}
         // Property name for the title of each menu item

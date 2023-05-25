@@ -28,7 +28,11 @@ import MedicationList from "../../private/pages/registrationSettings/medicationL
 import PackageManagement from "../../private/pages/packageManagement";
 import Supplement from "../../private/pages/registrationSettings/supplement";
 import DeliveryStatus from "../../private/pages/dispatch/deliveryStatus";
-
+import CuisineCategory from "../../private/pages/mealSettings/cuisineCategory";
+import ActivenessStatus from "../../private/pages/registrationSettings/activenessStatus";
+import DiscountTypeName from "../../private/pages/dispatch/discountType";
+import Banner from "../../private/pages/banner/banner";
+import BannerType from "../../private/pages/banner/bannerType";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -248,9 +252,19 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+
     case "patient-coupon":
       return (
         <Patient
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "Cuisine-Category":
+      return (
+        <CuisineCategory
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -266,9 +280,27 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "activeness-Status":
+      return (
+        <ActivenessStatus
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "package-management":
       return (
         <PackageManagement
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "discount-type":
+      return (
+        <DiscountTypeName
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -284,9 +316,27 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "banner":
+      return (
+        <Banner
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "delivery-status":
       return (
         <DeliveryStatus
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "banner-type":
+      return (
+        <BannerType
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
