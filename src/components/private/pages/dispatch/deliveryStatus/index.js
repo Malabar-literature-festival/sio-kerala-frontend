@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const DeliveryStatus = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Delivery Slot - Diet Food Management Portal`;
+    document.title = `delivery Statuse Name - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -15,15 +15,15 @@ const DeliveryStatus = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "slot",
+      placeholder: "Delivery Statuse Name",
       // Name of the input field
-      name: "slot",
+      name: "deliveryStatuseName",
       // Validation rules for the input
       validation: "",
       // Default value for the input field
       default: "",
       // Label text for the input field
-      label: "Slot",
+      label: "Delivery Statuse Name",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -35,11 +35,11 @@ const DeliveryStatus = (props) => {
     },
     {
       type: "number",
-      placeholder: "DeliveryStatusName",
-      name: "deliveryStatuseName",
+      placeholder: "created At",
+      name: "created At",
       validation: "",
       default: "",
-      label: "DeliveryStatusName",
+      label: "Created At",
       required: true,
       view: true,
       add: true,
@@ -181,7 +181,7 @@ const DeliveryStatus = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Status`}
+        shortName={`Delivery Status`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
