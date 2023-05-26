@@ -159,7 +159,7 @@ const MealTimeCategory = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Category`}
+        shortName={`Meal Time Category`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

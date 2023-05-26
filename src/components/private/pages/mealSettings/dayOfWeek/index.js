@@ -159,7 +159,7 @@ const DayOfWeek = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Day`}
+        shortName={`Day Of Week`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

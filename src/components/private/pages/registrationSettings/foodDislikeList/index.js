@@ -159,7 +159,7 @@ const FoodDislikeList = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Food like List`}
+        shortName={`Food Dislike List`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

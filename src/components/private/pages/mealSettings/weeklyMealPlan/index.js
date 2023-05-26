@@ -12,12 +12,24 @@ const WeeklyMealPlan = (props) => {
 
   const [attributes] = useState([
     {
-      type: "boolean",
-      placeholder: "Delete test",
-      name: "delete",
+      type: "number",
+      placeholder: "Weekly Meal Plan",
+      name: "weekStartDate",
       validation: "",
       default: "",
-      label: "Delete test",
+      label: "week Start Date",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "number",
+      placeholder: "Weekly Meal Plan",
+      name: "weekEndDate",
+      validation: "",
+      default: "",
+      label: "week End Date",
       required: true,
       view: true,
       add: true,
@@ -159,7 +171,7 @@ const WeeklyMealPlan = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Plan`}
+        shortName={`Weekly Meal Plan`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
