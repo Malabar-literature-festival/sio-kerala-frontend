@@ -4,115 +4,43 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const MealIngredient = (props) => {
+const RecipeIngredient = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal Ingredient - Diet Food Management Portal`;
+    document.title = `Recipe Ingredient - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      type: "number",
-      placeholder: "Quantity",
-      name: "ingredientQuantity",
-      validation: "",
-      default: "",
-      label: "Quantity",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
       type: "text",
       apiType: "API",
       selectApi: "",
-      placeholder: "Meal",
-      name: "meal",
+      placeholder: "Ingredient",
+      name: "ingredientName",
       validation: "",
-      showItem: "mealName",
+      showItem: "",
       default: "",
-      label: "Meal",
+      label: "Ingredient",
       required: true,
       view: true,
-      // add: true,
-      // update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "meal",
-      placeholder: "Meal",
-      name: "meal",
-      validation: "",
-      showItem: "mealName",
-      default: "",
-      label: "Meal",
-      required: true,
-      // view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
+      type: "boolean",
       apiType: "API",
       selectApi: "",
-      placeholder: "Recipe Ingredient",
-      name: "recipeIngredient",
+      placeholder: "Delete",
+      name: "delete",
       validation: "",
-      showItem: "ingredientName",
+      showItem: "",
       default: "",
-      label: "Recipe Ingredient",
+      label: "Delete",
       required: true,
       view: true,
-      // add: true,
-      // update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "recipe-ingredients/recipe-ingredient",
-      placeholder: "Recipe Ingredient",
-      name: "recipeIngredient",
-      validation: "",
-      showItem: "ingredientName",
-      default: "",
-      label: "Recipe Ingredient",
-      required: true,
-      // view: true,
       add: true,
       update: true,
     },
-    // {
-    //   type: "text",
-    //   // apiType: "API",
-    //   selectApi: "",
-    //   placeholder: "Ingredient Quantity",
-    //   name: "ingredientQuantity",
-    //   validation: "",
-    //   showItem: "mealPreparationTime",
-    //   default: "",
-    //   label: "Ingredient Quantity",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
-    // {
-    //   type: "image",
-    //   apiType: "API",
-    //   selectApi: "",
-    //   placeholder: "Photo",
-    //   name: "meal",
-    //   validation: "",
-    //   showItem: "mealPhoto",
-    //   default: "",
-    //   label: "Photo",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
   ]);
   // const [timingAttributes] = useState([
   //   {
@@ -245,11 +173,11 @@ const MealIngredient = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`meal-ingredients`}
+        api={`recipe-ingredients`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Meal Ingredient`}
+        shortName={`Recipe Ingredient`}
         // Privilege flag indicating whether the user can add menu items
         // formMode={`single`}
         formMode={`double`}
@@ -262,4 +190,4 @@ const MealIngredient = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(MealIngredient);
+export default Layout(RecipeIngredient);

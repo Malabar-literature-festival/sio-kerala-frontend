@@ -34,6 +34,7 @@ import DiscountTypeName from "../../private/pages/dispatch/discountType";
 import Banner from "../../private/pages/banner/banner";
 import BannerType from "../../private/pages/banner/bannerType";
 import MealIngredient from "../../private/pages/mealSettings/mealIngredient";
+import RecipeIngredient from "../../private/pages/mealSettings/recipeIngredient";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -347,6 +348,15 @@ const Switch = ({
     case "meal-ingredient":
       return (
         <MealIngredient
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "recipe-ingredient":
+      return (
+        <RecipeIngredient
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
