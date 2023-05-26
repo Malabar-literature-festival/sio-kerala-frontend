@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
 import { themColorReducer } from "./reducers/theme";
 import thunk from "redux-thunk";
-import { currentMenuReducer, menuStatusReducer } from "./reducers/common";
+import { currentMenuReducer, menuStatusReducer, openMenuReducer, selectedMenuReducer } from "./reducers/common";
 import { userLoginDetailsReducer } from "./reducers/login";
 import { userReducer, usersReducer } from "./reducers/users";
 import { select } from "./reducers/select";
@@ -15,10 +15,12 @@ const rootReducer = combineReducers({
   user: userReducer,
   menuStatus: menuStatusReducer,
   currentMenu: currentMenuReducer,
+  openedMenu: openMenuReducer,
   select: select,
   pages: pages,
   actionNewList: actionNewList,
   actionAddedList: actionAddedList,
+  selectedMenu: selectedMenuReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

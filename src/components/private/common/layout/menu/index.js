@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Header, Nav, SubMenu } from "./styels";
+import { Header, MenuGroup, Nav, SubMenu } from "./styels";
 import { useTranslation } from "react-i18next"; // react-i18next hook for translations
 import { useDispatch, useSelector } from "react-redux";
-import { currentMenu, menuStatus } from "../../../../../store/actions/common";
+import { currentMenu, menuStatus, openedMenu, selectedMenu } from "../../../../../store/actions/common";
 import { GetIcon, LogoutIcon } from "../../../../../icons";
 import LanguageTooltip from "../../../../elements/tooltip";
 import { Logo, Logout, User } from "../header/styels";
@@ -11,8 +11,10 @@ import { clearLogin } from "../../../../../store/actions/login";
 import { logo } from "../../../../../images";
 const Menu = (props) => {
   const { t } = useTranslation();
-  const location = useLocation();
   const themeColors = useSelector((state) => state.themeColors);
+  const openedMenus = useSelector((state) => state.openedMenu);
+  const selectedMenuItem = useSelector((state) => state.selectedMenu);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -36,24 +38,27 @@ const Menu = (props) => {
           <div key={menuItem._id}>
             {menuItem.submenus.length > 0 ? (
               <React.Fragment>
-                <div href="#"
+                <MenuGroup
+                  key={menuItem._id}
+                  href="#"
                   onClick={() => {
-                    // dispatch(menuStatus(false));
-                    // dispatch(currentMenu(menuItem.label));
+                    console.log(menuItem);
+                    dispatch(openedMenu(menuItem._id));
                   }}
-                  className={location.pathname === menuItem.path ? "open active" : "open"}
+                  className={openedMenus[menuItem._id] === true ? "open active" : " open"}
                 >
-                  <GetIcon icon={`home`} /> {t(menuItem.label)}
-                </div>
-                <SubMenu>
+                  <GetIcon icon={`home`} /> {t(menuItem.label)} <GetIcon icon={"down"}></GetIcon>
+                </MenuGroup>
+                <SubMenu className={openedMenus[menuItem._id] === true ? "down" : "close"}>
                   {menuItem.submenus?.map((submenu) => (
                     <Link
                       key={submenu._id} // Use submenu.label as the key
                       onClick={() => {
                         dispatch(menuStatus(false));
+                        dispatch(selectedMenu(submenu));
                         dispatch(currentMenu(submenu.label)); // Use submenu.label in currentMenu dispatch
                       }}
-                      className={location.pathname === submenu.path ? "main active" : "main"} // Use submenu.path for the active class
+                      className={submenu._id === selectedMenuItem._id ? "main active" : "main"} // Use submenu.path for the active class
                       to={submenu.path} // Use submenu.path for the link destination
                     >
                       <GetIcon icon={`home`} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
@@ -65,9 +70,10 @@ const Menu = (props) => {
               <Link
                 onClick={() => {
                   dispatch(menuStatus(false));
+                  dispatch(selectedMenu(menuItem));
                   dispatch(currentMenu(menuItem.label));
                 }}
-                className={location.pathname === menuItem.path ? "main active" : "main"}
+                className={menuItem._id === selectedMenuItem._id ? "main active" : "main"}
                 to={menuItem.path}
               >
                 <GetIcon icon={`home`} /> {t(menuItem.label)}
