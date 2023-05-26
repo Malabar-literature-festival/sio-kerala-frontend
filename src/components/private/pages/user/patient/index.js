@@ -255,7 +255,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "decimal",
+      type: "number",
       placeholder: "Height",
       name: "height",
       validation: "",
@@ -267,7 +267,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "decimal",
+      type: "number",
       placeholder: "Present Weight",
       name: "presentWeight",
       validation: "",
@@ -279,7 +279,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "decimal",
+      type: "number",
       placeholder: "Target Weight",
       name: "targetWeight",
       validation: "",
@@ -291,7 +291,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "string",
+      type: "text",
       placeholder: "BMI",
       name: "bmi",
       validation: "",
@@ -303,7 +303,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "string",
+      type: "text",
       placeholder: "BMR",
       name: "bmr",
       validation: "",
@@ -315,7 +315,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
       placeholder: "User Activeness Status",
       name: "userActivenessStatus",
       validation: "",
@@ -327,7 +327,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
       placeholder: "Aim of Program",
       name: "aimOfProgram",
       validation: "",
@@ -339,7 +339,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
       placeholder: "User Medical Condition",
       name: "userMedicalCondition",
       validation: "",
@@ -351,7 +351,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
       placeholder: "User Food Like List",
       name: "userFoodLikeList",
       validation: "",
@@ -363,7 +363,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
       placeholder: "User Dislike Like",
       name: "userDislikeLike",
       validation: "",
@@ -375,7 +375,31 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "reference",
+      type: "text",
+      placeholder: "User Addiction List",
+      name: "userAddictionList",
+      validation: "",
+      default: "",
+      label: "User Addiction List",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Using Any Supplement",
+      name: "usingAnySupplement",
+      validation: "",
+      default: "",
+      label: "User Addiction List",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
       placeholder: "User Addiction List",
       name: "userAddictionList",
       validation: "",

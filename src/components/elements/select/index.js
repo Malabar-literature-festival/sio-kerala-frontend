@@ -148,31 +148,32 @@ function CustomSelect(props) {
       </button>
       {optionsVisible && initialized && (
         <ul className="options">
-          {options.map((option) => (
-            <li
-              value={option.id === selectedId}
-              className={`${option.id === selectedId}`}
-              key={option.id}
-              onClick={() => {
-                if (selectedId === option.id) {
-                  props.onSelect(
-                    { id: defaultValue, value: props.label },
-                    props.id,
-                    props.type
-                  );
-                  setSelectedValue(props.label);
-                  setSelectedId(defaultValue);
-                } else {
-                  props.onSelect(option, props.id, props.type);
-                  setSelectedValue(option.value);
-                  setSelectedId(option.id);
-                }
-                toggleOptions();
-              }}
-            >
-              {option.value}
-            </li>
-          ))}
+          {options.length &&
+            options?.map((option) => (
+              <li
+                value={option.id === selectedId}
+                className={`${option.id === selectedId}`}
+                key={option.id}
+                onClick={() => {
+                  if (selectedId === option.id) {
+                    props.onSelect(
+                      { id: defaultValue, value: props.label },
+                      props.id,
+                      props.type
+                    );
+                    setSelectedValue(props.label);
+                    setSelectedId(defaultValue);
+                  } else {
+                    props.onSelect(option, props.id, props.type);
+                    setSelectedValue(option.value);
+                    setSelectedId(option.id);
+                  }
+                  toggleOptions();
+                }}
+              >
+                {option.value}
+              </li>
+            ))}
         </ul>
       )}
       {initialized && options.length === 0 && (
