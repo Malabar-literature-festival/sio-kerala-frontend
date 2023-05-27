@@ -218,7 +218,7 @@ const CrudForm = (props) => {
         value = event;
       } else if (type === "select") {
         value = event.id;
-      } else if (type === "text" || type === "number" || type === "password") {
+      } else if (type === "email" || type === "text" || type === "number" || type === "password") {
         value = event.target.value;
       } else if (type === "search") {
         value = JSON.stringify(event);
