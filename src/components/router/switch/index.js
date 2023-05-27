@@ -255,7 +255,7 @@ const Switch = ({
         />
       );
 
-    case "patient-coupon":
+    case "patient":
       return (
         <Patient
           key={key}
