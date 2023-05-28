@@ -59,8 +59,8 @@ const UserList = (props) => {
       label: "User Type",
       required: true,
       view: true,
-      add: true,
-      update: true,
+      // add: true,
+      // update: true,
     },
     {
       type: "select",
