@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Header, MenuGroup, Nav, SubMenu } from "./styels";
 import { useTranslation } from "react-i18next"; // react-i18next hook for translations
 import { useDispatch, useSelector } from "react-redux";

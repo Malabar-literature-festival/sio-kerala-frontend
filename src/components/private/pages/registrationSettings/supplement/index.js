@@ -13,7 +13,7 @@ const Supplement = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "SupplementName",
+      placeholder: "Supplement Name",
       name: "usingAnySupplementName",
       validation: "",
       default: "",
@@ -159,7 +159,7 @@ const Supplement = (props) => {
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Supplement`}
+        shortName={`supplement`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
