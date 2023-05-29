@@ -131,7 +131,7 @@ function FormInput(props) {
             type={`file`}
             onChange={(event) => props.onChange(event, props.id, props.type)}
           />
-          {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }} />}
+          {props.error?.length > 0 && <ErrorMessage className="image"  dangerouslySetInnerHTML={{ __html: props.error }} />}
         </FileContainer>
       );
     // Render a textarea

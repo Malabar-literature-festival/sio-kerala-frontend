@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Page404 from "../public/page404"; // 404 page component
 
 import Switch from "./switch";
 import { useSelector } from "react-redux";
+import Page404 from "../private/pages/page404";
 
 const PageRouter = () => {
   const user = useSelector((state) => state.login);
@@ -13,7 +13,7 @@ const PageRouter = () => {
       <Route
         key={`${router._id}`}
         path={`${router.path}`}
-        element={<Switch key={`${router._id}`} page={router.element} />}
+        element={<Switch  page={router.element} />}
       />
     );
   };

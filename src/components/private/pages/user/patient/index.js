@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const Patient = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `User List - Diet Food Management Portal`;
+    document.title = `Patient List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -122,7 +122,7 @@ const Patient = (props) => {
       update: true,
     },
   ]);
-  const [timingAttributes] = useState([
+  const [subscriberProfile] = useState([
     {
       type: "text",
       placeholder: "Subscriber ID",
@@ -430,25 +430,25 @@ const Patient = (props) => {
       // Element type for rendering
       element: "button",
       // Type of action, in this case a sublist
-      type: "subList",
+      type: "subItem",
       // Unique identifier for the submenu
-      id: "sub-menu",
+      id: "patient-details",
       // Displayed item title
       itemTitle: "title",
       // Title of the submenu
       title: "Details",
       // Additional attributes for timing
-      attributes: timingAttributes,
+      attributes: subscriberProfile,
       // Parameters for API and submenu configuration
       params: {
         // API endpoint for submenu data
-        api: `sub-menu`,
+        api: `user/subscriber`,
         // Parent reference for the submenu
-        parentReference: "menu",
+        parentReference: "user",
         // Property name for the submenu item title
         itemTitle: "label",
         // Short name for the submenu
-        shortName: "Sub Menu2",
+        shortName: "Patient Details",
         // Privileges for adding submenu items
         addPrivilege: true,
         // Privileges for deleting submenu items

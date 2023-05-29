@@ -1,33 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Table,
-  Th,
-  Button,
-  Td,
-  Tr,
-  Count,
-  ArrowButton,
-  AddButton,
-  ButtonPanel,
-  Filter,
-  Filters,
-  ToggleContainer,
-  ToggleInput,
-  ToggleSlider,
-  NoData,
-  ScrollLayout,
-  FilterBox,
-  Img,
-} from "./styles";
+import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox, Img } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
-import {
-  AddIcon,
-  FilterIcon,
-  GetIcon,
-  NextIcon,
-  PreviousIcon,
-} from "../../../icons";
+import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import { deleteData, postData, putData } from "../../../backend/api";
 import CrudForm from "./create";
@@ -40,20 +15,7 @@ import Search from "../search";
 import SubPage from "./subPage";
 import moment from "moment";
 import DateRangeSelector from "../daterange";
-const ListTable = ({
-  parentReference = "_id",
-  referenceId = 0,
-  actions = [],
-  api,
-  setMessage,
-  attributes = [],
-  addPrivilege = true,
-  delPrivilege = true,
-  updatePrivilege = true,
-  shortName = "Item",
-  itemTitle = "title",
-  datefilter = false,
-}) => {
+const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title", datefilter = false, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -68,6 +30,7 @@ const ListTable = ({
   const [subAttributes, setSubAttributes] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [count, setCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
   const themeColors = useSelector((state) => state.themeColors);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -102,31 +65,23 @@ const ListTable = ({
     let date = new Date();
     attributes.forEach((item) => {
       if (item.type === "checkbox") {
-        let bool = JSON.parse(
-          item.default === "false" || item.default === "true"
-            ? item.default
-            : "false"
-        );
+        let bool = JSON.parse(item.default === "false" || item.default === "true" ? item.default : "false");
         if (item.add) {
           addValuesTemp.addValues[item.name] = bool;
         }
         addValuesTemp.updateValues[item.name] = bool;
-      } else if (
-        item.type === "datetime" ||
-        item.type === "date" ||
-        item.type === "time"
-      ) {
+      } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
         addValuesTemp.addValues[item.name] = date.toISOString();
         if (item.add) {
           addValuesTemp.updateValues[item.name] = date.toISOString();
         }
       } else if (item.type === "image" || item.type === "file") {
         if (item.add) {
-          addValuesTemp.addValues[item.name] = "";
-          addValuesTemp.addValues["selected_" + item.name] = [];
+          addValuesTemp.addValues[item.name] = [];
         }
-        addValuesTemp.updateValues[item.name] = "";
-        addValuesTemp.updateValues["selected_" + item.name] = [];
+        if (item.update) {
+          addValuesTemp.updateValues[item.name] = [];
+        }
       } else {
         if (item.add) {
           addValuesTemp.addValues[item.name] = item.default;
@@ -151,24 +106,14 @@ const ListTable = ({
 
     setFilter(tempFilter);
     setInitialized(true);
-  }, [
-    attributes,
-    dispatch,
-    setPrevCrud,
-    prevCrud,
-    setFormInput,
-    setAddValues,
-    setUpdateValues,
-    setFilterView,
-    parentReference,
-    referenceId,
-  ]);
+  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
 
   // end processing attributes
   useEffect(() => {
     setLoaderBox(users.isLoading);
     if (currentIndex === 0 && users.data?.count) {
-      setCount(users.data.count);
+      setCount(users.data.filterCount);
+      setTotalCount(users.data.totalCount);
     }
   }, [users, currentIndex]);
 
@@ -209,18 +154,10 @@ const ListTable = ({
             updateValues[item.name] = bool;
           } else if (item.type === "select") {
             console.log(typeof value[item.name]);
-            updateValues[item.name] =
-              typeof value[item.name] === "undefined"
-                ? ""
-                : typeof value[item.name] === "string" ||
-                  typeof value[item.name] === "number"
-                ? value[item.name]
-                : value[item.name]?._id
-                ? value[item.name]._id
-                : "";
+            updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
           } else if (item.type === "image") {
-            updateValues["selected_" + item.name] = [];
-            updateValues[item.name] = value[item.name] ? value[item.name] : "";
+            updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
+            updateValues[item.name] = [];
           } else {
             updateValues[item.name] = value[item.name] ? value[item.name] : "";
           }
@@ -244,9 +181,7 @@ const ListTable = ({
         if (response.status === 200) {
           setMessage({
             type: 1,
-            content: `The '${
-              item.title ? item.title : shortName
-            }' deleted successfully!`,
+            content: `The '${item.title ? item.title : shortName}' deleted successfully!`,
             proceed: t("okay"),
           });
           setCount((count) => count - 1);
@@ -281,10 +216,7 @@ const ListTable = ({
   };
   const submitHandler = async (data) => {
     setLoaderBox(true);
-    const saveData =
-      referenceId === 0
-        ? { ...data }
-        : { ...data, [parentReference]: referenceId };
+    const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
       .then((response) => {
         if (response.status === 200) {
@@ -390,28 +322,18 @@ const ListTable = ({
           if (attribute.view) {
             switch (attribute.type) {
               case "minute":
-                return (
-                  <Td key={index}>
-                    {convertMinutesToHHMM(
-                      parseFloat(data[attribute.name] ?? 0)
-                    )}
-                  </Td>
-                );
+                return <Td key={index}>{convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0))}</Td>;
               case "image":
                 return (
                   <Td key={index}>
-                    <Img src={data[attribute.name]} />{" "}
+                    <Img src={process.env.REACT_APP_CDN + data[attribute.name]} />
                   </Td>
                 );
               case "datetime":
-                let userFriendlyDateTime = moment(data[attribute.name]).format(
-                  "DD.MM.YYYY, H:mm"
-                );
+                let userFriendlyDateTime = moment(data[attribute.name]).format("DD.MM.YYYY, H:mm");
                 return <Td key={index}>{userFriendlyDateTime}</Td>;
               case "date":
-                let userFriendlyDate = moment(data[attribute.name]).format(
-                  "DD.MM.YYYY"
-                );
+                let userFriendlyDate = moment(data[attribute.name]).format("DD.MM.YYYY");
                 return <Td key={index}>{userFriendlyDate}</Td>;
               case "textarea":
                 return (
@@ -433,39 +355,22 @@ const ListTable = ({
                   case "undefined":
                     return <Td key={index}>Not Found</Td>;
                   case "object":
-                    return (
-                      <Td key={index}>
-                        {data[attribute.name]?.[attribute.showItem] ?? "Nil"}
-                      </Td>
-                    );
+                    return <Td key={index}>{data[attribute.name]?.[attribute.showItem] ?? "Nil"}</Td>;
                   case "boolean":
-                    return (
-                      <Td key={index}>{data[attribute.name].toString()}</Td>
-                    );
+                    return <Td key={index}>{data[attribute.name].toString()}</Td>;
                   case "string":
                   case "number":
                   default:
-                    if (
-                      attribute.type === "select" &&
-                      attribute.apiType === "JSON"
-                    ) {
+                    if (attribute.type === "select" && attribute.apiType === "JSON") {
                       return attribute.selectApi
-                        .filter(
-                          (item) =>
-                            item.id.toString() ===
-                            data[attribute.name]?.toString()
-                        )
+                        .filter((item) => item.id.toString() === data[attribute.name]?.toString())
                         .map((filteredItem) => (
                           <Td style={{ color: filteredItem.color }} key={index}>
                             {filteredItem.value}
                           </Td>
                         ));
                     } else {
-                      return (
-                        <Td key={index}>
-                          {data[attribute.name]?.toString().substring(0, 200)}
-                        </Td>
-                      );
+                      return <Td key={index}>{data[attribute.name]?.toString().substring(0, 200)}</Td>;
                     }
                 }
             }
@@ -481,9 +386,7 @@ const ListTable = ({
                 setMessage({
                   type: 2,
                   content: t("deleteRequest", {
-                    label: data[itemTitle]
-                      ? data[itemTitle].toString()
-                      : "Item",
+                    label: data[itemTitle] ? data[itemTitle].toString() : "Item",
                   }),
                   proceed: t("delete"),
                   onProceed: deleteHandler,
@@ -520,6 +423,9 @@ const ListTable = ({
                   } else if (item.type === "subList") {
                     setSubAttributes({ item, data });
                     setShowSubList(true);
+                  } else if (item.type === "subItem") {
+                    setSubAttributes({ item, data });
+                    setShowSubList(true);
                   } else {
                     openAction(item, data);
                   }
@@ -537,10 +443,7 @@ const ListTable = ({
                   onChange={async (event) => {
                     // item.callback(item, data);
                     setLoaderBox(true);
-                    await postData(
-                      { status: event.target.checked },
-                      `${item.api}/${data._id}`
-                    )
+                    await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
                       .then((response) => {
                         if (response.status === 200) {
                           if (response.data?.message) {
@@ -603,16 +506,11 @@ const ListTable = ({
     };
   }, []);
   //end crud functions
-  return (
+  return viewMode === "list" || viewMode === "subList" ? (
     <RowContainer>
       <ButtonPanel>
         <FilterBox>
-          <Search
-            theme={themeColors}
-            placeholder="Search"
-            value={searchValue}
-            onChange={handleChange}
-          ></Search>
+          <Search theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
           {filter && (
             <Filter
               theme={themeColors}
@@ -624,29 +522,11 @@ const ListTable = ({
             </Filter>
           )}
 
-          {datefilter && (
-            <DateRangeSelector
-              onChange={dateRangeChange}
-              themeColors={themeColors}
-            ></DateRangeSelector>
-          )}
+          {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>
           {formInput.map((item, index) => {
-            return (
-              item.type === "select" &&
-              (item.filter ?? true) === true && (
-                <FormInput
-                  customClass={"filter"}
-                  placeholder={item.placeHolder}
-                  value={filterView[item.name]}
-                  key={`input` + index}
-                  id={item.name}
-                  {...item}
-                  onChange={filterChange}
-                />
-              )
-            );
+            return item.type === "select" && (item.filter ?? true) === true && <FormInput customClass={"filter"} placeholder={item.placeHolder} value={filterView[item.name]} key={`input` + index} id={item.name} {...item} onChange={filterChange} />;
           })}
         </Filters>
         {(addPrivilege ? addPrivilege : false) && (
@@ -661,56 +541,41 @@ const ListTable = ({
           <thead>
             <Tr>
               {attributes.map((attribute) => {
-                return attribute.view === true ? (
-                  <Th key={shortName + attribute.name}>{t(attribute.label)}</Th>
-                ) : (
-                  ""
-                );
+                return attribute.view === true ? <Th key={shortName + attribute.name}>{t(attribute.label)}</Th> : "";
               })}
             </Tr>
           </thead>
-          <tbody>
-            {users.data?.response?.length > 0 &&
-              users.data.response.map((item, index) => (
-                <TableRowWithActions
-                  key={`${shortName}-${index}`}
-                  attributes={attributes}
-                  data={item}
-                />
-              ))}
-          </tbody>
+          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} attributes={attributes} data={item} />)}</tbody>
         </Table>
       </ScrollLayout>
-      {!users.data && !users.data?.response && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
-      {users.data?.response?.length === 0 && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
-      {count > 10 && (
-        <Count>
-          <ArrowButton
-            theme={themeColors}
-            onClick={() => {
-              setCurrentIndex((prev) => (prev > 9 ? prev - 10 : 0));
-            }}
-          >
-            <PreviousIcon />
-          </ArrowButton>
-          {`Showing ${currentIndex + 1} - ${
-            currentIndex + 10 > count ? count : currentIndex + 10
-          } from ${count}`}
-          <ArrowButton
-            theme={themeColors}
-            onClick={() => {
-              setCurrentIndex((prev) =>
-                prev + 10 > count ? currentIndex : currentIndex + 10
-              );
-            }}
-          >
-            <NextIcon />
-          </ArrowButton>
-        </Count>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
+      {count > 0 ? (
+        count > 10 ? (
+          <Count>
+            <ArrowButton
+              theme={themeColors}
+              onClick={() => {
+                setCurrentIndex((prev) => (prev > 9 ? prev - 10 : 0));
+              }}
+            >
+              <PreviousIcon />
+            </ArrowButton>
+            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count} out of ${totalCount}`}
+            <ArrowButton
+              theme={themeColors}
+              onClick={() => {
+                setCurrentIndex((prev) => (prev + 10 > count ? currentIndex : currentIndex + 10));
+              }}
+            >
+              <NextIcon />
+            </ArrowButton>
+          </Count>
+        ) : (
+          <Count>{`Showing ${currentIndex + 1} -  ${count} from ${count} out of ${totalCount}`}</Count>
+        )
+      ) : (
+        <Count>{`No Result Found`}</Count>
       )}
       {isCreating && (
         <CrudForm
@@ -727,38 +592,13 @@ const ListTable = ({
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && (
-        <CrudForm
-          api={api}
-          formType={"put"}
-          updateId={updateId}
-          header={t("update", { label: t(shortName ? shortName : "Form") })}
-          formInput={formInput}
-          formErrors={errroInput}
-          formValues={updateValues}
-          submitHandler={updateHandler}
-          isOpenHandler={isEditingHandler}
-          isOpen={isEditing}
-        ></CrudForm>
-      )}
-      {action.data && (
-        <Manage
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          onClose={closeManage}
-          {...action}
-        ></Manage>
-      )}
+      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && (
-        <SubPage
-          closeModal={closeModal}
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          subAttributes={subAttributes}
-        ></SubPage>
-      )}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
+  ) : (
+    ""
   );
 };
 export default ListTable;
