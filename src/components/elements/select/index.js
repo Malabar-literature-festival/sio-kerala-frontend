@@ -5,6 +5,7 @@ import { Label, SelectBox } from "./styles";
 import { DownIcon, TickIcon } from "../../../icons";
 import { useTranslation } from "react-i18next";
 import { addSelectObject } from "../../../store/actions/select";
+import { ErrorMessage } from "../form/styles";
 
 function CustomSelect(props) {
   const themeColors = useSelector((state) => state.themeColors);
@@ -26,8 +27,7 @@ function CustomSelect(props) {
         setOptions(data);
         setInitialized(true);
         try {
-          const selected = data.filter((item) => item.id === selectedId)[0]
-            .value;
+          const selected = data.filter((item) => item.id === selectedId)[0].value;
           setSelectedValue(selected ? selected : props.placeHolder);
         } catch {}
       };
@@ -62,8 +62,7 @@ function CustomSelect(props) {
       setOptions(options);
       setInitialized(true);
       try {
-        const selected = options.filter((item) => item.id === selectedId)[0]
-          .value;
+        const selected = options.filter((item) => item.id === selectedId)[0].value;
         setSelectedValue(selected ? selected : props.placeHolder);
       } catch {}
     } else if (props.apiType === "JSON") {
@@ -72,20 +71,11 @@ function CustomSelect(props) {
       setInitialized(true);
       try {
         console.log(options);
-        const selected = options.filter((item) => item.id === selectedId)[0]
-          .value;
+        const selected = options.filter((item) => item.id === selectedId)[0].value;
         setSelectedValue(selected ? selected : props.placeHolder);
       } catch {}
     }
-  }, [
-    props.apiType,
-    props.selectApi,
-    props.placeHolder,
-    initialized,
-    selectedId,
-    selectData,
-    dispatch,
-  ]);
+  }, [props.apiType, props.selectApi, props.placeHolder, initialized, selectedId, selectData, dispatch]);
 
   useEffect(() => {
     fetchData();
@@ -104,46 +94,23 @@ function CustomSelect(props) {
     };
   }, []);
   return (
-    <SelectBox
-      theme={themeColors}
-      className={`custom-select ${optionsVisible ? "open" : "close"} ${
-        props.customClass
-      }`}
-      ref={selectRef}
-    >
-      <button
-        className={`${
-          selectedId !== null && selectedId.length !== 0 ? "has" : ""
-        }`}
-        onClick={toggleOptions}
-      >
+    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass}`} ref={selectRef}>
+      <button className={`${selectedId !== null && selectedId.length !== 0 ? "has" : ""}`} onClick={toggleOptions}>
         {props.error?.length ? (
           <>
-            <Label
-              theme={themeColors}
-              className={`${
-                !props.value.length > 0 ? "shrink error" : "error"
-              }`}
-            >
+            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink error" : "error"}`}>
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           </>
         ) : (
           <>
-            <Label
-              theme={themeColors}
-              className={`${!props.value.length > 0 ? "shrink" : ""}`}
-            >
+            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
               <TickIcon />
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           </>
         )}
-        {`${
-          props.value.length === 0
-            ? `${t(props.label)}${props.required ? " *" : ""}`
-            : `${selectedValue}`
-        }`}
+        {`${props.value.length === 0 ? `${t(props.label)}${props.required ? " *" : ""}` : `${selectedValue}`}`}
         <DownIcon />
       </button>
       {optionsVisible && initialized && (
@@ -156,11 +123,7 @@ function CustomSelect(props) {
                 key={option.id}
                 onClick={() => {
                   if (selectedId === option.id) {
-                    props.onSelect(
-                      { id: defaultValue, value: props.label },
-                      props.id,
-                      props.type
-                    );
+                    props.onSelect({ id: defaultValue, value: props.label }, props.id, props.type);
                     setSelectedValue(props.label);
                     setSelectedId(defaultValue);
                   } else {
@@ -187,6 +150,7 @@ function CustomSelect(props) {
           </li>
         </ul>
       )}
+      {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
     </SelectBox>
   );
 }

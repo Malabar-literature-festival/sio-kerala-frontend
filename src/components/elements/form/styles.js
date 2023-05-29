@@ -147,6 +147,10 @@ export const ErrorMessage = styled.div`
   color: #fe7b7b;
   font-size: 12px;
   width: 100%;
+  &.image
+  {
+    margin: 0;
+  }
 `;
 export const Description = styled.div`
   flex: 1 1 100%;

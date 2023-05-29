@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const Patient = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `User List - Diet Food Management Portal`;
+    document.title = `Patient List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -40,7 +40,7 @@ const Patient = (props) => {
       placeholder: "E-Mail",
       name: "email",
       validation: "",
-      default: "qwert@mail.com",
+      default: "",
       label: "E-Mail",
       // required: true,
       view: true,
@@ -48,20 +48,52 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "text",
-      apiType: "API",
-      selectApi: "",
+      type: "select",
       placeholder: "Gender",
       name: "subscriber",
       validation: "",
-      showItem: "Gender",
       default: "",
       label: "Gender",
+      showItem: "Gender",
       required: true,
-      view: true,
+      view: false,
       add: true,
-      // update: true,
+      update: true,
+      filter: false,
+      apiType: "CSV",
+      selectApi: "Male,Female",
     },
+    {
+      type: "select",
+      placeholder: "Gender",
+      name: "subscriber",
+      validation: "",
+      default: "",
+      label: "Gender",
+      showItem: "Gender",
+      required: false,
+      view: true,
+      filter: false,
+      add: false,
+      update: false,
+      apiType: "API",
+      selectApi: "Male,Female",
+    },
+    // {
+    //   type: "text",
+    //   apiType: "API",
+    //   selectApi: "",
+    //   placeholder: "Gender",
+    //   name: "subscriber",
+    //   validation: "",
+    //   showItem: "Gender",
+    //   default: "",
+    //   label: "Gender",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   // update: true,
+    // },
     {
       type: "date",
       apiType: "API",
@@ -93,7 +125,9 @@ const Patient = (props) => {
       // update: true,
     },
     {
-      type: "text",
+      type: "select",
+      apiType: "API",
+      selectApi: "user-type/select",
       placeholder: "User Type",
       name: "userType",
       validation: "",
@@ -103,20 +137,22 @@ const Patient = (props) => {
       required: true,
       // view: true,
       add: true,
-      // update: true,
+      update: true,
     },
     {
-      type: "text",
+      type: "select",
+      apiType: "API",
+      selectApi: "franchise/select",
       placeholder: "Franchise",
       name: "franchise",
       validation: "",
-      showItem: "role",
+      showItem: "name",
       default: "",
       label: "Franchise",
       required: true,
       // view: true,
       add: true,
-      // update: true,
+      update: true,
     },
     {
       type: "image",
@@ -131,7 +167,7 @@ const Patient = (props) => {
       update: true,
     },
   ]);
-  const [timingAttributes] = useState([
+  const [subscriberProfile] = useState([
     {
       type: "text",
       placeholder: "Subscriber ID",
@@ -439,25 +475,25 @@ const Patient = (props) => {
       // Element type for rendering
       element: "button",
       // Type of action, in this case a sublist
-      type: "subList",
+      type: "subItem",
       // Unique identifier for the submenu
-      id: "sub-menu",
+      id: "patient-details",
       // Displayed item title
-      itemTitle: "title",
+      itemTitle: "username",
       // Title of the submenu
       title: "Details",
       // Additional attributes for timing
-      attributes: timingAttributes,
+      attributes: subscriberProfile,
       // Parameters for API and submenu configuration
       params: {
         // API endpoint for submenu data
-        api: `sub-menu`,
+        api: `user/subscriber`,
         // Parent reference for the submenu
-        parentReference: "menu",
+        parentReference: "user",
         // Property name for the submenu item title
-        itemTitle: "label",
+        itemTitle: "username",
         // Short name for the submenu
-        shortName: "Sub Menu2",
+        shortName: "Patient Details",
         // Privileges for adding submenu items
         addPrivilege: true,
         // Privileges for deleting submenu items
@@ -480,7 +516,7 @@ const Patient = (props) => {
         // API endpoint for fetching menu data
         api={`user`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={`username`}
         // Short name or label for the menu
         shortName={`User`}
         // Privilege flag indicating whether the user can add menu items

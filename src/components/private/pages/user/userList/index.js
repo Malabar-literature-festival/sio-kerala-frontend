@@ -13,6 +13,18 @@ const UserList = (props) => {
   const [attributes] = useState([
     {
       type: "text",
+      placeholder: "Name",
+      name: "userDisplayName",
+      validation: "",
+      default: "",
+      label: "Name",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
       placeholder: "User Name",
       name: "username",
       validation: "",
@@ -23,34 +35,23 @@ const UserList = (props) => {
       add: true,
       update: true,
     },
-    {
-      type: "text",
-      placeholder: "Display Name",
-      name: "userDisplayName",
-      validation: "",
-      default: "",
-      label: "Display Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
+
     {
       type: "email",
-      placeholder: "E-Mail",
+      placeholder: "Email",
       name: "email",
       validation: "email",
       default: "",
-      label: "E-Mail",
+      label: "Email",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
+      type: "select",
       apiType: "API",
-      selectApi: "",
+      selectApi: "user-type/select",
       placeholder: "User Type",
       name: "userType",
       validation: "",
@@ -59,23 +60,8 @@ const UserList = (props) => {
       label: "User Type",
       required: true,
       view: true,
-      // add: true,
-      // update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "user-type",
-      placeholder: "User Type",
-      name: "role",
-      validation: "",
-      // showItem: "role",
-      default: "",
-      label: "User Type",
-      required: false,
-      view: false,
       add: true,
-      update: false,
+      update: true,
     },
     {
       type: "image",
@@ -186,7 +172,7 @@ const UserList = (props) => {
       // Unique identifier for the submenu
       id: "sub-menu",
       // Displayed item title
-      itemTitle: "title",
+      itemTitle: "userDisplayName",
       // Title of the submenu
       title: "Sub Menu1",
       // Additional attributes for timing
@@ -198,7 +184,7 @@ const UserList = (props) => {
         // Parent reference for the submenu
         parentReference: "menu",
         // Property name for the submenu item title
-        itemTitle: "label",
+        itemTitle: "userDisplayName",
         // Short name for the submenu
         shortName: "Sub Menu2",
         // Privileges for adding submenu items
