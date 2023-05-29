@@ -50,7 +50,7 @@ const Patient = (props) => {
     {
       type: "text",
       placeholder: "Gender",
-      name: "userDisplayName",
+      name: "gender",
       validation: "",
       default: "",
       label: "Gender",
@@ -62,7 +62,7 @@ const Patient = (props) => {
     {
       type: "text",
       placeholder: "Date of Birth",
-      name: "userDisplayName",
+      name: "dateOfBirth",
       validation: "",
       default: "",
       label: "Date of Birth",
@@ -74,7 +74,7 @@ const Patient = (props) => {
     {
       type: "text",
       placeholder: "Address",
-      name: "userDisplayName",
+      name: "address",
       validation: "",
       default: "",
       label: "Address",
