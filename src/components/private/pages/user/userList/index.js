@@ -172,7 +172,7 @@ const UserList = (props) => {
       // Unique identifier for the submenu
       id: "sub-menu",
       // Displayed item title
-      itemTitle: "title",
+      itemTitle: "userDisplayName",
       // Title of the submenu
       title: "Sub Menu1",
       // Additional attributes for timing
@@ -184,7 +184,7 @@ const UserList = (props) => {
         // Parent reference for the submenu
         parentReference: "menu",
         // Property name for the submenu item title
-        itemTitle: "label",
+        itemTitle: "userDisplayName",
         // Short name for the submenu
         shortName: "Sub Menu2",
         // Privileges for adding submenu items
