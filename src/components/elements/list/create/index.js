@@ -162,11 +162,13 @@ const CrudForm = (props) => {
       default:
         break;
     }
-    if (field.type === "image" || field.type === "file") {
+    if ((field.type === "image" || field.type === "file") && props.formType === "post") {
       if (value.length === 0) {
         tempformError = t("validContent", { label: t(field.label) });
         flag += 1;
       }
+    } else if ((field.type === "image" || field.type === "file") && props.formType === "put") {
+      return { flag, tempformError };
     } else {
       if (field.required && value.length === 0) {
         tempformError = t("required", { label: t(field.label) });

@@ -47,7 +47,7 @@ const Menu = (props) => {
                   }}
                   className={openedMenus[menuItem._id] === true ? "open active" : " open"}
                 >
-                  <GetIcon icon={`home`} /> {t(menuItem.label)} <GetIcon icon={"down"}></GetIcon>
+                  <GetIcon icon={menuItem.icon} /> {t(menuItem.label)} <GetIcon icon={"down"}></GetIcon>
                 </MenuGroup>
                 <SubMenu className={openedMenus[menuItem._id] === true ? "down" : "close"}>
                   {menuItem.submenus?.map((submenu) => (
@@ -61,7 +61,7 @@ const Menu = (props) => {
                       className={submenu._id === selectedMenuItem._id ? "main active" : "main"} // Use submenu.path for the active class
                       to={submenu.path} // Use submenu.path for the link destination
                     >
-                      <GetIcon icon={`home`} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
+                      <GetIcon icon={menuItem.icon} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
                     </Link>
                   ))}
                 </SubMenu>
@@ -76,7 +76,7 @@ const Menu = (props) => {
                 className={menuItem._id === selectedMenuItem._id ? "main active" : "main"}
                 to={menuItem.path}
               >
-                <GetIcon icon={`home`} /> {t(menuItem.label)}
+                <GetIcon icon={menuItem.icon} /> {t(menuItem.label  )}
               </Link>
             )}
           </div>
