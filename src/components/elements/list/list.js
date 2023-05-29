@@ -540,8 +540,8 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
         <Table>
           <thead>
             <Tr>
-              {attributes.map((attribute) => {
-                return attribute.view === true ? <Th key={shortName + attribute.name}>{t(attribute.label)}</Th> : "";
+              {attributes.map((attribute, index) => {
+                return attribute.view === true ? <Th key={shortName + attribute.name + index}>{t(attribute.label)}</Th> : "";
               })}
             </Tr>
           </thead>
