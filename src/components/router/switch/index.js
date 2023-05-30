@@ -34,9 +34,11 @@ import DiscountTypeName from "../../private/pages/dispatch/discountType";
 import Banner from "../../private/pages/banner/banner";
 import BannerType from "../../private/pages/banner/bannerType";
 import MealIngredient from "../../private/pages/mealSettings/mealIngredient";
-import RecipeIngredient from "../../private/pages/mealSettings/recipeIngredient";
+
 import Dietician from "../../private/pages/dietician";
 import Deliveryman from "../../private/pages/dispatch/deliveryman";
+import Ingredient from "../../private/pages/mealSettings/Ingredient";
+import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import MedicalRecord from "../../private/pages/user/medicalRecord";
 /**
@@ -357,7 +359,7 @@ const Switch = ({
       );
     case "recipe-ingredient":
       return (
-        <RecipeIngredient
+        <Ingredient
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -376,6 +378,15 @@ const Switch = ({
     case "delivery-man":
       return (
         <Deliveryman
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "add-meal":
+      return (
+        <AddMeal
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
