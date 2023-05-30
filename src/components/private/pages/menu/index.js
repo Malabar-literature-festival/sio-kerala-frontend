@@ -106,14 +106,15 @@ const Menu = (props) => {
       update: true,
     },
   ]);
+
   const [timingAttributes] = useState([
     {
       type: "text",
-      placeholder: "test",
+      placeholder: "Label",
       name: "label",
       validation: "",
       default: "",
-      label: "test",
+      label: "Label",
       required: true,
       view: true,
       add: true,
