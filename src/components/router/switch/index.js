@@ -382,7 +382,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "vechile-category":
+    case "vehicle-category":
       return (
         <VehicleCategory
           key={key}
