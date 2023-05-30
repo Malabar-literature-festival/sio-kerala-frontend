@@ -39,7 +39,7 @@ import Dietician from "../../private/pages/dietician";
 import Deliveryman from "../../private/pages/dispatch/deliveryman";
 import Ingredient from "../../private/pages/mealSettings/Ingredient";
 import AddMeal from "../../private/pages/mealSettings/addMeal";
-
+import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -389,6 +389,15 @@ const Switch = ({
     case "add-meal":
       return (
         <AddMeal
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "vechile-category":
+      return (
+        <VehicleCategory
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
