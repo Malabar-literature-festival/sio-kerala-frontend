@@ -4,42 +4,36 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const RedeemCoupon = (props) => {
+const Ingredient = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Redeem Coupon - Diet Food Management Portal`;
+    document.title = `Ingredient - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
-      placeholder: "Coupon",
-      // Name of the input field
-      name: "title",
-      // Validation rules for the input
+
+      placeholder: "Ingredient",
+      name: "ingredientName",
       validation: "",
-      // Default value for the input field
+      showItem: "",
       default: "",
-      // Coupon text for the input field
-      label: "Coupon",
-      // Indicates if the input field is required
+      label: "Ingredient",
       required: true,
-      // Indicates if the input field should be displayed in the view mode
       view: true,
-      // Indicates if the input field should be displayed in the add mode
       add: true,
-      // Indicates if the input field should be displayed in the update mode
       update: true,
     },
     {
-      type: "number",
-      placeholder: "Coupon Code",
-      name: "code",
+      type: "boolean",
+
+      placeholder: "Delete",
+      name: "delete",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Coupon Code",
+      label: "Delete",
       required: true,
       view: true,
       add: true,
@@ -47,11 +41,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Coupon Type",
-      name: "type",
+
+      placeholder: "Calories",
+      name: " calories",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Coupon Type",
+      label: "Calories",
       required: true,
       view: true,
       add: true,
@@ -59,11 +55,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Uses Count",
-      name: "usesCount",
+
+      placeholder: "Protein",
+      name: "protein",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Uses Count",
+      label: "Protein",
       required: true,
       view: true,
       add: true,
@@ -71,11 +69,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Min Purchase",
-      name: "minPurchase",
+
+      placeholder: "SatFat",
+      name: "satFat",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Min Purchase",
+      label: "SatFat",
       required: true,
       view: true,
       add: true,
@@ -83,11 +83,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Max Purchase",
-      name: "maxDiscount",
+
+      placeholder: "UnSatFat",
+      name: "unSatFat",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Max Purchase",
+      label: "UnSatFat",
       required: true,
       view: true,
       add: true,
@@ -95,11 +97,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Discount",
-      name: "discount",
+
+      placeholder: "TotalFat",
+      name: "totalFat",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Discount",
+      label: "TotalFat",
       required: true,
       view: true,
       add: true,
@@ -107,37 +111,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Customer Type",
-      name: "customerType",
+
+      placeholder: "Cholesterol",
+      name: " cholesterol",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Customer Type",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-  ]);
-  const [timingAttributes] = useState([
-    {
-      type: "text",
-      placeholder: "Label",
-      name: "label",
-      validation: "",
-      default: "",
-      label: "Label",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
-      validation: "",
-      default: "",
-      label: "Sequence",
+      label: "Cholesterol",
       required: true,
       view: true,
       add: true,
@@ -145,11 +125,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Icon",
-      name: "icon",
+
+      placeholder: "Fiber",
+      name: "fiber",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Icon",
+      label: "Fiber",
       required: true,
       view: true,
       add: true,
@@ -157,11 +139,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Path",
-      name: "path",
+
+      placeholder: "Carbohydrate",
+      name: "carbohydrate",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Path",
+      label: "Carbohydrate",
       required: true,
       view: true,
       add: true,
@@ -169,11 +153,41 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "text",
-      placeholder: "Element Name",
-      name: "element",
+
+      placeholder: "Sugar",
+      name: "sugars",
       validation: "",
+      showItem: "",
       default: "",
-      label: "Element Name",
+      label: "Sugar",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+
+      placeholder: "Iron",
+      name: "iron",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Iron",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+
+      placeholder: "Calcium",
+      name: "calcium",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Calcium",
       required: true,
       view: true,
       add: true,
@@ -181,11 +195,13 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "checkbox",
-      placeholder: "Status",
-      name: "status",
+
+      placeholder: "Vitamin A	",
+      name: "vitaminA",
       validation: "",
-      default: "true",
-      label: "Status",
+      showItem: "",
+      default: "",
+      label: "Vitamin A",
       required: true,
       view: true,
       add: true,
@@ -193,11 +209,84 @@ const RedeemCoupon = (props) => {
     },
     {
       type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
+
+      placeholder: "Vitamin C	",
+      name: "VitaminC",
       validation: "",
-      default: "false",
-      label: "Is Link",
+      showItem: "",
+      default: "",
+      label: "Vitamin C",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Vitamin E	",
+      name: "vitaminE",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Vitamin E",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "varientGroup",
+      name: "varientGroup",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "varientGroup",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "ingredient/select",
+      placeholder: "Ingredient",
+      name: "varientGroup",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Ingredient",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "varientLevel",
+      name: "ingredientName",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "varientLevel",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "string",
+      placeholder: "Quantity",
+      name: "quantity",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Quantity",
       required: true,
       view: true,
       add: true,
@@ -205,41 +294,6 @@ const RedeemCoupon = (props) => {
     },
   ]);
 
-  // const [actions] = useState([
-  //   {
-  //     // Element type for rendering
-  //     element: "button",
-  //     // Type of action, in this case a sublist
-  //     type: "subList",
-  //     // Unique identifier for the submenu
-  //     id: "sub-menu",
-  //     // Displayed item title
-  //     itemTitle: "title",
-  //     // Title of the submenu
-  //     title: "Sub Menu",
-  //     // Additional attributes for timing
-  //     attributes: timingAttributes,
-  //     // Parameters for API and submenu configuration
-  //     params: {
-  //       // API endpoint for submenu data
-  //       api: `sub-menu`,
-  //       // Parent reference for the submenu
-  //       parentReference: "menu",
-  //       // Property name for the submenu item title
-  //       itemTitle: "label",
-  //       // Short name for the submenu
-  //       shortName: "Sub Menu",
-  //       // Privileges for adding submenu items
-  //       addPrivilege: true,
-  //       // Privileges for deleting submenu items
-  //       delPrivilege: true,
-  //       // Privileges for updating submenu items
-  //       updatePrivilege: true,
-  //       // Custom CSS class for styling
-  //       customClass: "medium",
-  //     },
-  //   },
-  // ]);
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
@@ -249,12 +303,15 @@ const RedeemCoupon = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`redeem-coupon`}
+        api={`recipe-ingredients`}
         // Property name for the title of each menu item
-        itemTitle={`redeem coupon`}
+        itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`redeem coupon`}
+        shortName={`Ingredient Management`}
         // Privilege flag indicating whether the user can add menu items
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
@@ -263,4 +320,4 @@ const RedeemCoupon = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(RedeemCoupon);
+export default Layout(Ingredient);

@@ -1,57 +1,47 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../common/layout";
-import ListTable from "../../../elements/list/list";
-import { Container } from "../../common/layout/styels";
+import Layout from "../../../common/layout";
+import ListTable from "../../../../elements/list/list";
+import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Menu = (props) => {
+const AddMeal = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Menu - Diet Food Management Portal`;
+    document.title = `Add Meal - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
-      placeholder: "Label",
-      // Name of the input field
-      name: "label",
-      // Validation rules for the input
-      validation: "",
-      // Default value for the input field
-      default: "",
-      // Label text for the input field
-      label: "Label",
-      // Indicates if the input field is required
-      required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
-      add: true,
-      // Indicates if the input field should be displayed in the update mode
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
+      placeholder: "MealName",
+      name: "mealName",
       validation: "",
       default: "",
-      label: "Sequence",
+      label: "MealName",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Icon",
-      name: "icon",
+      type: "textarea",
+      placeholder: "Meal Description",
+      name: "mealDescription",
       validation: "",
       default: "",
-      label: "Icon",
+      label: "Meal Description",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "image",
+      placeholder: "Meal Photo",
+      name: "mealPhoto	",
+      validation: "",
+      default: "",
+      label: "Meal Photo",
       required: true,
       view: true,
       add: true,
@@ -59,138 +49,85 @@ const Menu = (props) => {
     },
     {
       type: "text",
-      placeholder: "Path",
-      name: "path",
+      placeholder: "Meal Preparation Time",
+      name: "mealPreparationTime",
       validation: "",
       default: "",
-      label: "Path",
+      label: "Meal Preparation Time",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Element Name",
-      name: "element",
+      type: "select",
+      apiType: "API",
+      selectApi: "protein-categories/select",
+      placeholder: "Protein Category",
+      name: "proteinCategory",
       validation: "",
       default: "",
-      label: "Element Name",
+      label: "Protein Category",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
-      validation: "",
-      default: "true",
-      label: "Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
-      validation: "",
-      default: "false",
-      label: "Is Link",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-  ]);
-
-  const [timingAttributes] = useState([
-    {
-      type: "text",
-      placeholder: "Label",
-      name: "label",
+      type: "select",
+      apiType: "API",
+      selectApi: "cuisine-categories/select",
+      placeholder: "Cuisine Category",
+      name: "cuisineCategory",
       validation: "",
       default: "",
-      label: "Label",
+      label: "Cuisine Category",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
+      type: "select",
+      apiType: "API",
+      selectApi: "mealtime-category/select",
+      placeholder: "Meal Time Category",
+      name: "mealTimeCategory",
       validation: "",
       default: "",
-      label: "Sequence",
+      label: "Meal Time Category",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Icon",
-      name: "icon",
+      type: "select",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Meal Tag",
+      name: "mealTag",
       validation: "",
       default: "",
-      label: "Icon",
+      label: "Meal Tag",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Path",
-      name: "path",
+      type: "select",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Franchise",
+      name: "franchise",
       validation: "",
       default: "",
-      label: "Path",
+      label: "Franchise",
       required: true,
       view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Element Name",
-      name: "element",
-      validation: "",
-      default: "",
-      label: "Element Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
-      validation: "",
-      default: "true",
-      label: "Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
-      validation: "",
-      default: "false",
-      label: "Is Link",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
+      add: false,
+      update: false,
     },
   ]);
 
@@ -207,7 +144,7 @@ const Menu = (props) => {
       // Title of the submenu
       title: "Sub Menu",
       // Additional attributes for timing
-      attributes: timingAttributes,
+      // attributes: timingAttributes,
       // Parameters for API and submenu configuration
       params: {
         // API endpoint for submenu data
@@ -237,16 +174,13 @@ const Menu = (props) => {
       <ListTable
         // Actions to be displayed in the ListTable
         actions={actions}
-        // API endpoint for fetching menu data
-        api={`menu`}
+        // API endpoint for fetching meal data
+        api={`meal`}
         // Property name for the title of each menu item
         itemTitle={`label`}
         // Short name or label for the menu
-        shortName={`Menu`}
+        shortName={`Add Meal`}
         // Privilege flag indicating whether the user can add menu items
-        // formMode={`single`}
-        formMode={`double`}
-        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
@@ -255,4 +189,4 @@ const Menu = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(Menu);
+export default Layout(AddMeal);
