@@ -41,6 +41,7 @@ import Ingredient from "../../private/pages/mealSettings/Ingredient";
 import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import MedicalRecord from "../../private/pages/user/medicalRecord";
+import AddVariant from "../../private/pages/mealSettings/addVariant";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -405,6 +406,15 @@ const Switch = ({
     case "medical-record":
       return (
         <MedicalRecord
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "add-variant":
+      return (
+        <AddVariant
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
