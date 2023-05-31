@@ -56,44 +56,56 @@ const Patient = (props) => {
       label: "Gender",
       showItem: "Gender",
       required: true,
-      view: false,
+      view: true,
       add: true,
       update: true,
       filter: false,
       apiType: "JSON",
       selectApi: "Male,Female",
     },
-    {
-      type: "select",
-      placeholder: "Gender",
-      name: "subscriber",
-      validation: "",
-      default: "",
-      label: "Gender",
-      showItem: "Gender",
-      required: false,
-      view: true,
-      filter: false,
-      add: false,
-      update: false,
-      apiType: "API",
-      selectApi: "Male,Female",
-    },
     // {
-    //   type: "date",
-    //   apiType: "API",
-    //   selectApi: "",
-    //   placeholder: "DOB",
+    //   type: "select",
+    //   placeholder: "Gender",
     //   name: "subscriber",
     //   validation: "",
-    //   showItem: "dateOfBirth",
     //   default: "",
-    //   label: "DOB",
-    //   required: true,
+    //   label: "Gender",
+    //   showItem: "Gender",
+    //   required: false,
     //   view: true,
-    //   add: true,
-    //   update: true,
+    //   filter: false,
+    //   add: false,
+    //   update: false,
+    //   apiType: "API",
+    //   selectApi: "Male,Female",
     // },
+    {
+      type: "date",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "DOB",
+      name: "subscriber",
+      validation: "",
+      showItem: "dateOfBirth",
+      default: "",
+      label: "DOB",
+      required: true,
+      view: true,
+      add: false,
+      update: false,
+    },
+    {
+      type: "text",
+      placeholder: "YYYY/MM/DD",
+      name: "dateOfBirth",
+      validation: "",
+      default: "",
+      label: "DOB",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+    },
     {
       type: "text",
       apiType: "API",
@@ -123,6 +135,7 @@ const Patient = (props) => {
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "select",
@@ -138,6 +151,7 @@ const Patient = (props) => {
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "image",
@@ -683,7 +697,7 @@ const Patient = (props) => {
     },
   ]);
 
-  const [addmisionHistory] = useState([
+  const [admissionHistory] = useState([
     {
       type: "text",
       placeholder: "MR Number",
@@ -795,103 +809,211 @@ const Patient = (props) => {
     },
   ]);
 
+  const [patientDiet] = useState([
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "type-of-diet/select",
+      placeholder: "Type of Diet",
+      name: "typeOfDiet",
+      validation: "",
+      showItem: "role",
+      default: "",
+      label: "Type of Diet",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "text",
+      placeholder: "Type of Diet",
+      name: "typeOfDiet",
+      showItem: "typeOfDietName",
+      validation: "",
+      default: "",
+      label: "Type of Diet",
+      required: false,
+      view: true,
+      add: false,
+      update: false,
+    },
+    {
+      type: "date",
+      placeholder: "Start Date",
+      name: "startDate",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "Start Date",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "date",
+      placeholder: "Start Time",
+      name: "startTime",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "Start Time",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "date",
+      placeholder: "End Date",
+      name: "endDate",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "End Date",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "date",
+      placeholder: "End Time",
+      name: "endTime",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "End Time",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Calories",
+      name: "calories",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "Calories",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "date",
+      placeholder: "Visit Shedule",
+      name: "visitShedule",
+      showItem: "",
+      validation: "",
+      default: "",
+      label: "Visit Shedule",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "string",
+      placeholder: "Remarks",
+      name: "remarks",
+      showItem: "",
+      validation: "",
+      default: "remark",
+      label: "Remarks",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Dietician Visit",
+      name: "dieticianVisit",
+      validation: "",
+      default: "false",
+      label: "Dietician Visit",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+  ]);
+
   const [actions] = useState([
     {
-      // Element type for rendering
       element: "button",
-      // Type of action, in this case a sublist
       type: "subItem",
-      // Unique identifier for the submenu
       id: "patient-details",
-      // Displayed item title
       itemTitle: "username",
-      // Title of the submenu
       title: "Details",
-      // Additional attributes for timing
       attributes: subscriberProfile,
-      // Parameters for API and submenu configuration
       params: {
-        // API endpoint for submenu data
         api: `user/subscriber`,
-        // Parent reference for the submenu
         parentReference: "user",
-        // Property name for the submenu item title
         itemTitle: "username",
-        // Short name for the submenu
         shortName: "Patient Details",
-        // Privileges for adding submenu items
         addPrivilege: true,
-        // Privileges for deleting submenu items
         delPrivilege: true,
-        // Privileges for updating submenu items
         updatePrivilege: true,
-        // Custom CSS class for styling
         customClass: "medium",
       },
     },
     {
-      // Element type for rendering
       element: "button",
-      // Type of action, in this case a sublist
       type: "subList",
-      // Unique identifier for the submenu
       id: "patient-history",
-      // Displayed item title
       itemTitle: "title",
-      // Title of the submenu
       title: "Medical Record",
-      // Additional attributes for timing
       attributes: medicalRecord,
-      // Parameters for API and submenu configuration
       params: {
-        // API endpoint for submenu data
         api: `patient-history`,
-        // Parent reference for the submenu
         parentReference: "user",
-        // Property name for the submenu item title
         itemTitle: "label",
-        // Short name for the submenu
         shortName: "Medical Record",
-        // Privileges for adding submenu items
         addPrivilege: true,
-        // Privileges for deleting submenu items
         delPrivilege: true,
-        // Privileges for updating submenu items
         updatePrivilege: true,
-        // Custom CSS class for styling
         customClass: "medium",
       },
     },
     {
-      // Element type for rendering
       element: "button",
-      // Type of action, in this case a sublist
       type: "subList",
-      // Unique identifier for the submenu
       id: "patient-history",
-      // Displayed item title
       itemTitle: "title",
-      // Title of the submenu
       title: "Addmision History",
-      // Additional attributes for timing
-      attributes: addmisionHistory,
-      // Parameters for API and submenu configuration
+      attributes: admissionHistory,
       params: {
-        // API endpoint for submenu data
         api: `patient-history`,
-        // Parent reference for the submenu
         parentReference: "user",
-        // Property name for the submenu item title
         itemTitle: "label",
-        // Short name for the submenu
         shortName: "Addmision History",
-        // Privileges for adding submenu items
         addPrivilege: true,
-        // Privileges for deleting submenu items
         delPrivilege: true,
-        // Privileges for updating submenu items
         updatePrivilege: true,
-        // Custom CSS class for styling
+        customClass: "medium",
+      },
+    },
+    {
+      element: "button",
+      type: "subList",
+      id: "patient-diet",
+      itemTitle: "username",
+      title: "Diet",
+      attributes: patientDiet,
+      params: {
+        api: `patient-diet`,
+        parentReference: "user",
+        itemTitle: "username",
+        shortName: "Diet",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
         customClass: "medium",
       },
     },
