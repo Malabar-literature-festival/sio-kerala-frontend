@@ -51,7 +51,7 @@
   "upload": "{{label}} hochladen",
   "captcha": "Captcha",
   "description": "Beschreibung",
-  "acceptAgreement": "Ja, ich habe die <a target='new' href='http://www.innopark24.de/privacypolicy'>Datenschutzrichtlinie</a> gelesen und akzeptiere sie *",
+  "acceptAgreement": "Ja, ich habe die <a target='new' href='http://www.example.com/privacy'>Datenschutzrichtlinie</a> gelesen und akzeptiere sie *",
   "mandatory": "Alle Felder mit * sind obligatorisch",
   "validationFailed": "Keine aktiven Benutzer gefunden!",
   "remember": "Bitte denken Sie daran, den Parkplatz rechtzeitig zu verlassen.",

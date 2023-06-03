@@ -6,11 +6,11 @@ const Footer = () => {
     <FooterText>
       {/* <Nav theme={themeColors}> */}
         {/* Link to the home page */}
-        {/* <Link target="_blank" to="https://www.innopark24.de/datenschutz">
+        {/* <Link target="_blank" to="https://www.example.com/privacy">
           {t("privacy")}
         </Link> */}
         {/* Link to the imprint page */}
-        {/* <Link target="_blank" to="https://www.innopark24.de/impressum">
+        {/* <Link target="_blank" to="https://www.example.com/imprint">
           {t("imprint")}
         </Link> */}
       {/* </Nav> */}

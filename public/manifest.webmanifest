@@ -4,9 +4,9 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Ticket Portal | innopark24.de",
-    "short_name": "Ticket Portal",
-    "description": "Ticket Portal | innopark24.de",
+    "name": "Diet Food Management Portal",
+    "short_name": "Diet Food Management Portal",
+    "description": "Diet Food Management Portal",
     "icons": [
         {
             "src": "/icon-192x192.png",
