@@ -13,7 +13,6 @@ const Ingredient = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-
       placeholder: "Ingredient",
       name: "ingredientName",
       validation: "",
@@ -27,7 +26,6 @@ const Ingredient = (props) => {
     },
     {
       type: "boolean",
-
       placeholder: "Delete",
       name: "delete",
       validation: "",
@@ -41,7 +39,6 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Calories",
       name: " calories",
       validation: "",
