@@ -16,7 +16,7 @@ import { clearLogin, fetchLogin } from "../../../store/actions/login";
 
 const Login = (props) => {
   useEffect(() => {
-    document.title = `Time Recording Tool`;
+    document.title = `Diet Food Management System`;
   }, []);
 
   const navigate = useNavigate();
