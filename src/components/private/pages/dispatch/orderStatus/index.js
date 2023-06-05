@@ -33,18 +33,6 @@ const OrderStatus = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
-    {
-      type: "date",
-      placeholder: "Created At",
-      name: "createdAt",
-      validation: "",
-      default: "",
-      label: "Created At",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
   ]);
   // const [timingAttributes] = useState([
   //   {

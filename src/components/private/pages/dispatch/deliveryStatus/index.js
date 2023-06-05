@@ -33,18 +33,6 @@ const DeliveryStatus = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
-    {
-      type: "number",
-      placeholder: "created At",
-      name: "created At",
-      validation: "",
-      default: "",
-      label: "Created At",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
   ]);
   // const [timingAttributes] = useState([
   //   {
