@@ -33,30 +33,6 @@ const TypeOfDiet = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
-    {
-      type: "datetime",
-      placeholder: "Created At",
-      name: "createdAt",
-      validation: "",
-      default: "",
-      label: "Created At",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "datetime",
-      placeholder: "Created At",
-      name: "updatedAt",
-      validation: "",
-      default: "",
-      label: "Updated At",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
   ]);
   const [timingAttributes] = useState([
     {

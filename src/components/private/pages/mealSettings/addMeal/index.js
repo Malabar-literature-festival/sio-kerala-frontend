@@ -7,41 +7,45 @@ import { Container } from "../../../common/layout/styels";
 const AddMeal = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Add Meal - Diet Food Management Portal`;
+    document.title = `Meal - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "MealName",
+      placeholder: "Meal",
       name: "mealName",
       validation: "",
       default: "",
-      label: "MealName",
+      label: "Meal",
       required: true,
       view: true,
       add: true,
       update: true,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "user/select",
+      placeholder: "User",
+      name: "user",
+      validation: "",
+      showItem: "username",
+      default: "",
+      label: "User",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
     },
     {
       type: "textarea",
-      placeholder: "Meal Description",
+      placeholder: "Description",
       name: "mealDescription",
       validation: "",
       default: "",
-      label: "Meal Description",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "image",
-      placeholder: "Meal Photo",
-      name: "mealPhoto	",
-      validation: "",
-      default: "",
-      label: "Meal Photo",
+      label: "Description",
       required: true,
       view: true,
       add: true,
@@ -49,11 +53,11 @@ const AddMeal = (props) => {
     },
     {
       type: "text",
-      placeholder: "Meal Preparation Time",
+      placeholder: "Preparation Time",
       name: "mealPreparationTime",
       validation: "",
       default: "",
-      label: "Meal Preparation Time",
+      label: "Preparation Time",
       required: true,
       view: true,
       add: true,
@@ -66,12 +70,14 @@ const AddMeal = (props) => {
       placeholder: "Protein Category",
       name: "proteinCategory",
       validation: "",
+      showItem: "proteinCategoriesName",
       default: "",
       label: "Protein Category",
       required: true,
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "select",
@@ -80,12 +86,14 @@ const AddMeal = (props) => {
       placeholder: "Cuisine Category",
       name: "cuisineCategory",
       validation: "",
+      showItem: "cuisineCategoriesName",
       default: "",
       label: "Cuisine Category",
       required: true,
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "select",
@@ -94,12 +102,14 @@ const AddMeal = (props) => {
       placeholder: "Meal Time Category",
       name: "mealTimeCategory",
       validation: "",
+      showItem: "mealtimeCategoriesName",
       default: "",
       label: "Meal Time Category",
       required: true,
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "select",
@@ -108,60 +118,225 @@ const AddMeal = (props) => {
       placeholder: "Meal Tag",
       name: "mealTag",
       validation: "",
+      showItem: "mealTagName",
       default: "",
       label: "Meal Tag",
       required: true,
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
       type: "select",
       apiType: "API",
-      selectApi: "",
+      selectApi: "franchise/select",
       placeholder: "Franchise",
       name: "franchise",
       validation: "",
+      showItem: "",
       default: "",
       label: "Franchise",
+      required: true,
+      view: false,
+      add: false,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "image",
+      placeholder: "Meal",
+      name: "mealPhoto",
+      validation: "",
+      default: "",
+      label: "Meal",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    // {
+    //   type: "text",
+    //   placeholder: "delete",
+    //   name: "delete",
+    //   validation: "",
+    //   default: "",
+    //   label: "delete",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
+  ]);
+
+  const [addVariant] = useState([
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "meal/select",
+      placeholder: "Meal",
+      name: "meal",
+      validation: "",
+      showItem: "mealName",
+      default: "",
+      label: "Meal",
       required: true,
       view: true,
       add: false,
       update: false,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "variant-group/select",
+      showItem: "variantGroupName",
+      placeholder: "Variant Group",
+      name: "variantGroup",
+      validation: "",
+      default: "",
+      label: "variant Group",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "variant-level/select",
+      placeholder: "Variant Level",
+      name: "variantLevel",
+      validation: "",
+      showItem: "variantLevelName",
+      default: "",
+      label: "variant Level",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "text",
+      placeholder: "Meal Price",
+      name: "mealPrice",
+      validation: "",
+      default: "",
+      label: "Meal Price",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Meal OfferPrice",
+      name: "mealOfferPrice",
+      validation: "",
+      default: "",
+      label: "Meal OfferPrice",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "number",
+      placeholder: "Number of Persons",
+      name: "numberOfPersons",
+      validation: "",
+      default: "",
+      label: "Number of Persons",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+  ]);
+
+  const [mealIngredient] = useState([
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "meal/select",
+      placeholder: "Meal",
+      name: "meal",
+      validation: "",
+      showItem: "mealName",
+      default: "",
+      label: "Meal",
+      required: true,
+      view: false,
+      add: false,
+      update: false,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "recipe-ingredients/select",
+      placeholder: "Recipe Ingredient",
+      name: "recipeIngredient",
+      validation: "",
+      showItem: "ingredientName",
+      default: "",
+      label: "Recipe Ingredient",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "number",
+      placeholder: "Quantity",
+      name: "ingredientQuantity",
+      validation: "",
+      default: "",
+      label: "Quantity",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
     },
   ]);
 
   const [actions] = useState([
     {
-      // Element type for rendering
       element: "button",
-      // Type of action, in this case a sublist
       type: "subList",
-      // Unique identifier for the submenu
-      id: "sub-menu",
-      // Displayed item title
-      itemTitle: "title",
-      // Title of the submenu
-      title: "Sub Menu",
-      // Additional attributes for timing
-      // attributes: timingAttributes,
-      // Parameters for API and submenu configuration
+      id: "meal-variant",
+      itemTitle: "mealName",
+      title: "Meal Variant",
+      attributes: addVariant,
       params: {
-        // API endpoint for submenu data
-        api: `sub-menu`,
-        // Parent reference for the submenu
-        parentReference: "menu",
-        // Property name for the submenu item title
-        itemTitle: "label",
-        // Short name for the submenu
-        shortName: "Sub Menu",
-        // Privileges for adding submenu items
+        api: `meal-variant`,
+        parentReference: "meal",
+        itemTitle: "mealName",
+        shortName: "Meal Variant",
         addPrivilege: true,
-        // Privileges for deleting submenu items
         delPrivilege: true,
-        // Privileges for updating submenu items
         updatePrivilege: true,
-        // Custom CSS class for styling
+        customClass: "medium",
+      },
+    },
+    {
+      element: "button",
+      type: "subList",
+      id: "meal-ingredients",
+      itemTitle: "mealName",
+      title: "Meal Ingredient",
+      attributes: mealIngredient,
+      params: {
+        api: `meal-ingredients`,
+        parentReference: "meal",
+        itemTitle: "mealName",
+        shortName: "Meal Ingredient",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
         customClass: "medium",
       },
     },
@@ -172,17 +347,14 @@ const AddMeal = (props) => {
     <Container className="noshadow">
       {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
         actions={actions}
-        // API endpoint for fetching meal data
         api={`meal`}
-        // Property name for the title of each menu item
-        itemTitle={`label`}
-        // Short name or label for the menu
-        shortName={`Add Meal`}
-        // Privilege flag indicating whether the user can add menu items
+        itemTitle={`Meal`}
+        shortName={`Meal`}
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
-        // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
     </Container>

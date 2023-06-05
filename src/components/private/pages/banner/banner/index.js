@@ -45,18 +45,6 @@ const Banner = (props) => {
       add: true,
       update: true,
     },
-    {
-      type: "number",
-      placeholder: "Created At",
-      name: "createdAt",
-      validation: "",
-      default: "",
-      label: "Created At",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
     // {
     //   type: "checkbox",
     //   placeholder: "Status",
