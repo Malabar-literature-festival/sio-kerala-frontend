@@ -88,15 +88,32 @@ const withLayout = (WrappedComponent) => {
           <RowContainer className="content">
             <Header user={user.data}></Header>
             <Container>
-              <WrappedComponent user={user.data} {...props} setLoaderBox={setLoaderBox} setMessage={setMessageBox}></WrappedComponent>
-              {showMessage && <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={setLoaderBox} showMessage={showMessage}></Message>}
+              <WrappedComponent
+                user={user.data}
+                {...props}
+                setLoaderBox={setLoaderBox}
+                setMessage={setMessageBox}
+              ></WrappedComponent>
+              {showMessage && (
+                <Message
+                  meessage={meessage}
+                  closeMessage={closeMessage}
+                  setLoaderBox={setLoaderBox}
+                  showMessage={showMessage}
+                ></Message>
+              )}
               {showLoader && <Loader></Loader>}
             </Container>
           </RowContainer>
         </MainContainer>
       </React.Fragment>
     ) : (
-      <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={setLoaderBox} showMessage={showMessage}></Message>
+      <Message
+        meessage={meessage}
+        closeMessage={closeMessage}
+        setLoaderBox={setLoaderBox}
+        showMessage={showMessage}
+      ></Message>
     );
   };
 };
