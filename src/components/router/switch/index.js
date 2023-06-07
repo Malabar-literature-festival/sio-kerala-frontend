@@ -42,6 +42,7 @@ import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import MedicalRecord from "../../private/pages/user/medicalRecord";
 import AddVariant from "../../private/pages/mealSettings/addVariant";
 import Appointment from "../../private/pages/user/appointment";
+import OrderList from "../../private/pages/order/orderList";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -424,6 +425,15 @@ const Switch = ({
     case "appointment":
       return (
         <Appointment
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "order-list":
+      return (
+        <OrderList
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
