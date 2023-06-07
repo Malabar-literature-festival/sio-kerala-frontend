@@ -40,6 +40,7 @@ const VariantLevel = (props) => {
       filter: false,
     },
   ]);
+  ]);
 
   return (
     <Container className="noshadow">

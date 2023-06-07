@@ -104,7 +104,6 @@ const Banner = (props) => {
       filter: false,
     },
   ]);
-
   const [timingAttributes] = useState([
     {
       type: "text",

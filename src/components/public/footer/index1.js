@@ -10,13 +10,13 @@ const Footer = () => {
   return (
     <FooterContainer>
       {/* Copyright information */}
-      <Copy>©2023 innopark24 GmbH & Co. KG</Copy>
+      <Copy>©2023 Diet Food Management Portal</Copy>
       {/* Navigation links */}
       <Nav>
         {/* Link to the privacy page */}
-        <Link to="https://www.innopark24.de/datenschutz">{t("privacy")}</Link>
+        <Link to="https://www.example.com/privacy">{t("privacy")}</Link>
         {/* Link to the imprint page */}
-        <Link to="https://www.innopark24.de/impressum">{t("imprint")}</Link>
+        <Link to="https://www.example.com/imprint">{t("imprint")}</Link>
       </Nav>
     </FooterContainer>
   );
