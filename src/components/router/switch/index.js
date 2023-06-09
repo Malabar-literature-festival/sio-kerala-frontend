@@ -41,7 +41,7 @@ import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import MedicalRecord from "../../private/pages/user/medicalRecord";
 import AddVariant from "../../private/pages/mealSettings/addVariant";
-import Appointment from "../../private/pages/user/appointment";
+import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 /**
  * Switch component to render different pages based on the provided page prop.

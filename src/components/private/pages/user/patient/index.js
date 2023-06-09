@@ -1157,7 +1157,7 @@ const Patient = (props) => {
         actions={actions}
         api={`user`}
         itemTitle={`username`}
-        shortName={`User`}
+        shortName={`Patient`}
         // formMode={`single`}
         formMode={`double`}
         //
