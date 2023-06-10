@@ -15,9 +15,9 @@ const Header = () => {
       <Right>
         <Nav className="hm">
           {/* Link to the privacy page */}
-          <Link to="https://www.innopark24.de/help">{t("help")}</Link>
+          <Link to="https://www.example.com/help">{t("help")}</Link>
           {/* Link to the imprint page */}
-          <Link to="https://www.innopark24.de/faq">{t("faq")}</Link>
+          <Link to="https://www.example.com/faq">{t("faq")}</Link>
         </Nav>
         <LanguageTooltip></LanguageTooltip>
       </Right>
