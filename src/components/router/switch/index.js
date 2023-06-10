@@ -23,7 +23,7 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
-import Patient from "../../private/pages/user/patient";
+import Patient from "../../private/pages/user/patient/patient";
 import MedicationList from "../../private/pages/registrationSettings/medicationList";
 import PackageManagement from "../../private/pages/packageManagement";
 import Supplement from "../../private/pages/registrationSettings/supplement";
@@ -39,10 +39,11 @@ import Deliveryman from "../../private/pages/dispatch/deliveryman";
 import Ingredient from "../../private/pages/mealSettings/Ingredient/ingredient";
 import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
-import MedicalRecord from "../../private/pages/user/medicalRecord";
+import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionRecord";
 import AddVariant from "../../private/pages/mealSettings/addVariant";
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
+import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -404,9 +405,9 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "medical-record":
+    case "admission-record":
       return (
-        <MedicalRecord
+        <AdmissionRecord
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -434,6 +435,15 @@ const Switch = ({
     case "order-list":
       return (
         <OrderList
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "admission-history":
+      return (
+        <AdmissionHistory
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
