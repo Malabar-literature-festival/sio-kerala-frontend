@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start ",
-    "build": "react-scripts build && cp vercel.json build/ && cp staticwebapp.config.json build/ && cd build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
