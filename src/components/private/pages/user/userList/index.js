@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { customAlphabet } from "nanoid";
 //
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
@@ -7,7 +6,7 @@ import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7);
+// const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7);
 
 const UserList = (props) => {
   //to update the page title
@@ -81,7 +80,8 @@ const UserList = (props) => {
     {
       type: "select",
       placeholder: "Gender",
-      name: "subscriber",
+      name: "gender",
+      collection:"subscriber",
       showItem: "gender",
       validation: "",
       default: "",
@@ -94,22 +94,22 @@ const UserList = (props) => {
       apiType: "CSV",
       selectApi: "Male,Female",
     },
-    {
-      type: "select",
-      placeholder: "Gender",
-      name: "gender",
-      showItem: "",
-      validation: "",
-      default: "",
-      label: "Gender",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-      filter: false,
-      apiType: "CSV",
-      selectApi: "Male,Female",
-    },
+    // {
+    //   type: "select",
+    //   placeholder: "Gender",
+    //   name: "gender",
+    //   showItem: "",
+    //   validation: "",
+    //   default: "",
+    //   label: "Gender",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    //   filter: false,
+    //   apiType: "CSV",
+    //   selectApi: "Male,Female",
+    // },
     // {
     //   type: "select",
     //   placeholder: "Gender",
@@ -126,39 +126,39 @@ const UserList = (props) => {
     //   apiType: "API",
     //   selectApi: "Male,Female",
     // },
-    {
-      type: "date",
-      apiType: "API",
-      selectApi: "",
-      placeholder: "DOB",
-      name: "subscriber",
-      showItem: "dateOfBirth",
-      validation: "",
-      default: "",
-      label: "DOB",
-      required: true,
-      view: true,
-      add: false,
-      update: false,
-    },
-    {
-      type: "date",
-      placeholder: "YYYY/MM/DD",
-      name: "dateOfBirth",
-      validation: "",
-      default: "",
-      label: "DOB",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-    },
+    // {
+    //   type: "date",
+    //   apiType: "API",
+    //   selectApi: "",
+    //   placeholder: "DOB",
+    //   name: "subscriber",
+    //   showItem: "dateOfBirth",
+    //   validation: "",
+    //   default: "",
+    //   label: "DOB",
+    //   required: true,
+    //   view: true,
+    //   add: false,
+    //   update: false,
+    // },
+    // {
+    //   type: "date",
+    //   placeholder: "YYYY/MM/DD",
+    //   name: "dateOfBirth",
+    //   validation: "",
+    //   default: "",
+    //   label: "DOB",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    // },
     {
       type: "text",
       apiType: "API",
       selectApi: "",
       placeholder: "Address",
-      name: "subscriber",
+      name: "address",
       validation: "",
       showItem: "address",
       default: "",

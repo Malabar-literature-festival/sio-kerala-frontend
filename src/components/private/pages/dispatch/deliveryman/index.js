@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { customAlphabet } from "nanoid";
+// import { customAlphabet } from "nanoid";
 //
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7);
+// const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7);
 
 const UserList = (props) => {
   //to update the page title

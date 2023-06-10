@@ -42,7 +42,7 @@ export const ColumnContainer = styled.div`
     margin: auto;
   }
   &.login {
-     height: calc(100vh);
+    height: calc(100vh);
     align-items: center;
     padding: 0;
   }
@@ -92,11 +92,11 @@ export const RowContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
-  margin-bottom:auto;
-  &.content{
+  margin-bottom: auto;
+  &.content {
     flex: 1 1 calc(100% - 15em);
     max-width: calc(100% - 15em);
-    height:100vh;
+    height: 100vh;
   }
   &.marginright {
     margin-right: 15px;
@@ -227,6 +227,11 @@ export const RowContainer = styled.div`
       min-height: 120px;
       border-radius: 10px;
       flex: none;
+    }
+    &.content {
+      flex: 1 1 calc(100% - 0em);
+      max-width: calc(100% - 0em);
+      height: 100vh;
     }
   }
 `;

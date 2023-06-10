@@ -82,8 +82,24 @@ export const ToolTip = styled.div`
     top: 27px;
     left: -80px;
     font-size: 18px;
+
     @media screen and (max-width: 768px) {
       font-size: 15px;
     }
+  }
+  &.actions {
+    top: 50px;
+    left: auto;
+    right: 0;
+    z-index: 1000;
+    border-radius:12px;
+    font-size: 18px;
+    padding: 0px;
+    @media screen and (max-width: 768px) {
+      font-size: 15px;
+    }
+  }
+  &.hide {
+    display: none;
   }
 `;

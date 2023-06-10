@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container, Logout, MNav, Status, Title, User } from "./styels";
@@ -8,13 +7,11 @@ import { CloseIcon, LogoutIcon, MenuIcon } from "../../../../../icons";
 import LanguageTooltip from "../../../../elements/tooltip";
 import { clearLogin } from "../../../../../store/actions/login";
 const Header = (props) => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const menuCurrentStatus = useSelector((state) => state.menuStatus);
-  const currentMenu = useSelector((state) => state.currentMenu);
+  // const currentMenu = useSelector((state) => state.currentMenu);
   const selectedMenuItem = useSelector((state) => state.selectedMenu);
 
-  console.log("currentMenu", currentMenu);
   const navigate = useNavigate();
   return (
     <Container>
@@ -35,7 +32,6 @@ const Header = (props) => {
           }}
         >
           <LogoutIcon />
-          {t("logout")}
         </Logout>
         <LanguageTooltip></LanguageTooltip>
       </Status>

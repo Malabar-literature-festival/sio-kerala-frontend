@@ -40,6 +40,7 @@ export const Container = styled.div`
   box-shadow: inset rgb(0 0 0 / 6%) 0px 0px 8px 7px;
   &.noshadow {
     box-shadow: none;
+        overflow: initial;
   }
 
   background: #f3f8fb;
