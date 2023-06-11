@@ -17,8 +17,6 @@ const MealIngredient = (props) => {
       name: "ingredientQuantity",
       validation: "",
       default: "",
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       label: "Quantity",
       required: true,
       view: true,
@@ -48,6 +46,8 @@ const MealIngredient = (props) => {
       placeholder: "Recipe Ingredient",
       name: "recipeIngredient",
       validation: "",
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       showItem: "ingredientName",
       default: "",
       label: "Recipe Ingredient",
