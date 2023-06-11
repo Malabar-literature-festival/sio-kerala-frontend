@@ -23,6 +23,8 @@ const DeliverySlot = (props) => {
       // Default value for the input field
       default: "",
       // Label text for the input field
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       label: "Slot",
       // Indicates if the input field is required
       required: true,
