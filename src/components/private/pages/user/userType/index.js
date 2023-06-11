@@ -186,7 +186,7 @@ const UserType = (props) => {
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
-      ></ListTable> 
+      ></ListTable>
     </Container>
   );
 };
