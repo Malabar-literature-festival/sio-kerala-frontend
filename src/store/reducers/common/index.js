@@ -10,7 +10,6 @@ const selectedMenu = localStorage.getItem("selectedMenu") !== null ? JSON.parse(
 function menuStatusReducer(state = menuStatus, action) {
   switch (action.type) {
     case "MENU_STATUS":
-      // Saving the last selected colot theme to the local storage for persist in the system.
       return action.payload;
     default:
       return state;
@@ -21,7 +20,6 @@ function selectedMenuReducer(state = selectedMenu, action) {
     case "SELECTED_MENU":
       localStorage.setItem("selectedMenu", JSON.stringify(action.payload));
 
-      // Saving the last selected colot theme to the local storage for persist in the system.
       return action.payload;
     default:
       return state;

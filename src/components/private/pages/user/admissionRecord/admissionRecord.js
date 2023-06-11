@@ -43,6 +43,7 @@ const AdmissionRecord = (props) => {
       placeholder: "Start Date & Time",
       name: "startDate",
       showItem: "",
+      title:true,
       validation: "",
       default: "",
       label: "Start Date",

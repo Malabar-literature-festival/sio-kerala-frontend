@@ -14,6 +14,7 @@ const AdmissionHistory = (props) => {
       type: "text",
       placeholder: "Booking ID",
       name: "bookingId",
+      title:true,
       validation: "",
       default: "",
       label: "Booking ID",

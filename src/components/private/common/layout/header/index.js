@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container, Logout, MNav, Status, Title, User } from "./styels";
+import { Container, Logout, MNav, Status, Title } from "./styels";
 import { menuStatus } from "../../../../../store/actions/common";
-import { CloseIcon, LogoutIcon, MenuIcon } from "../../../../../icons";
-import LanguageTooltip from "../../../../elements/tooltip";
+import { LogoutIcon, MenuIcon } from "../../../../../icons";
 import { clearLogin } from "../../../../../store/actions/login";
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -17,14 +16,14 @@ const Header = (props) => {
     <Container>
       <MNav
         onClick={() => {
-          dispatch(menuStatus());
+          dispatch(menuStatus(!menuCurrentStatus));
         }}
       >
-        {menuCurrentStatus ? <CloseIcon /> : <MenuIcon />}
+        <MenuIcon />
       </MNav>
       <Status>
         <Title>{selectedMenuItem.label}</Title>
-        <User>{props.user.user.email}</User>
+        {/* <User>{props.user.user.email}</User> */}
         <Logout
           onClick={() => {
             dispatch(clearLogin());
@@ -33,7 +32,6 @@ const Header = (props) => {
         >
           <LogoutIcon />
         </Logout>
-        <LanguageTooltip></LanguageTooltip>
       </Status>
     </Container>
   );

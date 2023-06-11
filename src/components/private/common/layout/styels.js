@@ -24,7 +24,7 @@ export const SideBar = styled.div`
     display: flex;
     visibility: collapse;
     min-height: 60%;
-    max-height: 80%;
+    max-height: 100%;
     z-index: 1;
     &.active {
       visibility: visible;

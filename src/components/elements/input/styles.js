@@ -30,6 +30,10 @@ export const InputContainer = styled.div`
   @media (max-width: 768px) {
     flex: 100%;
     margin: 0px !important;
+    &.checkbox {
+      flex: 1 1 100%;
+      margin: 0px 5px 15px !important;
+    }
   }
   ${(props) =>
     props.children &&

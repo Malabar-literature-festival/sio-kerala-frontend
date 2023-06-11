@@ -88,3 +88,33 @@ export const Logout = styled.div`
     }
   }
 `;
+
+export const MNavClose = styled.div`
+  margin-right: 1em;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display:none;
+  a {
+    text-decoration: none;
+  }
+  svg {
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: auto;
+    display: flex;
+    border: 1px solid;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    svg {
+      margin: auto;
+    }
+  }
+`;
