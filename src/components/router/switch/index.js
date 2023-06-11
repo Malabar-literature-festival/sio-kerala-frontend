@@ -23,7 +23,7 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
-import Patient from "../../private/pages/user/patient";
+import Patient from "../../private/pages/user/patient"; 
 import MedicationList from "../../private/pages/registrationSettings/medicationList";
 import PackageManagement from "../../private/pages/packageManagement";
 import Supplement from "../../private/pages/registrationSettings/supplement";
