@@ -16,6 +16,8 @@ const MealTag = (props) => {
       placeholder: "Meat Tag Name",
       name: "mealTagName",
       validation: "",
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       default: "",
       label: "Meal Tag Name",
       required: true,

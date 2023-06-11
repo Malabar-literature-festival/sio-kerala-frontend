@@ -61,7 +61,7 @@ const Menu = (props) => {
                       className={submenu._id === selectedMenuItem._id ? "main active" : "main"} // Use submenu.path for the active class
                       to={submenu.path} // Use submenu.path for the link destination
                     >
-                      <GetIcon icon={menuItem.icon} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
+                      <GetIcon icon={submenu.icon} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
                     </Link>
                   ))}
                 </SubMenu>

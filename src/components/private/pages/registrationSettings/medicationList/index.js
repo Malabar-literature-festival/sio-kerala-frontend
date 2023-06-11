@@ -19,6 +19,8 @@ const MedicationList = (props) => {
       default: "",
       label: "Under AnyMedication",
       required: true,
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       view: true,
       add: true,
       update: true,

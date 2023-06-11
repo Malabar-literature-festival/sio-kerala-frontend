@@ -18,6 +18,8 @@ const VehicleCategory = (props) => {
       validation: "",
       default: "",
       label: "vehicle Type",
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       required: true,
       view: true,
       add: true,

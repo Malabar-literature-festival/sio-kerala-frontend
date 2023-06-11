@@ -16,6 +16,8 @@ const MedicalRecord = (props) => {
       placeholder: "MR Number",
       name: "mrNumber",
       validation: "",
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       default: "",
       label: "MR Number",
       required: true,

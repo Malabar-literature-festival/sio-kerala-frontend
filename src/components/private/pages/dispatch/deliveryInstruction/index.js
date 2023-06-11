@@ -21,6 +21,8 @@ const DeliveryInstruction = (props) => {
       // Validation rules for the input
       validation: "",
       // Default value for the input field
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       default: "",
       // Label text for the input field
       label: "Delivery Instruction Name",

@@ -16,6 +16,8 @@ const AimOfProgram = (props) => {
       placeholder: "aimofProgramName",
       name: "aimofProgramName",
       validation: "",
+      title: true,
+      // title when true it will show as title fild for the view, view should be true then only it will work
       default: "",
       label: "Aim Of Program",
       required: true,
