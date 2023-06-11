@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Th, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, ScrollLayout, FilterBox, Img } from "./styles";
+import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, Img, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
@@ -13,8 +13,11 @@ import Manage from "./manage";
 import Loader from "../loader";
 import Search from "../search";
 import SubPage from "./subPage";
-import moment from "moment";
 import DateRangeSelector from "../daterange";
+import * as xlsx from "xlsx";
+import { ToolTip } from "../../styles/list/styles";
+// import { convertMinutesToHHMM } from "../../functions/minuteToHour";
+import { dateFormat, dateTimeFormat } from "../../functions/date";
 const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title", datefilter = false, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
@@ -32,6 +35,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   const [count, setCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const themeColors = useSelector((state) => state.themeColors);
+  const selectedMenuItem = useSelector((state) => state.selectedMenu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t] = useTranslation();
@@ -148,23 +152,26 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
       const updateValues = {};
       setUpdateId(value._id);
       formInput.forEach((item) => {
+        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name];
         if (item.update) {
           if (item.type === "checkbox") {
             let bool = value[item.name].toString() === "true" ? true : false;
             updateValues[item.name] = bool;
           } else if (item.type === "select") {
-            console.log(typeof value[item.name]);
+            console.log(itemValue);
+            console.log(value[item.name]);
             updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
           } else if (item.type === "image") {
             updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
             updateValues[item.name] = [];
           } else {
-            updateValues[item.name] = value[item.name] ? value[item.name] : "";
+            updateValues[item.name] = itemValue ? itemValue : "";
           }
         }
       });
+
       updateValues["_id"] = value._id;
-      console.log(updateValues);
+      console.log("updateValues", updateValues);
       setUpdateValues(updateValues);
       setIsEditing(true);
       window.location.hash = "edit";
@@ -313,184 +320,212 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
 
     return `${hoursStr}:${minsStr}`;
   }
-
+  const getValue = (attribute, itemValue) => {
+    let response = "";
+    switch (attribute.type) {
+      case "minute":
+        response = convertMinutesToHHMM(parseFloat(itemValue ?? 0));
+        break;
+      case "image":
+        response = <Img src={process.env.REACT_APP_CDN + itemValue} />;
+        break;
+      case "datetime":
+        response = dateTimeFormat(itemValue);
+        break;
+      case "date":
+        response = dateFormat(itemValue);
+        break;
+      case "textarea":
+        response = itemValue?.substring(0, 200);
+        break;
+      case "icon":
+        response = <i className={`fa-light ${itemValue}`} />;
+        break;
+      default:
+        switch (typeof itemValue) {
+          case "undefined":
+            response = "--";
+            break;
+          case "object":
+            response = itemValue?.[attribute.showItem] ?? "--";
+            break;
+          case "boolean":
+            response = itemValue.toString();
+            break;
+          case "string":
+          case "number":
+          default:
+            if (attribute.type === "select" && attribute.apiType === "JSON") {
+              attribute.selectApi.filter((item) => item.id.toString() === itemValue?.toString()).map((filteredItem) => (response = filteredItem.value));
+            } else {
+              response = itemValue?.toString().substring(0, 200);
+            }
+            break;
+        }
+    }
+    return response;
+  };
   const TableRowWithActions = ({ attributes, data, slNo }) => {
+    selectRef.current[slNo] = useRef(null);
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
       <Tr key={`${shortName}-${slNo}`}>
-        {attributes.map((attribute, index) => {
-          if (attribute.view) {
-            try {
+        <TrBody>
+          {attributes.map((attribute, index) => {
+            if (attribute.view && (attribute.title ?? false)) {
               const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
-              switch (attribute.type) {
-                case "minute":
-                  return <Td key={index}>{convertMinutesToHHMM(parseFloat(itemValue ?? 0))}</Td>;
-                case "image":
-                  return (
-                    <Td key={index}>
-                      <Img src={process.env.REACT_APP_CDN + itemValue} />
-                    </Td>
-                  );
-                case "datetime":
-                  let userFriendlyDateTime = moment(itemValue).format("DD.MM.YYYY, H:mm");
-                  return <Td key={index}>{userFriendlyDateTime}</Td>;
-                case "date":
-                  let userFriendlyDate = moment(itemValue).format("DD.MM.YYYY");
-                  return <Td key={index}>{userFriendlyDate}</Td>;
-                case "textarea":
-                  return (
-                    <Td
-                      key={index}
-                      dangerouslySetInnerHTML={{
-                        __html: itemValue?.substring(0, 200),
-                      }}
-                    ></Td>
-                  );
-                case "icon":
-                  return (
-                    <Td key={index}>
-                      <i className={`fa-light ${itemValue}`} />
-                    </Td>
-                  );
-                default:
-                  switch (typeof itemValue) {
-                    case "undefined":
-                      return <Td key={index}>--</Td>;
-                    case "object":
-                      return <Td key={index}>{itemValue?.[attribute.showItem] ?? "--"}</Td>;
-                    case "boolean":
-                      return <Td key={index}>{itemValue.toString()}</Td>;
-                    case "string":
-                    case "number":
-                    default:
-                      if (attribute.type === "select" && attribute.apiType === "JSON") {
-                        return attribute.selectApi
-                          .filter((item) => item.id.toString() === itemValue?.toString())
-                          .map((filteredItem) => (
-                            <Td style={{ color: filteredItem.color }} key={index}>
-                              {filteredItem.value}
-                            </Td>
-                          ));
-                      } else {
-                        return <Td key={index}>{itemValue?.toString().substring(0, 200)}</Td>;
-                      }
-                  }
-              }
-            } catch (error) {
-              console.log(error);
-              return <Td key={index}>--</Td>;
+              console.log(selectedMenuItem.icon);
+              return (
+                <Td key={index}>
+                  <Head>
+                    {<GetIcon icon={selectedMenuItem.icon} />}
+                    {` ${getValue(attribute, itemValue)}`}
+                  </Head>
+                </Td>
+              );
+            } else {
+              return "";
             }
-          }
-
-          return null;
-        })}
-
-        <Td key={`actions-${shortName}-${data._id}`} className="actions">
-          {delPrivilege && (
-            <Button
-              key={`delete-${data._id}`}
-              onClick={() => {
-                setMessage({
-                  type: 2,
-                  content: t("deleteRequest", {
-                    label: data[itemTitle] ? data[itemTitle].toString() : "Item",
-                  }),
-                  proceed: t("delete"),
-                  onProceed: deleteHandler,
-                  data: data,
-                });
-              }}
-              className="delete"
-            >
-              <span>{t("delete")}</span>
-              <GetIcon icon={"delete"} />
-            </Button>
-          )}
-          {updatePrivilege && (
-            <Button
-              key={`edit-${data._id}`}
-              onClick={() => {
-                isEditingHandler(data, udpateView);
-              }}
-              className="edit"
-            >
-              <span>{t("edit")}</span>
-              <GetIcon icon={"edit"} />
-            </Button>
-          )}
-          {actions.map((item) => {
-            return item.element === "button" ? (
-              <Button
-                key={`custom-${item.id}-${data._id}`}
-                onClick={() => {
-                  if (item.type === "callback") {
-                    item.callback(item, data);
-                  } else if (item.type === "call") {
-                    window.location.href = `tel:${data.mobileNumber}`;
-                  } else if (item.type === "subList") {
-                    setSubAttributes({ item, data });
-                    setShowSubList(true);
-                  } else if (item.type === "subItem") {
-                    setSubAttributes({ item, data });
-                    setShowSubList(true);
-                  } else {
-                    openAction(item, data);
-                  }
-                }}
-                className="edit"
-              >
-                <span>{t(item.title)}</span>
-                <GetIcon icon={item.icon} />
-              </Button>
-            ) : (
-              <ToggleContainer key={`${item.id}-${data._id}`}>
-                <ToggleInput
-                  type="checkbox"
-                  checked={data[item.id]}
-                  onChange={async (event) => {
-                    // item.callback(item, data);
-                    setLoaderBox(true);
-                    await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
-                      .then((response) => {
-                        if (response.status === 200) {
-                          if (response.data?.message) {
-                            setMessage({
-                              type: 1,
-                              content: t(response.data?.message),
-                              proceed: t("okay"),
-                            });
-                          }
-                          //
-                          refreshView();
-                          // setIsEditing(false);
-                        } else if (response.status === 404) {
-                          refreshView();
-                          setMessage({
-                            type: 1,
-                            content: t("error"),
-                            proceed: "Okay",
-                          });
-                        } else {
-                          refreshView();
-                          setMessage({
-                            type: 1,
-                            content: t("error"),
-                            proceed: "Okay",
-                          });
-                        }
-                        // setLoaderBox(false);
-                      })
-                      .catch((error) => {
-                        alert(error);
-                        // setLoaderBox(false);
-                      });
-                  }}
-                />
-                <ToggleSlider />
-              </ToggleContainer>
-            );
           })}
-        </Td>
+          <Td key={`actions-${shortName}-${data._id}`} className="actions">
+            {actions.map((item) => {
+              return (
+                item.element !== "button" && (
+                  <ToggleContainer key={`${item.id}-${data._id}`}>
+                    <ToggleInput
+                      type="checkbox"
+                      checked={data[item.id]}
+                      onChange={async (event) => {
+                        // item.callback(item, data);
+                        setLoaderBox(true);
+                        await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
+                          .then((response) => {
+                            if (response.status === 200) {
+                              if (response.data?.message) {
+                                setMessage({ type: 1, content: t(response.data?.message), proceed: t("okay") });
+                              }
+                              //
+                              refreshView();
+                              // setIsEditing(false);
+                            } else if (response.status === 404) {
+                              refreshView();
+                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                            } else {
+                              refreshView();
+                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                            }
+                            // setLoaderBox(false);
+                          })
+                          .catch((error) => {
+                            alert(error);
+                            // setLoaderBox(false);
+                          });
+                      }}
+                    />
+                    <ToggleSlider />
+                  </ToggleContainer>
+                )
+              );
+            })}
+            <ToolTipContainer
+              ref={selectRef.current[slNo]}
+              onClick={() => {
+                setCurrentAction(data._id);
+              }}
+            >
+              <More className={currentAction === data._id ? `active` : ``}>
+                <GetIcon icon={"dots"}></GetIcon>
+              </More>
+              <ToolTip className={currentAction === data._id ? `actions` : `actions hide`}>
+                <Actions>
+                  {updatePrivilege && (
+                    <Button
+                      key={`edit-${data._id}`}
+                      onClick={() => {
+                        isEditingHandler(data, udpateView);
+                      }}
+                      className="edit menu"
+                    >
+                      <GetIcon icon={"edit"} />
+                      <span>{t("edit")}</span>
+                    </Button>
+                  )}
+                  {actions.map((item) => {
+                    return (
+                      item.element === "button" && (
+                        <Button
+                          key={`custom-${item.id}-${data._id}`}
+                          onClick={() => {
+                            if (item.type === "callback") {
+                              item.callback(item, data);
+                            } else if (item.type === "call") {
+                              window.location.href = `tel:${data.mobileNumber}`;
+                            } else if (item.type === "subList") {
+                              setSubAttributes({ item, data });
+                              setShowSubList(true);
+                            } else {
+                              openAction(item, data);
+                            }
+                          }}
+                          className="edit menu"
+                        >
+                          <GetIcon icon={item.icon} />
+                          <span>{t(item.title)}</span>
+                        </Button>
+                      )
+                    );
+                  })}
+                  {delPrivilege && (
+                    <Button
+                      key={`delete-${data._id}`}
+                      onClick={() => {
+                        setMessage({
+                          type: 2,
+                          content: t("deleteRequest", { label: data[itemTitle] ? data[itemTitle].toString() : "Item" }),
+                          proceed: t("delete"),
+                          onProceed: deleteHandler,
+                          data: data,
+                        });
+                      }}
+                      className="delete menu"
+                    >
+                      <GetIcon icon={"delete"} />
+                      <span>{t("delete")}</span>
+                    </Button>
+                  )}
+                </Actions>
+              </ToolTip>
+            </ToolTipContainer>
+          </Td>
+        </TrBody>
+        <TrBody className="small">
+          {attributes.map((attribute, index) => {
+            if (attribute.view && (attribute.tag ?? false)) {
+              try {
+                const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+                if (attribute.type === "image") {
+                  return "";
+                }
+                return (
+                  <Td key={index}> 
+                    <Title>{attribute.label}</Title>
+                    <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                  </Td>
+                );
+              } catch (error) {
+                console.log(error);
+                return (
+                  <Td key={index}>
+                    <Title>{attribute.label}</Title>
+                    <DataItem>{`--`} </DataItem>
+                  </Td>
+                );
+              }
+            }
+
+            return null;
+          })}
+        </TrBody>
       </Tr>
     );
   };
@@ -506,6 +541,92 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     searchTimeoutRef.current = setTimeout(() => {
       setFilterView({ ...filterView, searchkey: event.target.value });
     }, 300);
+  };
+  const selectRef = useRef([]);
+  const [currentAction, setCurrentAction] = useState("0");
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const clickedInsideRefs = selectRef.current.filter((ref) => ref.current && ref.current.contains(event.target));
+
+      if (clickedInsideRefs.length === 0) {
+        setCurrentAction("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  //export to excel
+  const toExcel = (currentIndex) => {
+    try {
+      exportToExcel();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const exportToExcel = () => {
+    // JSON data to be converted to Excel
+    console.log(users.data?.response);
+    const jsonData = users.data?.response;
+    if (jsonData) {
+      // Convert JSON to worksheet
+      const excelData = [];
+      jsonData.forEach((data) => {
+        const excelRow = {};
+        attributes.forEach((attribute) => {
+          if (attribute.view) {
+            const name = t(attribute.label);
+            switch (attribute.type) {
+              case "minute":
+                return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
+              case "datetime":
+                return (excelRow[name] = dateTimeFormat(data[attribute.name]));
+              case "date":
+                return (excelRow[name] = dateFormat(data[attribute.name]));
+              case "select":
+                if (attribute.apiType === "JSON") {
+                  return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
+                } else if (attribute.apiType === "CSV") {
+                  return (excelRow[name] = data[attribute.name]);
+                } else {
+                  return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                }
+
+              default:
+                switch (typeof data[attribute.name]) {
+                  case "undefined":
+                    return (excelRow[name] = "Not Found");
+                  case "object":
+                    return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                  case "boolean":
+                    return (excelRow[name] = data[attribute.name].toString());
+                  case "string":
+                  case "number":
+                  default:
+                    if (attribute.type === "select" && attribute.apiType === "JSON") {
+                      return attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem) => (excelRow[name] = filteredItem.value));
+                    } else {
+                      return (excelRow[name] = data[attribute.name]?.toString().substring(0, 200));
+                    }
+                }
+            }
+          }
+        });
+        excelData.push(excelRow);
+      });
+      const worksheet = xlsx.utils.json_to_sheet(excelData);
+
+      // Create workbook
+      const workbook = xlsx.utils.book_new();
+      xlsx.utils.book_append_sheet(workbook, worksheet, t(shortName));
+      // Convert workbook to Excel binary and download the file
+      xlsx.writeFile(workbook, t(shortName) + "-data.xlsx");
+    }
   };
   useEffect(() => {
     return () => {
@@ -529,7 +650,14 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
               <FilterIcon />
             </Filter>
           )}
-
+          <Filter
+            theme={themeColors}
+            onClick={() => {
+              setMessage({ type: 2, content: "Do you want export this page to excel?", proceed: "Export Now", onProceed: toExcel, data: currentIndex });
+            }}
+          >
+            <GetIcon icon={"excel"} />
+          </Filter>
           {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>
@@ -544,18 +672,16 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           </AddButton>
         )}
       </ButtonPanel>
-      <ScrollLayout>
-        <Table>
-          <thead>
+      <Table>
+        {/* <thead>
             <Tr>
               {attributes.map((attribute, index) => {
                 return attribute.view === true ? <Th key={shortName + attribute.name + index}>{t(attribute.label)}</Th> : "";
               })}
             </Tr>
-          </thead>
-          <tbody>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} attributes={attributes} data={item} />)}</tbody>
-        </Table>
-      </ScrollLayout>
+          </thead> */}
+        {users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}
+      </Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (

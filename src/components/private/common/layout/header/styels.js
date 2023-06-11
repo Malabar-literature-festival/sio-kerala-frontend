@@ -6,11 +6,11 @@ export const Container = styled.div`
   height: 60px;
 `;
 export const Logo = styled.img`
-  height: 30px;
+  height: 65px;
   width: fit-content;
   padding-left: 1em;
   padding-top: 1em;
-  margin-bottom:20px;
+  margin-bottom: 10px;
 `;
 export const LogoContaner = styled.div`
   display: flex;

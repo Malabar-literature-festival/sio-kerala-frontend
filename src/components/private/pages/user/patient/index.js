@@ -1219,7 +1219,6 @@ const Patient = (props) => {
         shortName={`Patient`}
         // formMode={`single`}
         formMode={`double`}
-        //
         {...props}
         attributes={attributes}
       ></ListTable>
