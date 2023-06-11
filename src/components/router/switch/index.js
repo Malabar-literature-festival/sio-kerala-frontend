@@ -174,7 +174,7 @@ const Switch = ({
       return (
         <VariantGroup
           key={key}
-          addPrivilege={addPrivilege}
+          addPrivilege={addPrivilege} 
           delPrivilege={delPrivilege}
           updatePrivilege={updatePrivilege}
         />
