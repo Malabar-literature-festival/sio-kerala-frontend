@@ -126,12 +126,12 @@ const Menu = (props) => {
     },
     {
       type: "number",
-      placeholder: "Sequence",
+      placeholder: "Sequence 01",
       name: "sequence",
       validation: "",
       default: "",
       tag: true, // when its true this field show as items in view
-      label: "Sequence",
+      label: "Sequence 01",
       required: true,
       view: true,
       add: true,
