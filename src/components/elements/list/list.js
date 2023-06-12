@@ -18,7 +18,7 @@ import * as xlsx from "xlsx";
 import { ToolTip } from "../../styles/list/styles";
 // import { convertMinutesToHHMM } from "../../functions/minuteToHour";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
-const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = "title", datefilter = false, viewMode = "list" }) => {
+const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -367,7 +367,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   };
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
-    const titleValue = data[itemTitle] ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+    const titleValue = (itemTitle.collection?.length > 0 ? data[itemTitle.collection][itemTitle.name] : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
 
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
@@ -392,7 +392,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           <Td key={`row-head-${slNo}`}>
             <Head>
               {<GetIcon icon={selectedMenuItem.icon} />}
-              {` ${titleValue}`}
+              {` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}
             </Head>
           </Td>
           <Td key={`actions-${shortName}-${data._id}`} className="actions">
@@ -484,12 +484,13 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                     );
                   })}
                   {delPrivilege && (
+                    
                     <Button
                       key={`delete-${data._id}`}
                       onClick={() => {
                         setMessage({
                           type: 2,
-                          content: t("deleteRequest", { label: data[itemTitle] ? data[itemTitle].toString() : "Item" }),
+                          content: t("deleteRequest", { label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item" }),
                           proceed: t("delete"),
                           onProceed: deleteHandler,
                           data: data,
