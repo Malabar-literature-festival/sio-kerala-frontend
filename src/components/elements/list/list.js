@@ -313,14 +313,13 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     setActions([]);
   };
 
-  
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
-    const titleValue = (itemTitle.collection?.length > 0 ? data[itemTitle.collection][itemTitle.name] : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+    const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
 
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
-      <Tr key={`${shortName}-${slNo}`}>
+      <Tr key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody>
           {/* {attributes.map((attribute, index) => {
             if (attribute.view && (attribute.title ?? false)) {
@@ -407,11 +406,11 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                       <span>{t("edit")}</span>
                     </Button>
                   )}
-                  {actions.map((item) => {
+                  {actions.map((item, index) => {
                     return (
                       item.element === "button" && (
                         <Button
-                          key={`custom-${item.id}-${data._id}`}
+                          key={`custom-${item.id + "-" + index}-${data._id}`}
                           onClick={() => {
                             if (item.type === "callback") {
                               item.callback(item, data);
@@ -433,7 +432,6 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                     );
                   })}
                   {delPrivilege && (
-                    
                     <Button
                       key={`delete-${data._id}`}
                       onClick={() => {
@@ -688,7 +686,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
       {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
       {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} subAttributes={subAttributes}></SubPage>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
     ""
