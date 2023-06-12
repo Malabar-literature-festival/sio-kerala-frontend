@@ -34,7 +34,6 @@ const Patient = (props) => {
       name: "userDisplayName",
       validation: "",
       default: "",
-      tag: true,
       label: "Name",
       required: true,
       view: true,
@@ -1297,7 +1296,8 @@ const Patient = (props) => {
       <ListTable
         actions={actions}
         api={`user`}
-        itemTitle={`userDisplayName`}
+        // itemTitle={`userDisplayName`}
+        itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
         shortName={`Patient`}
         // parentReference={"userType"}
         // referenceId={"6471b3849fb2b29fe045887b"}

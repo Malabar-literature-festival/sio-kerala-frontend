@@ -210,8 +210,6 @@ const Menu = (props) => {
       type: "subList",
       // Unique identifier for the submenu
       id: "sub-menu",
-      // Displayed item title
-      itemTitle: { name: "label", type: "text", collection: "" },
       // Title of the submenu
       title: "Sub Menu",
       // Additional attributes for timing
