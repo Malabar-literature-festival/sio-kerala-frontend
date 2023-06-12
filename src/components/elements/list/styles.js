@@ -1,12 +1,12 @@
 import styled from "styled-components";
 export const Table = styled.div`
   border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
+  /* width: calc(100% + 60px); */
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
-  
+  margin-left: -30px;
+  margin-right: -30px;
   &.auto {
     width: auto;
   }
@@ -37,6 +37,7 @@ export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
   display: flex;
   flex-direction: column;
+  padding: 5px 26px;
   padding-bottom: 12px;
   &:hover {
     background-color: #ddedeb;
@@ -80,9 +81,8 @@ export const Td = styled.div`
 export const TrBody = styled.div`
   display: flex;
   flex-flow: wrap;
-  &.small
-  {
-    font-size:13px;
+  &.small {
+    font-size: 13px;
   }
 `;
 export const Title = styled.span`
@@ -96,7 +96,7 @@ export const Head = styled.span`
   font-weight: bold;
   width: "100%";
   display: flex;
-  align-items: "center";  
+  align-items: "center";
 
   svg {
     margin-right: 10px;
@@ -313,7 +313,7 @@ export const More = styled.div`
   justify-content: center;
   align-items: center;
   right: 0;
-  margin-top:5px;
+  margin-top: 5px;
   &.active,
   &:hover {
     color: white;

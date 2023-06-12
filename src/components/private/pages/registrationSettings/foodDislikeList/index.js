@@ -16,9 +16,7 @@ const FoodDislikeList = (props) => {
       placeholder: "Food Dislike List",
       name: "foodDislikeListName",
       validation: "",
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
-      default: "",
+       default: "",
       label: "Food Dislike List",
       required: true,
       view: true,
