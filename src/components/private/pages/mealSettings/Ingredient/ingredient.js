@@ -18,6 +18,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Ingredient",
       required: true,
       view: true,
@@ -31,6 +32,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Delete",
       required: true,
       view: true,
@@ -44,6 +46,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Calories",
       required: true,
       view: true,
@@ -52,12 +55,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Protein",
       name: "protein",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Protein",
       required: true,
       view: true,
@@ -66,12 +69,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "SatFat",
       name: "satFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "SatFat",
       required: true,
       view: true,
@@ -80,12 +83,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "UnSatFat",
       name: "unSatFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "UnSatFat",
       required: true,
       view: true,
@@ -94,12 +97,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "TotalFat",
       name: "totalFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "TotalFat",
       required: true,
       view: true,
@@ -108,12 +111,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Cholesterol",
       name: " cholesterol",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Cholesterol",
       required: true,
       view: true,
@@ -122,12 +125,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Fiber",
       name: "fiber",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Fiber",
       required: true,
       view: true,
@@ -136,12 +139,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Carbohydrate",
       name: "carbohydrate",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Carbohydrate",
       required: true,
       view: true,
@@ -150,12 +153,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Sugar",
       name: "sugars",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Sugar",
       required: true,
       view: true,
@@ -164,12 +167,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Iron",
       name: "iron",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Iron",
       required: true,
       view: true,
@@ -178,12 +181,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Calcium",
       name: "calcium",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Calcium",
       required: true,
       view: true,
@@ -192,12 +195,12 @@ const Ingredient = (props) => {
     },
     {
       type: "checkbox",
-
       placeholder: "Vitamin A	",
       name: "vitaminA",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Vitamin A",
       required: true,
       view: true,
@@ -206,12 +209,12 @@ const Ingredient = (props) => {
     },
     {
       type: "checkbox",
-
       placeholder: "Vitamin C	",
       name: "VitaminC",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Vitamin C",
       required: true,
       view: true,
@@ -225,6 +228,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Vitamin E",
       required: true,
       view: true,
@@ -240,6 +244,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "varientGroup",
       required: true,
       view: true,
@@ -255,6 +260,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Ingredient",
       required: true,
       view: true,
@@ -270,6 +276,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "varientLevel",
       required: true,
       view: true,
@@ -283,6 +290,7 @@ const Ingredient = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Quantity",
       required: true,
       view: true,
@@ -302,7 +310,8 @@ const Ingredient = (props) => {
         // API endpoint for fetching menu data
         api={`recipe-ingredients`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "ingredientName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Ingredient Management`}
         // Privilege flag indicating whether the user can add menu items

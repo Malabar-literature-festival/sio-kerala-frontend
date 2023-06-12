@@ -17,6 +17,7 @@ const WeeklyMealPlan = (props) => {
       name: "weekStartDate",
       validation: "",
       default: "",
+      tag: true,
       label: "week Start Date",
       required: true,
       view: true,
@@ -29,6 +30,7 @@ const WeeklyMealPlan = (props) => {
       name: "weekEndDate",
       validation: "",
       default: "",
+      tag: true,
       label: "week End Date",
       required: true,
       view: true,
@@ -169,7 +171,8 @@ const WeeklyMealPlan = (props) => {
         // API endpoint for fetching menu data
         api={`weekly-meal-plan`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "weekStartDate", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Weekly Meal Plan`}
         // Privilege flag indicating whether the user can add menu items
