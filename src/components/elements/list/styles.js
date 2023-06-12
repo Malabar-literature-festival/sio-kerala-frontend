@@ -5,8 +5,6 @@ export const Table = styled.div`
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
-  margin-left: -30px;
-  margin-right: -30px;
   &.auto {
     width: auto;
   }
@@ -37,7 +35,7 @@ export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  padding: 5px 26px;
+  /* padding: 5px 26px; */
   padding-bottom: 12px;
   &:hover {
     background-color: #ddedeb;

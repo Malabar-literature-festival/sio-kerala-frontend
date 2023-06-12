@@ -223,7 +223,7 @@ const Menu = (props) => {
         // Parent reference for the submenu
         parentReference: "menu",
         // Property name for the submenu item title
-        itemTitle: "label",
+        itemTitle: { name: "label", type: "text", collection: "" },
         // Short name for the submenu
         shortName: "Sub Menu",
         // Privileges for adding submenu items
@@ -248,7 +248,7 @@ const Menu = (props) => {
         // API endpoint for fetching menu data
         api={`menu`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{ name: "label", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Menu`}
         // Privilege flag indicating whether the user can add menu items
