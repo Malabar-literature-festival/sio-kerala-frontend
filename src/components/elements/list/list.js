@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, Img, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
+import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
@@ -18,6 +18,7 @@ import * as xlsx from "xlsx";
 import { ToolTip } from "../../styles/list/styles";
 // import { convertMinutesToHHMM } from "../../functions/minuteToHour";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
+import { convertMinutesToHHMM, getValue } from "./functions";
 const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
@@ -311,60 +312,8 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   const closeManage = () => {
     setActions([]);
   };
-  function convertMinutesToHHMM(minutes) {
-    const hours = Math.floor(minutes / 60);
-    const mins = Math.floor(minutes % 60);
 
-    const hoursStr = hours.toString().padStart(2, "0");
-    const minsStr = mins.toString().padStart(2, "0");
-
-    return `${hoursStr}:${minsStr}`;
-  }
-  const getValue = (attribute, itemValue) => {
-    let response = "";
-    switch (attribute.type) {
-      case "minute":
-        response = convertMinutesToHHMM(parseFloat(itemValue ?? 0));
-        break;
-      case "image":
-        response = <Img src={process.env.REACT_APP_CDN + itemValue} />;
-        break;
-      case "datetime":
-        response = dateTimeFormat(itemValue);
-        break;
-      case "date":
-        response = dateFormat(itemValue);
-        break;
-      case "textarea":
-        response = itemValue?.substring(0, 200);
-        break;
-      case "icon":
-        response = <i className={`fa-light ${itemValue}`} />;
-        break;
-      default:
-        switch (typeof itemValue) {
-          case "undefined":
-            response = "--";
-            break;
-          case "object":
-            response = itemValue?.[attribute.showItem] ?? "--";
-            break;
-          case "boolean":
-            response = itemValue.toString();
-            break;
-          case "string":
-          case "number":
-          default:
-            if (attribute.type === "select" && attribute.apiType === "JSON") {
-              attribute.selectApi.filter((item) => item.id.toString() === itemValue?.toString()).map((filteredItem) => (response = filteredItem.value));
-            } else {
-              response = itemValue?.toString().substring(0, 200);
-            }
-            break;
-        }
-    }
-    return response;
-  };
+  
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
     const titleValue = (itemTitle.collection?.length > 0 ? data[itemTitle.collection][itemTitle.name] : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
