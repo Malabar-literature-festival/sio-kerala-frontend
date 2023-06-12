@@ -59,7 +59,7 @@ const UserList = (props) => {
       placeholder: "Name",
       name: "userDisplayName",
       validation: "",
-      default: "",
+       default: "",
       label: "Name",
       required: true,
       view: true,

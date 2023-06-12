@@ -105,7 +105,6 @@ const Banner = (props) => {
     },
   ]);
 
-
   return (
     <Container className="noshadow">
       <ListTable

@@ -6,11 +6,11 @@ export const Container = styled.div`
   height: 60px;
 `;
 export const Logo = styled.img`
-  height: 30px;
+  height: 65px;
   width: fit-content;
   padding-left: 1em;
   padding-top: 1em;
-  margin-bottom:20px;
+  margin-bottom: 10px;
 `;
 export const LogoContaner = styled.div`
   display: flex;
@@ -74,6 +74,36 @@ export const Logout = styled.div`
   }
   @media screen and (max-width: 768px) {
     margin-left: auto;
+    border: 1px solid;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    svg {
+      margin: auto;
+    }
+  }
+`;
+
+export const MNavClose = styled.div`
+  margin-right: 1em;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display:none;
+  a {
+    text-decoration: none;
+  }
+  svg {
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: auto;
+    display: flex;
     border: 1px solid;
     border-radius: 4px;
     display: flex;

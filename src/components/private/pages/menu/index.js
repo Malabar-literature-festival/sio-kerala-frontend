@@ -39,6 +39,7 @@ const Menu = (props) => {
       name: "sequence",
       validation: "",
       default: "",
+      tag: true, // when its true this field show as items in view
       label: "Sequence",
       required: true,
       view: true,
@@ -63,6 +64,7 @@ const Menu = (props) => {
       name: "path",
       validation: "",
       default: "",
+      tag: true, // when its true this field show as items in view
       label: "Path",
       required: true,
       view: true,
@@ -74,6 +76,7 @@ const Menu = (props) => {
       placeholder: "Element Name",
       name: "element",
       validation: "",
+      tag: true, // when its true this field show as items in view
       default: "",
       label: "Element Name",
       required: true,
@@ -87,6 +90,7 @@ const Menu = (props) => {
       name: "status",
       validation: "",
       default: "true",
+      tag: true, // when its true this field show as items in view
       label: "Status",
       required: true,
       view: true,
@@ -126,6 +130,7 @@ const Menu = (props) => {
       name: "sequence",
       validation: "",
       default: "",
+      tag: true, // when its true this field show as items in view
       label: "Sequence",
       required: true,
       view: true,
@@ -151,6 +156,7 @@ const Menu = (props) => {
       validation: "",
       default: "",
       label: "Path",
+      tag: true, // when its true this field show as items in view
       required: true,
       view: true,
       add: true,
@@ -162,6 +168,7 @@ const Menu = (props) => {
       name: "element",
       validation: "",
       default: "",
+      tag: true, // when its true this field show as items in view
       label: "Element Name",
       required: true,
       view: true,
@@ -174,6 +181,7 @@ const Menu = (props) => {
       name: "status",
       validation: "",
       default: "true",
+      tag: true, // when its true this field show as items in view
       label: "Status",
       required: true,
       view: true,

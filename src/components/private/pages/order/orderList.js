@@ -30,8 +30,7 @@ const OrderList = (props) => {
     {
       type: "date",
       placeholder: "Order Date",
-      name: "orderDate",
-      validation: "",
+      name: "orderDate",validation: "",
       default: "",
       label: "Order Date",
       required: true,

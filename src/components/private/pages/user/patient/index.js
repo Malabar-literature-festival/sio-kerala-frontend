@@ -33,7 +33,7 @@ const Patient = (props) => {
       placeholder: "Name",
       name: "userDisplayName",
       validation: "",
-      default: "",
+       default: "",
       label: "Name",
       required: true,
       view: true,
@@ -1215,13 +1215,12 @@ const Patient = (props) => {
       <ListTable
         actions={actions}
         api={`user`}
-        itemTitle={`username`}
+        itemTitle={`userDisplayName`}
         shortName={`Patient`}
         parentReference={"userType"}
         referenceId={"6471b3849fb2b29fe045887b"}
         // formMode={`single`}
         formMode={`double`}
-        //
         {...props}
         attributes={attributes}
       ></ListTable>

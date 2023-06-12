@@ -18,7 +18,7 @@ const AddictionList = (props) => {
       validation: "",
       default: "",
       label: "Addiction ListName",
-      required: true,
+       required: true,
       view: true,
       add: true,
       update: true,

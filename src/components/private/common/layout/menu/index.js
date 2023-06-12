@@ -1,36 +1,38 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Header, MenuGroup, Nav, SubMenu } from "./styels";
 import { useTranslation } from "react-i18next"; // react-i18next hook for translations
 import { useDispatch, useSelector } from "react-redux";
 import { currentMenu, menuStatus, openedMenu, selectedMenu } from "../../../../../store/actions/common";
-import { GetIcon, LogoutIcon } from "../../../../../icons";
-import LanguageTooltip from "../../../../elements/tooltip";
-import { Logo, Logout, User } from "../header/styels";
-import { clearLogin } from "../../../../../store/actions/login";
+import { CloseIcon, GetIcon } from "../../../../../icons";
+import { Logo, MNavClose } from "../header/styels";
 import { logo } from "../../../../../images";
 const Menu = (props) => {
   const { t } = useTranslation();
   const themeColors = useSelector((state) => state.themeColors);
   const openedMenus = useSelector((state) => state.openedMenu);
   const selectedMenuItem = useSelector((state) => state.selectedMenu);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   return (
     <>
       <Logo src={logo} alt="logo" />
-      <Header className="hd">
-        <User>{props.user.user.email}</User>
-        <Logout
+      <Header>
+        {/* <User>{props.user.user.email}</User> */}
+        {/* <Logout
           onClick={() => {
             dispatch(clearLogin());
             navigate("/");
           }}
         >
           <LogoutIcon />
-        </Logout>
-        <LanguageTooltip></LanguageTooltip>
+        </Logout> */}
+        <MNavClose
+          onClick={() => {
+            dispatch(menuStatus(false));
+          }}
+        >
+          <CloseIcon />
+        </MNavClose>
       </Header>
       <Nav theme={themeColors}>
         {/* Link to the home page */}
@@ -61,7 +63,7 @@ const Menu = (props) => {
                       className={submenu._id === selectedMenuItem._id ? "main active" : "main"} // Use submenu.path for the active class
                       to={submenu.path} // Use submenu.path for the link destination
                     >
-                      <GetIcon icon={menuItem.icon} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
+                      <GetIcon icon={submenu.icon} /> {t(submenu.label)} {/* Use submenu.label for the link text */}
                     </Link>
                   ))}
                 </SubMenu>
@@ -76,7 +78,7 @@ const Menu = (props) => {
                 className={menuItem._id === selectedMenuItem._id ? "main active" : "main"}
                 to={menuItem.path}
               >
-                <GetIcon icon={menuItem.icon} /> {t(menuItem.label  )}
+                <GetIcon icon={menuItem.icon} /> {t(menuItem.label)}
               </Link>
             )}
           </div>

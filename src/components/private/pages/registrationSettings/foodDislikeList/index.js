@@ -16,7 +16,7 @@ const FoodDislikeList = (props) => {
       placeholder: "Food Dislike List",
       name: "foodDislikeListName",
       validation: "",
-      default: "",
+       default: "",
       label: "Food Dislike List",
       required: true,
       view: true,

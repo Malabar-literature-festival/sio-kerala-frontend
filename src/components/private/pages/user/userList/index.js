@@ -1229,7 +1229,7 @@ const UserList = (props) => {
       <ListTable
         // actions={actions}
         api={`user`}
-        itemTitle={`username`}
+        itemTitle={`userDisplayName`}
         shortName={`User`}
         // formMode={`single`}
         formMode={`double`}

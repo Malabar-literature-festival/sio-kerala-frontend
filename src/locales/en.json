@@ -63,7 +63,7 @@
   "delete": "Delete",
   "managers": "Managers",
   "deleteRequest": "Do you want to delete `{{label}}`?",
-  "addNew": "Add New {{label}}?",
+  "addNew": "{{label}}",
   "addNewTitle": "Add New {{label}}",
   "error": "Something Went Wrong!",
   "timing": "Timing",

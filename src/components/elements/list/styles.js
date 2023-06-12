@@ -1,10 +1,12 @@
 import styled from "styled-components";
-export const Table = styled.table`
+export const Table = styled.div`
   border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
+  /* width: calc(100% + 60px); */
   font-family: Arial, sans-serif;
   margin-bottom: auto;
+  border-top: 1px solid #ccc;
+  margin-left: -30px;
+  margin-right: -30px;
   &.auto {
     width: auto;
   }
@@ -31,28 +33,80 @@ export const Th = styled.th`
   }
 `;
 
-export const Tr = styled.tr`
+export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 26px;
+  padding-bottom: 12px;
   &:hover {
     background-color: #ddedeb;
-    border-radius: 12px;
   }
 `;
-
-export const Td = styled.td`
+export const Td = styled.div`
   text-align: left;
-  padding: 8px;
-  height: 30px;
+  padding: 10px 5px;
+  position: relative;
+  &.no,
+  &.name {
+    border: 1px solid gray;
+  }
+  &.has {
+    border: 2px solid black;
+    cursor: pointer;
+  }
+  &.no,
+  &.has {
+    text-align: center;
+  }
+  &.no svg {
+    fill: grey;
+  }
+  &.name {
+    text-overflow: "no-wrap";
+  }
   &.actions {
     display: flex;
     justify-content: right;
     overflow-wrap: normal;
+    margin-left: auto;
+    margin-right: 5px;
+    padding: 0;
   }
   &.right {
     text-align: right;
   }
 `;
 
+export const TrBody = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  &.small {
+    font-size: 13px;
+  }
+`;
+export const Title = styled.span`
+  margin-right: 5px;
+  margin-bottom: 5px;
+  &:after {
+    content: " :";
+  }
+`;
+export const Head = styled.span`
+  font-weight: bold;
+  width: "100%";
+  display: flex;
+  align-items: "center";
+
+  svg {
+    margin-right: 10px;
+  }
+`;
+export const DataItem = styled.span`
+  background-color: #d7d7d7;
+  padding: 5px 10px;
+  border-radius: 10px;
+`;
 export const Button = styled.button`
   color: #fff;
   border: none;
@@ -60,10 +114,17 @@ export const Button = styled.button`
   margin-right: 8px;
   cursor: pointer;
   font-size: 14px;
-  border-radius: 10px;
   white-space: nowrap;
   &.add {
     background-color: #4caf50;
+  }
+  &.menu {
+    padding: 10px;
+    margin-right: 0;
+    text-align: left;
+  }
+  &.menu:last-child {
+    margin-bottom: 0px;
   }
   &.edit {
     background-color: gray;
@@ -77,13 +138,10 @@ export const Button = styled.button`
   }
   svg {
     fill: white;
-    margin-left: 5px;
+    margin-right: 5px;
     height: 0.9em;
   }
   @media (max-width: 768px) {
-    span {
-      display: none;
-    }
     svg {
       margin-left: 0px;
     }
@@ -215,7 +273,7 @@ export const Img = styled.img`
   width: 100px;
 `;
 export const ScrollLayout = styled.div`
-  overflow: auto;
+  /* overflow: auto; */
 `;
 export const ToggleSlider = styled.span`
   position: absolute;
@@ -245,4 +303,55 @@ export const ToggleSlider = styled.span`
     transform: translateX(18px);
     background-color: green;
   }
+`;
+export const More = styled.div`
+  display: flex;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  margin-top: 5px;
+  &.active,
+  &:hover {
+    color: white;
+    background-color: #77998e;
+  }
+`;
+export const Actions = styled.div`
+  display: flex;
+  margin-left: auto;
+  flex-direction: column;
+  border-radius: 10px;
+  div {
+    margin: 0px 0px 5px 0;
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  div:last-child {
+    margin-right: 0px;
+  }
+  div.active {
+    margin-right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+  }
+  @media screen and (max-width: 768px) {
+    div {
+      color: black;
+    }
+    div.active {
+      color: #198ad6;
+    }
+  }
+`;
+
+export const ToolTipContainer = styled.div`
+  display: flex;
 `;

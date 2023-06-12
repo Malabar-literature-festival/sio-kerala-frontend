@@ -1,2 +1,2 @@
-import logo from "./public/logo.webp";
+import logo from "./public/logo.png";
 export { logo };

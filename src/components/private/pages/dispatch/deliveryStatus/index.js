@@ -23,7 +23,7 @@ const DeliveryStatus = (props) => {
       // Default value for the input field
       default: "",
       // Label text for the input field
-      label: "Delivery Statuse Name",
+       label: "Delivery Statuse Name",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode

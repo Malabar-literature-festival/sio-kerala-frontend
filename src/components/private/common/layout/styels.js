@@ -24,7 +24,7 @@ export const SideBar = styled.div`
     display: flex;
     visibility: collapse;
     min-height: 60%;
-    max-height: 80%;
+    max-height: 100%;
     z-index: 1;
     &.active {
       visibility: visible;
@@ -40,6 +40,7 @@ export const Container = styled.div`
   box-shadow: inset rgb(0 0 0 / 6%) 0px 0px 8px 7px;
   &.noshadow {
     box-shadow: none;
+        overflow: initial;
   }
 
   background: #f3f8fb;

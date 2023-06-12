@@ -16,7 +16,7 @@ const Appointment = (props) => {
       placeholder: "Booking ID",
       name: "bookingId",
       validation: "",
-      default: "",
+       default: "",
       label: "Booking ID",
       required: true,
       view: true,
