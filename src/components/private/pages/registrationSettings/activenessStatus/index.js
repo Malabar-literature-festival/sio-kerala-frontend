@@ -19,8 +19,6 @@ const ActivenessStatus = (props) => {
       // Name of the input field
       name: "activenessStatusName",
       // Validation rules for the input
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       validation: "",
       // Default value for the input field
       default: "",

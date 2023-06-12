@@ -21,8 +21,6 @@ const Menu = (props) => {
       // Validation rules for the input
       validation: "",
       // Default value for the input field
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       default: "",
       // Label text for the input field
       label: "Label",
@@ -118,8 +116,6 @@ const Menu = (props) => {
       type: "text",
       placeholder: "Label",
       name: "label",
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       validation: "",
       default: "",
       label: "Label",

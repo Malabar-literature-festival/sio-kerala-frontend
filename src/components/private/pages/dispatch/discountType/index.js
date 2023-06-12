@@ -25,8 +25,6 @@ const DiscountType = (props) => {
       // Label text for the input field
       label: "Discount Type",
       // Indicates if the input field is required
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       required: true,
       // Indicates if the input field should be displayed in the view mode
       view: true,

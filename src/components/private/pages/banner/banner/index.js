@@ -16,8 +16,6 @@ const Banner = (props) => {
       apiType: "",
       selectApi: "",
       placeholder: "Title",
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       name: "title",
       showItem: "",
       validation: "",

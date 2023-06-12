@@ -367,11 +367,13 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   };
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
+    const titleValue = data[itemTitle] ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
       <Tr key={`${shortName}-${slNo}`}>
         <TrBody>
-          {attributes.map((attribute, index) => {
+          {/* {attributes.map((attribute, index) => {
             if (attribute.view && (attribute.title ?? false)) {
               const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
               console.log(selectedMenuItem.icon);
@@ -386,7 +388,13 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
             } else {
               return "";
             }
-          })}
+          })} */}
+          <Td key={`row-head-${slNo}`}>
+            <Head>
+              {<GetIcon icon={selectedMenuItem.icon} />}
+              {` ${titleValue}`}
+            </Head>
+          </Td>
           <Td key={`actions-${shortName}-${data._id}`} className="actions">
             {actions.map((item) => {
               return (
@@ -507,7 +515,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                   return "";
                 }
                 return (
-                  <Td key={index}> 
+                  <Td key={index}>
                     <Title>{attribute.label}</Title>
                     <DataItem>{getValue(attribute, itemValue)} </DataItem>
                   </Td>

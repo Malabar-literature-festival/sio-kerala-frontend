@@ -25,8 +25,6 @@ const UserType = (props) => {
       // Label text for the input field
       label: "Role",
       // Indicates if the input field is required
-      title: true,
-      // title when true it will show as title fild for the view, view should be true then only it will work
       required: true,
       // Indicates if the input field should be displayed in the view mode
       view: true,
@@ -181,7 +179,7 @@ const UserType = (props) => {
         // API endpoint for fetching menu data
         api={`user-type`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={`role`}
         // Short name or label for the menu
         shortName={`Role`}
         // Privilege flag indicating whether the user can add menu items
