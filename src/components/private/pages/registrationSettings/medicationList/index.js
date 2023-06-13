@@ -17,6 +17,7 @@ const MedicationList = (props) => {
       name: "underAnyMedicationName",
       validation: "",
       default: "",
+      tag: true,
       label: "Under AnyMedication",
       required: true,
       view: true,
@@ -157,8 +158,13 @@ const MedicationList = (props) => {
         // API endpoint for fetching menu data
         api={`under-any-medication`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{
+          name: "underAnyMedicationName",
+          type: "text",
+          collection: "",
+        }}
         shortName={`MedicationList`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
