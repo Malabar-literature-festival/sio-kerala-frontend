@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+// import { customAlphabet } from "nanoid";
+//
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
+
+// const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7);
+
 const UserList = (props) => {
   //to update the page title
   useEffect(() => {
@@ -12,11 +17,52 @@ const UserList = (props) => {
 
   const [attributes] = useState([
     {
+      type: "hidden",
+      placeholder: "CPR/Mobile",
+      name: "username",
+      validation: "",
+      default: "username",
+      label: "CPR/Mobile",
+      required: true,
+      view: false,
+      add: false,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "CPR/Mobile",
+      name: "subscriber",
+      showItem: "cprNumber",
+      tag: true,
+      validation: "",
+      default: "",
+      label: "CPR/Mobile",
+      required: false,
+      view: true,
+      add: false,
+      update: true,
+    },
+    // {
+    //   type: "text",
+    //   placeholder: "CPR/Mobile",
+    //   name: "cprNumber",
+    //   showItem: "",
+    //   tag: true,
+    //   validation: "",
+    //   default: "",
+    //   label: "CPR/Mobile",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    // },
+    {
       type: "text",
       placeholder: "Name",
       name: "userDisplayName",
       validation: "",
       default: "",
+      tag: true,
       label: "Name",
       required: true,
       view: true,
@@ -24,25 +70,13 @@ const UserList = (props) => {
       update: true,
     },
     {
-      type: "text",
-      placeholder: "User Name",
-      name: "username",
+      type: "email",
+      placeholder: "E-Mail",
+      name: "email",
       validation: "",
       default: "",
-      label: "User Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-
-    {
-      type: "email",
-      placeholder: "Email",
-      name: "email",
-      validation: "email",
-      default: "",
-      label: "Email",
+      tag: true,
+      label: "E-Mail",
       required: true,
       view: true,
       add: true,
@@ -50,112 +84,141 @@ const UserList = (props) => {
     },
     {
       type: "select",
+      placeholder: "Gender",
+      name: "subscriber",
+      showItem: "gender",
+      tag: true,
+      validation: "",
+      default: "",
+      label: "Gender",
+      required: false,
+      view: true,
+      add: false,
+      update: true,
+      filter: false,
+      apiType: "CSV",
+      selectApi: "Male,Female",
+    },
+    {
+      type: "select",
+      placeholder: "Gender",
+      name: "gender",
+      showItem: "",
+      tag: true,
+      validation: "",
+      default: "",
+      label: "Gender",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
+      apiType: "CSV",
+      selectApi: "Male,Female",
+    },
+    {
+      type: "date",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "DOB",
+      name: "subscriber",
+      showItem: "dateOfBirth",
+      tag: true,
+      validation: "",
+      default: "",
+      label: "DOB",
+      required: true,
+      view: true,
+      add: false,
+      update: false,
+    },
+    {
+      type: "date",
+      placeholder: "YYYY/MM/DD",
+      name: "dateOfBirth",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "DOB",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Address",
+      name: "subscriber",
+      validation: "",
+      showItem: "address",
+      tag: true,
+      default: "",
+      label: "Address",
+      required: false,
+      view: true,
+      add: false,
+      update: true,
+    },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Address",
+      name: "address",
+      validation: "",
+      showItem: "",
+      tag: true,
+      default: "",
+      label: "Address",
+      required: false,
+      view: false,
+      add: true,
+      update: true,
+    },
+    {
+      type: "hidden",
       apiType: "API",
       selectApi: "user-type/select",
       placeholder: "User Type",
       name: "userType",
       validation: "",
       showItem: "role",
-      default: "",
+      tag: true,
+      default: "role",
       label: "User Type",
       required: true,
-      view: true,
+      view: false,
       add: true,
       update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "user-type/select",
+      placeholder: "Role",
+      name: "userType",
+      validation: "",
+      showItem: "roleDisplayName",
+      tag: true,
+      default: "",
+      label: "Role",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
     },
     {
       type: "image",
-      placeholder: "User Image",
+      placeholder: "Image",
       name: "userImage",
       validation: "",
-      default: "true",
-      label: "User Image",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-  ]);
-  const [timingAttributes] = useState([
-    {
-      type: "text",
-      placeholder: "Label",
-      name: "label",
-      validation: "",
       default: "",
-      label: "Label",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
-      validation: "",
-      default: "",
-      label: "Sequence",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Icon",
-      name: "icon",
-      validation: "",
-      default: "",
-      label: "Icon",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Path",
-      name: "path",
-      validation: "",
-      default: "",
-      label: "Path",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Element Name",
-      name: "element",
-      validation: "",
-      default: "",
-      label: "Element Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
-      validation: "",
-      default: "true",
-      label: "Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
-      validation: "",
-      default: "false",
-      label: "Is Link",
+      tag: true,
+      label: "Image",
       required: true,
       view: true,
       add: true,
@@ -163,61 +226,18 @@ const UserList = (props) => {
     },
   ]);
 
-  const [actions] = useState([
-    {
-      // Element type for rendering
-      element: "button",
-      // Type of action, in this case a sublist
-      type: "subList",
-      // Unique identifier for the submenu
-      id: "sub-menu",
-      // Displayed item title
-      itemTitle: "userDisplayName",
-      // Title of the submenu
-      title: "Sub Menu1",
-      // Additional attributes for timing
-      attributes: timingAttributes,
-      // Parameters for API and submenu configuration
-      params: {
-        // API endpoint for submenu data
-        api: `sub-menu`,
-        // Parent reference for the submenu
-        parentReference: "menu",
-        // Property name for the submenu item title
-        itemTitle: "userDisplayName",
-        // Short name for the submenu
-        shortName: "Sub Menu2",
-        // Privileges for adding submenu items
-        addPrivilege: true,
-        // Privileges for deleting submenu items
-        delPrivilege: true,
-        // Privileges for updating submenu items
-        updatePrivilege: true,
-        // Custom CSS class for styling
-        customClass: "medium",
-      },
-    },
-  ]);
-  // Use the useTranslation hook from react-i18next to handle translations
-  // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
     <Container className="noshadow">
-      {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
-        actions={actions}
-        // API endpoint for fetching menu data
+        // actions={actions}
         api={`user`}
-        // Property name for the title of each menu item
-        itemTitle={`label`}
-        // Short name or label for the menu
+        // itemTitle={`userDisplayName`}
+        itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
         shortName={`User`}
-        // Privilege flag indicating whether the user can add menu items
         // formMode={`single`}
         formMode={`double`}
         //
         {...props}
-        // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
     </Container>

@@ -1,33 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Table,
-  Th,
-  Button,
-  Td,
-  Tr,
-  Count,
-  ArrowButton,
-  AddButton,
-  ButtonPanel,
-  Filter,
-  Filters,
-  ToggleContainer,
-  ToggleInput,
-  ToggleSlider,
-  NoData,
-  ScrollLayout,
-  FilterBox,
-  Img,
-} from "./styles";
+import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
-import {
-  AddIcon,
-  FilterIcon,
-  GetIcon,
-  NextIcon,
-  PreviousIcon,
-} from "../../../icons";
+import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import { deleteData, postData, putData } from "../../../backend/api";
 import CrudForm from "./create";
@@ -38,23 +13,13 @@ import Manage from "./manage";
 import Loader from "../loader";
 import Search from "../search";
 import SubPage from "./subPage";
-import moment from "moment";
 import DateRangeSelector from "../daterange";
-const ListTable = ({
-  parentReference = "_id",
-  referenceId = 0,
-  actions = [],
-  api,
-  setMessage,
-  attributes = [],
-  addPrivilege = true,
-  delPrivilege = true,
-  updatePrivilege = true,
-  shortName = "Item",
-  itemTitle = "title",
-  datefilter = false,
-  viewMode = "list",
-}) => {
+import * as xlsx from "xlsx";
+import { ToolTip } from "../../styles/list/styles";
+// import { convertMinutesToHHMM } from "../../functions/minuteToHour";
+import { dateFormat, dateTimeFormat } from "../../functions/date";
+import { convertMinutesToHHMM, getValue } from "./functions";
+const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -71,6 +36,7 @@ const ListTable = ({
   const [count, setCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const themeColors = useSelector((state) => state.themeColors);
+  const selectedMenuItem = useSelector((state) => state.selectedMenu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t] = useTranslation();
@@ -104,20 +70,12 @@ const ListTable = ({
     let date = new Date();
     attributes.forEach((item) => {
       if (item.type === "checkbox") {
-        let bool = JSON.parse(
-          item.default === "false" || item.default === "true"
-            ? item.default
-            : "false"
-        );
+        let bool = JSON.parse(item.default === "false" || item.default === "true" ? item.default : "false");
         if (item.add) {
           addValuesTemp.addValues[item.name] = bool;
         }
         addValuesTemp.updateValues[item.name] = bool;
-      } else if (
-        item.type === "datetime" ||
-        item.type === "date" ||
-        item.type === "time"
-      ) {
+      } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
         addValuesTemp.addValues[item.name] = date.toISOString();
         if (item.add) {
           addValuesTemp.updateValues[item.name] = date.toISOString();
@@ -153,18 +111,7 @@ const ListTable = ({
 
     setFilter(tempFilter);
     setInitialized(true);
-  }, [
-    attributes,
-    dispatch,
-    setPrevCrud,
-    prevCrud,
-    setFormInput,
-    setAddValues,
-    setUpdateValues,
-    setFilterView,
-    parentReference,
-    referenceId,
-  ]);
+  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
 
   // end processing attributes
   useEffect(() => {
@@ -206,33 +153,26 @@ const ListTable = ({
       const updateValues = {};
       setUpdateId(value._id);
       formInput.forEach((item) => {
+        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name];
         if (item.update) {
           if (item.type === "checkbox") {
             let bool = value[item.name].toString() === "true" ? true : false;
             updateValues[item.name] = bool;
           } else if (item.type === "select") {
-            console.log(typeof value[item.name]);
-            updateValues[item.name] =
-              typeof value[item.name] === "undefined"
-                ? ""
-                : typeof value[item.name] === "string" ||
-                  typeof value[item.name] === "number"
-                ? value[item.name]
-                : value[item.name]?._id
-                ? value[item.name]._id
-                : "";
+            console.log(itemValue);
+            console.log(value[item.name]);
+            updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
           } else if (item.type === "image") {
-            updateValues["old_" + item.name] = value[item.name]
-              ? value[item.name]
-              : "";
+            updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
             updateValues[item.name] = [];
           } else {
-            updateValues[item.name] = value[item.name] ? value[item.name] : "";
+            updateValues[item.name] = itemValue ? itemValue : "";
           }
         }
       });
+
       updateValues["_id"] = value._id;
-      console.log(updateValues);
+      console.log("updateValues", updateValues);
       setUpdateValues(updateValues);
       setIsEditing(true);
       window.location.hash = "edit";
@@ -249,9 +189,7 @@ const ListTable = ({
         if (response.status === 200) {
           setMessage({
             type: 1,
-            content: `The '${
-              item.title ? item.title : shortName
-            }' deleted successfully!`,
+            content: `The '${item.title ? item.title : shortName}' deleted successfully!`,
             proceed: t("okay"),
           });
           setCount((count) => count - 1);
@@ -286,10 +224,7 @@ const ListTable = ({
   };
   const submitHandler = async (data) => {
     setLoaderBox(true);
-    const saveData =
-      referenceId === 0
-        ? { ...data }
-        : { ...data, [parentReference]: referenceId };
+    const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
       .then((response) => {
         if (response.status === 200) {
@@ -377,220 +312,176 @@ const ListTable = ({
   const closeManage = () => {
     setActions([]);
   };
-  function convertMinutesToHHMM(minutes) {
-    const hours = Math.floor(minutes / 60);
-    const mins = Math.floor(minutes % 60);
-
-    const hoursStr = hours.toString().padStart(2, "0");
-    const minsStr = mins.toString().padStart(2, "0");
-
-    return `${hoursStr}:${minsStr}`;
-  }
 
   const TableRowWithActions = ({ attributes, data, slNo }) => {
+    selectRef.current[slNo] = useRef(null);
+    const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
-      <Tr key={`${shortName}-${slNo}`}>
-        {attributes.map((attribute, index) => {
-          if (attribute.view) {
-            switch (attribute.type) {
-              case "minute":
-                return (
-                  <Td key={index}>
-                    {convertMinutesToHHMM(
-                      parseFloat(data[attribute.name] ?? 0)
-                    )}
-                  </Td>
-                );
-              case "image":
-                return (
-                  <Td key={index}>
-                    <Img
-                      src={process.env.REACT_APP_CDN + data[attribute.name]}
-                    />
-                  </Td>
-                );
-              case "datetime":
-                let userFriendlyDateTime = moment(data[attribute.name]).format(
-                  "DD.MM.YYYY, H:mm"
-                );
-                return <Td key={index}>{userFriendlyDateTime}</Td>;
-              case "date":
-                let userFriendlyDate = moment(data[attribute.name]).format(
-                  "DD.MM.YYYY"
-                );
-                return <Td key={index}>{userFriendlyDate}</Td>;
-              case "textarea":
-                return (
-                  <Td
-                    key={index}
-                    dangerouslySetInnerHTML={{
-                      __html: data[attribute.name]?.substring(0, 200),
-                    }}
-                  ></Td>
-                );
-              case "icon":
-                return (
-                  <Td key={index}>
-                    <i className={`fa-light ${data[attribute.name]}`} />
-                  </Td>
-                );
-              default:
-                switch (typeof data[attribute.name]) {
-                  case "undefined":
-                    return <Td key={index}>Not Found</Td>;
-                  case "object":
-                    return (
-                      <Td key={index}>
-                        {data[attribute.name]?.[attribute.showItem] ?? "Nil"}
-                      </Td>
-                    );
-                  case "boolean":
-                    return (
-                      <Td key={index}>{data[attribute.name].toString()}</Td>
-                    );
-                  case "string":
-                  case "number":
-                  default:
-                    if (
-                      attribute.type === "select" &&
-                      attribute.apiType === "JSON"
-                    ) {
-                      return attribute.selectApi
-                        .filter(
-                          (item) =>
-                            item.id.toString() ===
-                            data[attribute.name]?.toString()
-                        )
-                        .map((filteredItem) => (
-                          <Td style={{ color: filteredItem.color }} key={index}>
-                            {filteredItem.value}
-                          </Td>
-                        ));
-                    } else {
-                      return (
-                        <Td key={index}>
-                          {data[attribute.name]?.toString().substring(0, 200)}
-                        </Td>
-                      );
-                    }
-                }
+      <Tr key={`row-${shortName}-${data._id ?? slNo}`}>
+        <TrBody>
+          {/* {attributes.map((attribute, index) => {
+            if (attribute.view && (attribute.title ?? false)) {
+              const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+              console.log(selectedMenuItem.icon);
+              return (
+                <Td key={index}>
+                  <Head>
+                    {<GetIcon icon={selectedMenuItem.icon} />}
+                    {` ${getValue(attribute, itemValue)}`}
+                  </Head>
+                </Td>
+              );
+            } else {
+              return "";
             }
-          }
-          return null;
-        })}
+          })} */}
+          <Td key={`row-head-${slNo}`}>
+            <Head>
+              {<GetIcon icon={selectedMenuItem.icon} />}
+              {` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}
+            </Head>
+          </Td>
+          <Td key={`actions-${shortName}-${data._id}`} className="actions">
+            {actions.map((item) => {
+              return (
+                item.element !== "button" && (
+                  <ToggleContainer key={`${item.id}-${data._id}`}>
+                    <ToggleInput
+                      type="checkbox"
+                      checked={data[item.id]}
+                      onChange={async (event) => {
+                        // item.callback(item, data);
+                        setLoaderBox(true);
+                        await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
+                          .then((response) => {
+                            if (response.status === 200) {
+                              if (response.data?.message) {
+                                setMessage({ type: 1, content: t(response.data?.message), proceed: t("okay") });
+                              }
+                              //
+                              refreshView();
+                              // setIsEditing(false);
+                            } else if (response.status === 404) {
+                              refreshView();
+                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                            } else {
+                              refreshView();
+                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                            }
+                            // setLoaderBox(false);
+                          })
+                          .catch((error) => {
+                            alert(error);
+                            // setLoaderBox(false);
+                          });
+                      }}
+                    />
+                    <ToggleSlider />
+                  </ToggleContainer>
+                )
+              );
+            })}
+            <ToolTipContainer
+              ref={selectRef.current[slNo]}
+              onClick={() => {
+                setCurrentAction(data._id);
+              }}
+            >
+              <More className={currentAction === data._id ? `active` : ``}>
+                <GetIcon icon={"dots"}></GetIcon>
+              </More>
+              <ToolTip className={currentAction === data._id ? `actions` : `actions hide`}>
+                <Actions>
+                  {updatePrivilege && (
+                    <Button
+                      key={`edit-${data._id}`}
+                      onClick={() => {
+                        isEditingHandler(data, udpateView);
+                      }}
+                      className="edit menu"
+                    >
+                      <GetIcon icon={"edit"} />
+                      <span>{t("edit")}</span>
+                    </Button>
+                  )}
+                  {actions.map((item, index) => {
+                    return (
+                      item.element === "button" && (
+                        <Button
+                          key={`custom-${item.id + "-" + index}-${data._id}`}
+                          onClick={() => {
+                            if (item.type === "callback") {
+                              item.callback(item, data);
+                            } else if (item.type === "call") {
+                              window.location.href = `tel:${data.mobileNumber}`;
+                            } else if (item.type === "subList") {
+                              setSubAttributes({ item, data });
+                              setShowSubList(true);
+                            } else {
+                              openAction(item, data);
+                            }
+                          }}
+                          className="edit menu"
+                        >
+                          <GetIcon icon={item.icon} />
+                          <span>{t(item.title)}</span>
+                        </Button>
+                      )
+                    );
+                  })}
+                  {delPrivilege && (
+                    <Button
+                      key={`delete-${data._id}`}
+                      onClick={() => {
+                        setMessage({
+                          type: 2,
+                          content: t("deleteRequest", { label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item" }),
+                          proceed: t("delete"),
+                          onProceed: deleteHandler,
+                          data: data,
+                        });
+                      }}
+                      className="delete menu"
+                    >
+                      <GetIcon icon={"delete"} />
+                      <span>{t("delete")}</span>
+                    </Button>
+                  )}
+                </Actions>
+              </ToolTip>
+            </ToolTipContainer>
+          </Td>
+        </TrBody>
+        <TrBody className="small">
+          {attributes.map((attribute, index) => {
+            if (attribute.view && (attribute.tag ?? false)) {
+              try {
+                const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+                if (attribute.type === "image") {
+                  return "";
+                }
+                return (
+                  <Td key={index}>
+                    <Title>{attribute.label}</Title>
+                    <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                  </Td>
+                );
+              } catch (error) {
+                console.log(error);
+                return (
+                  <Td key={index}>
+                    <Title>{attribute.label}</Title>
+                    <DataItem>{`--`} </DataItem>
+                  </Td>
+                );
+              }
+            }
 
-        <Td key={`actions-${shortName}-${data._id}`} className="actions">
-          {delPrivilege && (
-            <Button
-              key={`delete-${data._id}`}
-              onClick={() => {
-                setMessage({
-                  type: 2,
-                  content: t("deleteRequest", {
-                    label: data[itemTitle]
-                      ? data[itemTitle].toString()
-                      : "Item",
-                  }),
-                  proceed: t("delete"),
-                  onProceed: deleteHandler,
-                  data: data,
-                });
-              }}
-              className="delete"
-            >
-              <span>{t("delete")}</span>
-              <GetIcon icon={"delete"} />
-            </Button>
-          )}
-          {updatePrivilege && (
-            <Button
-              key={`edit-${data._id}`}
-              onClick={() => {
-                isEditingHandler(data, udpateView);
-              }}
-              className="edit"
-            >
-              <span>{t("edit")}</span>
-              <GetIcon icon={"edit"} />
-            </Button>
-          )}
-          {actions.map((item) => {
-            return item.element === "button" ? (
-              <Button
-                key={`custom-${item.id}-${data._id}`}
-                onClick={() => {
-                  if (item.type === "callback") {
-                    item.callback(item, data);
-                  } else if (item.type === "call") {
-                    window.location.href = `tel:${data.mobileNumber}`;
-                  } else if (item.type === "subList") {
-                    setSubAttributes({ item, data });
-                    setShowSubList(true);
-                  } else if (item.type === "subItem") {
-                    setSubAttributes({ item, data });
-                    setShowSubList(true);
-                  } else {
-                    openAction(item, data);
-                  }
-                }}
-                className="edit"
-              >
-                <span>{t(item.title)}</span>
-                <GetIcon icon={item.icon} />
-              </Button>
-            ) : (
-              <ToggleContainer key={`${item.id}-${data._id}`}>
-                <ToggleInput
-                  type="checkbox"
-                  checked={data[item.id]}
-                  onChange={async (event) => {
-                    // item.callback(item, data);
-                    setLoaderBox(true);
-                    await postData(
-                      { status: event.target.checked },
-                      `${item.api}/${data._id}`
-                    )
-                      .then((response) => {
-                        if (response.status === 200) {
-                          if (response.data?.message) {
-                            setMessage({
-                              type: 1,
-                              content: t(response.data?.message),
-                              proceed: t("okay"),
-                            });
-                          }
-                          //
-                          refreshView();
-                          // setIsEditing(false);
-                        } else if (response.status === 404) {
-                          refreshView();
-                          setMessage({
-                            type: 1,
-                            content: t("error"),
-                            proceed: "Okay",
-                          });
-                        } else {
-                          refreshView();
-                          setMessage({
-                            type: 1,
-                            content: t("error"),
-                            proceed: "Okay",
-                          });
-                        }
-                        // setLoaderBox(false);
-                      })
-                      .catch((error) => {
-                        alert(error);
-                        // setLoaderBox(false);
-                      });
-                  }}
-                />
-                <ToggleSlider />
-              </ToggleContainer>
-            );
+            return null;
           })}
-        </Td>
+        </TrBody>
       </Tr>
     );
   };
@@ -607,6 +498,92 @@ const ListTable = ({
       setFilterView({ ...filterView, searchkey: event.target.value });
     }, 300);
   };
+  const selectRef = useRef([]);
+  const [currentAction, setCurrentAction] = useState("0");
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const clickedInsideRefs = selectRef.current.filter((ref) => ref.current && ref.current.contains(event.target));
+
+      if (clickedInsideRefs.length === 0) {
+        setCurrentAction("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  //export to excel
+  const toExcel = (currentIndex) => {
+    try {
+      exportToExcel();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const exportToExcel = () => {
+    // JSON data to be converted to Excel
+    console.log(users.data?.response);
+    const jsonData = users.data?.response;
+    if (jsonData) {
+      // Convert JSON to worksheet
+      const excelData = [];
+      jsonData.forEach((data) => {
+        const excelRow = {};
+        attributes.forEach((attribute) => {
+          if (attribute.view) {
+            const name = t(attribute.label);
+            switch (attribute.type) {
+              case "minute":
+                return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
+              case "datetime":
+                return (excelRow[name] = dateTimeFormat(data[attribute.name]));
+              case "date":
+                return (excelRow[name] = dateFormat(data[attribute.name]));
+              case "select":
+                if (attribute.apiType === "JSON") {
+                  return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
+                } else if (attribute.apiType === "CSV") {
+                  return (excelRow[name] = data[attribute.name]);
+                } else {
+                  return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                }
+
+              default:
+                switch (typeof data[attribute.name]) {
+                  case "undefined":
+                    return (excelRow[name] = "Not Found");
+                  case "object":
+                    return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                  case "boolean":
+                    return (excelRow[name] = data[attribute.name].toString());
+                  case "string":
+                  case "number":
+                  default:
+                    if (attribute.type === "select" && attribute.apiType === "JSON") {
+                      return attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem) => (excelRow[name] = filteredItem.value));
+                    } else {
+                      return (excelRow[name] = data[attribute.name]?.toString().substring(0, 200));
+                    }
+                }
+            }
+          }
+        });
+        excelData.push(excelRow);
+      });
+      const worksheet = xlsx.utils.json_to_sheet(excelData);
+
+      // Create workbook
+      const workbook = xlsx.utils.book_new();
+      xlsx.utils.book_append_sheet(workbook, worksheet, t(shortName));
+      // Convert workbook to Excel binary and download the file
+      xlsx.writeFile(workbook, t(shortName) + "-data.xlsx");
+    }
+  };
   useEffect(() => {
     return () => {
       clearTimeout(searchTimeoutRef.current);
@@ -618,12 +595,7 @@ const ListTable = ({
     <RowContainer>
       <ButtonPanel>
         <FilterBox>
-          <Search
-            theme={themeColors}
-            placeholder="Search"
-            value={searchValue}
-            onChange={handleChange}
-          ></Search>
+          <Search theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
           {filter && (
             <Filter
               theme={themeColors}
@@ -634,30 +606,19 @@ const ListTable = ({
               <FilterIcon />
             </Filter>
           )}
-
-          {datefilter && (
-            <DateRangeSelector
-              onChange={dateRangeChange}
-              themeColors={themeColors}
-            ></DateRangeSelector>
-          )}
+          <Filter
+            theme={themeColors}
+            onClick={() => {
+              setMessage({ type: 2, content: "Do you want export this page to excel?", proceed: "Export Now", onProceed: toExcel, data: currentIndex });
+            }}
+          >
+            <GetIcon icon={"excel"} />
+          </Filter>
+          {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>
           {formInput.map((item, index) => {
-            return (
-              item.type === "select" &&
-              (item.filter ?? true) === true && (
-                <FormInput
-                  customClass={"filter"}
-                  placeholder={item.placeHolder}
-                  value={filterView[item.name]}
-                  key={`input` + index}
-                  id={item.name}
-                  {...item}
-                  onChange={filterChange}
-                />
-              )
-            );
+            return item.type === "select" && (item.filter ?? true) === true && <FormInput customClass={"filter"} placeholder={item.placeHolder} value={filterView[item.name]} key={`input` + index} id={item.name} {...item} onChange={filterChange} />;
           })}
         </Filters>
         {(addPrivilege ? addPrivilege : false) && (
@@ -667,39 +628,18 @@ const ListTable = ({
           </AddButton>
         )}
       </ButtonPanel>
-      <ScrollLayout>
-        <Table>
-          <thead>
+      <Table>
+        {/* <thead>
             <Tr>
               {attributes.map((attribute, index) => {
-                return attribute.view === true ? (
-                  <Th key={shortName + attribute.name + index}>
-                    {t(attribute.label)}
-                  </Th>
-                ) : (
-                  ""
-                );
+                return attribute.view === true ? <Th key={shortName + attribute.name + index}>{t(attribute.label)}</Th> : "";
               })}
             </Tr>
-          </thead>
-          <tbody>
-            {users.data?.response?.length > 0 &&
-              users.data.response.map((item, index) => (
-                <TableRowWithActions
-                  key={`${shortName}-${index}`}
-                  attributes={attributes}
-                  data={item}
-                />
-              ))}
-          </tbody>
-        </Table>
-      </ScrollLayout>
-      {!users.data && !users.data?.response && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
-      {users.data?.response?.length === 0 && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
+          </thead> */}
+        {users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}
+      </Table>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (
         count > 10 ? (
           <Count>
@@ -711,24 +651,18 @@ const ListTable = ({
             >
               <PreviousIcon />
             </ArrowButton>
-            {`Showing ${currentIndex + 1} - ${
-              currentIndex + 10 > count ? count : currentIndex + 10
-            } from ${count} out of ${totalCount}`}
+            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count} out of ${totalCount}`}
             <ArrowButton
               theme={themeColors}
               onClick={() => {
-                setCurrentIndex((prev) =>
-                  prev + 10 > count ? currentIndex : currentIndex + 10
-                );
+                setCurrentIndex((prev) => (prev + 10 > count ? currentIndex : currentIndex + 10));
               }}
             >
               <NextIcon />
             </ArrowButton>
           </Count>
         ) : (
-          <Count>{`Showing ${
-            currentIndex + 1
-          } -  ${count} from ${count} out of ${totalCount}`}</Count>
+          <Count>{`Showing ${currentIndex + 1} -  ${count} from ${count} out of ${totalCount}`}</Count>
         )
       ) : (
         <Count>{`No Result Found`}</Count>
@@ -749,37 +683,10 @@ const ListTable = ({
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && (
-        <CrudForm
-          api={api}
-          formType={"put"}
-          updateId={updateId}
-          header={t("update", { label: t(shortName ? shortName : "Form") })}
-          formInput={formInput}
-          formErrors={errroInput}
-          formValues={updateValues}
-          submitHandler={updateHandler}
-          isOpenHandler={isEditingHandler}
-          isOpen={isEditing}
-        ></CrudForm>
-      )}
-      {action.data && (
-        <Manage
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          onClose={closeManage}
-          {...action}
-        ></Manage>
-      )}
+      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && (
-        <SubPage
-          closeModal={closeModal}
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          subAttributes={subAttributes}
-        ></SubPage>
-      )}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
     ""

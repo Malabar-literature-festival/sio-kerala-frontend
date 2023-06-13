@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../../elements/loader";
 import Message from "../../../elements/message";
-import Footer from "./footer";
-import Header from "./header";
-import Menu from "./menu";
-import { Container, MainContainer, SideBar } from "./styels";
 import { clearLogin } from "../../../../store/actions/login";
-import { RowContainer } from "../../../styles/containers/styles";
 
 /**
  * withLayout HOC that wraps a component and adds the layout elements to it.
@@ -68,7 +63,6 @@ const withLayout = (WrappedComponent) => {
     // Get the vehicle state from the redux store.
     const user = useSelector((state) => state.login);
     // Get the menu status from the redux store.
-    const menuStatus = useSelector((state) => state.menuStatus);
     /**
      * Effect to update the showLoader state when the vehicle data changes.
      */
@@ -77,26 +71,42 @@ const withLayout = (WrappedComponent) => {
         setShowLoader(false);
       }
     }, [user]);
-    const themeColors = useSelector((state) => state.themeColors);
     return user.data.token ? (
       <React.Fragment>
-        <MainContainer>
+        {/* <MainContainer>
           <SideBar theme={themeColors} className={menuStatus && "active"}>
             <Menu user={user.data}></Menu>
             <Footer></Footer>
           </SideBar>
           <RowContainer className="content">
             <Header user={user.data}></Header>
-            <Container>
-              <WrappedComponent user={user.data} {...props} setLoaderBox={setLoaderBox} setMessage={setMessageBox}></WrappedComponent>
-              {showMessage && <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={setLoaderBox} showMessage={showMessage}></Message>}
+            <Container> */}
+              <WrappedComponent
+                user={user.data}
+                {...props}
+                setLoaderBox={setLoaderBox}
+                setMessage={setMessageBox}
+              ></WrappedComponent>
+              {showMessage && (
+                <Message
+                  meessage={meessage}
+                  closeMessage={closeMessage}
+                  setLoaderBox={setLoaderBox}
+                  showMessage={showMessage}
+                ></Message>
+              )}
               {showLoader && <Loader></Loader>}
-            </Container>
+            {/* </Container>
           </RowContainer>
-        </MainContainer>
+        </MainContainer> */}
       </React.Fragment>
     ) : (
-      <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={setLoaderBox} showMessage={showMessage}></Message>
+      <Message
+        meessage={meessage}
+        closeMessage={closeMessage}
+        setLoaderBox={setLoaderBox}
+        showMessage={showMessage}
+      ></Message>
     );
   };
 };

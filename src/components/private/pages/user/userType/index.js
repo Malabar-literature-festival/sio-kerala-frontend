@@ -39,6 +39,7 @@ const UserType = (props) => {
       name: "roleDisplayName",
       validation: "",
       default: "",
+      tag: true,
       label: "Display Name",
       required: true,
       view: true,
@@ -53,6 +54,7 @@ const UserType = (props) => {
       name: "label",
       validation: "",
       default: "",
+      tag: true,
       label: "Label",
       required: true,
       view: true,
@@ -65,6 +67,7 @@ const UserType = (props) => {
       name: "sequence",
       validation: "",
       default: "",
+      tag: true,
       label: "Sequence",
       required: true,
       view: true,
@@ -77,6 +80,7 @@ const UserType = (props) => {
       name: "icon",
       validation: "",
       default: "",
+      tag: true,
       label: "Icon",
       required: true,
       view: true,
@@ -89,6 +93,7 @@ const UserType = (props) => {
       name: "path",
       validation: "",
       default: "",
+      tag: true,
       label: "Path",
       required: true,
       view: true,
@@ -101,6 +106,7 @@ const UserType = (props) => {
       name: "element",
       validation: "",
       default: "",
+      tag: true,
       label: "Element Name",
       required: true,
       view: true,
@@ -113,6 +119,7 @@ const UserType = (props) => {
       name: "status",
       validation: "",
       default: "true",
+      tag: true,
       label: "Status",
       required: true,
       view: true,
@@ -125,6 +132,7 @@ const UserType = (props) => {
       name: "isLink",
       validation: "",
       default: "false",
+      tag: true,
       label: "Is Link",
       required: true,
       view: true,
@@ -142,7 +150,12 @@ const UserType = (props) => {
       // Unique identifier for the submenu
       id: "sub-menu",
       // Displayed item title
-      itemTitle: "title",
+      // itemTitle: "title",
+      itemTitle: {
+        name: "typeOfDietName",
+        type: "text",
+        collection: "typeOfDiet",
+      },
       // Title of the submenu
       title: "Order",
       // Additional attributes for timing
@@ -154,7 +167,12 @@ const UserType = (props) => {
         // Parent reference for the submenu
         parentReference: "menu",
         // Property name for the submenu item title
-        itemTitle: "label",
+        // itemTitle: "label",
+        itemTitle: {
+          name: "typeOfDietName",
+          type: "text",
+          collection: "typeOfDiet",
+        },
         // Short name for the submenu
         shortName: "Sub Menu",
         // Privileges for adding submenu items
@@ -179,7 +197,7 @@ const UserType = (props) => {
         // API endpoint for fetching menu data
         api={`user-type`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{ name: "role", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Role`}
         // Privilege flag indicating whether the user can add menu items

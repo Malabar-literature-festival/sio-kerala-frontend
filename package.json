@@ -11,6 +11,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
     "i18next": "^22.4.9",
+    "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.10.0",
@@ -24,11 +25,12 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start ",
-    "build": "react-scripts build && cp vercel.json build/ && cp staticwebapp.config.json build/ && cd build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

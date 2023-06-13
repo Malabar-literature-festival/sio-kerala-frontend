@@ -13,7 +13,7 @@ export const Header = styled.div`
   }
 `;
 export const Nav = styled.nav`
-  padding-top: 2em;
+  padding-top: 0  em;
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.secForeground};
