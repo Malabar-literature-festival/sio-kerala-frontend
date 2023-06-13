@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
-import { AddIcon, FilterIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
+import { AddIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import { deleteData, postData, putData } from "../../../backend/api";
 import CrudForm from "./create";
@@ -57,7 +57,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   const [updateId, setUpdateId] = useState("");
   const [updateValues, setUpdateValues] = useState({});
   const [udpateView, setUpdateView] = useState(() => {});
-  const [filterView, setFilterView] = useState({});
+  const [filterView, setFilterView] = useState(referenceId !== 0 ? { [parentReference]: referenceId } : {});
   useEffect(() => {
     const addValuesTemp = {
       addValues: {},
@@ -66,7 +66,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
       errorValues: {},
       filterValues: {},
     };
-    let tempFilter = false;
+    // let tempFilter = false;
     let date = new Date();
     attributes.forEach((item) => {
       if (item.type === "checkbox") {
@@ -94,7 +94,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
         addValuesTemp.updateValues[item.name] = item.default;
         if (item.type === "select") {
           addValuesTemp.filterValues[item.name] = "";
-          tempFilter = true;
+          // tempFilter = true;
         }
       }
       addValuesTemp.errorValues[item.name] = "";
@@ -109,7 +109,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     setUpdateValues(addValuesTemp.updateValues);
     setFilterView(addValuesTemp.filterValues);
 
-    setFilter(tempFilter);
+    // setFilter(tempFilter);
     setInitialized(true);
   }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
 
@@ -489,7 +489,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     setShowSubList(false);
   };
   const [searchValue, setSearchValue] = useState("");
-  const [filter, setFilter] = useState(false);
+  // const [filter, setFilter] = useState(false);
   const searchTimeoutRef = useRef();
   const handleChange = (event) => {
     clearTimeout(searchTimeoutRef.current);
@@ -595,17 +595,15 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     <RowContainer>
       <ButtonPanel>
         <FilterBox>
-          <Search theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
-          {filter && (
-            <Filter
-              theme={themeColors}
-              onClick={() => {
-                refreshView(currentIndex);
-              }}
-            >
-              <FilterIcon />
-            </Filter>
-          )}
+          <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
+          <Filter
+            theme={themeColors}
+            onClick={() => {
+              refreshView(currentIndex);
+            }}
+          >
+            <GetIcon icon={"reload"} />
+          </Filter>
           <Filter
             theme={themeColors}
             onClick={() => {
