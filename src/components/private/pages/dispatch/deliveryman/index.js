@@ -22,6 +22,7 @@ const UserList = (props) => {
       name: "username",
       validation: "",
       default: "username",
+      tag: true,
       label: "CPR/Mobile",
       required: true,
       view: false,
@@ -35,6 +36,7 @@ const UserList = (props) => {
       showItem: "cprNumber",
       validation: "",
       default: "",
+      tag: true,
       label: "CPR/Mobile",
       required: false,
       view: true,
@@ -60,6 +62,7 @@ const UserList = (props) => {
       name: "userDisplayName",
       validation: "",
       default: "",
+      tag: true,
       label: "Name",
       required: true,
       view: true,
@@ -72,6 +75,7 @@ const UserList = (props) => {
       name: "email",
       validation: "",
       default: "",
+      tag: true,
       label: "E-Mail",
       required: true,
       view: true,
@@ -85,6 +89,7 @@ const UserList = (props) => {
       showItem: "gender",
       validation: "",
       default: "",
+      tag: true,
       label: "Gender",
       required: false,
       view: true,
@@ -101,6 +106,7 @@ const UserList = (props) => {
       showItem: "",
       validation: "",
       default: "",
+      tag: true,
       label: "Gender",
       required: true,
       view: false,
@@ -135,6 +141,7 @@ const UserList = (props) => {
       showItem: "dateOfBirth",
       validation: "",
       default: "",
+      tag: true,
       label: "DOB",
       required: true,
       view: true,
@@ -147,6 +154,7 @@ const UserList = (props) => {
       name: "dateOfBirth",
       validation: "",
       default: "",
+      tag: true,
       label: "DOB",
       required: true,
       view: false,
@@ -162,6 +170,7 @@ const UserList = (props) => {
       validation: "",
       showItem: "address",
       default: "",
+      tag: true,
       label: "Address",
       required: false,
       view: true,
@@ -177,6 +186,7 @@ const UserList = (props) => {
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Address",
       required: false,
       view: false,
@@ -192,6 +202,7 @@ const UserList = (props) => {
       validation: "",
       showItem: "role",
       default: "role",
+      tag: true,
       label: "User Type",
       required: true,
       view: false,
@@ -224,6 +235,7 @@ const UserList = (props) => {
       validation: "",
       showItem: "roleDisplayName",
       default: "",
+      tag: true,
       label: "Role",
       required: true,
       view: false,
@@ -237,6 +249,7 @@ const UserList = (props) => {
       name: "userImage",
       validation: "",
       default: "",
+      tag: true,
       label: "Image",
       required: true,
       view: true,
@@ -1229,7 +1242,7 @@ const UserList = (props) => {
       <ListTable
         // actions={actions}
         api={`user`}
-        itemTitle={`username`}
+        itemTitle={{ name: "username", type: "text", collection: "" }}
         shortName={`Delivery Men`}
         // formMode={`single`}
         formMode={`double`}

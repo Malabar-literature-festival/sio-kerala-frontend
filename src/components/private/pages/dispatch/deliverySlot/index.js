@@ -22,6 +22,7 @@ const DeliverySlot = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
       label: "Slot",
       // Indicates if the input field is required
@@ -39,6 +40,7 @@ const DeliverySlot = (props) => {
       name: "mealtimeCategoriesName.mealtimeCategoriesName",
       validation: "",
       default: "",
+      tag: true,
       label: "reference",
       required: true,
       view: true,
@@ -179,8 +181,9 @@ const DeliverySlot = (props) => {
         // API endpoint for fetching menu data
         api={`delivery-slot`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{ name: "slot", type: "text", collection: "" }}
         shortName={`Delivery Slot`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
