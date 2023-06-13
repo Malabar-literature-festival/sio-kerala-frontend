@@ -16,7 +16,9 @@ const MedicalCondition = (props) => {
       placeholder: "medical-conditions",
       name: "medicalConditionsName",
       validation: "",
-      default: "", label: "Medical Condition",
+      default: "",
+      tag: true,
+      label: "Medical Condition",
       required: true,
       view: true,
       add: true,
@@ -156,7 +158,8 @@ const MedicalCondition = (props) => {
         // API endpoint for fetching menu data
         api={`medical-conditions`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "medicalConditionsName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Medical Condition`}
         // Privilege flag indicating whether the user can add menu items

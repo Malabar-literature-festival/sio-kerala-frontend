@@ -17,6 +17,7 @@ const MealTag = (props) => {
       name: "mealTagName",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal Tag Name",
       required: true,
       view: true,
@@ -157,7 +158,8 @@ const MealTag = (props) => {
         // API endpoint for fetching menu data
         api={`meal-tag`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "mealTagName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal Tag Name `}
         // Privilege flag indicating whether the user can add menu items

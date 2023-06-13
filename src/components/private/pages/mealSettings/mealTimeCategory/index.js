@@ -17,6 +17,7 @@ const MealTimeCategory = (props) => {
       name: "mealtimeCategoriesName",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal time Category",
       required: true,
       view: true,
@@ -157,7 +158,8 @@ const MealTimeCategory = (props) => {
         // API endpoint for fetching menu data
         api={`mealtime-category`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "mealtimeCategoriesName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal Time Category`}
         // Privilege flag indicating whether the user can add menu items

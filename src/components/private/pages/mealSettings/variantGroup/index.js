@@ -17,6 +17,7 @@ const VariantGroup = (props) => {
       name: "variantGroupName",
       validation: "",
       default: "",
+      tag: true,
       label: "Variant Group Name",
       required: true,
       view: true,
@@ -32,6 +33,7 @@ const VariantGroup = (props) => {
       name: "label",
       validation: "",
       default: "",
+      tag: true,
       label: "Label",
       required: true,
       view: true,
@@ -44,6 +46,7 @@ const VariantGroup = (props) => {
       name: "sequence",
       validation: "",
       default: "",
+      tag: true,
       label: "Sequence",
       required: true,
       view: true,
@@ -56,6 +59,7 @@ const VariantGroup = (props) => {
       name: "icon",
       validation: "",
       default: "",
+      tag: true,
       label: "Icon",
       required: true,
       view: true,
@@ -68,6 +72,7 @@ const VariantGroup = (props) => {
       name: "path",
       validation: "",
       default: "",
+      tag: true,
       label: "Path",
       required: true,
       view: true,
@@ -80,6 +85,7 @@ const VariantGroup = (props) => {
       name: "element",
       validation: "",
       default: "",
+      tag: true,
       label: "Element Name",
       required: true,
       view: true,
@@ -138,7 +144,8 @@ const VariantGroup = (props) => {
       <ListTable
         actions={actions}
         api={`variant-group`}
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "variantGroupName", type: "text", collection: "" }}
         shortName={`Variant Group`}
         {...props}
         attributes={attributes}

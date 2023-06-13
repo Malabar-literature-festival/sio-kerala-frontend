@@ -17,6 +17,7 @@ const ProteinCategory = (props) => {
       name: "proteinCategoriesName",
       validation: "",
       default: "",
+      tag: true,
       label: "Protein Category",
       required: true,
       view: true,
@@ -29,6 +30,7 @@ const ProteinCategory = (props) => {
       name: "protienImage",
       validation: "",
       default: "",
+      tag: true,
       label: "Image",
       required: true,
       view: true,
@@ -132,7 +134,8 @@ const ProteinCategory = (props) => {
         // API endpoint for fetching menu data
         api={`protein-categories`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "proteinCategoriesName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Protein Category`}
         // Privilege flag indicating whether the user can add menu items

@@ -18,6 +18,7 @@ const AddVariant = (props) => {
       showItem: "mealName",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal",
       required: true,
       view: true,
@@ -31,6 +32,7 @@ const AddVariant = (props) => {
       showItem: "variantGroupName",
       validation: "",
       default: "",
+      tag: true,
       label: "Variant Group",
       required: false,
       view: true,
@@ -44,6 +46,7 @@ const AddVariant = (props) => {
       showItem: "variantLevelName",
       validation: "",
       default: "",
+      tag: true,
       label: "Variant Level",
       required: false,
       view: true,
@@ -59,6 +62,7 @@ const AddVariant = (props) => {
       name: "variantGroupName",
       validation: "",
       default: "",
+      tag: true,
       label: "variant Group",
       required: true,
       view: false,
@@ -74,6 +78,7 @@ const AddVariant = (props) => {
       name: "variantLevel",
       validation: "",
       default: "",
+      tag: true,
       label: "variant Level",
       required: true,
       view: false,
@@ -87,6 +92,7 @@ const AddVariant = (props) => {
       name: "mealPrice",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal Price",
       required: true,
       view: true,
@@ -99,6 +105,7 @@ const AddVariant = (props) => {
       name: "mealOfferPrice",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal OfferPrice",
       required: true,
       view: true,
@@ -111,6 +118,7 @@ const AddVariant = (props) => {
       name: "numberOfPersons",
       validation: "",
       default: "",
+      tag: true,
       label: "Number of Persons",
       required: true,
       view: true,
@@ -232,9 +240,11 @@ const AddVariant = (props) => {
         // API endpoint for fetching meal data
         api={`meal-variant`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "meal", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Variant`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

@@ -16,7 +16,9 @@ const Supplement = (props) => {
       placeholder: "Supplement Name",
       name: "usingAnySupplementName",
       validation: "",
-      default: "",  label: "Supplement Name ",
+      default: "",
+      label: "Supplement Name ",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -156,7 +158,8 @@ const Supplement = (props) => {
         // API endpoint for fetching menu data
         api={`using-any-supplement`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "usingAnySupplementName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`supplement`}
         // Privilege flag indicating whether the user can add menu items

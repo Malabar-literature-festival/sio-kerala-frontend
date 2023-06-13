@@ -18,6 +18,7 @@ const OrderList = (props) => {
       placeholder: "User",
       name: "user",
       validation: "",
+      tag: true,
       showItem: "username",
       default: "",
       label: "User",
@@ -30,8 +31,10 @@ const OrderList = (props) => {
     {
       type: "date",
       placeholder: "Order Date",
-      name: "orderDate",validation: "",
+      name: "orderDate",
+      validation: "",
       default: "",
+      tag: true,
       label: "Order Date",
       required: true,
       view: true,
@@ -47,6 +50,7 @@ const OrderList = (props) => {
       validation: "",
       showItem: "day",
       default: "",
+      tag: true,
       label: "Day of week",
       required: true,
       view: true,
@@ -95,6 +99,7 @@ const OrderList = (props) => {
       validation: "",
       showItem: "mealtimeCategoriesName",
       default: "",
+      tag: true,
       label: "Meal-time Category",
       required: true,
       view: true,
@@ -111,6 +116,7 @@ const OrderList = (props) => {
       validation: "",
       showItem: "mealName",
       default: "",
+      tag: true,
       label: "Meal",
       required: true,
       view: true,
@@ -355,7 +361,8 @@ const OrderList = (props) => {
       <ListTable
         actions={actions}
         api={`user/weekly-meal-plan-entry`}
-        itemTitle={`Weekly Meal Plan Entry`}
+        // itemTitle={`Weekly Meal Plan Entry`}
+        itemTitle={{ name: "user", type: "text", collection: "" }}
         shortName={`Weekly Meal Plan Entry`}
         // formMode={`single`}
         formMode={`double`}
