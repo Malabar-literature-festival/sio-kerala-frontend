@@ -14,7 +14,7 @@ const Ingredient = (props) => {
     {
       type: "text",
       placeholder: "Ingredient",
-      name: "ingredientName",
+      name: "ingredientsName",
       validation: "",
       showItem: "",
       default: "",
@@ -272,7 +272,7 @@ const Ingredient = (props) => {
       apiType: "API",
       selectApi: "",
       placeholder: "varientLevel",
-      name: "ingredientName",
+      name: "ingredientsName",
       validation: "",
       showItem: "",
       default: "",
@@ -308,10 +308,10 @@ const Ingredient = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`recipe-ingredients`}
+        api={`ingredient`}
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "ingredientName", type: "text", collection: "" }}
+        itemTitle={{ name: "ingredientsName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Ingredient Management`}
         // Privilege flag indicating whether the user can add menu items

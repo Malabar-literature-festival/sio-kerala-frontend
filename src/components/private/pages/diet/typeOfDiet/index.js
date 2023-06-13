@@ -167,7 +167,8 @@ const TypeOfDiet = (props) => {
         // API endpoint for fetching menu data
         api={`type-of-diet`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "typeOfDietName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Type Of Diet`}
         // Privilege flag indicating whether the user can add menu items
