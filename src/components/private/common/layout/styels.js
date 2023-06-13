@@ -35,17 +35,17 @@ export const SideBar = styled.div`
 export const Container = styled.div`
   display: flex;
   flex: 1 1 100%;
-  padding: 1em;
   overflow: auto;
   box-shadow: inset rgb(0 0 0 / 6%) 0px 0px 8px 7px;
   &.noshadow {
     box-shadow: none;
-        overflow: initial;
+    overflow: initial;
   }
-
+  &.nopadding {
+    padding: 0;
+  }
   background: #f3f8fb;
   @media screen and (max-width: 768px) {
-    padding: 10px;
     padding-bottom: 20px;
     display: block;
   }

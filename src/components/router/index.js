@@ -26,7 +26,7 @@ const PageRouter = () => {
         </SideBar>
         <RowContainer className="content">
           <Header user={user.data}></Header>
-          <Container>
+          <Container className="nopadding">
             <Routes>
               <Route path="/" element={<Switch page="login" />} />
               {user?.data?.menu?.map((menu) => {

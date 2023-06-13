@@ -34,12 +34,18 @@ export const Th = styled.th`
 export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
   display: flex;
+  padding: 0em 2em;
+  @media screen and (max-width: 768px) {
+     padding: 1em 1em 0.5em;
+  }
   flex-direction: column;
   /* padding: 5px 26px; */
   padding-bottom: 12px;
   &:hover {
     background-color: #ddedeb;
   }
+  
+ 
 `;
 export const Td = styled.div`
   text-align: left;
@@ -146,10 +152,11 @@ export const Button = styled.button`
   }
 `;
 export const Count = styled.div`
-  padding: 0.5em;
-  text-align: right;
-  padding: 0.5em;
-  text-align: right;
+  padding: 1em 2em;
+  @media screen and (max-width: 768px) {
+     padding: 1em 1em 0.5em;
+  }
+  text-align: right;  
   height: 25px;
   justify-content: flex-end;
   display: flex;
@@ -173,6 +180,7 @@ export const ButtonPanel = styled.div`
   display: flex;
   align-items: center;
   align-items: center;
+  padding: 1em 2em 0.5em;
   justify-content: space-between;
   margin-bottom: 0.5em;
   svg {
@@ -182,6 +190,7 @@ export const ButtonPanel = styled.div`
     flex-direction: column;
     justify-content: left;
     align-items: flex-start;
+    padding: 1em 1em 0.5em;
   }
 `;
 export const AddButton = styled.button`
