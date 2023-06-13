@@ -17,6 +17,7 @@ const VariantLevel = (props) => {
       name: "variantLevelName",
       validation: "",
       default: "",
+      tag: true,
       label: "Variant Level",
       required: true,
       view: true,
@@ -32,6 +33,7 @@ const VariantLevel = (props) => {
       validation: "",
       showItem: "variantGroupName",
       default: "",
+      tag: true,
       label: "Variant Group",
       required: true,
       view: true,
@@ -50,7 +52,8 @@ const VariantLevel = (props) => {
         // API endpoint for fetching menu data
         api={`variant-level`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "variantLevelName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Variant Level`}
         // Privilege flag indicating whether the user can add menu items
