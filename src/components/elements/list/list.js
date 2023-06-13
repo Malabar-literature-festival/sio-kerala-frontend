@@ -316,33 +316,23 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
     const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
-
+    const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
       <Tr key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody>
-          {/* {attributes.map((attribute, index) => {
-            if (attribute.view && (attribute.title ?? false)) {
-              const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
-              console.log(selectedMenuItem.icon);
-              return (
-                <Td key={index}>
-                  <Head>
-                    {<GetIcon icon={selectedMenuItem.icon} />}
-                    {` ${getValue(attribute, itemValue)}`}
-                  </Head>
-                </Td>
-              );
-            } else {
-              return "";
-            }
-          })} */}
           <Td key={`row-head-${slNo}`}>
             <Head>
-              {<GetIcon icon={selectedMenuItem.icon} />}
-              {` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}
+              {signleRecord ? (
+                <span>{shortName}</span>
+              ) : (
+                <>
+                  <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
+                </>
+              )}
             </Head>
           </Td>
+
           <Td key={`actions-${shortName}-${data._id}`} className="actions">
             {actions.map((item) => {
               return (
@@ -416,7 +406,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                               item.callback(item, data);
                             } else if (item.type === "call") {
                               window.location.href = `tel:${data.mobileNumber}`;
-                            } else if (item.type === "subList") {
+                            } else if (item.type === "subList" || item.type === "subItem") {
                               setSubAttributes({ item, data });
                               setShowSubList(true);
                             } else {
@@ -431,7 +421,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
                       )
                     );
                   })}
-                  {delPrivilege && (
+                  {delPrivilege && !signleRecord && (
                     <Button
                       key={`delete-${data._id}`}
                       onClick={() => {
@@ -626,16 +616,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           </AddButton>
         )}
       </ButtonPanel>
-      <Table>
-        {/* <thead>
-            <Tr>
-              {attributes.map((attribute, index) => {
-                return attribute.view === true ? <Th key={shortName + attribute.name + index}>{t(attribute.label)}</Th> : "";
-              })}
-            </Tr>
-          </thead> */}
-        {users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}
-      </Table>
+      <Table>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (
@@ -687,7 +668,48 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
       {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
-    ""
+    <RowContainer>
+      <ButtonPanel>
+        <FilterBox>
+          <Filter
+            theme={themeColors}
+            onClick={() => {
+              refreshView(currentIndex);
+            }}
+          >
+            <GetIcon icon={"reload"} />
+          </Filter>
+        </FilterBox>
+        {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
+          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+            <AddIcon></AddIcon>
+            {t("addNew", { label: t(shortName) })}
+          </AddButton>
+        )}
+      </ButtonPanel>
+      <Table>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
+
+      {isCreating && (
+        <CrudForm
+          api={api}
+          formType={"post"}
+          header={t("addNewTitle", {
+            label: t(shortName ? shortName : "Form"),
+          })}
+          formInput={formInput}
+          formValues={addValues}
+          formErrors={errroInput}
+          submitHandler={submitHandler}
+          isOpenHandler={isCreatingHandler}
+          isOpen={isCreating}
+        ></CrudForm>
+      )}
+      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
+      {showLoader && <Loader></Loader>}
+    </RowContainer>
   );
 };
 export default ListTable;

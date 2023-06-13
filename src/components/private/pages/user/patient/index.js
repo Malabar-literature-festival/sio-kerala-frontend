@@ -263,7 +263,7 @@ const Patient = (props) => {
       type: "text",
       placeholder: "Email ID",
       name: "emailId",
-      validation: "",
+      validation: "email",
       default: "",
       tag: true,
       label: "Email ID",
@@ -325,7 +325,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "boolean",
+      type: "checkbox",
       placeholder: "Marital Status",
       name: "maritalStatus",
       validation: "",
@@ -1134,7 +1134,11 @@ const Patient = (props) => {
       params: {
         api: `user/subscriber`,
         parentReference: "user",
-        itemTitle: "username",
+        itemTitle: {
+          name: "mobileNumber",
+          type: "text",
+          collection: "",
+        },
         shortName: "Patient Details",
         addPrivilege: true,
         delPrivilege: true,

@@ -34,7 +34,7 @@ export const Th = styled.th`
 export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
   display: flex;
-  padding: 0em 2em;
+  padding: .5em 2em 12px;
   @media screen and (max-width: 768px) {
      padding: 1em 1em 0.5em;
   }
@@ -44,8 +44,6 @@ export const Tr = styled.div`
   &:hover {
     background-color: #ddedeb;
   }
-  
- 
 `;
 export const Td = styled.div`
   text-align: left;
