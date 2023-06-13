@@ -17,6 +17,7 @@ const PackageManagement = (props) => {
       name: "packageName",
       validation: "",
       default: "",
+      tag: true,
       label: "Package Name",
       required: true,
       view: true,
@@ -29,6 +30,7 @@ const PackageManagement = (props) => {
       name: "description",
       validation: "",
       default: "",
+      tag: true,
       label: "Description",
       required: true,
       view: true,
@@ -41,6 +43,7 @@ const PackageManagement = (props) => {
       name: "calories",
       validation: "",
       default: "",
+      tag: true,
       label: "Calories",
       required: true,
       view: true,
@@ -53,6 +56,7 @@ const PackageManagement = (props) => {
       name: "days",
       validation: "",
       default: "",
+      tag: true,
       label: "Days",
       required: true,
       view: true,
@@ -65,6 +69,7 @@ const PackageManagement = (props) => {
       name: "mealTimeCategory",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal Time Category",
       required: true,
       view: true,
@@ -77,6 +82,7 @@ const PackageManagement = (props) => {
       name: "rate",
       validation: "",
       default: "",
+      tag: true,
       label: "Rate",
       required: true,
       view: true,
@@ -89,6 +95,7 @@ const PackageManagement = (props) => {
       name: "currency",
       validation: "",
       default: "",
+      tag: true,
       label: "Currency",
       required: true,
       view: true,
@@ -101,6 +108,7 @@ const PackageManagement = (props) => {
       name: "image",
       validation: "",
       default: "",
+      tag: true,
       label: "Image",
       required: true,
       view: true,
@@ -113,6 +121,7 @@ const PackageManagement = (props) => {
       name: "isActive",
       validation: "",
       default: "",
+      tag: true,
       label: "Is Active",
       required: true,
       view: true,
@@ -127,6 +136,7 @@ const PackageManagement = (props) => {
       name: "label",
       validation: "",
       default: "",
+      tag: true,
       label: "Label",
       required: true,
       view: true,
@@ -139,6 +149,7 @@ const PackageManagement = (props) => {
       name: "sequence",
       validation: "",
       default: "",
+      tag: true,
       label: "Sequence",
       required: true,
       view: true,
@@ -151,6 +162,7 @@ const PackageManagement = (props) => {
       name: "icon",
       validation: "",
       default: "",
+      tag: true,
       label: "Icon",
       required: true,
       view: true,
@@ -163,6 +175,7 @@ const PackageManagement = (props) => {
       name: "path",
       validation: "",
       default: "",
+      tag: true,
       label: "Path",
       required: true,
       view: true,
@@ -175,6 +188,7 @@ const PackageManagement = (props) => {
       name: "element",
       validation: "",
       default: "",
+      tag: true,
       label: "Element Name",
       required: true,
       view: true,
@@ -187,6 +201,7 @@ const PackageManagement = (props) => {
       name: "status",
       validation: "",
       default: "true",
+      tag: true,
       label: "Status",
       required: true,
       view: true,
@@ -199,6 +214,7 @@ const PackageManagement = (props) => {
       name: "isLink",
       validation: "",
       default: "false",
+      tag: true,
       label: "Is Link",
       required: true,
       view: true,
@@ -209,35 +225,20 @@ const PackageManagement = (props) => {
 
   const [actions] = useState([
     {
-      // Element type for rendering
       element: "button",
-      // Type of action, in this case a sublist
       type: "subList",
-      // Unique identifier for the submenu
       id: "sub-menu",
-      // Displayed item title
       itemTitle: "title",
-      // Title of the submenu
       title: "Order",
-      // Additional attributes for timing
       attributes: timingAttributes,
-      // Parameters for API and submenu configuration
       params: {
-        // API endpoint for submenu data
         api: `sub-menu`,
-        // Parent reference for the submenu
         parentReference: "menu",
-        // Property name for the submenu item title
         itemTitle: "label",
-        // Short name for the submenu
         shortName: "Sub Menu",
-        // Privileges for adding submenu items
         addPrivilege: true,
-        // Privileges for deleting submenu items
         delPrivilege: true,
-        // Privileges for updating submenu items
         updatePrivilege: true,
-        // Custom CSS class for styling
         customClass: "medium",
       },
     },
@@ -248,17 +249,12 @@ const PackageManagement = (props) => {
     <Container className="noshadow">
       {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
         actions={actions}
-        // API endpoint for fetching menu data
         api={`package`}
-        // Property name for the title of each menu item
-        itemTitle={`label`}
-        // Short name or label for the menu
+        // itemTitle={`label`}
+        itemTitle={{ name: "packageName", type: "text", collection: "" }}
         shortName={`Package`}
-        // Privilege flag indicating whether the user can add menu items
         {...props}
-        // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
     </Container>
