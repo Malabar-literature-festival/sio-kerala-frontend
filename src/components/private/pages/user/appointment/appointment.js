@@ -16,7 +16,8 @@ const Appointment = (props) => {
       placeholder: "Booking ID",
       name: "bookingId",
       validation: "",
-       default: "",
+      default: "",
+      tag: true,
       label: "Booking ID",
       required: true,
       view: true,
@@ -32,6 +33,7 @@ const Appointment = (props) => {
       validation: "",
       showItem: "userDisplayName",
       default: "",
+      tag: true,
       label: "User",
       required: true,
       view: true,
@@ -45,6 +47,7 @@ const Appointment = (props) => {
       name: "bookingDate",
       validation: "",
       default: "",
+      tag: true,
       label: "Booking Date",
       required: true,
       view: true,
@@ -60,6 +63,7 @@ const Appointment = (props) => {
       showItem: "bookingSlotsName",
       validation: "",
       default: "",
+      tag: true,
       label: "Time Slot",
       required: true,
       view: true,
@@ -76,6 +80,7 @@ const Appointment = (props) => {
       validation: "",
       showItem: "userDisplayName",
       default: "",
+      tag: true,
       label: "Dietician",
       required: true,
       view: true,
@@ -213,7 +218,12 @@ const Appointment = (props) => {
       <ListTable
         // actions={actions}
         api={`appointment`}
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{
+          name: "userDisplayName",
+          type: "text",
+          collection: "user",
+        }}
         shortName={`ppointment`}
         // formMode={`single`}
         formMode={`double`}

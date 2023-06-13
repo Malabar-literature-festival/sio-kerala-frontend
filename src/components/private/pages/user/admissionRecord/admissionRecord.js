@@ -18,6 +18,7 @@ const AdmissionRecord = (props) => {
       validation: "",
       showItem: "role",
       default: "",
+      tag: true,
       label: "Type of Diet",
       required: true,
       view: false,
@@ -32,6 +33,7 @@ const AdmissionRecord = (props) => {
       showItem: "typeOfDietName",
       validation: "",
       default: "",
+      tag: true,
       label: "Type of Diet",
       required: false,
       view: true,
@@ -43,9 +45,10 @@ const AdmissionRecord = (props) => {
       placeholder: "Start Date & Time",
       name: "startDate",
       showItem: "",
-      title:true,
+      title: true,
       validation: "",
       default: "",
+      tag: true,
       label: "Start Date",
       required: true,
       view: true,
@@ -59,6 +62,7 @@ const AdmissionRecord = (props) => {
       showItem: "",
       validation: "",
       default: "",
+      tag: true,
       label: "End Date",
       required: true,
       view: true,
@@ -72,6 +76,7 @@ const AdmissionRecord = (props) => {
       showItem: "",
       validation: "",
       default: "",
+      tag: true,
       label: "Calories",
       required: true,
       view: true,
@@ -85,6 +90,7 @@ const AdmissionRecord = (props) => {
       showItem: "",
       validation: "",
       default: "",
+      tag: true,
       label: "Visit Shedule",
       required: true,
       view: true,
@@ -98,6 +104,7 @@ const AdmissionRecord = (props) => {
       showItem: "",
       validation: "",
       default: "remark",
+      tag: true,
       label: "Remarks",
       required: true,
       view: true,
@@ -110,6 +117,7 @@ const AdmissionRecord = (props) => {
       name: "dieticianVisit",
       validation: "",
       default: "false",
+      tag: true,
       label: "Dietician Visit",
       required: true,
       view: true,
@@ -122,6 +130,7 @@ const AdmissionRecord = (props) => {
       name: "admissionType",
       validation: "",
       default: "",
+      tag: true,
       label: "Admission Type",
       required: true,
       view: true,
@@ -134,6 +143,7 @@ const AdmissionRecord = (props) => {
       name: "diagnosis",
       validation: "",
       default: "",
+      tag: true,
       label: "Diagnosis",
       required: true,
       view: true,
@@ -146,6 +156,7 @@ const AdmissionRecord = (props) => {
       name: "admissionDate",
       validation: "",
       default: "",
+      tag: true,
       label: "Admission Date",
       required: true,
       view: true,
@@ -158,7 +169,7 @@ const AdmissionRecord = (props) => {
     //   name: "dischargeDate",
     //   validation: "",
     //   default: "",
-    //   label: "Discharge Date",
+    // label: "Discharge Date",
     //   required: true,
     //   view: true,
     //   add: true,
@@ -170,6 +181,7 @@ const AdmissionRecord = (props) => {
       name: "roomNumber",
       validation: "",
       default: "",
+      tag: true,
       label: "Room Number",
       required: true,
       view: true,
@@ -194,7 +206,8 @@ const AdmissionRecord = (props) => {
     <Container className="noshadow">
       <ListTable
         api={`patient-diet`}
-        itemTitle={`username`}
+        // itemTitle={`username`}
+        itemTitle={{ name: "username", type: "text", collection: "user" }}
         shortName={`User`}
         // formMode={`single`}
         formMode={`double`}
