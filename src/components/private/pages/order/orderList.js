@@ -134,6 +134,7 @@ const OrderList = (props) => {
       showItem: "",
       validation: "",
       default: "",
+      tag: true,
       label: "Calories",
       required: false,
       view: true,
@@ -147,6 +148,7 @@ const OrderList = (props) => {
       showItem: "variantLevelName",
       validation: "",
       default: "",
+      tag: true,
       label: "Variant Level",
       required: false,
       view: true,
@@ -162,6 +164,7 @@ const OrderList = (props) => {
       name: "variantGroupName",
       validation: "",
       default: "",
+      tag: true,
       label: "variant Group",
       required: true,
       view: false,
@@ -177,6 +180,7 @@ const OrderList = (props) => {
       name: "variantLevel",
       validation: "",
       default: "",
+      tag: true,
       label: "variant Level",
       required: true,
       view: false,
@@ -190,6 +194,7 @@ const OrderList = (props) => {
       name: "mealPrice",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal Price",
       required: true,
       view: true,
@@ -202,6 +207,7 @@ const OrderList = (props) => {
       name: "mealOfferPrice",
       validation: "",
       default: "",
+      tag: true,
       label: "Meal OfferPrice",
       required: true,
       view: true,
@@ -214,6 +220,7 @@ const OrderList = (props) => {
       name: "numberOfPersons",
       validation: "",
       default: "",
+      tag: true,
       label: "Number of Persons",
       required: true,
       view: true,
@@ -245,6 +252,7 @@ const OrderList = (props) => {
       showItem: "username",
       validation: "",
       default: "",
+      tag: true,
       label: "Delivery Men",
       required: true,
       view: true,
@@ -261,6 +269,7 @@ const OrderList = (props) => {
       showItem: "deliveryInstructionName",
       validation: "",
       default: "",
+      tag: true,
       label: "Delivery Instruction",
       required: true,
       view: true,
@@ -277,6 +286,7 @@ const OrderList = (props) => {
       showItem: "slot",
       validation: "",
       default: "",
+      tag: true,
       label: "Delivery Slot",
       required: true,
       view: true,
@@ -292,6 +302,7 @@ const OrderList = (props) => {
       name: "variantLevel",
       validation: "",
       default: "",
+      tag: true,
       label: "variant Level",
       required: true,
       view: false,
@@ -308,6 +319,7 @@ const OrderList = (props) => {
       showItem: "orderStatus",
       validation: "",
       default: "",
+      tag: true,
       label: "Order Status",
       required: true,
       view: true,
@@ -360,9 +372,9 @@ const OrderList = (props) => {
     <Container className="noshadow">
       <ListTable
         actions={actions}
-        api={`user/weekly-meal-plan-entry`}
+        api={`weekly-meal-plan-entry`}
         // itemTitle={`Weekly Meal Plan Entry`}
-        itemTitle={{ name: "user", type: "text", collection: "" }}
+        itemTitle={{ name: "username", type: "text", collection: "user" }}
         shortName={`Weekly Meal Plan Entry`}
         // formMode={`single`}
         formMode={`double`}
