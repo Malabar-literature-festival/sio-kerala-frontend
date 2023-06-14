@@ -22,8 +22,9 @@ const DeliveryStatus = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
-       label: "Delivery Statuse Name",
+      label: "Delivery Statuse Name",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -167,8 +168,13 @@ const DeliveryStatus = (props) => {
         // API endpoint for fetching menu data
         api={`delivery-status`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{
+          name: "deliveryStatuseName",
+          type: "text",
+          collection: "",
+        }}
         shortName={`Delivery Status`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

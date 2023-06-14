@@ -17,6 +17,7 @@ const VehicleCategory = (props) => {
       name: "vehicleType",
       validation: "",
       default: "",
+      tag: true,
       label: "vehicle Type",
       required: true,
       view: true,
@@ -29,6 +30,7 @@ const VehicleCategory = (props) => {
       name: "minCoverageArea",
       validation: "",
       default: "",
+      tag: true,
       label: "Minimum Coverage Area",
       required: true,
       view: true,
@@ -41,6 +43,7 @@ const VehicleCategory = (props) => {
       name: "maxCoverageArea",
       validation: "",
       default: "",
+      tag: true,
       label: "Max Coverage Area",
       required: true,
       view: true,
@@ -53,6 +56,7 @@ const VehicleCategory = (props) => {
       name: "extraCharge",
       validation: "",
       default: "",
+      tag: true,
       label: "ExtraCharge",
       required: true,
       view: true,
@@ -193,8 +197,9 @@ const VehicleCategory = (props) => {
         // API endpoint for fetching menu data
         api={`vehicle-category`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{ name: "vehicleType", type: "text", collection: "" }}
         shortName={`vehicle-category`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

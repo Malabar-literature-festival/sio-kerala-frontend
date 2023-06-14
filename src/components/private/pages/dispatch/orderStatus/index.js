@@ -22,6 +22,7 @@ const OrderStatus = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
       label: "Order Status",
       // Indicates if the input field is required
@@ -167,8 +168,9 @@ const OrderStatus = (props) => {
         // API endpoint for fetching menu data
         api={`order-statuses`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{ name: "orderStatus", type: "text", collection: "" }}
         shortName={`Order Status`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
