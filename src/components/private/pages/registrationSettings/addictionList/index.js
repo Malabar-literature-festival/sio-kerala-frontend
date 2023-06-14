@@ -17,8 +17,9 @@ const AddictionList = (props) => {
       name: "addictionListName",
       validation: "",
       default: "",
+      tag: true,
       label: "Addiction ListName",
-       required: true,
+      required: true,
       view: true,
       add: true,
       update: true,
@@ -157,7 +158,11 @@ const AddictionList = (props) => {
         // API endpoint for fetching menu data
         api={`addiction-lists`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{
+          name: "addictionListName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Addiction List`}
         // Privilege flag indicating whether the user can add menu items

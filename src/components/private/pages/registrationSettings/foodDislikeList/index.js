@@ -16,7 +16,8 @@ const FoodDislikeList = (props) => {
       placeholder: "Food Dislike List",
       name: "foodDislikeListName",
       validation: "",
-       default: "",
+      default: "",
+      tag: true,
       label: "Food Dislike List",
       required: true,
       view: true,
@@ -157,7 +158,11 @@ const FoodDislikeList = (props) => {
         // API endpoint for fetching menu data
         api={`fooddislike-lists`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{
+          name: "foodDislikeListName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Food Dislike List`}
         // Privilege flag indicating whether the user can add menu items

@@ -22,6 +22,7 @@ const ActivenessStatus = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
       label: "Activeness Status",
       // Indicates if the input field is required
@@ -167,8 +168,13 @@ const ActivenessStatus = (props) => {
         // API endpoint for fetching menu data
         api={`activeness-status`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{
+          name: "activenessStatusName",
+          type: "text",
+          collection: "",
+        }}
         shortName={`Activeness Status`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
