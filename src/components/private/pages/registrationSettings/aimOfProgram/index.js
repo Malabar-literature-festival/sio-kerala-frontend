@@ -17,6 +17,7 @@ const AimOfProgram = (props) => {
       name: "aimofProgramName",
       validation: "",
       default: "",
+      tag: true,
       label: "Aim Of Program",
       required: true,
       view: true,
@@ -157,7 +158,7 @@ const AimOfProgram = (props) => {
         // API endpoint for fetching menu data
         api={`aimof-programs`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{ name: "aimofProgramName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Aim Of Program`}
         // Privilege flag indicating whether the user can add menu items
