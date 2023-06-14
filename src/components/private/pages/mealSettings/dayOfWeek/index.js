@@ -17,6 +17,7 @@ const DayOfWeek = (props) => {
       name: "day",
       validation: "",
       default: "",
+      tag: true,
       label: "DayOfWeek",
       required: true,
       view: true,
@@ -157,7 +158,8 @@ const DayOfWeek = (props) => {
         // API endpoint for fetching menu data
         api={`dayof-week`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "day", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Day Of Week`}
         // Privilege flag indicating whether the user can add menu items

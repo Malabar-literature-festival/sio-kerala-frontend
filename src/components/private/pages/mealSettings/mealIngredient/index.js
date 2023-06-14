@@ -17,6 +17,7 @@ const MealIngredient = (props) => {
       name: "ingredientQuantity",
       validation: "",
       default: "",
+      tag: true,
       label: "Quantity",
       required: true,
       view: true,
@@ -32,6 +33,7 @@ const MealIngredient = (props) => {
       validation: "",
       showItem: "mealName",
       default: "",
+      tag: true,
       label: "Meal",
       required: true,
       view: true,
@@ -48,6 +50,7 @@ const MealIngredient = (props) => {
       validation: "",
       showItem: "ingredientName",
       default: "",
+      tag: true,
       label: "Recipe Ingredient",
       required: true,
       view: true,
@@ -65,7 +68,8 @@ const MealIngredient = (props) => {
         // API endpoint for fetching menu data
         api={`meal-ingredients`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "ingredientQuantity", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal Ingredient`}
         // Privilege flag indicating whether the user can add menu items

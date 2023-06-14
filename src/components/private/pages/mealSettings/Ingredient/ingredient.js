@@ -14,24 +14,12 @@ const Ingredient = (props) => {
     {
       type: "text",
       placeholder: "Ingredient",
-      name: "ingredientName",
+      name: "ingredientsName",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Ingredient",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "boolean",
-      placeholder: "Delete",
-      name: "delete",
-      validation: "",
-      showItem: "",
-      default: "",
-      label: "Delete",
       required: true,
       view: true,
       add: true,
@@ -40,10 +28,11 @@ const Ingredient = (props) => {
     {
       type: "text",
       placeholder: "Calories",
-      name: " calories",
+      name: "calories",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Calories",
       required: true,
       view: true,
@@ -52,12 +41,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Protein",
       name: "protein",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Protein",
       required: true,
       view: true,
@@ -66,12 +55,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "SatFat",
       name: "satFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "SatFat",
       required: true,
       view: true,
@@ -80,12 +69,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "UnSatFat",
       name: "unSatFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "UnSatFat",
       required: true,
       view: true,
@@ -94,12 +83,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "TotalFat",
       name: "totalFat",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "TotalFat",
       required: true,
       view: true,
@@ -108,12 +97,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Cholesterol",
-      name: " cholesterol",
+      name: "cholesterol",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Cholesterol",
       required: true,
       view: true,
@@ -122,12 +111,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Fiber",
       name: "fiber",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Fiber",
       required: true,
       view: true,
@@ -136,12 +125,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Carbohydrate",
       name: "carbohydrate",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Carbohydrate",
       required: true,
       view: true,
@@ -150,12 +139,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Sugar",
       name: "sugars",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Sugar",
       required: true,
       view: true,
@@ -164,12 +153,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Iron",
       name: "iron",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Iron",
       required: true,
       view: true,
@@ -178,12 +167,12 @@ const Ingredient = (props) => {
     },
     {
       type: "text",
-
       placeholder: "Calcium",
       name: "calcium",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Calcium",
       required: true,
       view: true,
@@ -191,13 +180,61 @@ const Ingredient = (props) => {
       update: true,
     },
     {
-      type: "checkbox",
-
-      placeholder: "Vitamin A	",
-      name: "vitaminA",
+      type: "select",
+      apiType: "API",
+      selectApi: "variant-group/select",
+      placeholder: "Varient Group",
+      name: "varientGroup",
+      validation: "",
+      showItem: "variantGroupName",
+      default: "",
+      tag: true,
+      label: "Varient Group",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "variant-level/select",
+      placeholder: "varientLevel",
+      name: "varientLevel",
+      validation: "",
+      showItem: "variantLevelName",
+      default: "",
+      tag: true,
+      label: "varientLevel",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "text",
+      placeholder: "Quantity",
+      name: "quantity",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
+      label: "Quantity",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Vitamin A",
+      name: "VitaminA",
+      validation: "",
+      showItem: "",
+      default: "",
+      tag: true,
       label: "Vitamin A",
       required: true,
       view: true,
@@ -206,12 +243,12 @@ const Ingredient = (props) => {
     },
     {
       type: "checkbox",
-
-      placeholder: "Vitamin C	",
-      name: "VitaminC",
+      placeholder: "Vitamin C",
+      name: "vitaminC",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Vitamin C",
       required: true,
       view: true,
@@ -220,70 +257,13 @@ const Ingredient = (props) => {
     },
     {
       type: "checkbox",
-      placeholder: "Vitamin E	",
+      placeholder: "Vitamin E",
       name: "vitaminE",
       validation: "",
       showItem: "",
       default: "",
+      tag: true,
       label: "Vitamin E",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "",
-      placeholder: "varientGroup",
-      name: "varientGroup",
-      validation: "",
-      showItem: "",
-      default: "",
-      label: "varientGroup",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "ingredient/select",
-      placeholder: "Ingredient",
-      name: "varientGroup",
-      validation: "",
-      showItem: "",
-      default: "",
-      label: "Ingredient",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "",
-      placeholder: "varientLevel",
-      name: "ingredientName",
-      validation: "",
-      showItem: "",
-      default: "",
-      label: "varientLevel",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "string",
-      placeholder: "Quantity",
-      name: "quantity",
-      validation: "",
-      showItem: "",
-      default: "",
-      label: "Quantity",
       required: true,
       view: true,
       add: true,
@@ -291,21 +271,19 @@ const Ingredient = (props) => {
     },
   ]);
 
-  // Use the useTranslation hook from react-i18next to handle translations
-  // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
     <Container className="noshadow">
-      {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
         // actions={actions}
-        // API endpoint for fetching menu data
-        api={`recipe-ingredients`}
-        // Property name for the title of each menu item
-        itemTitle={`label`}
-        // Short name or label for the menu
+        // api={`recipe-ingredients`}
+        api={`ingredient`}
+        // itemTitle={`label`}
+        itemTitle={{
+          name: "ingredientsName",
+          type: "text",
+          collection: "",
+        }}
         shortName={`Ingredient Management`}
-        // Privilege flag indicating whether the user can add menu items
         // formMode={`single`}
         formMode={`double`}
         //

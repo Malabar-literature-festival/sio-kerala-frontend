@@ -17,6 +17,7 @@ const FoodlikeList = (props) => {
       name: "foodLikeListName",
       validation: "",
       default: "",
+      tag: true,
       label: "Foodlike List",
       required: true,
       view: true,
@@ -157,7 +158,8 @@ const FoodlikeList = (props) => {
         // API endpoint for fetching menu data
         api={`foodlike-lists`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "foodLikeListName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Foodlike List`}
         // Privilege flag indicating whether the user can add menu items

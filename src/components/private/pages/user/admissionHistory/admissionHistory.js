@@ -14,9 +14,10 @@ const AdmissionHistory = (props) => {
       type: "text",
       placeholder: "Booking ID",
       name: "bookingId",
-      title:true,
+      title: true,
       validation: "",
       default: "",
+      tag: true,
       label: "Booking ID",
       required: false,
       view: true,
@@ -32,6 +33,7 @@ const AdmissionHistory = (props) => {
       validation: "",
       showItem: "userDisplayName",
       default: "",
+      tag: true,
       label: "User",
       required: true,
       view: true,
@@ -48,6 +50,7 @@ const AdmissionHistory = (props) => {
       validation: "",
       showItem: "userDisplayName",
       default: "",
+      tag: true,
       label: "Dietician",
       required: true,
       view: true,
@@ -61,6 +64,7 @@ const AdmissionHistory = (props) => {
       name: "admissionType",
       validation: "",
       default: "",
+      tag: true,
       label: "Admission Type",
       showItem: "",
       required: true,
@@ -90,6 +94,7 @@ const AdmissionHistory = (props) => {
       showItem: "",
       validation: "",
       default: "null",
+      tag: true,
       label: "Discharge Date",
       required: false,
       view: true,
@@ -102,6 +107,7 @@ const AdmissionHistory = (props) => {
       name: "roomNumber",
       validation: "",
       default: "",
+      tag: true,
       label: "Room Number",
       required: true,
       view: true,
@@ -166,7 +172,12 @@ const AdmissionHistory = (props) => {
       <ListTable
         // actions={actions}
         api={`appointment`}
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{
+          name: "userDisplayName",
+          type: "text",
+          collection: "user",
+        }}
         shortName={`ppointment`}
         // formMode={`single`}
         formMode={`double`}

@@ -22,6 +22,7 @@ const CuisineCategory = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
       label: "Cuisine Category",
       // Indicates if the input field is required
@@ -167,9 +168,11 @@ const CuisineCategory = (props) => {
         // API endpoint for fetching menu data
         api={`cuisine-category`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
+        itemTitle={{ name: "cuisineCategoriesName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Cuisine Category`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
