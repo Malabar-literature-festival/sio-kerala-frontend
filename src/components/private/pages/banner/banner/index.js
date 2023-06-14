@@ -110,7 +110,11 @@ const Banner = (props) => {
       <ListTable
         // actions={actions}
         api={`banner`}
-        itemTitle={`Banner`}
+        itemTitle={{
+          name: "title",
+          type: "text",
+          collection: "",
+        }}
         shortName={`Banner`}
         // formMode={`single`}
         formMode={`double`}

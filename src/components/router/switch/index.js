@@ -23,7 +23,7 @@ import DeliveryInstruction from "../../private/pages/dispatch/deliveryInstructio
 import TypeOfDiet from "../../private/pages/diet/typeOfDiet";
 import WeeklyMealPlan from "../../private/pages/mealSettings/weeklyMealPlan";
 import RedeemCoupen from "../../private/pages/dispatch/redeemCoupon";
-import Patient from "../../private/pages/user/patient"; 
+import Patient from "../../private/pages/user/patient";
 import MedicationList from "../../private/pages/registrationSettings/medicationList";
 import PackageManagement from "../../private/pages/packageManagement";
 import Supplement from "../../private/pages/registrationSettings/supplement";
@@ -44,6 +44,8 @@ import AddVariant from "../../private/pages/mealSettings/addVariant";
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
+import Blog from "../../private/pages/blog/blogs";
+import BlogCategory from "../../private/pages/blog/blogCategory";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -175,7 +177,7 @@ const Switch = ({
       return (
         <VariantGroup
           key={key}
-          addPrivilege={addPrivilege} 
+          addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
           updatePrivilege={updatePrivilege}
         />
@@ -444,6 +446,24 @@ const Switch = ({
     case "admission-history":
       return (
         <AdmissionHistory
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "blog":
+      return (
+        <Blog
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "blog-category":
+      return (
+        <BlogCategory
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
