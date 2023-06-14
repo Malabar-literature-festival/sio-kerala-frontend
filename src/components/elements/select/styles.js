@@ -89,7 +89,7 @@ export const SelectBox = styled.div`
   &.filter .options {
     top: 31px;
   }
-  &.open svg {
+  &.open svg.down {
     transition: all 0.2s ease-out 0s;
     transform: rotate(180deg);
     color: black;

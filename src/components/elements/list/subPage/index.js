@@ -3,7 +3,7 @@ import FormInput from "../../input";
 import ListTable from "../list";
 import { Footer, Header, Overlay, Page } from "./../manage/styles";
 import { getValue } from "../functions";
-const SubPage = ({ subAttributes, setLoaderBox, setMessage, closeModal, itemTitle }) => {
+const SubPage = ({  subAttributes, setLoaderBox, setMessage, closeModal, itemTitle }) => {
   const [t] = useTranslation();
   const titleValue = (itemTitle.collection?.length > 0 ? subAttributes?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : subAttributes?.data?.[itemTitle.name]) || "Please update the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
   const viewMode = subAttributes.item.type ?? "subList";

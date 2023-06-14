@@ -72,8 +72,8 @@ export const FileContainer = styled.div`
   box-shadow: none;
   -webkit-transition: all 0.2s ease-out 0s;
   transition: all 0.2s ease-out 0s;
-  color: #4f4f4f;
-  background: #e7f2f9;
+  color: ${(props) => props.theme.foreground};
+  background: ${(props) => props.theme.background};
   text-align: center;
   button {
     background-color: transparent;
