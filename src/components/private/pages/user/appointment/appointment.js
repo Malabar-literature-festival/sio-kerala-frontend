@@ -19,10 +19,10 @@ const Appointment = (props) => {
       default: "",
       tag: true,
       label: "Booking ID",
-      required: true,
+      required: false,
       view: true,
-      add: true,
-      update: true,
+      add: false,
+      update: false,
     },
     {
       type: "select",
