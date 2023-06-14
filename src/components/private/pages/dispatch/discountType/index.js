@@ -22,6 +22,7 @@ const DiscountType = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Label text for the input field
       label: "Discount Type",
       // Indicates if the input field is required
@@ -167,8 +168,9 @@ const DiscountType = (props) => {
         // API endpoint for fetching menu data
         api={`discount-type`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        // itemTitle={`label`}
         // Short name or label for the menu
+        itemTitle={{ name: "discountTypeName", type: "text", collection: "" }}
         shortName={`Discount Type`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

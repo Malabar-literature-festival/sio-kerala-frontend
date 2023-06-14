@@ -22,6 +22,7 @@ const RedeemCoupon = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
+      tag: true,
       // Coupon text for the input field
       label: "Coupon",
       // Indicates if the input field is required
@@ -39,6 +40,7 @@ const RedeemCoupon = (props) => {
       name: "code",
       validation: "",
       default: "",
+      tag: true,
       label: "Coupon Code",
       required: true,
       view: true,
@@ -51,6 +53,7 @@ const RedeemCoupon = (props) => {
       name: "type",
       validation: "",
       default: "",
+      tag: true,
       label: "Coupon Type",
       required: true,
       view: true,
@@ -63,6 +66,7 @@ const RedeemCoupon = (props) => {
       name: "usesCount",
       validation: "",
       default: "",
+      tag: true,
       label: "Uses Count",
       required: true,
       view: true,
@@ -75,6 +79,7 @@ const RedeemCoupon = (props) => {
       name: "minPurchase",
       validation: "",
       default: "",
+      tag: true,
       label: "Min Purchase",
       required: true,
       view: true,
@@ -87,6 +92,7 @@ const RedeemCoupon = (props) => {
       name: "maxDiscount",
       validation: "",
       default: "",
+      tag: true,
       label: "Max Purchase",
       required: true,
       view: true,
@@ -99,6 +105,7 @@ const RedeemCoupon = (props) => {
       name: "discount",
       validation: "",
       default: "",
+      tag: true,
       label: "Discount",
       required: true,
       view: true,
@@ -111,6 +118,7 @@ const RedeemCoupon = (props) => {
       name: "customerType",
       validation: "",
       default: "",
+      tag: true,
       label: "Customer Type",
       required: true,
       view: true,
@@ -251,9 +259,10 @@ const RedeemCoupon = (props) => {
         // API endpoint for fetching menu data
         api={`redeem-coupon`}
         // Property name for the title of each menu item
-        itemTitle={`redeem coupon`}
+        // itemTitle={`redeem coupon`}
         // Short name or label for the menu
-        shortName={`redeem coupon`}
+        itemTitle={{ name: "title", type: "text", collection: "" }}
+        shortName={`Redeem coupon`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
