@@ -3,9 +3,10 @@ import CustomSelect from "../select";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, CheckBox, DatetimeInput, FileContainer, Input, InputContainer, Label, TextArea } from "./styles";
+import { Button, DatetimeInput, FileContainer, Input, InputContainer, Label, TextArea } from "./styles";
 import { ErrorMessage } from "../form/styles";
 import { TickIcon, UploadIcon } from "../../../icons";
+import Checkbox from "../checkbox";
 
 function FormInput(props) {
   // Initialize translation function for current language
@@ -116,7 +117,7 @@ function FormInput(props) {
         fileInputRef.current.click();
       };
       return (
-        <FileContainer>
+        <FileContainer theme={themeColors}>
           <button onClick={handleButtonClick}>
             <UploadIcon />
             {t("upload", { label: t(props.label) }) + (props.required ? " *" : "") + (props.value.length > 0 ? ` : ${props.value[0].name} (${size})` : "")}
@@ -169,19 +170,20 @@ function FormInput(props) {
     case "checkbox":
       return (
         <InputContainer className="checkbox">
-          <Label className="checkbox" theme={themeColors}>
-            <CheckBox
-              theme={themeColors}
-              type={props.type}
-              checked={props.value}
-              onChange={() => {
-                console.log(props.value)
-                props.onChange(!props.value, props.id, props.type);
-              }}
-            ></CheckBox>
-            <span dangerouslySetInnerHTML={{ __html: t(props.placeholder) }}></span>
-          </Label>
-        </InputContainer>
+        <Label className="checkbox">
+          <Checkbox
+            theme={themeColors}
+            label={t(props.placeholder)}
+            type={props.type}
+            checked={props.value}
+            onChange={(event) => {
+              console.log(event.target.checked === false ? false : true);
+              props.onChange(event.target.checked === false ? false : true, props.id, props.type);
+            }}
+          ></Checkbox>
+          {/* <span dangerouslySetInnerHTML={{ __html: t(props.placeholder) }}></span> */}
+        </Label>
+      </InputContainer>
       );
     // Render a select box
     case "select":

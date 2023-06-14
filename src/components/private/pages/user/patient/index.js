@@ -1239,6 +1239,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
     {
@@ -1383,9 +1384,10 @@ const Patient = (props) => {
         api={`user`}
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
+        preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
         shortName={`Patient`}
-        parentReference={"userType"}
-        referenceId={"6471b3849fb2b29fe045887b"}
+        // parentReference={"userType"}
+        // referenceId={"6471b3849fb2b29fe045887b"}
         // formMode={`single`}
         formMode={`double`}
         {...props}
