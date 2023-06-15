@@ -135,6 +135,7 @@ const VariantGroup = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);

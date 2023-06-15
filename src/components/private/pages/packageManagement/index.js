@@ -240,6 +240,7 @@ const PackageManagement = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);
@@ -254,6 +255,7 @@ const PackageManagement = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "packageName", type: "text", collection: "" }}
         shortName={`Package`}
+        formMode={`double`}
         {...props}
         attributes={attributes}
       ></ListTable>

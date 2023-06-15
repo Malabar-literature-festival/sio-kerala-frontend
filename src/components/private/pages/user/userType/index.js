@@ -183,6 +183,7 @@ const UserType = (props) => {
         updatePrivilege: true,
         // Custom CSS class for styling
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);

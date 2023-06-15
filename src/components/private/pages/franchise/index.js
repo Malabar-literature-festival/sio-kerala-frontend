@@ -237,6 +237,7 @@ const Franchise = (props) => {
         updatePrivilege: true,
         // Custom CSS class for styling
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);
@@ -254,6 +255,7 @@ const Franchise = (props) => {
         itemTitle={`label`}
         // Short name or label for the menu
         shortName={`Franchise`}
+        formMode={`double`}
         // Additional attributes related to the menu
         attributes={attributes}
         {...props}

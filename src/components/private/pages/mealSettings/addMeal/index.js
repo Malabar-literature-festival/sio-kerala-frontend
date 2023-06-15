@@ -338,6 +338,7 @@ const AddMeal = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double"
       },
     },
     {
