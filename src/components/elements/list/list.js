@@ -29,7 +29,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
           error: null,
         }
   );
- 
+
   const [showSublist, setShowSubList] = useState(false);
   const [currentApi] = useState(`${api}`);
   const [subAttributes, setSubAttributes] = useState(null);
@@ -58,14 +58,14 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
   const [updateId, setUpdateId] = useState("");
   const [updateValues, setUpdateValues] = useState({});
   const [udpateView, setUpdateView] = useState(() => {});
-  const [filterView, setFilterView] = useState({});
+  const [filterView, setFilterView] = useState(referenceId !== 0 ? { [parentReference]: referenceId, ...preFilter } : { ...preFilter });
   useEffect(() => {
     const addValuesTemp = {
       addValues: {},
       updateValues: {},
       viewValues: {},
       errorValues: {},
-      filterValues: referenceId !== 0 ? { [parentReference]: referenceId, ...preFilter } : { ...preFilter },
+      filterValues: {},
     };
     // let tempFilter = false;
     let date = new Date();
@@ -108,11 +108,13 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     setAddValues(addValuesTemp.addValues);
     setErrorInput(addValuesTemp.errorValues);
     setUpdateValues(addValuesTemp.updateValues);
-    setFilterView(addValuesTemp.filterValues);
+    setFilterView((prevFilterView) => {
+      return { ...prevFilterView, ...addValuesTemp.filterValues };
+    });
 
     // setFilter(tempFilter);
     setInitialized(true);
-  }, [attributes, dispatch, setPrevCrud, preFilter, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
+  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
 
   // end processing attributes
   useEffect(() => {
