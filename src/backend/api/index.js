@@ -1,6 +1,7 @@
 import { clearLogin } from "../../store/actions/login";
 import { GetAccessToken } from "../authentication";
 import axios from "axios";
+
 const postData = async (fields, ulr, dispatch, navigate) => {
   const data = new Promise(async (resolve, reject) => {
     try {
@@ -15,6 +16,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
           formData.append(key, value);
         }
       });
+
       const response = await axios.post(
         `${process.env.REACT_APP_API}${ulr}`,
         formData,
@@ -27,6 +29,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
           },
         }
       );
+
       if (response.status === 440) {
         try {
           dispatch(clearLogin());
@@ -36,6 +39,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
           console.log(error);
         }
       }
+
       resolve({ status: response.status, data: response.data });
     } catch (error) {
       console.log("error", error);
@@ -48,6 +52,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
 
   return data;
 };
+
 const putData = async (fields, ulr, dispatch, navigate) => {
   const data = new Promise(async (resolve, reject) => {
     try {
