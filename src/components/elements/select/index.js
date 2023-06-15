@@ -6,6 +6,7 @@ import { DownIcon, TickIcon } from "../../../icons";
 import { useTranslation } from "react-i18next";
 import { addSelectObject } from "../../../store/actions/select";
 import { ErrorMessage } from "../form/styles";
+import Search from "../search";
 
 function CustomSelect(props) {
   const themeColors = useSelector((state) => state.themeColors);
@@ -15,11 +16,22 @@ function CustomSelect(props) {
   const [initialized, setInitialized] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props.label);
   const [options, setOptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
   const selectData = useSelector((state) => state.select[props.selectApi]);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const toggleOptions = () => {
     setOptionsVisible(!optionsVisible);
+  };
+  const [searchValue, setSearchValue] = useState("");
+  const handleChange = (event) => {
+    // clearTimeout(searchTimeoutRef.current);
+    setSearchValue(event.target.value);
+    const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(event.target.value.toString().toLowerCase()));
+    setFilteredOptions(filteredOptions);
+    if (event.target.value.toString() === "") {
+      setFilteredOptions([]);
+    }
   };
   const fetchData = useCallback(async () => {
     if (props.apiType === "API") {
@@ -111,12 +123,13 @@ function CustomSelect(props) {
           </>
         )}
         {`${props.value.length === 0 ? `${t(props.label)}${props.required ? " *" : ""}` : `${selectedValue}`}`}
-        <DownIcon />
+        <DownIcon className="down" />
       </button>
       {optionsVisible && initialized && (
         <ul className="options">
+          {(props.search ?? true) && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>}
           {options.length &&
-            options?.map((option) => (
+            (searchValue.length > 0 ? filteredOptions : options)?.map((option) => (
               <li
                 value={option.id === selectedId}
                 className={`${option.id === selectedId}`}

@@ -19,7 +19,7 @@ import { ToolTip } from "../../styles/list/styles";
 // import { convertMinutesToHHMM } from "../../functions/minuteToHour";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
-const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, viewMode = "list" }) => {
+const ListTable = ({ formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -29,6 +29,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           error: null,
         }
   );
+
   const [showSublist, setShowSubList] = useState(false);
   const [currentApi] = useState(`${api}`);
   const [subAttributes, setSubAttributes] = useState(null);
@@ -57,7 +58,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
   const [updateId, setUpdateId] = useState("");
   const [updateValues, setUpdateValues] = useState({});
   const [udpateView, setUpdateView] = useState(() => {});
-  const [filterView, setFilterView] = useState(referenceId !== 0 ? { [parentReference]: referenceId } : {});
+  const [filterView, setFilterView] = useState(referenceId !== 0 ? { [parentReference]: referenceId, ...preFilter } : { ...preFilter });
   useEffect(() => {
     const addValuesTemp = {
       addValues: {},
@@ -107,7 +108,9 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
     setAddValues(addValuesTemp.addValues);
     setErrorInput(addValuesTemp.errorValues);
     setUpdateValues(addValuesTemp.updateValues);
-    setFilterView(addValuesTemp.filterValues);
+    setFilterView((prevFilterView) => {
+      return { ...prevFilterView, ...addValuesTemp.filterValues };
+    });
 
     // setFilter(tempFilter);
     setInitialized(true);
@@ -156,7 +159,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
         const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name];
         if (item.update) {
           if (item.type === "checkbox") {
-            let bool = value[item.name].toString() === "true" ? true : false;
+            let bool = value[item.name]?.toString() === "true" ? true : false;
             updateValues[item.name] = bool;
           } else if (item.type === "select") {
             console.log(itemValue);
@@ -649,6 +652,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
 
       {isCreating && (
         <CrudForm
+          formMode={formMode}
           api={api}
           formType={"post"}
           header={t("addNewTitle", {
@@ -662,10 +666,10 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
       {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
     <RowContainer>
@@ -706,7 +710,7 @@ const ListTable = ({ parentReference = "_id", referenceId = 0, actions = [], api
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && <CrudForm api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
       {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
     </RowContainer>

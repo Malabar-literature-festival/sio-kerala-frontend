@@ -8,6 +8,11 @@ export const Form = styled.div`
   @media (max-width: 768px) {
     border: 0;
   }
+  &.double {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-gap: 10px; /* Adjust the gap between columns if desired */
+  }
 `;
 const fadeIn = keyframes`
   from {
@@ -53,6 +58,9 @@ export const Page = styled.div`
   animation-duration: 0.2s;
   margin: auto;
   padding: 1em;
+  &.double {
+    width: 50%;
+  }
   @media (max-width: 768px) {
     width: 100%;
     position: relative;
@@ -94,4 +102,11 @@ export const ErrorMessage = styled.div`
   width: 100%;
   text-align: left;
   float: left;
+`;
+export const LnputLayout = styled.div`
+  display: flex;
+  &.single {
+  }
+  &.double {
+  }
 `;

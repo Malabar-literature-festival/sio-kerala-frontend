@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 //
-import Layout from "../../../common/layout";
-import ListTable from "../../../../elements/list/list";
-import { Container } from "../../../common/layout/styels";
+import Layout from "../../common/layout";
+import ListTable from "../../../elements/list/list";
+import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const DeliveryMan = (props) => {
+const Dietician = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Delivery Man - Diet Food Management Portal`;
+    document.title = `Dietician List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -80,7 +80,7 @@ const DeliveryMan = (props) => {
       view: false,
       filter: false,
       add: true,
-      update: false,
+      update: true,
       apiType: "CSV",
       selectApi: "Male,Female",
     },
@@ -115,11 +115,10 @@ const DeliveryMan = (props) => {
     // },
     {
       type: "text",
-      apiType: "",
+      apiType: "API",
       selectApi: "",
       placeholder: "Address",
       name: "subscriber",
-      // collection: "subscribers",
       validation: "",
       showItem: "address",
       default: "",
@@ -144,42 +143,25 @@ const DeliveryMan = (props) => {
       required: false,
       view: false,
       add: true,
-      update: false,
+      update: true,
     },
-    // {
-    //   type: "hidden",
-    //   apiType: "API",
-    //   selectApi: "user-type/select",
-    //   placeholder: "User Type",
-    //   name: "userType",
-    //   validation: "",
-    //   showItem: "role",
-    //   default: "role",
-    //   tag: true,
-    //   label: "User Type",
-    //   required: true,
-    //   view: false,
-    //   add: true,
-    //   update: true,
-    //   filter: false,
-    // },
-    // {
-    //   type: "hidden",
-    //   apiType: "",
-    //   selectApi: "",
-    //   placeholder: "User Type",
-    //   name: "userType",
-    //   validation: "",
-    //   showItem: "",
-    //   default: "6471b3849fb2b29fe045887b",
-    //   tag: true,
-    //   label: "User Type",
-    //   required: true,
-    //   view: false,
-    //   add: true,
-    //   update: true,
-    //   filter: false,
-    // },
+    {
+      type: "hidden",
+      apiType: "API",
+      selectApi: "user-type/select",
+      placeholder: "User Type",
+      name: "userType",
+      validation: "",
+      showItem: "role",
+      default: "role",
+      tag: true,
+      label: "User Type",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
+    },
     // {
     //   type: "select",
     //   apiType: "API",
@@ -219,9 +201,9 @@ const DeliveryMan = (props) => {
         api={`user`}
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Delivery Man`}
+        shortName={`Dietician`}
         parentReference={"userType"}
-        referenceId={"64815bde89e0a44fc31c53b0"}
+        referenceId={"6471b34d9fb2b29fe0458878"}
         // formMode={`single`}
         formMode={`double`}
         {...props}
@@ -230,4 +212,4 @@ const DeliveryMan = (props) => {
     </Container>
   );
 };
-export default Layout(DeliveryMan);
+export default Layout(Dietician);
