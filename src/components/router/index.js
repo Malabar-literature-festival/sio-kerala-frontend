@@ -13,7 +13,7 @@ import { RowContainer } from "../styles/containers/styles";
 import Header from "../private/common/layout/header";
 import Footer from "../private/common/layout/footer";
 import Menu from "../private/common/layout/menu";
-import Body from "../private/pages/dashboard/body";
+import Body from "../private/pages/dashboard";
 
 const PageRouter = () => {
   const user = useSelector((state) => state.login);

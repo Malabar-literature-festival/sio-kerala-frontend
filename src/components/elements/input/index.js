@@ -25,17 +25,17 @@ function FormInput(props) {
       return (
         <InputContainer animation={props.animation}>
           {props.error?.length ? (
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
+            <Label theme={themeColors} className={`${!props.value.toString().length > 0 ? "error shrink" : "error"}`}>
               {props.error}
             </Label>
           ) : (
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
+            <Label theme={themeColors} className={`${!props.value.toString().length > 0 ? "shrink" : ""}`}>
               <TickIcon />
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           )}
-          <Input autoComplete="on" theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type,props.sub)} />
-           {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
+          <Input autoComplete="on" theme={themeColors} className={`input ${props.value.toString().length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type, props.sub)} />
+          {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
         </InputContainer>
       );
     // Render a time input with time picker
@@ -43,19 +43,7 @@ function FormInput(props) {
       let userFriendlyTime = new Date(props.value);
       return (
         <InputContainer>
-          <DatetimeInput
-            theme={themeColors}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={15}
-            timeCaption="Time"
-            selected={userFriendlyTime}
-            dateFormat="h:mm aa"
-            className={`input ${props.value.length > 0 ? "shrink" : ""}`}
-            placeholder={t(props.placeholder)}
-            type={props.type}
-            onChange={(event) => props.onChange(event, props.id, props.type)}
-          />
+          <DatetimeInput theme={themeColors} showTimeSelect showTimeSelectOnly timeIntervals={15} timeCaption="Time" selected={userFriendlyTime} dateFormat="h:mm aa" className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={props.type} onChange={(event) => props.onChange(event, props.id, props.type)} />
           <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
             {t(props.label)}
           </Label>
@@ -122,17 +110,8 @@ function FormInput(props) {
             <UploadIcon />
             {t("upload", { label: t(props.label) }) + (props.required ? " *" : "") + (props.value.length > 0 ? ` : ${props.value[0].name} (${size})` : "")}
           </button>
-          <Input
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            theme={themeColors}
-            accept={props.type === "image" ? `image/*` : ``}
-            className={`input ${props.value.length > 0 ? "shrink" : ""}`}
-            placeholder={t(props.placeholder)}
-            type={`file`}
-            onChange={(event) => props.onChange(event, props.id, props.type)}
-          />
-          {props.error?.length > 0 && <ErrorMessage className="image"  dangerouslySetInnerHTML={{ __html: props.error }} />}
+          <Input ref={fileInputRef} style={{ display: "none" }} theme={themeColors} accept={props.type === "image" ? `image/*` : ``} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={`file`} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          {props.error?.length > 0 && <ErrorMessage className="image" dangerouslySetInnerHTML={{ __html: props.error }} />}
         </FileContainer>
       );
     // Render a textarea
@@ -170,20 +149,20 @@ function FormInput(props) {
     case "checkbox":
       return (
         <InputContainer className="checkbox">
-        <Label className="checkbox">
-          <Checkbox
-            theme={themeColors}
-            label={t(props.placeholder)}
-            type={props.type}
-            checked={props.value}
-            onChange={(event) => {
-              console.log(event.target.checked === false ? false : true);
-              props.onChange(event.target.checked === false ? false : true, props.id, props.type);
-            }}
-          ></Checkbox>
-          {/* <span dangerouslySetInnerHTML={{ __html: t(props.placeholder) }}></span> */}
-        </Label>
-      </InputContainer>
+          <Label className="checkbox">
+            <Checkbox
+              theme={themeColors}
+              label={t(props.placeholder)}
+              type={props.type}
+              checked={props.value}
+              onChange={(event) => {
+                console.log(event.target.checked === false ? false : true);
+                props.onChange(event.target.checked === false ? false : true, props.id, props.type);
+              }}
+            ></Checkbox>
+            {/* <span dangerouslySetInnerHTML={{ __html: t(props.placeholder) }}></span> */}
+          </Label>
+        </InputContainer>
       );
     // Render a select box
     case "select":

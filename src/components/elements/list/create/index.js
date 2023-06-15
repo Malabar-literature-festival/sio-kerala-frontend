@@ -3,7 +3,6 @@ import FormInput from "../../input";
 import { Footer, Form, Header, Page, Overlay } from "./styles";
 import { useTranslation } from "react-i18next";
 const CrudForm = (props) => {
-  console.log(props);
   // Use the useTranslation hook from react-i18next to handle translations
   const { t } = useTranslation();
 
