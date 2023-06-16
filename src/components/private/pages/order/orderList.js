@@ -124,40 +124,6 @@ const OrderList = (props) => {
       update: true,
       filter: false,
     },
-<<<<<<< HEAD
-=======
-  ]);
-
-  const [mealVariant] = useState([
-    {
-      type: "text",
-      placeholder: "Calories",
-      name: "calories",
-      showItem: "",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Calories",
-      required: false,
-      view: true,
-      add: false,
-      update: false,
-    },
-    {
-      type: "text",
-      placeholder: "Variant Level",
-      name: "variantLevel",
-      showItem: "variantLevelName",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Variant Level",
-      required: false,
-      view: true,
-      add: false,
-      update: false,
-    },
->>>>>>> origin/kavya
     {
       type: "select",
       apiType: "API",
@@ -168,67 +134,7 @@ const OrderList = (props) => {
       validation: "",
       default: "",
       tag: true,
-<<<<<<< HEAD
       label: "Order Status",
-=======
-      label: "variant Group",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "variant-level/select",
-      placeholder: "Variant Level",
-      name: "variantLevel",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "variant Level",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "text",
-      placeholder: "Meal Price",
-      name: "mealPrice",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Meal Price",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Meal OfferPrice",
-      name: "mealOfferPrice",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Meal OfferPrice",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Number of Persons",
-      name: "numberOfPersons",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Number of Persons",
->>>>>>> origin/kavya
       required: true,
       view: true,
       add: true,
@@ -285,7 +191,6 @@ const OrderList = (props) => {
       update: true,
       filter: false,
     },
-<<<<<<< HEAD
     // {
     //   type: "select",
     //   apiType: "API",
@@ -303,86 +208,12 @@ const OrderList = (props) => {
     //   update: true,
     //   filter: false,
     // },
-=======
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "delivery-slot/select",
-      placeholder: "Delivery Slot",
-      name: "deliverySlot",
-      showItem: "slot",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Delivery Slot",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "variant-level/select",
-      placeholder: "Variant Level",
-      name: "variantLevel",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "variant Level",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "order-statuses/select",
-      placeholder: "Order Status",
-      name: "orderStatus",
-      showItem: "orderStatus",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Order Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
->>>>>>> origin/kavya
   ]);
 
   const [actions] = useState([
     {
       element: "button",
       type: "subList",
-<<<<<<< HEAD
-=======
-      id: "meal-variant",
-      itemTitle: "orderDate",
-      title: "Variants",
-      attributes: mealVariant,
-      params: {
-        api: `user/meal-variant`,
-        parentReference: "meal",
-        itemTitle: "orderDate",
-        shortName: "Variants",
-        addPrivilege: true,
-        delPrivilege: true,
-        updatePrivilege: true,
-        customClass: "medium",
-        formMode: "double",
-      },
-    },
-    {
-      element: "button",
-      type: "subList",
->>>>>>> origin/kavya
       id: "dispatch",
       // itemTitle: "orderDate",
       itemTitle: {
@@ -417,17 +248,12 @@ const OrderList = (props) => {
         actions={actions}
         api={`weekly-meal-plan-entry`}
         // itemTitle={`Weekly Meal Plan Entry`}
-<<<<<<< HEAD
         itemTitle={{
           name: "userDisplayName",
           type: "text",
           collection: "user",
         }}
         shortName={`Order`}
-=======
-        itemTitle={{ name: "username", type: "text", collection: "user" }}
-        shortName={`Weekly Meal Plan Entry`}
->>>>>>> origin/kavya
         // formMode={`single`}
         formMode={`double`}
         datefilter={true}
