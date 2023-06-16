@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const AddictionList = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Addiction ListName - Diet Food Management Portal`;
+    document.title = `Addiction List Name - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([

@@ -4,21 +4,44 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const VehicleCategory = (props) => {
+const Blog = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `vehicle Type - Diet Food Management Portal`;
+    document.title = `Blog - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
+      // Type of input, in this case, a text input
       type: "text",
-      placeholder: "vehicle Type",
-      name: "vehicleType",
+      // Placeholder text for the input field
+      placeholder: "Title",
+      // Name of the input field
+      name: "title",
+      // Validation rules for the input
+      validation: "",
+      // Default value for the input field
+      default: "",
+      tag: true,
+      // Label text for the input field
+      label: "Title",
+      // Indicates if the input field is required
+      required: true,
+      // Indicates if the input field should be displayed in the view mode
+      view: true,
+      // Indicates if the input field should be displayed in the add mode
+      add: true,
+      // Indicates if the input field should be displayed in the update mode
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Author",
+      name: "author",
       validation: "",
       default: "",
       tag: true,
-      label: "vehicle Type",
+      label: "Author",
       required: true,
       view: true,
       add: true,
@@ -26,43 +49,101 @@ const VehicleCategory = (props) => {
     },
     {
       type: "text",
-      placeholder: "minCoverageArea",
-      name: "minCoverageArea",
+      placeholder: "Content",
+      name: "content",
       validation: "",
       default: "",
       tag: true,
-      label: "Minimum Coverage Area",
+      label: "Content",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Max Coverage Area",
-      name: "maxCoverageArea",
+      type: "number",
+      placeholder: "Date",
+      name: "date",
       validation: "",
       default: "",
       tag: true,
-      label: "Max Coverage Area",
+      label: "Date",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "ExtraCharge",
-      name: "extraCharge",
+      type: "image",
+      placeholder: "Featured Image",
+      name: "featuredImage",
       validation: "",
       default: "",
       tag: true,
-      label: "ExtraCharge",
+      label: "Featured Image",
       required: true,
       view: true,
       add: true,
       update: true,
     },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "post-category/select",
+      placeholder: "category",
+      name: "category",
+      showItem: "name",
+      validation: "",
+      default: "",
+      label: "category",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "franchise/select",
+      placeholder: "Franchise",
+      name: "franchise",
+      showItem: "name",
+      validation: "",
+      default: "",
+      label: "Franchise",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    // {
+    //   type: "text",
+    //   placeholder: "category",
+    //   name: "category",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "category",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
+    // {
+    //   type: "text",
+    //   placeholder: "franchise",
+    //   name: "franchise",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "franchise",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
   ]);
   // const [timingAttributes] = useState([
   //   {
@@ -162,7 +243,7 @@ const VehicleCategory = (props) => {
   //     // Displayed item title
   //     itemTitle: "title",
   //     // Title of the submenu
-  //     title: "Order",
+  //     title: "Sub Menu",
   //     // Additional attributes for timing
   //     attributes: timingAttributes,
   //     // Parameters for API and submenu configuration
@@ -195,13 +276,16 @@ const VehicleCategory = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`vehicle-category`}
+        api={`post-management`}
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "vehicleType", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`vehicle-category`}
-        formMode={`double`}
+        itemTitle={{
+          name: "title",
+          type: "text",
+          collection: "",
+        }}
+        shortName={`Blog`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -211,4 +295,4 @@ const VehicleCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(VehicleCategory);
+export default Layout(Blog);

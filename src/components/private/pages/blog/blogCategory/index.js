@@ -4,64 +4,51 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const VehicleCategory = (props) => {
+const BlogCategory = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `vehicle Type - Diet Food Management Portal`;
+    document.title = `Blog Category - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
+      // Type of input, in this case, a text input
       type: "text",
-      placeholder: "vehicle Type",
-      name: "vehicleType",
+      // Placeholder text for the input field
+      placeholder: "category",
+      // Name of the input field
+      name: "category",
+      // Validation rules for the input
       validation: "",
+      // Default value for the input field
       default: "",
       tag: true,
-      label: "vehicle Type",
+      // Label text for the input field
+      label: "category",
+      // Indicates if the input field is required
       required: true,
+      // Indicates if the input field should be displayed in the view mode
       view: true,
+      // Indicates if the input field should be displayed in the add mode
       add: true,
+      // Indicates if the input field should be displayed in the update mode
       update: true,
     },
     {
-      type: "text",
-      placeholder: "minCoverageArea",
-      name: "minCoverageArea",
+      type: "select",
+      apiType: "API",
+      selectApi: "franchise/select",
+      placeholder: "Franchise",
+      name: "franchise",
+      showItem: "name",
       validation: "",
       default: "",
-      tag: true,
-      label: "Minimum Coverage Area",
+      label: "Franchise",
       required: true,
       view: true,
       add: true,
       update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Max Coverage Area",
-      name: "maxCoverageArea",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Max Coverage Area",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "ExtraCharge",
-      name: "extraCharge",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "ExtraCharge",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
+      filter: false,
     },
   ]);
   // const [timingAttributes] = useState([
@@ -162,7 +149,7 @@ const VehicleCategory = (props) => {
   //     // Displayed item title
   //     itemTitle: "title",
   //     // Title of the submenu
-  //     title: "Order",
+  //     title: "Sub Menu",
   //     // Additional attributes for timing
   //     attributes: timingAttributes,
   //     // Parameters for API and submenu configuration
@@ -195,13 +182,16 @@ const VehicleCategory = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`vehicle-category`}
+        api={`post-category`}
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "vehicleType", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`vehicle-category`}
-        formMode={`double`}
+        itemTitle={{
+          name: "category",
+          type: "text",
+          collection: "",
+        }}
+        shortName={`Blog Category`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -211,4 +201,4 @@ const VehicleCategory = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(VehicleCategory);
+export default Layout(BlogCategory);
