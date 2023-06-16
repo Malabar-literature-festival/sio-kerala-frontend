@@ -47,6 +47,9 @@ import AdmissionHistory from "../../private/pages/user/admissionHistory/admissio
 import Dashboard from "../../private/pages/dashboard";
 import Subscriber from "../../private/pages/package/subscriber";
 import Notification from "../../private/pages/notification/notification";
+import Blog from "../../private/pages/blog/blogs";
+import BlogCategory from "../../private/pages/blog/blogCategory";
+import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -462,6 +465,15 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "blog":
+      return (
+        <Blog
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "subscriber":
       return (
         <Subscriber
@@ -471,9 +483,28 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "blog-category":
+      return (
+        <BlogCategory
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "notification":
       return (
         <Notification
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+
+    case "social-media":
+      return (
+        <SocialMedia
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

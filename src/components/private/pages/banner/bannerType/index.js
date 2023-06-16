@@ -191,7 +191,11 @@ const BannerType = (props) => {
         // API endpoint for fetching menu data
         api={`banner-type`}
         // Property name for the title of each menu item
-        itemTitle={`label`}
+        itemTitle={{
+          name: "bannerTypesName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Banner Type`}
         // Privilege flag indicating whether the user can add menu items
