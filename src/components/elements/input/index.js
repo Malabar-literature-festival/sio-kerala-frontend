@@ -71,7 +71,7 @@ function FormInput(props) {
       );
     // Render a datetime input with date and time pickers
     case "datetime":
-      let userFriendlyDateTime = props.value.length > 0 ? moment(props.value).format("dD.MM.YYYY hh:mm") : "";
+      let userFriendlyDateTime = props.value.length > 0 ? moment(props.value).format("DD.MM.YYYY hh:mm A") : "";
       return (
         <InputContainer>
           <DatetimeInput theme={themeColors} showTimeSelect className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={props.type} value={userFriendlyDateTime} onChange={(event) => props.onChange(event, props.id, props.type)} />
