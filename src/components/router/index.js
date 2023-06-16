@@ -4,17 +4,28 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Switch from "./switch";
 import { useSelector } from "react-redux";
 import Page404 from "../private/pages/page404";
-import { Container, MainContainer, SideBar } from "../private/common/layout/styels";
+import {
+  Container,
+  MainContainer,
+  SideBar,
+} from "../private/common/layout/styels";
 import { RowContainer } from "../styles/containers/styles";
 import Header from "../private/common/layout/header";
 import Footer from "../private/common/layout/footer";
 import Menu from "../private/common/layout/menu";
+import Body from "../private/pages/dashboard";
 
 const PageRouter = () => {
   const user = useSelector((state) => state.login);
   const menuStatus = useSelector((state) => state.menuStatus);
   const createRouter = (router) => {
-    return <Route key={`${router._id}`} path={`${router.path}`} element={<Switch page={router.element} />} />;
+    return (
+      <Route
+        key={`${router._id}`}
+        path={`${router.path}`}
+        element={<Switch page={router.element} />}
+      />
+    );
   };
   const themeColors = useSelector((state) => state.themeColors);
   return user.data.token ? (
@@ -29,6 +40,7 @@ const PageRouter = () => {
           <Container className="nopadding">
             <Routes>
               <Route path="/" element={<Switch page="login" />} />
+              <Route path="/dashboard" element={<Body />} />
               {user?.data?.menu?.map((menu) => {
                 if (menu.submenus?.length > 0) {
                   return (
