@@ -45,6 +45,7 @@ import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 import Dashboard from "../../private/pages/dashboard";
+import Notification from "../../private/pages/notification/notification";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -153,6 +154,8 @@ const Switch = ({ page, key, addPrivilege = true, delPrivilege = true, updatePri
       return <AdmissionHistory key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "dashboard":
       return <Dashboard key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
+    case "notification":
+      return <Notification key={key} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     default:
       return <Page404 key={key}></Page404>;
   }
