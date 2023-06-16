@@ -34,6 +34,22 @@ const BlogCategory = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "franchise/select",
+      placeholder: "Franchise",
+      name: "franchise",
+      showItem: "name",
+      validation: "",
+      default: "",
+      label: "Franchise",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
   ]);
   // const [timingAttributes] = useState([
   //   {

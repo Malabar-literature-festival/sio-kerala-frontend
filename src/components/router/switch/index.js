@@ -46,6 +46,7 @@ import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 import Blog from "../../private/pages/blog/blogs";
 import BlogCategory from "../../private/pages/blog/blogCategory";
+import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -464,6 +465,15 @@ const Switch = ({
     case "blog-category":
       return (
         <BlogCategory
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "social-media":
+      return (
+        <SocialMedia
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

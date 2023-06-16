@@ -4,44 +4,21 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Blog = (props) => {
+const SocialMedia = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Blog - Diet Food Management Portal`;
+    document.title = `Social Media - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
-      placeholder: "Title",
-      // Name of the input field
-      name: "title",
-      // Validation rules for the input
-      validation: "",
-      // Default value for the input field
-      default: "",
-      tag: true,
-      // Label text for the input field
-      label: "Title",
-      // Indicates if the input field is required
-      required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
-      add: true,
-      // Indicates if the input field should be displayed in the update mode
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Author",
-      name: "author",
+      placeholder: "instaId",
+      name: "instaId",
       validation: "",
       default: "",
       tag: true,
-      label: "Author",
+      label: "instaId",
       required: true,
       view: true,
       add: true,
@@ -49,58 +26,81 @@ const Blog = (props) => {
     },
     {
       type: "text",
-      placeholder: "Content",
-      name: "content",
+      placeholder: "facebookId",
+      name: "facebookId",
       validation: "",
       default: "",
       tag: true,
-      label: "Content",
+      label: "facebookId",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "number",
-      placeholder: "Date",
-      name: "date",
+      type: "text",
+      placeholder: "twitterId",
+      name: "twitterId",
       validation: "",
       default: "",
       tag: true,
-      label: "Date",
+      label: "twitterId",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "image",
-      placeholder: "Featured Image",
-      name: "featuredImage",
+      type: "text",
+      placeholder: "linkedinId",
+      name: "linkedinId",
       validation: "",
       default: "",
       tag: true,
-      label: "Featured Image",
+      label: "linkedinId",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "select",
-      apiType: "API",
-      selectApi: "post-category/select",
-      placeholder: "category",
-      name: "category",
-      showItem: "name",
+      type: "text",
+      placeholder: "pinterestId",
+      name: "pinterestId",
       validation: "",
       default: "",
-      label: "category",
+      tag: true,
+      label: "pinterestId",
       required: true,
       view: true,
       add: true,
       update: true,
-      filter: false,
+    },
+    {
+      type: "text",
+      placeholder: "youtubeId",
+      name: "youtubeId",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "youtubeId",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "whatsapp",
+      name: "whatsapp",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "whatsapp",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
     },
     {
       type: "select",
@@ -118,32 +118,6 @@ const Blog = (props) => {
       update: true,
       filter: false,
     },
-    // {
-    //   type: "text",
-    //   placeholder: "category",
-    //   name: "category",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "category",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
-    // {
-    //   type: "text",
-    //   placeholder: "franchise",
-    //   name: "franchise",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "franchise",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
   ]);
   // const [timingAttributes] = useState([
   //   {
@@ -276,16 +250,16 @@ const Blog = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`post-management`}
+        api={`social-media`}
         // Property name for the title of each menu item
         // itemTitle={`label`}
         // Short name or label for the menu
         itemTitle={{
-          name: "title",
+          name: "instaId",
           type: "text",
           collection: "",
         }}
-        shortName={`Blog`}
+        shortName={`Social Media`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
@@ -295,4 +269,4 @@ const Blog = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(Blog);
+export default Layout(SocialMedia);
