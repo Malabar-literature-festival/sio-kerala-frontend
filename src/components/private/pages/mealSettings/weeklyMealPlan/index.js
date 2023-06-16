@@ -68,6 +68,7 @@ const WeeklyMealPlan = (props) => {
           collection: "user",
         }}
         shortName={`Weekly Meal Plan`}
+        formMode={`double`}
         {...props}
         attributes={attributes}
       ></ListTable>

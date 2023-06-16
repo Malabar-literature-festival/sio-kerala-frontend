@@ -1330,6 +1330,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
     {
@@ -1358,6 +1359,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
     {
@@ -1386,6 +1388,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
     {
@@ -1414,6 +1417,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
     {

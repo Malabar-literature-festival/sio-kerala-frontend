@@ -46,6 +46,7 @@ import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 import Dashboard from "../../private/pages/dashboard";
 import Subscriber from "../../private/pages/package/subscriber";
+import Notification from "../../private/pages/notification/notification";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -464,6 +465,15 @@ const Switch = ({
     case "subscriber":
       return (
         <Subscriber
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "notification":
+      return (
+        <Notification
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

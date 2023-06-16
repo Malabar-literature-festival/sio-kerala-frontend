@@ -178,7 +178,7 @@ const AdmissionHistory = (props) => {
           type: "text",
           collection: "user",
         }}
-        shortName={`ppointment`}
+        shortName={`Appointment`}
         // formMode={`single`}
         formMode={`double`}
         //
