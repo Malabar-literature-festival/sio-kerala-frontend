@@ -156,11 +156,14 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
       const updateValues = {};
       setUpdateId(value._id);
       formInput.forEach((item) => {
-        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name];
+        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name] ?? "";
         if (item.update) {
           if (item.type === "checkbox") {
             let bool = value[item.name]?.toString() === "true" ? true : false;
             updateValues[item.name] = bool;
+          } else if (item.type === "number") {
+            console.log(parseInt(value[item.name]));
+            updateValues[item.name] = parseInt(value[item.name]);
           } else if (item.type === "select") {
             console.log(itemValue);
             console.log(value[item.name]);
@@ -175,7 +178,6 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
       });
 
       updateValues["_id"] = value._id;
-      console.log("updateValues", updateValues);
       setUpdateValues(updateValues);
       setIsEditing(true);
       window.location.hash = "edit";
@@ -520,7 +522,6 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
 
   const exportToExcel = () => {
     // JSON data to be converted to Excel
-    console.log(users.data?.response);
     const jsonData = users.data?.response;
     if (jsonData) {
       // Convert JSON to worksheet

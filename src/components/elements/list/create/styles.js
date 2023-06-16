@@ -5,13 +5,16 @@ export const Form = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  @media (max-width: 768px) {
-    border: 0;
-  }
   &.double {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
     grid-gap: 10px; /* Adjust the gap between columns if desired */
+  }
+  @media (max-width: 768px) {
+    border: 0;
+    &.double {
+      display: flex;
+    }
   }
 `;
 const fadeIn = keyframes`
@@ -66,6 +69,9 @@ export const Page = styled.div`
     position: relative;
     top: 0;
     padding: 0;
+    &.double {
+    width: 100%;
+  }
   }
 `;
 export const Header = styled.div`
