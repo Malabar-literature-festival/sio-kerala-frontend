@@ -161,6 +161,7 @@ const AimOfProgram = (props) => {
         itemTitle={{ name: "aimofProgramName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Aim Of Program`}
+        displayColumn={"double"}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

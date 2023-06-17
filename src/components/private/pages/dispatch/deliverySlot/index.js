@@ -34,19 +34,19 @@ const DeliverySlot = (props) => {
       // Indicates if the input field should be displayed in the update mode
       update: true,
     },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "mealtimeCategoriesName.mealtimeCategoriesName",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "reference",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
+    // {
+    //   type: "number",
+    //   placeholder: "Sequence",
+    //   name: "mealtimeCategoriesName.mealtimeCategoriesName",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "reference",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
   ]);
   // const [timingAttributes] = useState([
   //   {

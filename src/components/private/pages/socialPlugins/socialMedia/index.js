@@ -260,6 +260,7 @@ const SocialMedia = (props) => {
           collection: "",
         }}
         shortName={`Social Media`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
