@@ -20,7 +20,7 @@ import { ToolTip } from "../../styles/list/styles";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
-const ListTable = ({ formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+const ListTable = ({ displayColumn = 'single', formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -661,7 +661,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
           </AddButton>
         )}
       </ButtonPanel>
-      <Table>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      <Table className={displayColumn}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (
@@ -686,7 +686,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             </ArrowButton>
           </Count>
         ) : (
-          <Count>{`Showing ${count} record${count > 1 ? "s":''}`}</Count>
+          <Count>{`Showing ${count} record${count > 1 ? "s" : ""}`}</Count>
         )
       ) : (
         <Count>{`No records found`}</Count>
