@@ -48,7 +48,7 @@ const Blog = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "textarea",
       placeholder: "Content",
       name: "content",
       validation: "",

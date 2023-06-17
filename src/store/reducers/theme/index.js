@@ -6,22 +6,22 @@ const themColor =
   localStorage.getItem("_theme") !== null
     ? JSON.parse(localStorage.getItem("_menu"))
     : {
-        background: "#f4f4f4",
-        foreground: "#4f4f4f",
-        border: "Black",
-        secBackground: "#08225f",
-        secForeground: "white",
-        lightBackground: "White",
-        lightForeground: "Black",
-        lightBorder: "Black",
-        lightSecBackground: "White",
-        lightSecForeground: "#1381c5",
-        foregroundInvert: "white",
-        borderThinkness: "0px",
-        themeBackground: "#DD2F6E",
-        themeForeground: "white",
-        disabledBackground: "#77998e69",
-        disabledForeground: "white",
+      background: '#ddedeb',
+      foreground: '#4f4f4f',
+      border: 'Black',
+      secBackground: '#08225f',
+      secForeground: 'white',
+      lightBackground: 'White',
+      lightForeground: 'Black',
+      lightBorder: 'Black',
+      lightSecBackground: 'White',
+      lightSecForeground: "#1381c5",
+      foregroundInvert:'white',
+      borderThinkness:'0px',
+      themeBackground:'#7C9D45',
+      themeForeground:'white',
+      disabledBackground:'#77998e69',
+      disabledForeground:'white',
       };
 
 // This is the function we use to update the state of redux it initiailly as above. Any where in the apllication programer can call this reducers to update the redux.

@@ -50,9 +50,9 @@ const Login = (props) => {
   const { setLoaderBox } = props;
   useEffect(() => {
     if (user.data?.token) {
-      navigate(user.data?.menu[0]?.path??"404");
+      navigate(user.data?.menu[0]?.path ?? "404");
     }
-    console.log("DATA",user.data)
+    console.log("DATA", user.data);
     setLoaderBox(user.isLoading);
     if (user.error !== null) {
       props.setMessage({ type: 1, content: t(user.error), proceed: "Okay" });
@@ -67,7 +67,7 @@ const Login = (props) => {
 
   return (
     <MainContainer>
-      <Header> </Header>
+      <Header />
       <ColumnContainer
         className="login"
         style={{
@@ -76,10 +76,21 @@ const Login = (props) => {
         }}
       >
         <FormContainer>
-          <AutoForm useCaptcha={false} formType={"post"} description={t("loginDescription")} header={t("loginHead")} formInput={formInput} submitHandler={submitChange} button={t("validate")} isOpenHandler={isCreatingHandler} isOpen={true} plainForm={true}></AutoForm>
+          <AutoForm
+            useCaptcha={false}
+            formType={"post"}
+            description={t("loginDescription")}
+            header={t("loginHead")}
+            formInput={formInput}
+            submitHandler={submitChange}
+            button={t("validate")}
+            isOpenHandler={isCreatingHandler}
+            isOpen={true}
+            plainForm={true}
+          ></AutoForm>
         </FormContainer>
       </ColumnContainer>
-      <Footer></Footer>
+      <Footer />
     </MainContainer>
   );
 };

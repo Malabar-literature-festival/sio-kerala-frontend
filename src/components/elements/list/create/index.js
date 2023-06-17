@@ -269,10 +269,9 @@ const CrudForm = (props) => {
 
   return (
     <Overlay>
-      <Page>
+      <Page className={props.formMode ?? "single"}>
         <Header>{props.header ? props.header : "Login"}</Header>
-        <Form>{formState?.length > 0 && formState.map((item, index) => ((props.formType === "put" && item.update) || (props.formType === "post" && item.add) ? <FormInput placeholder={item.placeHolder} key={`input` + index} id={index} error={formErrors[formState[index].name]} value={formValues[formState[index].name]} {...item} onChange={handleChange} /> : ""))}</Form>
-
+        <Form className={props.formMode ?? "single"}>{formState?.length > 0 && formState.map((item, index) => ((props.formType === "put" && item.update) || (props.formType === "post" && item.add) ? <FormInput placeholder={item.placeHolder} key={`input` + index} id={index} error={formErrors[formState[index].name]} value={formValues[formState[index].name]} {...item} onChange={handleChange} /> : ""))}</Form>
         <Footer>
           <FormInput type="close" value={"Cancel"} onChange={closeModal} />
           <FormInput disabled={submitDisabled} type="submit" name="submit" value={props.button ? props.button : "Submit"} onChange={submitChange} />

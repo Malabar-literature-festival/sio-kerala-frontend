@@ -40,7 +40,7 @@ import Ingredient from "../../private/pages/mealSettings/Ingredient/ingredient";
 import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionRecord";
-import AddVariant from "../../private/pages/mealSettings/addVariant";
+// import AddVariant from "../../private/pages/mealSettings/addVariant";
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
@@ -417,15 +417,15 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "add-variant":
-      return (
-        <AddVariant
-          key={key}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+    // case "add-variant":
+    //   return (
+    //     <AddVariant
+    //       key={key}
+    //       addPrivilege={addPrivilege}
+    //       delPrivilege={delPrivilege}
+    //       updatePrivilege={updatePrivilege}
+    //     />
+    //   );
     case "appointment":
       return (
         <Appointment

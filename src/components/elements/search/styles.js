@@ -5,7 +5,7 @@ export const SearchInput = styled.div`
   animation: ease-in-out;
   animation-duration: 0.2s;
   margin-bottom: 5px;
-  margin-top:4px;
+  margin-top: 4px;
   input {
     box-sizing: border-box;
     outline: none !important;
@@ -42,5 +42,8 @@ export const SearchInput = styled.div`
     left: 13px;
     top: 12px;
     pointer-events: none;
+  }
+  &.select {
+    margin: 5px 5px;
   }
 `;

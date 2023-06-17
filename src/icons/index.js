@@ -103,8 +103,8 @@ export const ExternalIcon = () => (
     <path fill="currentColor" d="M336 0c-8.8 0-16 7.2-16 16s7.2 16 16 16H457.4L212.7 276.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L480 54.6V176c0 8.8 7.2 16 16 16s16-7.2 16-16V16c0-8.8-7.2-16-16-16H336zM64 64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V304c0-8.8-7.2-16-16-16s-16 7.2-16 16V448c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V128c0-17.7 14.3-32 32-32H208c8.8 0 16-7.2 16-16s-7.2-16-16-16H64z" />
   </Svg>
 );
-export const DownIcon = () => (
-  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+export const DownIcon = ({className}) => (
+  <Svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
     <path fill="currentColor" d="M199 401c9.4 9.4 24.6 9.4 33.9 0L425 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L41 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L199 401z" />
   </Svg>
 );
@@ -596,16 +596,16 @@ export const MealPlanEntryIcon = () => (
 );
 export const MealTagIcon = () => (
   <Svg
-  viewBox="0 0 512 512"
-  // version="1.1"
-  // id="Layer_1"
-  // xmlns="http://www.w3.org/2000/svg"
-  // xmlns:xlink="http://www.w3.org/1999/xlink"
-  // x="0px"
-  // y="0px"
-  // viewBox="0 0 640 512"
-  // style="enable-background:new 0 0 640 512;"
-  // xml:space="preserve"
+    viewBox="0 0 512 512"
+    // version="1.1"
+    // id="Layer_1"
+    // xmlns="http://www.w3.org/2000/svg"
+    // xmlns:xlink="http://www.w3.org/1999/xlink"
+    // x="0px"
+    // y="0px"
+    // viewBox="0 0 640 512"
+    // style="enable-background:new 0 0 640 512;"
+    // xml:space="preserve"
   >
     <path
       fill="currentColor"
@@ -772,6 +772,11 @@ export const ReloadIcon = () => (
     <path fill="currentColor" d="M417.3 360.2c3.2-5 8.7-8.2 14.7-8.2c12.3 0 20.3 12.8 13.7 23.2C406 438.2 335.9 480 256 480C132.3 480 32 379.7 32 256S132.3 32 256 32c56.1 0 107.4 20.6 146.7 54.7L433.4 56c5.1-5.1 12.1-8 19.3-8C467.8 48 480 60.2 480 75.3V176c0 8.8-7.2 16-16 16H363.3c-15.1 0-27.3-12.2-27.3-27.3c0-7.2 2.9-14.2 8-19.3l36-36C346.5 81.1 303.3 64 256 64C150 64 64 150 64 256s86 192 192 192c67.6 0 127.1-35 161.3-87.8zM448 86.6L374.6 160H448V86.6z" />
   </Svg>
 );
+export const PlainTickIcon = () => (
+  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+    <path fill="currentColor" d="M443.3 100.7c6.2 6.2 6.2 16.4 0 22.6l-272 272c-6.2 6.2-16.4 6.2-22.6 0l-144-144c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L160 361.4 420.7 100.7c6.2-6.2 16.4-6.2 22.6 0z" />
+  </Svg>
+);
 export const GetIcon = ({ icon }) => {
   const trimmedIcon = icon && typeof icon === "string" ? icon.trim() : "";
 
@@ -879,6 +884,8 @@ export const GetIcon = ({ icon }) => {
       return <ExcelIcon />;
     case "reload":
       return <ReloadIcon />;
+    case "checked":
+      return <PlainTickIcon />;
     default:
       return <QuestionIcon />;
   }

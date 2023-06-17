@@ -12,30 +12,20 @@ const RedeemCoupon = (props) => {
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
       placeholder: "Coupon",
-      // Name of the input field
-      name: "title",
-      // Validation rules for the input
+      name: "coupon",
       validation: "",
-      // Default value for the input field
       default: "",
       tag: true,
-      // Coupon text for the input field
       label: "Coupon",
-      // Indicates if the input field is required
       required: true,
-      // Indicates if the input field should be displayed in the view mode
       view: true,
-      // Indicates if the input field should be displayed in the add mode
       add: true,
-      // Indicates if the input field should be displayed in the update mode
       update: true,
     },
     {
-      type: "number",
+      type: "text",
       placeholder: "Coupon Code",
       name: "code",
       validation: "",
@@ -47,34 +37,51 @@ const RedeemCoupon = (props) => {
       add: true,
       update: true,
     },
+    // {
+    //   type: "text",
+    //   placeholder: "Discount Type",
+    //   name: "type",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "Coupon Type",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
     {
-      type: "text",
-      placeholder: "Coupon Type",
-      name: "type",
+      type: "select",
+      apiType: "API",
+      selectApi: "discount-type/select",
+      placeholder: "Discount Type",
+      name: "discountType",
+      validation: "",
+      showItem: "",
+      default: "",
+      tag: true,
+      label: "Discount Type",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "number",
+      placeholder: "User Count",
+      name: "userCount",
       validation: "",
       default: "",
       tag: true,
-      label: "Coupon Type",
+      label: "User Count",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Uses Count",
-      name: "usesCount",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Uses Count",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
+      type: "number",
       placeholder: "Min Purchase",
       name: "minPurchase",
       validation: "",
@@ -87,7 +94,7 @@ const RedeemCoupon = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "number",
       placeholder: "Max Purchase",
       name: "maxDiscount",
       validation: "",
@@ -100,7 +107,7 @@ const RedeemCoupon = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "number",
       placeholder: "Discount",
       name: "discount",
       validation: "",
@@ -125,147 +132,58 @@ const RedeemCoupon = (props) => {
       add: true,
       update: true,
     },
+    {
+      type: "date",
+      placeholder: "Start Date",
+      name: "startDate",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Start Date",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "date",
+      placeholder: "End Date",
+      name: "endDate",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "End Date",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Is Active",
+      name: "status",
+      validation: "",
+      showItem: "",
+      default: "",
+      tag: true,
+      label: "Is Active",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
   ]);
-  // const [timingAttributes] = useState([
-  //   {
-  //     type: "text",
-  //     placeholder: "Label",
-  //     name: "label",
-  //     validation: "",
-  //     default: "",
-  //     label: "Label",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "number",
-  //     placeholder: "Sequence",
-  //     name: "sequence",
-  //     validation: "",
-  //     default: "",
-  //     label: "Sequence",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Icon",
-  //     name: "icon",
-  //     validation: "",
-  //     default: "",
-  //     label: "Icon",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Path",
-  //     name: "path",
-  //     validation: "",
-  //     default: "",
-  //     label: "Path",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Element Name",
-  //     name: "element",
-  //     validation: "",
-  //     default: "",
-  //     label: "Element Name",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Status",
-  //     name: "status",
-  //     validation: "",
-  //     default: "true",
-  //     label: "Status",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Is Link",
-  //     name: "isLink",
-  //     validation: "",
-  //     default: "false",
-  //     label: "Is Link",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  // ]);
 
-  // const [actions] = useState([
-  //   {
-  //     // Element type for rendering
-  //     element: "button",
-  //     // Type of action, in this case a sublist
-  //     type: "subList",
-  //     // Unique identifier for the submenu
-  //     id: "sub-menu",
-  //     // Displayed item title
-  //     itemTitle: "title",
-  //     // Title of the submenu
-  //     title: "Sub Menu",
-  //     // Additional attributes for timing
-  //     attributes: timingAttributes,
-  //     // Parameters for API and submenu configuration
-  //     params: {
-  //       // API endpoint for submenu data
-  //       api: `sub-menu`,
-  //       // Parent reference for the submenu
-  //       parentReference: "menu",
-  //       // Property name for the submenu item title
-  //       itemTitle: "label",
-  //       // Short name for the submenu
-  //       shortName: "Sub Menu",
-  //       // Privileges for adding submenu items
-  //       addPrivilege: true,
-  //       // Privileges for deleting submenu items
-  //       delPrivilege: true,
-  //       // Privileges for updating submenu items
-  //       updatePrivilege: true,
-  //       // Custom CSS class for styling
-  //       customClass: "medium",
-  //     },
-  //   },
-  // ]);
-  // Use the useTranslation hook from react-i18next to handle translations
-  // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
     <Container className="noshadow">
-      {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
         // actions={actions}
-        // API endpoint for fetching menu data
         api={`redeem-coupon`}
-        // Property name for the title of each menu item
         // itemTitle={`redeem coupon`}
         // Short name or label for the menu
-        itemTitle={{ name: "title", type: "text", collection: "" }}
+        itemTitle={{ name: "coupon", type: "text", collection: "" }}
         shortName={`Redeem coupon`}
-        // Privilege flag indicating whether the user can add menu items
         {...props}
-        // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
     </Container>

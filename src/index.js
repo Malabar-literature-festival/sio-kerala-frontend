@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import "bootstrap/dist/css/bootstrap.min.css";
 // if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
 //   navigator.serviceWorker
 //     .register("/service-worker.js")

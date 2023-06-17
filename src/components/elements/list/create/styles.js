@@ -5,8 +5,16 @@ export const Form = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  &.double {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-gap: 10px; /* Adjust the gap between columns if desired */
+  }
   @media (max-width: 768px) {
     border: 0;
+    &.double {
+      display: flex;
+    }
   }
 `;
 const fadeIn = keyframes`
@@ -53,11 +61,17 @@ export const Page = styled.div`
   animation-duration: 0.2s;
   margin: auto;
   padding: 1em;
+  &.double {
+    width: 50%;
+  }
   @media (max-width: 768px) {
     width: 100%;
     position: relative;
     top: 0;
     padding: 0;
+    &.double {
+    width: 100%;
+  }
   }
 `;
 export const Header = styled.div`
@@ -94,4 +108,11 @@ export const ErrorMessage = styled.div`
   width: 100%;
   text-align: left;
   float: left;
+`;
+export const LnputLayout = styled.div`
+  display: flex;
+  &.single {
+  }
+  &.double {
+  }
 `;
