@@ -148,7 +148,7 @@ const UserType = (props) => {
       // Type of action, in this case a sublist
       type: "subList",
       // Unique identifier for the submenu
-      id: "sub-menu",
+      id: "sub-menu-1",
       // Displayed item title
       // itemTitle: "title",
       itemTitle: {
@@ -163,7 +163,7 @@ const UserType = (props) => {
       // Parameters for API and submenu configuration
       params: {
         // API endpoint for submenu data
-        api: `user-type`,
+        api: `user-type-1`,
         // Parent reference for the submenu
         parentReference: "menu",
         // Property name for the submenu item title

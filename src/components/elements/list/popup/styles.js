@@ -27,7 +27,7 @@ export const Td = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  border-bottom:1px solid #D9D9D9;
+  border-top: 1px solid #d9d9d9;
   &.no,
   &.name {
     border: 1px solid gray;
@@ -63,11 +63,20 @@ export const TrBody = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  &.double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    &.double {
+    display: flex;
+  }
+  }
 `;
 export const Title = styled.span`
   margin-right: 5px;
   margin-bottom: 5px;
-  color:grey;
+  color: grey;
 `;
 export const Head = styled.span`
   font-weight: bold;
@@ -80,7 +89,6 @@ export const Head = styled.span`
   }
 `;
 export const DataItem = styled.span`
-font-weight:bold;
-  padding: 5px 10px;
+  font-weight: bold;
   border-radius: 10px;
 `;

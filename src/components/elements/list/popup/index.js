@@ -7,9 +7,10 @@ import Tabs from "../../tab";
 import { useCallback, useEffect, useState } from "react";
 import { RowContainer } from "../../../styles/containers/styles";
 import ListTable from "../list";
-export const DisplayInformations = ({ attributes, data }) => {
+export const DisplayInformations = ({ attributes, data, formMode }) => {
+    console.log(formMode)
   return (
-    <TrBody className="small">
+    <TrBody className={formMode}>
       {attributes.map((attribute, index) => {
         if (attribute.view) {
           try {
@@ -39,7 +40,7 @@ export const DisplayInformations = ({ attributes, data }) => {
     </TrBody>
   );
 };
-const Popup = ({ viewMode, themeColors, openData, setLoaderBox, setMessage, closeModal, itemTitle }) => {
+const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMessage, closeModal, itemTitle }) => {
   const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
 
   const tabHandler = useCallback(() => {
@@ -48,15 +49,15 @@ const Popup = ({ viewMode, themeColors, openData, setLoaderBox, setMessage, clos
       .map((item, index) => ({
         name: `${item.id}-${index}`,
         title: item.title,
-        element: <ListTable viewMode={item.type ?? "subList"} setMessage={setMessage} setLoaderBox={setLoaderBox} parentReference={item?.params?.parentReference} referenceId={openData?.data?._id} attributes={item.attributes} {...item.params}></ListTable>,
+        element: <ListTable formMode={item.formMode} viewMode={item.type ?? "subList"} setMessage={setMessage} setLoaderBox={setLoaderBox} parentReference={item?.params?.parentReference} referenceId={openData?.data?._id} attributes={item.attributes} {...item.params}></ListTable>,
       }));
     tempTab.unshift({
       name: "information",
       title: "Informations",
-      element: <DisplayInformations attributes={openData.attributes} data={openData.data} />,
+      element: <DisplayInformations formMode={formMode} attributes={openData.attributes} data={openData.data} />,
     });
     setTabs(tempTab);
-  }, [setMessage, setLoaderBox, openData]);
+  }, [setMessage, setLoaderBox, openData, formMode]);
 
   const [tabs, setTabs] = useState([]);
 
