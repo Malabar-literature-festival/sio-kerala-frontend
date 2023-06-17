@@ -36,7 +36,6 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
   const [subAttributes, setSubAttributes] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [count, setCount] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
   const themeColors = useSelector((state) => state.themeColors);
   const selectedMenuItem = useSelector((state) => state.selectedMenu);
   const dispatch = useDispatch();
@@ -122,7 +121,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     setLoaderBox(users.isLoading);
     if (currentIndex === 0 && users.data?.count) {
       setCount(users.data.filterCount);
-      setTotalCount(users.data.totalCount);
+      // setTotalCount(users.data.totalCount);
     }
   }, [users, currentIndex]);
 
@@ -325,10 +324,11 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
     const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
+
     return (
       <Tr className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody className={signleRecord ? "single" : ""}>
-          <Td  key={`row-head-${slNo}`}>
+          <Td key={`row-head-${slNo}`}>
             <Head>
               {signleRecord ? (
                 <>
@@ -395,15 +395,17 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
                 )
               );
             })}
-            {!signleRecord && <More
-              onClick={() => {
-                setIsOpen(true);
-                setOpenData({ actions, attributes, data });
-                setSubAttributes({ actions, attributes, data });
-              }}
-            >
-              <GetIcon icon={"open"}></GetIcon>
-            </More>}
+            {!signleRecord && (
+              <More
+                onClick={() => {
+                  setIsOpen(true);
+                  setOpenData({ actions, attributes, data });
+                  setSubAttributes({ actions, attributes, data });
+                }}
+              >
+                <GetIcon icon={"open"}></GetIcon>
+              </More>
+            )}
             <ToolTipContainer
               ref={selectRef.current[slNo]}
               onClick={() => {
@@ -478,7 +480,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
           </Td>
         </TrBody>
         {signleRecord ? (
-          <DisplayInformations attributes={attributes} data={data} />
+          <DisplayInformations formMode={formMode} attributes={attributes} data={data} />
         ) : (
           <TrBody className="small">
             {attributes.map((attribute, index) => {
@@ -673,7 +675,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             >
               <PreviousIcon />
             </ArrowButton>
-            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count} out of ${totalCount}`}
+            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} out of ${count} records`}
             <ArrowButton
               theme={themeColors}
               onClick={() => {
@@ -684,10 +686,10 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             </ArrowButton>
           </Count>
         ) : (
-          <Count>{`Showing ${currentIndex + 1} -  ${count} from ${count} out of ${totalCount}`}</Count>
+          <Count>{`Showing ${count} record${count > 1 ? "s":''}`}</Count>
         )
       ) : (
-        <Count>{`No Result Found`}</Count>
+        <Count>{`No records found`}</Count>
       )}
 
       {isCreating && (
