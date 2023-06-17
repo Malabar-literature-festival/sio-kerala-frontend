@@ -20,7 +20,7 @@ const WeeklyMealPlan = (props) => {
       showItem: "userDisplayName",
       validation: "",
       default: "",
-      tag: true,
+      // tag: true,
       label: "User",
       required: true,
       view: true,
