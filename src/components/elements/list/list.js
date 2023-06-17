@@ -1,28 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Table,
-  Button,
-  Td,
-  Tr,
-  Count,
-  ArrowButton,
-  AddButton,
-  ButtonPanel,
-  Filter,
-  Filters,
-  ToggleContainer,
-  ToggleInput,
-  ToggleSlider,
-  NoData,
-  FilterBox,
-  More,
-  Actions,
-  Title,
-  DataItem,
-  ToolTipContainer,
-  Head,
-  TrBody,
-} from "./styles";
+import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
@@ -42,23 +19,8 @@ import { ToolTip } from "../../styles/list/styles";
 // import { convertMinutesToHHMM } from "../../functions/minuteToHour";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
-const ListTable = ({
-  formMode = "single",
-  parentReference = "_id",
-  referenceId = 0,
-  actions = [],
-  api,
-  setMessage,
-  attributes = [],
-  addPrivilege = true,
-  delPrivilege = true,
-  updatePrivilege = true,
-  shortName = "Item",
-  itemTitle = { type: "text", name: "title" },
-  datefilter = false,
-  preFilter = {},
-  viewMode = "list",
-}) => {
+import Popup, { DisplayInformations } from "./popup";
+const ListTable = ({ formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -97,11 +59,7 @@ const ListTable = ({
   const [updateId, setUpdateId] = useState("");
   const [updateValues, setUpdateValues] = useState({});
   const [udpateView, setUpdateView] = useState(() => {});
-  const [filterView, setFilterView] = useState(
-    referenceId !== 0
-      ? { [parentReference]: referenceId, ...preFilter }
-      : { ...preFilter }
-  );
+  const [filterView, setFilterView] = useState(referenceId !== 0 ? { [parentReference]: referenceId, ...preFilter } : { ...preFilter });
   useEffect(() => {
     const addValuesTemp = {
       addValues: {},
@@ -114,20 +72,12 @@ const ListTable = ({
     let date = new Date();
     attributes.forEach((item) => {
       if (item.type === "checkbox") {
-        let bool = JSON.parse(
-          item.default === "false" || item.default === "true"
-            ? item.default
-            : "false"
-        );
+        let bool = JSON.parse(item.default === "false" || item.default === "true" ? item.default : "false");
         if (item.add) {
           addValuesTemp.addValues[item.name] = bool;
         }
         addValuesTemp.updateValues[item.name] = bool;
-      } else if (
-        item.type === "datetime" ||
-        item.type === "date" ||
-        item.type === "time"
-      ) {
+      } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
         addValuesTemp.addValues[item.name] = date?.toISOString();
         if (item.add) {
           addValuesTemp.updateValues[item.name] = date?.toISOString();
@@ -165,18 +115,7 @@ const ListTable = ({
 
     // setFilter(tempFilter);
     setInitialized(true);
-  }, [
-    attributes,
-    dispatch,
-    setPrevCrud,
-    prevCrud,
-    setFormInput,
-    setAddValues,
-    setUpdateValues,
-    setFilterView,
-    parentReference,
-    referenceId,
-  ]);
+  }, [attributes, dispatch, setPrevCrud, prevCrud, setFormInput, setAddValues, setUpdateValues, setFilterView, parentReference, referenceId]);
 
   // end processing attributes
   useEffect(() => {
@@ -197,7 +136,8 @@ const ListTable = ({
       dispatch(addPageObject(currentApi, currentIndex, filterView));
     } catch {}
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [openData, setOpenData] = useState({});
   //crud functions
   const [isCreating, setIsCreating] = useState(false);
   const isCreatingHandler = (value, callback) => {
@@ -218,10 +158,7 @@ const ListTable = ({
       const updateValues = {};
       setUpdateId(value._id);
       formInput.forEach((item) => {
-        const itemValue =
-          item.collection?.length > 0 && item.showItem?.length > 0
-            ? value[item.collection][item.showItem]
-            : value[item.name] ?? "";
+        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name] ?? "";
         if (item.update) {
           if (item.type === "checkbox") {
             let bool = value[item.name]?.toString() === "true" ? true : false;
@@ -232,19 +169,9 @@ const ListTable = ({
           } else if (item.type === "select") {
             console.log(itemValue);
             console.log(value[item.name]);
-            updateValues[item.name] =
-              typeof value[item.name] === "undefined"
-                ? ""
-                : typeof value[item.name] === "string" ||
-                  typeof value[item.name] === "number"
-                ? value[item.name]
-                : value[item.name]?._id
-                ? value[item.name]._id
-                : "";
+            updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
           } else if (item.type === "image") {
-            updateValues["old_" + item.name] = value[item.name]
-              ? value[item.name]
-              : "";
+            updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
             updateValues[item.name] = [];
           } else {
             updateValues[item.name] = itemValue ? itemValue : "";
@@ -269,9 +196,7 @@ const ListTable = ({
         if (response.status === 200) {
           setMessage({
             type: 1,
-            content: `The '${
-              item.title ? item.title : shortName
-            }' deleted successfully!`,
+            content: `The '${item.title ? item.title : shortName}' deleted successfully!`,
             proceed: t("okay"),
           });
           setCount((count) => count - 1);
@@ -306,10 +231,7 @@ const ListTable = ({
   };
   const submitHandler = async (data) => {
     setLoaderBox(true);
-    const saveData =
-      referenceId === 0
-        ? { ...data }
-        : { ...data, [parentReference]: referenceId };
+    const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
       .then((response) => {
         if (response.status === 200) {
@@ -400,30 +322,22 @@ const ListTable = ({
 
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
-    const titleValue =
-      (itemTitle.collection?.length > 0
-        ? data[itemTitle.collection]
-          ? data[itemTitle.collection][itemTitle.name]
-          : "NIl"
-        : data[itemTitle.name]) ??
-      "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
-    const signleRecord =
-      viewMode === "list" || viewMode === "subList" ? false : true;
+    const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+    const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
     return (
-      <Tr key={`row-${shortName}-${data._id ?? slNo}`}>
-        <TrBody>
-          <Td key={`row-head-${slNo}`}>
+      <Tr className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
+        <TrBody className={signleRecord ? "single" : ""}>
+          <Td  key={`row-head-${slNo}`}>
             <Head>
               {signleRecord ? (
-                <span>{shortName}</span>
+                <>
+                  <GetIcon icon={selectedMenuItem.icon} />
+                  <span>{shortName}</span>
+                </>
               ) : (
                 <>
-                  <GetIcon icon={selectedMenuItem.icon} />{" "}
-                  <span>{` ${getValue(
-                    { type: itemTitle.type ?? "text" },
-                    titleValue
-                  )}`}</span>
+                  <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
                 </>
               )}
             </Head>
@@ -440,10 +354,7 @@ const ListTable = ({
                       onChange={async (event) => {
                         // item.callback(item, data);
                         setLoaderBox(true);
-                        await postData(
-                          { status: event.target.checked },
-                          `${item.api}/${data._id}`
-                        )
+                        await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
                           .then((response) => {
                             if (response.status === 200) {
                               if (response.data?.message) {
@@ -484,6 +395,15 @@ const ListTable = ({
                 )
               );
             })}
+            {!signleRecord && <More
+              onClick={() => {
+                setIsOpen(true);
+                setOpenData({ actions, attributes, data });
+                setSubAttributes({ actions, attributes, data });
+              }}
+            >
+              <GetIcon icon={"open"}></GetIcon>
+            </More>}
             <ToolTipContainer
               ref={selectRef.current[slNo]}
               onClick={() => {
@@ -493,11 +413,7 @@ const ListTable = ({
               <More className={currentAction === data._id ? `active` : ``}>
                 <GetIcon icon={"dots"}></GetIcon>
               </More>
-              <ToolTip
-                className={
-                  currentAction === data._id ? `actions` : `actions hide`
-                }
-              >
+              <ToolTip className={currentAction === data._id ? `actions` : `actions hide`}>
                 <Actions>
                   {updatePrivilege && (
                     <Button
@@ -521,10 +437,7 @@ const ListTable = ({
                               item.callback(item, data);
                             } else if (item.type === "call") {
                               window.location.href = `tel:${data.mobileNumber}`;
-                            } else if (
-                              item.type === "subList" ||
-                              item.type === "subItem"
-                            ) {
+                            } else if (item.type === "subList" || item.type === "subItem") {
                               setSubAttributes({ item, data });
                               setShowSubList(true);
                             } else {
@@ -546,15 +459,7 @@ const ListTable = ({
                         setMessage({
                           type: 2,
                           content: t("deleteRequest", {
-                            label: getValue(
-                              { type: itemTitle.type ?? "text" },
-                              titleValue
-                            )
-                              ? getValue(
-                                  { type: itemTitle.type ?? "text" },
-                                  titleValue
-                                )
-                              : "Item",
+                            label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item",
                           }),
                           proceed: t("delete"),
                           onProceed: deleteHandler,
@@ -572,43 +477,44 @@ const ListTable = ({
             </ToolTipContainer>
           </Td>
         </TrBody>
-        <TrBody className="small">
-          {attributes.map((attribute, index) => {
-            if (attribute.view && (attribute.tag ?? false)) {
-              try {
-                const itemValue =
-                  attribute.collection?.length > 0 &&
-                  attribute.showItem?.length > 0
-                    ? data[attribute.collection][attribute.showItem]
-                    : data[attribute.name];
-                if (attribute.type === "image") {
-                  return "";
+        {signleRecord ? (
+          <DisplayInformations attributes={attributes} data={data} />
+        ) : (
+          <TrBody className="small">
+            {attributes.map((attribute, index) => {
+              if (attribute.view && (attribute.tag ?? false)) {
+                try {
+                  const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+                  if (attribute.type === "image") {
+                    return "";
+                  }
+                  return (
+                    <Td key={index}>
+                      <Title>{attribute.label}</Title>
+                      <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                    </Td>
+                  );
+                } catch (error) {
+                  console.log(error);
+                  return (
+                    <Td key={index}>
+                      <Title>{attribute.label}</Title>
+                      <DataItem>{`--`} </DataItem>
+                    </Td>
+                  );
                 }
-                return (
-                  <Td key={index}>
-                    <Title>{attribute.label}</Title>
-                    <DataItem>{getValue(attribute, itemValue)} </DataItem>
-                  </Td>
-                );
-              } catch (error) {
-                console.log(error);
-                return (
-                  <Td key={index}>
-                    <Title>{attribute.label}</Title>
-                    <DataItem>{`--`} </DataItem>
-                  </Td>
-                );
               }
-            }
 
-            return null;
-          })}
-        </TrBody>
+              return null;
+            })}
+          </TrBody>
+        )}
       </Tr>
     );
   };
   const closeModal = () => {
     setShowSubList(false);
+    setIsOpen(false);
   };
   const [searchValue, setSearchValue] = useState("");
   // const [filter, setFilter] = useState(false);
@@ -624,9 +530,7 @@ const ListTable = ({
   const [currentAction, setCurrentAction] = useState("0");
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const clickedInsideRefs = selectRef.current.filter(
-        (ref) => ref.current && ref.current.contains(event.target)
-      );
+      const clickedInsideRefs = selectRef.current.filter((ref) => ref.current && ref.current.contains(event.target));
 
       if (clickedInsideRefs.length === 0) {
         setCurrentAction("");
@@ -662,26 +566,18 @@ const ListTable = ({
             const name = t(attribute.label);
             switch (attribute.type) {
               case "minute":
-                return (excelRow[name] = convertMinutesToHHMM(
-                  parseFloat(data[attribute.name] ?? 0)
-                ));
+                return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
               case "datetime":
                 return (excelRow[name] = dateTimeFormat(data[attribute?.name]));
               case "date":
                 return (excelRow[name] = dateFormat(data[attribute?.name]));
               case "select":
                 if (attribute.apiType === "JSON") {
-                  return (excelRow[name] = attribute.selectApi
-                    .filter(
-                      (item) =>
-                        item.id.toString() === data[attribute.name]?.toString()
-                    )
-                    .map((filteredItem, index) => filteredItem.value));
+                  return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
                 } else if (attribute.apiType === "CSV") {
                   return (excelRow[name] = data[attribute.name]);
                 } else {
-                  return (excelRow[name] =
-                    data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                  return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
                 }
 
               default:
@@ -689,31 +585,16 @@ const ListTable = ({
                   case "undefined":
                     return (excelRow[name] = "Not Found");
                   case "object":
-                    return (excelRow[name] =
-                      data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                    return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
                   case "boolean":
                     return (excelRow[name] = data[attribute.name].toString());
                   case "string":
                   case "number":
                   default:
-                    if (
-                      attribute.type === "select" &&
-                      attribute.apiType === "JSON"
-                    ) {
-                      return attribute.selectApi
-                        .filter(
-                          (item) =>
-                            item.id.toString() ===
-                            data[attribute.name]?.toString()
-                        )
-                        .map(
-                          (filteredItem) =>
-                            (excelRow[name] = filteredItem.value)
-                        );
+                    if (attribute.type === "select" && attribute.apiType === "JSON") {
+                      return attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem) => (excelRow[name] = filteredItem.value));
                     } else {
-                      return (excelRow[name] = data[attribute.name]
-                        ?.toString()
-                        .substring(0, 200));
+                      return (excelRow[name] = data[attribute.name]?.toString().substring(0, 200));
                     }
                 }
             }
@@ -741,13 +622,7 @@ const ListTable = ({
     <RowContainer>
       <ButtonPanel>
         <FilterBox>
-          <Search
-            title={"Search"}
-            theme={themeColors}
-            placeholder="Search"
-            value={searchValue}
-            onChange={handleChange}
-          ></Search>
+          <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
           <Filter
             theme={themeColors}
             onClick={() => {
@@ -770,29 +645,11 @@ const ListTable = ({
           >
             <GetIcon icon={"excel"} />
           </Filter>
-          {datefilter && (
-            <DateRangeSelector
-              onChange={dateRangeChange}
-              themeColors={themeColors}
-            ></DateRangeSelector>
-          )}
+          {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>
           {formInput.map((item, index) => {
-            return (
-              item.type === "select" &&
-              (item.filter ?? true) === true && (
-                <FormInput
-                  customClass={"filter"}
-                  placeholder={item.placeHolder}
-                  value={filterView[item.name]}
-                  key={`input` + index}
-                  id={item.name}
-                  {...item}
-                  onChange={filterChange}
-                />
-              )
-            );
+            return item.type === "select" && (item.filter ?? true) === true && <FormInput customClass={"filter"} placeholder={item.placeHolder} value={filterView[item.name]} key={`input` + index} id={item.name} {...item} onChange={filterChange} />;
           })}
         </Filters>
         {(addPrivilege ? addPrivilege : false) && (
@@ -802,23 +659,9 @@ const ListTable = ({
           </AddButton>
         )}
       </ButtonPanel>
-      <Table>
-        {users.data?.response?.length > 0 &&
-          users.data.response.map((item, index) => (
-            <TableRowWithActions
-              key={`${shortName}-${index}`}
-              slNo={index}
-              attributes={attributes}
-              data={item}
-            />
-          ))}
-      </Table>
-      {!users.data && !users.data?.response && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
-      {users.data?.response?.length === 0 && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
+      <Table>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (
         count > 10 ? (
           <Count>
@@ -830,24 +673,18 @@ const ListTable = ({
             >
               <PreviousIcon />
             </ArrowButton>
-            {`Showing ${currentIndex + 1} - ${
-              currentIndex + 10 > count ? count : currentIndex + 10
-            } from ${count} out of ${totalCount}`}
+            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count} out of ${totalCount}`}
             <ArrowButton
               theme={themeColors}
               onClick={() => {
-                setCurrentIndex((prev) =>
-                  prev + 10 > count ? currentIndex : currentIndex + 10
-                );
+                setCurrentIndex((prev) => (prev + 10 > count ? currentIndex : currentIndex + 10));
               }}
             >
               <NextIcon />
             </ArrowButton>
           </Count>
         ) : (
-          <Count>{`Showing ${
-            currentIndex + 1
-          } -  ${count} from ${count} out of ${totalCount}`}</Count>
+          <Count>{`Showing ${currentIndex + 1} -  ${count} from ${count} out of ${totalCount}`}</Count>
         )
       ) : (
         <Count>{`No Result Found`}</Count>
@@ -869,40 +706,11 @@ const ListTable = ({
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && (
-        <CrudForm
-          formMode={formMode}
-          api={api}
-          formType={"put"}
-          updateId={updateId}
-          header={t("update", { label: t(shortName ? shortName : "Form") })}
-          formInput={formInput}
-          formErrors={errroInput}
-          formValues={updateValues}
-          submitHandler={updateHandler}
-          isOpenHandler={isEditingHandler}
-          isOpen={isEditing}
-        ></CrudForm>
-      )}
-      {action.data && (
-        <Manage
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          onClose={closeManage}
-          {...action}
-        ></Manage>
-      )}
+      {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && (
-        <SubPage
-          formMode={formMode}
-          closeModal={closeModal}
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          itemTitle={itemTitle}
-          subAttributes={subAttributes}
-        ></SubPage>
-      )}
+      {isOpen && <Popup formMode={formMode} closeModal={closeModal} themeColors={themeColors} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} openData={openData}></Popup>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
     <RowContainer>
@@ -917,30 +725,16 @@ const ListTable = ({
             <GetIcon icon={"reload"} />
           </Filter>
         </FilterBox>
-        {(addPrivilege ? addPrivilege : false) &&
-          users.data?.response?.length === 0 && (
-            <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
-              <AddIcon></AddIcon>
-              {t("addNew", { label: t(shortName) })}
-            </AddButton>
-          )}
-      </ButtonPanel>
-      <Table>
-        {users.data?.response?.length > 0 && (
-          <TableRowWithActions
-            key={`${shortName}-${0}`}
-            slNo={0}
-            attributes={attributes}
-            data={users.data?.response[0]}
-          />
+        {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
+          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+            <AddIcon></AddIcon>
+            {t("addNew", { label: t(shortName) })}
+          </AddButton>
         )}
-      </Table>
-      {!users.data && !users.data?.response && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
-      {users.data?.response?.length === 0 && (
-        <NoData>No {t(shortName)} found!</NoData>
-      )}
+      </ButtonPanel>
+      <Table>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
+      {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
 
       {isCreating && (
         <CrudForm
@@ -957,29 +751,9 @@ const ListTable = ({
           isOpen={isCreating}
         ></CrudForm>
       )}
-      {isEditing && (
-        <CrudForm
-          formMode={formMode}
-          api={api}
-          formType={"put"}
-          updateId={updateId}
-          header={t("update", { label: t(shortName ? shortName : "Form") })}
-          formInput={formInput}
-          formErrors={errroInput}
-          formValues={updateValues}
-          submitHandler={updateHandler}
-          isOpenHandler={isEditingHandler}
-          isOpen={isEditing}
-        ></CrudForm>
-      )}
-      {action.data && (
-        <Manage
-          setMessage={setMessage}
-          setLoaderBox={setLoaderBox}
-          onClose={closeManage}
-          {...action}
-        ></Manage>
-      )}
+      {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
+      {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
+      {isOpen && <Popup data={openData} actions={actions}></Popup>}
       {showLoader && <Loader></Loader>}
     </RowContainer>
   );

@@ -34,9 +34,9 @@ export const Th = styled.th`
 export const Tr = styled.div`
   border-bottom: 1px solid #ccc;
   display: flex;
-  padding: .5em 2em 12px;
+  padding: 0.5em 2em 12px;
   @media screen and (max-width: 768px) {
-     padding: 1em 1em 0.5em;
+    padding: 1em 1em 0.5em;
   }
   flex-direction: column;
   /* padding: 5px 26px; */
@@ -44,6 +44,13 @@ export const Tr = styled.div`
   &:hover {
     background-color: #ddedeb;
   }
+  &.single{
+    padding:0;
+  }
+  &.single:hover{
+    background-color: initial;
+  }
+  
 `;
 export const Td = styled.div`
   text-align: left;
@@ -85,6 +92,9 @@ export const TrBody = styled.div`
   flex-flow: wrap;
   &.small {
     font-size: 13px;
+  }
+  &.single{
+       padding: 10px 30px;
   }
 `;
 export const Title = styled.span`
@@ -152,9 +162,9 @@ export const Button = styled.button`
 export const Count = styled.div`
   padding: 1em 2em;
   @media screen and (max-width: 768px) {
-     padding: 1em 1em 0.5em;
+    padding: 1em 1em 0.5em;
   }
-  text-align: right;  
+  text-align: right;
   height: 25px;
   justify-content: flex-end;
   display: flex;
@@ -220,7 +230,7 @@ export const FilterBox = styled.div`
 export const Filter = styled.button`
   background: transparent;
   padding: 0 0.5em;
-  font-size: 1em;
+  font-size: initial;
   margin-right: 0.5em;
   outline: none;
   border: 0px solid #ddd;
@@ -271,6 +281,7 @@ export const NoData = styled.div`
   display: flex;
   align-items: center;
   height: 100px;
+  align-self:center;
 `;
 export const Img = styled.img`
   height: 50px;

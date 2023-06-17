@@ -4,6 +4,7 @@ export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
+  padding: 10px 30px;
 `;
 
 export const TabHeader = styled.div`
