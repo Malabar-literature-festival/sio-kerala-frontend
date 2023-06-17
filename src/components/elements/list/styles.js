@@ -5,6 +5,15 @@ export const Table = styled.div`
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
+  &.double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    &.double {
+      display: flex;
+    }
+  }
   &.auto {
     width: auto;
   }
@@ -41,16 +50,20 @@ export const Tr = styled.div`
   flex-direction: column;
   /* padding: 5px 26px; */
   padding-bottom: 12px;
+  .double & {
+    &:nth-child(even) {
+      border-left: 1px solid #ccc;
+    }
+  }
   &:hover {
     background-color: #ddedeb;
   }
-  &.single{
-    padding:0;
+  &.single {
+    padding: 0;
   }
-  &.single:hover{
+  &.single:hover {
     background-color: initial;
   }
-  
 `;
 export const Td = styled.div`
   text-align: left;
@@ -93,8 +106,8 @@ export const TrBody = styled.div`
   &.small {
     font-size: 13px;
   }
-  &.single{
-       padding: 10px 30px;
+  &.single {
+    padding: 10px 30px;
   }
 `;
 export const Title = styled.span`
@@ -281,7 +294,7 @@ export const NoData = styled.div`
   display: flex;
   align-items: center;
   height: 100px;
-  align-self:center;
+  align-self: center;
 `;
 export const Img = styled.img`
   height: 50px;
