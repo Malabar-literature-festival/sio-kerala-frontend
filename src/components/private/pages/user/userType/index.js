@@ -195,7 +195,7 @@ const UserType = (props) => {
       <ListTable
         // Actions to be displayed in the ListTable
         // actions={actions}
-        actions={actions}
+        // actions={actions}
         displayColumn="double"
         // API endpoint for fetching menu data
         api={`user-type`}
