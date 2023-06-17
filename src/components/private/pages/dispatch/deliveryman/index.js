@@ -15,11 +15,11 @@ const DeliveryMan = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "CPR/Mobile",
+      placeholder: "Username",
       name: "username",
       validation: "",
       default: "",
-      label: "CPR/Mobile",
+      label: "username",
       required: true,
       view: true,
       add: true,
@@ -50,6 +50,7 @@ const DeliveryMan = (props) => {
       add: true,
       update: true,
     },
+
     {
       type: "select",
       placeholder: "Gender",
@@ -114,7 +115,7 @@ const DeliveryMan = (props) => {
     //   update: true,
     // },
     {
-      type: "text",
+      type: "textarea",
       apiType: "",
       selectApi: "",
       placeholder: "Address",
@@ -129,6 +130,19 @@ const DeliveryMan = (props) => {
       view: true,
       add: false,
       update: false,
+    },
+    {
+      type: "password",
+      placeholder: "password",
+      name: "password",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "password",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
     },
     {
       type: "text",
