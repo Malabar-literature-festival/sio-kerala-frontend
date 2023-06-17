@@ -167,6 +167,7 @@ const DeliveryInstruction = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`delivery-instruction`}
+        displayColumn="double"
         // Property name for the title of each menu item
         itemTitle={{
           name: "deliveryInstructionName",

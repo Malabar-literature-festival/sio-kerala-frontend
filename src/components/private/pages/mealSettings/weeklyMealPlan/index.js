@@ -61,6 +61,7 @@ const WeeklyMealPlan = (props) => {
       <ListTable
         // actions={actions}
         api={`weekly-meal-plan`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{
           name: "userDisplayName",

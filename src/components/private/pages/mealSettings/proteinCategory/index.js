@@ -220,9 +220,14 @@ const ProteinCategory = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`protein-categories`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "proteinCategoriesName", type: "text", collection: "" }}
+        itemTitle={{
+          name: "proteinCategoriesName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Protein Category`}
         // Privilege flag indicating whether the user can add menu items

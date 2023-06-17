@@ -145,6 +145,7 @@ const VariantGroup = (props) => {
       <ListTable
         actions={actions}
         api={`variant-group`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{ name: "variantGroupName", type: "text", collection: "" }}
         shortName={`Variant Group`}

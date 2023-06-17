@@ -180,6 +180,7 @@ const DeliverySlot = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`delivery-slot`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         // Short name or label for the menu

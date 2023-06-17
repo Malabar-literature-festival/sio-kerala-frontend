@@ -15,11 +15,11 @@ const Dietician = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "CPR/Mobile",
+      placeholder: "username",
       name: "username",
       validation: "",
       default: "",
-      label: "CPR/Mobile",
+      label: "username",
       required: true,
       view: true,
       add: true,
@@ -114,7 +114,7 @@ const Dietician = (props) => {
     //   update: true,
     // },
     {
-      type: "text",
+      type: "textarea",
       apiType: "",
       selectApi: "",
       placeholder: "Address",
@@ -129,6 +129,19 @@ const Dietician = (props) => {
       view: true,
       add: false,
       update: false,
+    },
+    {
+      type: "password",
+      placeholder: "password",
+      name: "password",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "password",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
     },
     {
       type: "text",

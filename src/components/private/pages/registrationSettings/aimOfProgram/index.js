@@ -157,11 +157,11 @@ const AimOfProgram = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`aimof-programs`}
+        displayColumn="double"
         // Property name for the title of each menu item
         itemTitle={{ name: "aimofProgramName", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Aim Of Program`}
-        displayColumn={"double"}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

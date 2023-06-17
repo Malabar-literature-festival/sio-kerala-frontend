@@ -157,6 +157,7 @@ const FoodlikeList = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`foodlike-lists`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "foodLikeListName", type: "text", collection: "" }}

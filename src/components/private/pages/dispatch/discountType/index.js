@@ -31,6 +31,7 @@ const DiscountType = (props) => {
       <ListTable
         // actions={actions}
         api={`discount-type`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{ name: "discountTypeName", type: "text", collection: "" }}
         shortName={`Discount Type`}

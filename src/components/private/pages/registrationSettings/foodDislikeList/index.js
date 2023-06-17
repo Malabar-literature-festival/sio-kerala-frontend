@@ -157,6 +157,7 @@ const FoodDislikeList = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`fooddislike-lists`}
+        displayColumn="double"
         // Property name for the title of each menu item
         itemTitle={{
           name: "foodDislikeListName",

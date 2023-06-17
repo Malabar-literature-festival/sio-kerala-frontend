@@ -196,6 +196,7 @@ const VehicleCategory = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`vehicle-category`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "vehicleType", type: "text", collection: "" }}

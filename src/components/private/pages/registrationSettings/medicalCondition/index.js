@@ -157,9 +157,14 @@ const MedicalCondition = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`medical-conditions`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "medicalConditionsName", type: "text", collection: "" }}
+        itemTitle={{
+          name: "medicalConditionsName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Medical Condition`}
         // Privilege flag indicating whether the user can add menu items

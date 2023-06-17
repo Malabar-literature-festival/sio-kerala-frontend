@@ -237,6 +237,7 @@ const AddVariant = (props) => {
       <ListTable
         // Actions to be displayed in the ListTable
         actions={actions}
+        displayColumn="double"
         // API endpoint for fetching meal data
         api={`meal-variant`}
         // Property name for the title of each menu item
