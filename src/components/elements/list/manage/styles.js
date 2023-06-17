@@ -52,7 +52,7 @@ export const Page = styled.div`
   animation: ${fadeIn} 1s ease-in-out;
   animation-duration: 0.2s;
   margin: auto;
-  padding: 1em;
+  padding: 1em 0;
   &.medium {
     width: 70%;
     min-width: 250px;
@@ -67,15 +67,18 @@ export const Page = styled.div`
       width: 100%;
       min-width: 250px;
       max-width: 100%;
-      padding:10px;
+      padding: 10px;
     }
   }
 `;
 export const Header = styled.div`
-  text-align: center;
-  padding: 0.5em 0 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 30px 1em;
   font-weight: 500;
   font-size: 1.3em;
+  border-bottom: 1px solid rgb(204, 204, 204);
   @media (max-width: 768px) {
     position: sticky;
     top: 0;
