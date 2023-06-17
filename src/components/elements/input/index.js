@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import CustomSelect from "../select";
-import moment from "moment";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Button, DatetimeInput, FileContainer, Input, InputContainer, Label, TextArea } from "./styles";
@@ -52,10 +51,11 @@ function FormInput(props) {
       );
     // Render a date input with date picker
     case "date":
-      let userFriendlyDate = new Date(props.value);
+      let userFriendlyDate = props.value.length > 0 ? new Date(props.value) : null;
+      console.log(props.value.length);
       return (
         <InputContainer>
-          <DatetimeInput theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={props.type} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type}  value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -71,10 +71,12 @@ function FormInput(props) {
       );
     // Render a datetime input with date and time pickers
     case "datetime":
-      let userFriendlyDateTime = props.value.length > 0 ? moment(props.value).format("DD.MM.YYYY hh:mm A") : "";
+       console.log( props.value)
+      let userFriendlyDateTime = props.value.length > 0 ? new Date(props.value) : null;
+     
       return (
         <InputContainer>
-          <DatetimeInput theme={themeColors} showTimeSelect className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={props.type} value={userFriendlyDateTime} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput  theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime}  dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
