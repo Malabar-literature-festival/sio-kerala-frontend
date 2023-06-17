@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
+
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const CuisineCategory = (props) => {
@@ -167,9 +168,14 @@ const CuisineCategory = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`cuisine-category`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "cuisineCategoriesName", type: "text", collection: "" }}
+        itemTitle={{
+          name: "cuisineCategoriesName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Cuisine Category`}
         formMode={`double`}

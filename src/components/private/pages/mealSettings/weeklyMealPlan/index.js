@@ -20,7 +20,7 @@ const WeeklyMealPlan = (props) => {
       showItem: "userDisplayName",
       validation: "",
       default: "",
-      tag: true,
+      // tag: true,
       label: "User",
       required: true,
       view: true,
@@ -61,6 +61,7 @@ const WeeklyMealPlan = (props) => {
       <ListTable
         // actions={actions}
         api={`weekly-meal-plan`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{
           name: "userDisplayName",

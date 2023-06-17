@@ -157,6 +157,7 @@ const DayOfWeek = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`dayof-week`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "day", type: "text", collection: "" }}

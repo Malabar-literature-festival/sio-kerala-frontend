@@ -23,10 +23,10 @@ const Dashboard = (props) => {
     state.pages[`dashboard`]
       ? state.pages[`dashboard`]
       : {
-          data: null,
-          isLoading: true,
-          error: null,
-        }
+        data: null,
+        isLoading: true,
+        error: null,
+      }
   );
   useEffect(() => {
     props.setLoaderBox(dashboard.isLoading);

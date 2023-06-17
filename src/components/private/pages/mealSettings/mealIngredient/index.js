@@ -67,6 +67,7 @@ const MealIngredient = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`meal-ingredients`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "ingredientQuantity", type: "text", collection: "" }}
