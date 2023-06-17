@@ -61,6 +61,7 @@ const WeeklyMealPlan = (props) => {
       <ListTable
         // actions={actions}
         api={`weekly-meal-plan`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{
           name: "userDisplayName",
@@ -68,6 +69,7 @@ const WeeklyMealPlan = (props) => {
           collection: "user",
         }}
         shortName={`Weekly Meal Plan`}
+        formMode={`double`}
         {...props}
         attributes={attributes}
       ></ListTable>

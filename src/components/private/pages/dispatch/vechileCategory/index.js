@@ -196,11 +196,13 @@ const VehicleCategory = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`vehicle-category`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        // Short name or label for the menu
         itemTitle={{ name: "vehicleType", type: "text", collection: "" }}
+        // Short name or label for the menu
         shortName={`vehicle-category`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

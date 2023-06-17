@@ -19,7 +19,8 @@ import { ToolTip } from "../../styles/list/styles";
 // import { convertMinutesToHHMM } from "../../functions/minuteToHour";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
-const ListTable = ({ formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+import Popup, { DisplayInformations } from "./popup";
+const ListTable = ({ displayColumn = 'single', formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -35,7 +36,6 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
   const [subAttributes, setSubAttributes] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [count, setCount] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
   const themeColors = useSelector((state) => state.themeColors);
   const selectedMenuItem = useSelector((state) => state.selectedMenu);
   const dispatch = useDispatch();
@@ -77,9 +77,9 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
         }
         addValuesTemp.updateValues[item.name] = bool;
       } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
-        addValuesTemp.addValues[item.name] = date.toISOString();
+        addValuesTemp.addValues[item.name] = date?.toISOString();
         if (item.add) {
-          addValuesTemp.updateValues[item.name] = date.toISOString();
+          addValuesTemp.updateValues[item.name] = date?.toISOString();
         }
       } else if (item.type === "image" || item.type === "file") {
         if (item.add) {
@@ -121,7 +121,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     setLoaderBox(users.isLoading);
     if (currentIndex === 0 && users.data?.count) {
       setCount(users.data.filterCount);
-      setTotalCount(users.data.totalCount);
+      // setTotalCount(users.data.totalCount);
     }
   }, [users, currentIndex]);
 
@@ -135,7 +135,8 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
       dispatch(addPageObject(currentApi, currentIndex, filterView));
     } catch {}
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [openData, setOpenData] = useState({});
   //crud functions
   const [isCreating, setIsCreating] = useState(false);
   const isCreatingHandler = (value, callback) => {
@@ -301,10 +302,10 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     setFilterView(udpateValue);
   };
   const dateRangeChange = (item) => {
-    const startDate = new Date(item.startDate);
+    const startDate = new Date(item?.startDate);
     startDate.setHours(0, 0, 0, 0); // Set start date to 00:00
 
-    const endDate = new Date(item.endDate);
+    const endDate = new Date(item?.endDate);
     endDate.setHours(23, 59, 59, 999); // Set end date to 23:59
     const udpateValue = {
       ...filterView,
@@ -323,13 +324,17 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
     const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
     const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
+
     return (
-      <Tr key={`row-${shortName}-${data._id ?? slNo}`}>
-        <TrBody>
+      <Tr className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
+        <TrBody className={signleRecord ? "single" : ""}>
           <Td key={`row-head-${slNo}`}>
             <Head>
               {signleRecord ? (
-                <span>{shortName}</span>
+                <>
+                  <GetIcon icon={selectedMenuItem.icon} />
+                  <span>{shortName}</span>
+                </>
               ) : (
                 <>
                   <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
@@ -353,17 +358,29 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
                           .then((response) => {
                             if (response.status === 200) {
                               if (response.data?.message) {
-                                setMessage({ type: 1, content: t(response.data?.message), proceed: t("okay") });
+                                setMessage({
+                                  type: 1,
+                                  content: t(response.data?.message),
+                                  proceed: t("okay"),
+                                });
                               }
                               //
                               refreshView();
                               // setIsEditing(false);
                             } else if (response.status === 404) {
                               refreshView();
-                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                              setMessage({
+                                type: 1,
+                                content: t("error"),
+                                proceed: "Okay",
+                              });
                             } else {
                               refreshView();
-                              setMessage({ type: 1, content: t("error"), proceed: "Okay" });
+                              setMessage({
+                                type: 1,
+                                content: t("error"),
+                                proceed: "Okay",
+                              });
                             }
                             // setLoaderBox(false);
                           })
@@ -378,6 +395,17 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
                 )
               );
             })}
+            {!signleRecord && (
+              <More
+                onClick={() => {
+                  setIsOpen(true);
+                  setOpenData({ actions, attributes, data });
+                  setSubAttributes({ actions, attributes, data });
+                }}
+              >
+                <GetIcon icon={"open"}></GetIcon>
+              </More>
+            )}
             <ToolTipContainer
               ref={selectRef.current[slNo]}
               onClick={() => {
@@ -432,7 +460,9 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
                       onClick={() => {
                         setMessage({
                           type: 2,
-                          content: t("deleteRequest", { label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item" }),
+                          content: t("deleteRequest", {
+                            label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item",
+                          }),
                           proceed: t("delete"),
                           onProceed: deleteHandler,
                           data: data,
@@ -449,39 +479,44 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             </ToolTipContainer>
           </Td>
         </TrBody>
-        <TrBody className="small">
-          {attributes.map((attribute, index) => {
-            if (attribute.view && (attribute.tag ?? false)) {
-              try {
-                const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
-                if (attribute.type === "image") {
-                  return "";
+        {signleRecord ? (
+          <DisplayInformations formMode={formMode} attributes={attributes} data={data} />
+        ) : (
+          <TrBody className="small">
+            {attributes.map((attribute, index) => {
+              if (attribute.view && (attribute.tag ?? false)) {
+                try {
+                  const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+                  if (attribute.type === "image") {
+                    return "";
+                  }
+                  return (
+                    <Td key={index}>
+                      <Title>{attribute.label}</Title>
+                      <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                    </Td>
+                  );
+                } catch (error) {
+                  console.log(error);
+                  return (
+                    <Td key={index}>
+                      <Title>{attribute.label}</Title>
+                      <DataItem>{`--`} </DataItem>
+                    </Td>
+                  );
                 }
-                return (
-                  <Td key={index}>
-                    <Title>{attribute.label}</Title>
-                    <DataItem>{getValue(attribute, itemValue)} </DataItem>
-                  </Td>
-                );
-              } catch (error) {
-                console.log(error);
-                return (
-                  <Td key={index}>
-                    <Title>{attribute.label}</Title>
-                    <DataItem>{`--`} </DataItem>
-                  </Td>
-                );
               }
-            }
 
-            return null;
-          })}
-        </TrBody>
+              return null;
+            })}
+          </TrBody>
+        )}
       </Tr>
     );
   };
   const closeModal = () => {
     setShowSubList(false);
+    setIsOpen(false);
   };
   const [searchValue, setSearchValue] = useState("");
   // const [filter, setFilter] = useState(false);
@@ -535,9 +570,9 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
               case "minute":
                 return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
               case "datetime":
-                return (excelRow[name] = dateTimeFormat(data[attribute.name]));
+                return (excelRow[name] = dateTimeFormat(data[attribute?.name]));
               case "date":
-                return (excelRow[name] = dateFormat(data[attribute.name]));
+                return (excelRow[name] = dateFormat(data[attribute?.name]));
               case "select":
                 if (attribute.apiType === "JSON") {
                   return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
@@ -601,7 +636,13 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
           <Filter
             theme={themeColors}
             onClick={() => {
-              setMessage({ type: 2, content: "Do you want export this page to excel?", proceed: "Export Now", onProceed: toExcel, data: currentIndex });
+              setMessage({
+                type: 2,
+                content: "Do you want export this page to excel?",
+                proceed: "Export Now",
+                onProceed: toExcel,
+                data: currentIndex,
+              });
             }}
           >
             <GetIcon icon={"excel"} />
@@ -620,7 +661,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
           </AddButton>
         )}
       </ButtonPanel>
-      <Table>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      <Table className={displayColumn}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (
@@ -634,7 +675,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             >
               <PreviousIcon />
             </ArrowButton>
-            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} from ${count} out of ${totalCount}`}
+            {`Showing ${currentIndex + 1} - ${currentIndex + 10 > count ? count : currentIndex + 10} out of ${count} records`}
             <ArrowButton
               theme={themeColors}
               onClick={() => {
@@ -645,10 +686,10 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
             </ArrowButton>
           </Count>
         ) : (
-          <Count>{`Showing ${currentIndex + 1} -  ${count} from ${count} out of ${totalCount}`}</Count>
+          <Count>{`Showing ${count} record${count > 1 ? "s" : ""}`}</Count>
         )
       ) : (
-        <Count>{`No Result Found`}</Count>
+        <Count>{`No records found`}</Count>
       )}
 
       {isCreating && (
@@ -670,7 +711,8 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
       {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
       {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
       {showLoader && <Loader></Loader>}
-      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
+      {isOpen && <Popup formMode={formMode} closeModal={closeModal} themeColors={themeColors} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} openData={openData}></Popup>}
+      {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
     </RowContainer>
   ) : (
     <RowContainer>
@@ -713,6 +755,7 @@ const ListTable = ({ formMode = "single", parentReference = "_id", referenceId =
       )}
       {isEditing && <CrudForm formMode={formMode} api={api} formType={"put"} updateId={updateId} header={t("update", { label: t(shortName ? shortName : "Form") })} formInput={formInput} formErrors={errroInput} formValues={updateValues} submitHandler={updateHandler} isOpenHandler={isEditingHandler} isOpen={isEditing}></CrudForm>}
       {action.data && <Manage setMessage={setMessage} setLoaderBox={setLoaderBox} onClose={closeManage} {...action}></Manage>}
+      {isOpen && <Popup data={openData} actions={actions}></Popup>}
       {showLoader && <Loader></Loader>}
     </RowContainer>
   );

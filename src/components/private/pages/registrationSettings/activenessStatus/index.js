@@ -167,6 +167,7 @@ const ActivenessStatus = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`activeness-status`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         // Short name or label for the menu

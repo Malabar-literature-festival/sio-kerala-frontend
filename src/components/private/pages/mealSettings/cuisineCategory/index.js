@@ -167,9 +167,14 @@ const CuisineCategory = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`cuisine-category`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "cuisineCategoriesName", type: "text", collection: "" }}
+        itemTitle={{
+          name: "cuisineCategoriesName",
+          type: "text",
+          collection: "",
+        }}
         // Short name or label for the menu
         shortName={`Cuisine Category`}
         formMode={`double`}

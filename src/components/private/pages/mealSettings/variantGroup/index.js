@@ -135,6 +135,7 @@ const VariantGroup = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);
@@ -144,6 +145,7 @@ const VariantGroup = (props) => {
       <ListTable
         actions={actions}
         api={`variant-group`}
+        displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{ name: "variantGroupName", type: "text", collection: "" }}
         shortName={`Variant Group`}

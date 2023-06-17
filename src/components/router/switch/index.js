@@ -44,6 +44,9 @@ import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionR
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
+import Dashboard from "../../private/pages/dashboard";
+import Subscriber from "../../private/pages/package/subscriber";
+import Notification from "../../private/pages/notification/notification";
 import Blog from "../../private/pages/blog/blogs";
 import BlogCategory from "../../private/pages/blog/blogCategory";
 import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
@@ -453,9 +456,27 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "dashboard":
+      return (
+        <Dashboard
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "blog":
       return (
         <Blog
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "subscriber":
+      return (
+        <Subscriber
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -471,6 +492,16 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "notification":
+      return (
+        <Notification
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+
     case "social-media":
       return (
         <SocialMedia

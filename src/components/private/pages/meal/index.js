@@ -237,6 +237,7 @@ const Meal = (props) => {
         updatePrivilege: true,
         // Custom CSS class for styling
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);
@@ -254,6 +255,7 @@ const Meal = (props) => {
         itemTitle={`label`}
         // Short name or label for the menu
         shortName={`Franchise`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

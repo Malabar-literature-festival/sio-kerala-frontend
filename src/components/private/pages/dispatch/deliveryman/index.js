@@ -217,6 +217,7 @@ const DeliveryMan = (props) => {
       <ListTable
         // actions={actions}
         api={`user`}
+        displayColumn="double"
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
         shortName={`Delivery Man`}

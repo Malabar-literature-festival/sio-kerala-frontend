@@ -224,7 +224,7 @@ const Appointment = (props) => {
           type: "text",
           collection: "user",
         }}
-        shortName={`ppointment`}
+        shortName={`Appointment`}
         // formMode={`single`}
         formMode={`double`}
         //

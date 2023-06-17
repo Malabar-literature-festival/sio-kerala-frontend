@@ -38,7 +38,7 @@ const PackageManagement = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "number",
       placeholder: "Calories",
       name: "calories",
       validation: "",
@@ -51,7 +51,7 @@ const PackageManagement = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "number",
       placeholder: "Days",
       name: "days",
       validation: "",
@@ -63,10 +63,26 @@ const PackageManagement = (props) => {
       add: true,
       update: true,
     },
+    // {
+    //   type: "text",
+    //   placeholder: "Meal Time Category",
+    //   name: "mealTimeCategory",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "Meal Time Category",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
     {
-      type: "text",
+      type: "select",
+      apiType: "API",
+      selectApi: "mealtime-category/select",
       placeholder: "Meal Time Category",
       name: "mealTimeCategory",
+      showItem: "mealtimeCategoriesName",
       validation: "",
       default: "",
       tag: true,
@@ -75,9 +91,10 @@ const PackageManagement = (props) => {
       view: true,
       add: true,
       update: true,
+      filter: false,
     },
     {
-      type: "text",
+      type: "number",
       placeholder: "Rate",
       name: "rate",
       validation: "",
@@ -103,9 +120,9 @@ const PackageManagement = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "image",
       placeholder: "Image",
-      name: "image",
+      name: "packageImage",
       validation: "",
       default: "",
       tag: true,
@@ -116,7 +133,7 @@ const PackageManagement = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "checkbox",
       placeholder: "Is Active",
       name: "isActive",
       validation: "",
@@ -129,6 +146,7 @@ const PackageManagement = (props) => {
       update: true,
     },
   ]);
+
   const [timingAttributes] = useState([
     {
       type: "text",
@@ -240,6 +258,7 @@ const PackageManagement = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        formMode: "double",
       },
     },
   ]);
@@ -254,6 +273,7 @@ const PackageManagement = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "packageName", type: "text", collection: "" }}
         shortName={`Package`}
+        formMode={`double`}
         {...props}
         attributes={attributes}
       ></ListTable>

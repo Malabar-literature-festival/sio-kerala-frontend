@@ -179,10 +179,12 @@ const RedeemCoupon = (props) => {
       <ListTable
         // actions={actions}
         api={`redeem-coupon`}
+        displayColumn="double"
         // itemTitle={`redeem coupon`}
-        // Short name or label for the menu
         itemTitle={{ name: "coupon", type: "text", collection: "" }}
+        // Short name or label for the menu
         shortName={`Redeem coupon`}
+        formMode={`double`}
         {...props}
         attributes={attributes}
       ></ListTable>

@@ -157,6 +157,7 @@ const MedicationList = (props) => {
         // actions={actions}
         // API endpoint for fetching menu data
         api={`under-any-medication`}
+        displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         // Short name or label for the menu
