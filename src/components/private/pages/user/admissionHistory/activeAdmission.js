@@ -3,10 +3,10 @@ import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 
-const AdmissionHistory = (props) => {
+const ActiveAdmission = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Admission History - Diet Food Management Portal`;
+    document.title = `Active Admission - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -68,13 +68,25 @@ const AdmissionHistory = (props) => {
       label: "Admission Type",
       showItem: "",
       required: true,
-      view: true,
+      view: false,
       add: true,
       update: true,
       filter: false,
       apiType: "CSV",
       selectApi: "IN,OUT",
     },
+    // {
+    //   type: "date",
+    //   placeholder: "Admission Date",
+    //   name: "admissionDate",
+    //   validation: "",
+    //   default: "",
+    //   label: "Admission Date",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
     {
       type: "date",
       placeholder: "Booking Date",
@@ -87,7 +99,7 @@ const AdmissionHistory = (props) => {
       required: false,
       view: true,
       add: false,
-      update: false,
+      update: true,
     },
     {
       type: "date",
@@ -104,31 +116,19 @@ const AdmissionHistory = (props) => {
       update: true,
     },
     // {
-    //   type: "date",
-    //   placeholder: "Admission Date",
-    //   name: "admissionDate",
+    //   type: "datetime",
+    //   placeholder: "Discharge Date",
+    //   name: "dischargeDate",
+    //   showItem: "",
     //   validation: "",
-    //   default: "",
-    //   label: "Admission Date",
-    //   required: true,
+    //   default: "null",
+    //   tag: true,
+    //   label: "Discharge Date",
+    //   required: false,
     //   view: true,
-    //   add: true,
+    //   add: false,
     //   update: true,
     // },
-    {
-      type: "datetime",
-      placeholder: "Discharge Date",
-      name: "dischargeDate",
-      showItem: "",
-      validation: "",
-      default: "null",
-      tag: true,
-      label: "Discharge Date",
-      required: false,
-      view: true,
-      add: false,
-      update: true,
-    },
     {
       type: "text",
       placeholder: "Room Number",
@@ -199,7 +199,7 @@ const AdmissionHistory = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // actions={actions}
-        api={`appointment`}
+        api={`appointment/active`}
         // itemTitle={`label`}
         itemTitle={{
           name: "userDisplayName",
@@ -218,4 +218,4 @@ const AdmissionHistory = (props) => {
 };
 
 // exporting the page with parent container layout..
-export default Layout(AdmissionHistory);
+export default Layout(ActiveAdmission);
