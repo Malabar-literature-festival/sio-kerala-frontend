@@ -9,6 +9,7 @@ const Tabs = ({ tabs = [] }) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.name);
   return (
     <TabContainer>
+      
       <TabHeader>
         {tabs.map((tab) => {
           return (

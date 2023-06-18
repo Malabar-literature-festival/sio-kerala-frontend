@@ -24,6 +24,7 @@ export const Tab = styled.div`
   box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  flex-direction: column;
   ${(props) =>
     props.active &&
     `
@@ -44,22 +45,22 @@ export const TabLink = styled.div`
   height: 30px;
   border-left: 1px solid #c4d7d6;
   &:first-child {
-    border-left: 0;
+    border-left: 1px solid rgb(181 175 175 / 38%);
     border-top-left-radius: 10px;
   }
   &:last-child {
     border-top-right-radius: 10px;
   }
   &.active {
-    background-color: #ffffff;
-    color: #77998e;
-    height: 40px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(119, 153, 142);
     box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     font-weight: 600;
     font-size: 16px;
-    border-left: 0;
+    z-index: 1001;
+    height: 35px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     @media (max-width: 768px) {
       font-size: 14px;
     }

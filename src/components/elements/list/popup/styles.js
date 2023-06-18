@@ -112,7 +112,7 @@ export const Head = styled.span`
   width: "100%";
   display: flex;
   align-items: "center";
-
+padding: 20px 30px;
   svg {
     margin-right: 10px;
   }

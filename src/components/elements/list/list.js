@@ -402,13 +402,22 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
             {!signleRecord && (
               <More
                 onClick={() => {
-                  console.log('yes');
+                  console.log("yes");
                   setIsOpen(true);
                   setOpenData({ actions, attributes, data });
                   setSubAttributes({ actions, attributes, data });
                 }}
               >
                 <GetIcon icon={"open"}></GetIcon>
+              </More>
+            )}
+            {signleRecord && (
+              <More
+                onClick={() => {
+                  refreshView(currentIndex);
+                }}
+              >
+                <GetIcon icon={"reload"}></GetIcon>
               </More>
             )}
             <ToolTipContainer
@@ -721,25 +730,17 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
     </RowContainer>
   ) : (
     <RowContainer>
-      <ButtonPanel>
-        <FilterBox>
-          <Filter
-            theme={themeColors}
-            onClick={() => {
-              refreshView(currentIndex);
-            }}
-          >
-            <GetIcon icon={"reload"} />
-          </Filter>
-        </FilterBox>
-        {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
-          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
-            <AddIcon></AddIcon>
-            {t("addNew", { label: t(shortName) })}
-          </AddButton>
-        )}
-      </ButtonPanel>
-      <Table>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
+      {users.data?.response?.length === 0 && (
+        <ButtonPanel>
+          {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
+            <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+              <AddIcon></AddIcon>
+              {t("addNew", { label: t(shortName) })}
+            </AddButton>
+          )}
+        </ButtonPanel>
+      )}
+      <Table className={users.data?.response?.length === 0 ? "norecord" : "record"}>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
 
