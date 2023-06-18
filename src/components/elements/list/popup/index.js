@@ -8,7 +8,6 @@ import { useCallback, useEffect, useState } from "react";
 import { RowContainer } from "../../../styles/containers/styles";
 import ListTable from "../list";
 export const DisplayInformations = ({ attributes, data, formMode }) => {
-    console.log(formMode)
   return (
     <TrBody className={formMode}>
       {attributes.map((attribute, index) => {
@@ -41,7 +40,7 @@ export const DisplayInformations = ({ attributes, data, formMode }) => {
   );
 };
 const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMessage, closeModal, itemTitle }) => {
-  const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+  const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle.";
 
   const tabHandler = useCallback(() => {
     const tempTab = openData.actions
@@ -52,12 +51,12 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
         element: <ListTable formMode={item.formMode} viewMode={item.type ?? "subList"} setMessage={setMessage} setLoaderBox={setLoaderBox} parentReference={item?.params?.parentReference} referenceId={openData?.data?._id} attributes={item.attributes} {...item.params}></ListTable>,
       }));
     tempTab.unshift({
-      name: "information",
+      name: `information-${titleValue}`,
       title: "Informations",
       element: <DisplayInformations formMode={formMode} attributes={openData.attributes} data={openData.data} />,
     });
     setTabs(tempTab);
-  }, [setMessage, setLoaderBox, openData, formMode]);
+  }, [setMessage, setLoaderBox, openData, formMode, titleValue]);
 
   const [tabs, setTabs] = useState([]);
 

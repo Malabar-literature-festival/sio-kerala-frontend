@@ -13,6 +13,8 @@ export const TabHeader = styled.div`
   margin-bottom: 0;
   align-items: flex-end;
   height: 60px;
+  justify-content: flex-start;
+  overflow: auto;
 `;
 
 export const Tab = styled.div`
@@ -40,7 +42,9 @@ export const TabLink = styled.div`
   justify-content: center;
   text-align: center;
   height: 30px;
+  border-left: 1px solid #c4d7d6;
   &:first-child {
+    border-left: 0;
     border-top-left-radius: 10px;
   }
   &:last-child {
@@ -55,8 +59,12 @@ export const TabLink = styled.div`
     border-top-left-radius: 10px;
     font-weight: 600;
     font-size: 16px;
+    border-left: 0;
     @media (max-width: 768px) {
       font-size: 14px;
     }
+  }
+  @media (max-width: 768px) {
+    white-space: nowrap;
   }
 `;
