@@ -1329,7 +1329,7 @@ const Patient = (props) => {
     },
     {
       element: "button",
-      type: "subList",
+      type: "subItem",
       id: "user/subscriber",
       // itemTitle: "username",
       itemTitle: {

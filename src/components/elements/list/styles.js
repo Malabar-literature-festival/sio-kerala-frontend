@@ -5,6 +5,9 @@ export const Table = styled.div`
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
+  &.record{
+    border-top: 0px solid #ccc;
+  }
   &.double {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -122,7 +125,7 @@ export const TrBody = styled.div`
     font-size: 13px;
   }
   &.single {
-    padding: 10px 20px;
+        padding: 15px 17px 15px 26px;
   }
 `;
 export const Title = styled.span`
@@ -141,6 +144,7 @@ export const Head = styled.span`
   svg {
     margin-right: 10px;
   }
+  
 `;
 export const DataItem = styled.span`
   background-color: #d7d7d7;
