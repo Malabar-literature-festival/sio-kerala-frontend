@@ -27,7 +27,7 @@ export const Td = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
   &.no,
   &.name {
     border: 1px solid gray;
@@ -57,6 +57,35 @@ export const Td = styled.div`
   &.right {
     text-align: right;
   }
+  &:last-child {
+      border-bottom: 0 !important;
+    }
+  .double & {
+    &:nth-child(odd) {
+      border-right: 1px solid #ccc;
+    }
+    &:last-child {
+      border-bottom: 0 !important;
+    }
+
+    &:last-child,&:nth-last-child(2):nth-child(odd) {
+      /* Apply styles to second-to-last child in last row (odd index) */
+      border-bottom: 0 !important;
+      /* Add any additional styles here */
+    }
+    &:first-child,
+    &:nth-child(2) {
+      border-top: 1px solid #d9d9d9;
+    }
+  }
+  @media (max-width: 768px) {
+    &:nth-child(odd) {
+      border-right: 0px solid #ccc !important;
+    }
+    &:last-child:nth-child(odd) {
+      border-bottom: 0px solid #d9d9d9 !important;
+    }
+  }
 `;
 
 export const TrBody = styled.div`
@@ -69,8 +98,8 @@ export const TrBody = styled.div`
   }
   @media (max-width: 768px) {
     &.double {
-    display: flex;
-  }
+      display: flex;
+    }
   }
 `;
 export const Title = styled.span`
