@@ -88,6 +88,13 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
         if (item.update) {
           addValuesTemp.updateValues[item.name] = [];
         }
+      } else if (item.type === "multiSelect") {
+        if (item.add) {
+          addValuesTemp.addValues[item.name] = [];
+        }
+        if (item.update) {
+          addValuesTemp.updateValues[item.name] = [];
+        }
       } else {
         if (item.add) {
           addValuesTemp.addValues[item.name] = item.default;

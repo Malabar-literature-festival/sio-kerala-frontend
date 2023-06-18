@@ -642,7 +642,7 @@ const Patient = (props) => {
       filter: false,
     },
     {
-      type: "select",
+      type: "multiSelect",
       apiType: "API",
       selectApi: "foodlike-lists/select",
       placeholder: "Food Like List",
