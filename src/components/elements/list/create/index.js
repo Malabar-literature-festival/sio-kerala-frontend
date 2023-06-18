@@ -220,6 +220,20 @@ const CrudForm = (props) => {
         value = event;
       } else if (type === "select") {
         value = event.id;
+      } else if (type === "multiSelect") {
+        const items = formValues[field.name];
+        const index = items.findIndex((item) => item === event.id);
+
+        if (index === -1) {
+          // If event._id doesn't exist, push it to the items array
+          items.push(event.id);
+        } else {
+          // If event._id already exists, remove it from the items array
+          items.splice(index, 1);
+        }
+
+        value = items;
+        console.log(items)
       } else if (type === "email" || type === "text" || type === "number" || type === "password") {
         value = event.target.value;
       } else if (type === "search") {
@@ -227,9 +241,9 @@ const CrudForm = (props) => {
       } else if (type === "image" || type === "file") {
         value = event.target.files;
       } else if (type === "datetime" || type === "time") {
-        console.log(event)
+        console.log(event);
         value = event.toISOString();
-        console.log(value)
+        console.log(value);
       } else if (type === "date") {
         value = event.toISOString();
       } else {

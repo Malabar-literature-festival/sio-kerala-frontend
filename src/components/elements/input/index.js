@@ -6,6 +6,7 @@ import { Button, DatetimeInput, FileContainer, Input, InputContainer, Label, Tex
 import { ErrorMessage } from "../form/styles";
 import { TickIcon, UploadIcon } from "../../../icons";
 import Checkbox from "../checkbox";
+import MultiSelect from "../multiSelect";
 
 function FormInput(props) {
   // Initialize translation function for current language
@@ -55,7 +56,7 @@ function FormInput(props) {
       console.log(props.value.length);
       return (
         <InputContainer>
-          <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type}  value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -71,12 +72,12 @@ function FormInput(props) {
       );
     // Render a datetime input with date and time pickers
     case "datetime":
-       console.log( props.value)
+      console.log(props.value);
       let userFriendlyDateTime = props.value.length > 0 ? new Date(props.value) : null;
-     
+
       return (
         <InputContainer>
-          <DatetimeInput  theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime}  dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime} dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -169,6 +170,8 @@ function FormInput(props) {
     // Render a select box
     case "select":
       return <CustomSelect theme={themeColors} {...props} name={props.id} selected={props.value} onSelect={props.onChange}></CustomSelect>;
+    case "multiSelect":
+      return <MultiSelect theme={themeColors} {...props} name={props.id} selected={props.value} onSelect={props.onChange}></MultiSelect>;
     default:
       return <></>;
   }
