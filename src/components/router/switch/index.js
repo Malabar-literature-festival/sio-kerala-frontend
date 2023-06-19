@@ -51,6 +51,7 @@ import Blog from "../../private/pages/blog/blogs";
 import BlogCategory from "../../private/pages/blog/blogCategory";
 import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
 import PageSettings from "../../private/pages/settings/pageSettings";
+import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.

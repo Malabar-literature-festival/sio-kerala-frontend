@@ -14,15 +14,16 @@ const UserList = (props) => {
 
   const [attributes] = useState([
     {
-      type: "hidden",
+      type: "text",
       placeholder: "CPR/Mobile",
       name: "username",
       validation: "",
-      default: "username",
+      default: "",
+      tag: true,
       label: "CPR/Mobile",
       required: true,
       view: false,
-      add: false,
+      add: true,
       update: true,
     },
     {
@@ -64,6 +65,19 @@ const UserList = (props) => {
       view: true,
       add: true,
       update: true,
+    },
+    {
+      type: "password",
+      placeholder: "Password",
+      name: "password",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Password",
+      required: false,
+      view: false,
+      add: true,
+      update: false,
     },
     {
       type: "select",

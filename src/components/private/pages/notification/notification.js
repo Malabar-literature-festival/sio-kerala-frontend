@@ -25,7 +25,7 @@ const Notification = (props) => {
             update: true,
         },
         {
-            type: "text",
+            type: "image",
             placeholder: "Banner",
             name: "banner",
             validation: "",

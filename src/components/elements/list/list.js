@@ -20,7 +20,7 @@ import { ToolTip } from "../../styles/list/styles";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
-const ListTable = ({ displayColumn = 'single', formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -77,11 +77,18 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
         }
         addValuesTemp.updateValues[item.name] = bool;
       } else if (item.type === "datetime" || item.type === "date" || item.type === "time") {
-        addValuesTemp.addValues[item.name] = date?.toISOString();
+        addValuesTemp.addValues[item.name] = date.toISOString();
         if (item.add) {
-          addValuesTemp.updateValues[item.name] = date?.toISOString();
+          addValuesTemp.updateValues[item.name] = date.toISOString();
         }
       } else if (item.type === "image" || item.type === "file") {
+        if (item.add) {
+          addValuesTemp.addValues[item.name] = [];
+        }
+        if (item.update) {
+          addValuesTemp.updateValues[item.name] = [];
+        }
+      } else if (item.type === "multiSelect") {
         if (item.add) {
           addValuesTemp.addValues[item.name] = [];
         }
@@ -321,7 +328,7 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
 
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
-    const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+    const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle";
     const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
 
@@ -329,18 +336,22 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
       <Tr className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody className={signleRecord ? "single" : ""}>
           <Td key={`row-head-${slNo}`}>
-            <Head>
-              {signleRecord ? (
-                <>
-                  <GetIcon icon={selectedMenuItem.icon} />
-                  <span>{shortName}</span>
-                </>
-              ) : (
-                <>
-                  <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
-                </>
-              )}
-            </Head>
+            {signleRecord ? (
+              <Head>
+                <GetIcon icon={selectedMenuItem.icon} />
+                <span>{shortName}</span>
+              </Head>
+            ) : (
+              <Head
+                onClick={() => {
+                  setIsOpen(true);
+                  setOpenData({ actions, attributes, data });
+                  setSubAttributes({ actions, attributes, data });
+                }}
+              >
+                <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
+              </Head>
+            )}
           </Td>
 
           <Td key={`actions-${shortName}-${data._id}`} className="actions">
@@ -398,12 +409,22 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
             {!signleRecord && (
               <More
                 onClick={() => {
+                  console.log("yes");
                   setIsOpen(true);
                   setOpenData({ actions, attributes, data });
                   setSubAttributes({ actions, attributes, data });
                 }}
               >
                 <GetIcon icon={"open"}></GetIcon>
+              </More>
+            )}
+            {signleRecord && (
+              <More
+                onClick={() => {
+                  refreshView(currentIndex);
+                }}
+              >
+                <GetIcon icon={"reload"}></GetIcon>
               </More>
             )}
             <ToolTipContainer
@@ -570,9 +591,9 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
               case "minute":
                 return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
               case "datetime":
-                return (excelRow[name] = dateTimeFormat(data[attribute?.name]));
+                return (excelRow[name] = dateTimeFormat(data[attribute.name]));
               case "date":
-                return (excelRow[name] = dateFormat(data[attribute?.name]));
+                return (excelRow[name] = dateFormat(data[attribute.name]));
               case "select":
                 if (attribute.apiType === "JSON") {
                   return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
@@ -716,25 +737,17 @@ const ListTable = ({ displayColumn = 'single', formMode = "single", parentRefere
     </RowContainer>
   ) : (
     <RowContainer>
-      <ButtonPanel>
-        <FilterBox>
-          <Filter
-            theme={themeColors}
-            onClick={() => {
-              refreshView(currentIndex);
-            }}
-          >
-            <GetIcon icon={"reload"} />
-          </Filter>
-        </FilterBox>
-        {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
-          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
-            <AddIcon></AddIcon>
-            {t("addNew", { label: t(shortName) })}
-          </AddButton>
-        )}
-      </ButtonPanel>
-      <Table>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
+      {users.data?.response?.length === 0 && (
+        <ButtonPanel>
+          {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
+            <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+              <AddIcon></AddIcon>
+              {t("addNew", { label: t(shortName) })}
+            </AddButton>
+          )}
+        </ButtonPanel>
+      )}
+      <Table className={users.data?.response?.length === 0 ? "norecord" : "record"}>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
 

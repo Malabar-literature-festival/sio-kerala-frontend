@@ -9,10 +9,11 @@ const Tabs = ({ tabs = [] }) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.name);
   return (
     <TabContainer>
+      
       <TabHeader>
         {tabs.map((tab) => {
           return (
-            <TabLink theme={themeColors} className={activeTab === tab.name && "active"} onClick={() => setActiveTab(tab.name)}>
+            <TabLink key={`${tab.name}-tab-item`} theme={themeColors} className={activeTab === tab.name && "active"} onClick={() => setActiveTab(tab.name)}>
               {t(tab.title)}
             </TabLink>
           );
@@ -20,7 +21,7 @@ const Tabs = ({ tabs = [] }) => {
       </TabHeader>
       {/* tab for parking process */}
       {tabs.map((tab) => {
-        return <Tab active={activeTab === tab.name}>{tab.element}</Tab>;
+        return <Tab key={`${tab.name}-tab-content`} active={activeTab === tab.name}>{tab.element}</Tab>;
       })}
     </TabContainer>
   );
