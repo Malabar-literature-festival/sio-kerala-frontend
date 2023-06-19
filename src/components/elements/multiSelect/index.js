@@ -11,7 +11,6 @@ import Search from "../search";
 function MultiSelect(props) {
   const themeColors = useSelector((state) => state.themeColors);
   const [optionsVisible, setOptionsVisible] = useState(false);
-  const [defaultValue] = useState(props.default);
   const [selectedId, setSelectedId] = useState([]);
   const [initialized, setInitialized] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -83,7 +82,7 @@ function MultiSelect(props) {
         setSelectedValue(selectedId.length > 0 ? `${selectedId[0].value} ${selectedId.length > 1 ? " (" + (selectedId.length - 1) + " more)" : ""}` : props.label);
       } catch {}
     }
-  }, [props.apiType, props.selectApi, props.placeHolder, initialized, selectedId, selectData, dispatch]);
+  }, [props.apiType,props.label, props.selectApi, initialized, selectedId, selectData, dispatch]);
 
   useEffect(() => {
     fetchData();
