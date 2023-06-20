@@ -62,7 +62,7 @@ const putData = async (fields, ulr, dispatch, navigate) => {
       Object.entries(fields).forEach(([key, value]) => {
         if (typeof value === "object") {
           isUplaoding = true;
-          formData.append(key, value[0]);
+          formData.append(key, value);
         } else {
           formData.append(key, value);
         }
