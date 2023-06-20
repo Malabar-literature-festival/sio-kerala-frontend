@@ -120,4 +120,5 @@ padding: 20px 30px;
 export const DataItem = styled.span`
   font-weight: bold;
   border-radius: 10px;
+  text-align: right;
 `;

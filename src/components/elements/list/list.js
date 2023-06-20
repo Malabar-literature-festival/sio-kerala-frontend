@@ -21,7 +21,7 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
-  console.log(shortName, formMode);
+
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -240,7 +240,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
     // setMessage({ type: 1, content: item.title + " / " + data._id, proceed: "Okay" });
   };
   const submitHandler = async (data) => {
-    console.log(data);
     setLoaderBox(true);
     const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
@@ -277,7 +276,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
 
   const updateHandler = async (data) => {
     setLoaderBox(true);
-    console.log(data);
     data = { ...data, id: updateId };
     await putData(data, `${currentApi}`)
       .then((response) => {
@@ -755,7 +753,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
       <Table className={users.data?.response?.length === 0 ? "norecord" : "record"}>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
-
       {isCreating && (
         <CrudForm
           api={api}

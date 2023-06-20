@@ -9,7 +9,6 @@ const Tabs = ({ tabs = [] }) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.name);
   return (
     <TabContainer>
-      
       <TabHeader>
         {tabs.map((tab) => {
           return (
@@ -21,7 +20,11 @@ const Tabs = ({ tabs = [] }) => {
       </TabHeader>
       {/* tab for parking process */}
       {tabs.map((tab) => {
-        return <Tab key={`${tab.name}-tab-content`} active={activeTab === tab.name}>{tab.element}</Tab>;
+        return (
+          <Tab key={`${tab.name}-tab-content`} active={activeTab === tab.name}>
+            {tab.element}
+          </Tab>
+        );
       })}
     </TabContainer>
   );

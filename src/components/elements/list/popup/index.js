@@ -43,7 +43,6 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
   const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle.";
 
   const tabHandler = useCallback(() => {
-    console.log(openData.actions)
     const tempTab = openData.actions
       .filter((item) => item.type === "subList" || item.type === "subItem")
       .map((item, index) => ({
