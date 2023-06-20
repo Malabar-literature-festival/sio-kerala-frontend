@@ -233,17 +233,14 @@ const CrudForm = (props) => {
         }
 
         value = items;
-        console.log(items)
       } else if (type === "email" || type === "text" || type === "number" || type === "password") {
         value = event.target.value;
       } else if (type === "search") {
         value = JSON.stringify(event);
       } else if (type === "image" || type === "file") {
-        value = event.target.files;
+        value = event.target.files[0];
       } else if (type === "datetime" || type === "time") {
-        console.log(event);
         value = event.toISOString();
-        console.log(value);
       } else if (type === "date") {
         value = event.toISOString();
       } else {
