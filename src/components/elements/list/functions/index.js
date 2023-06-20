@@ -21,6 +21,10 @@ export const getValue = (attribute, itemValue) => {
     case "datetime":
       response = dateTimeFormat(itemValue);
       break;
+    case "multiSelect":
+      console.log(itemValue, attribute.showItem);
+      response = itemValue.map(item => item[attribute.showItem].toString()).join(", ");
+      break;
     case "date":
       response = dateFormat(itemValue);
       break;

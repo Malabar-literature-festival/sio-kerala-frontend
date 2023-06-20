@@ -21,6 +21,7 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+  console.log(shortName, formMode);
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -239,6 +240,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
     // setMessage({ type: 1, content: item.title + " / " + data._id, proceed: "Okay" });
   };
   const submitHandler = async (data) => {
+    console.log(data);
     setLoaderBox(true);
     const saveData = referenceId === 0 ? { ...data } : { ...data, [parentReference]: referenceId };
     await postData(saveData, currentApi)
@@ -275,6 +277,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
 
   const updateHandler = async (data) => {
     setLoaderBox(true);
+    console.log(data);
     data = { ...data, id: updateId };
     await putData(data, `${currentApi}`)
       .then((response) => {
@@ -510,9 +513,9 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
               if (attribute.view && (attribute.tag ?? false)) {
                 try {
                   const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
-                  // if (attribute.type === "image") {
-                  //   return "";
-                  // }
+                  if (attribute.type === "image") {
+                    return "";
+                  }
                   return (
                     <Td key={index}>
                       <Title>{attribute.label}</Title>
@@ -756,6 +759,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
       {isCreating && (
         <CrudForm
           api={api}
+          formMode={formMode}
           formType={"post"}
           header={t("addNewTitle", {
             label: t(shortName ? shortName : "Form"),
