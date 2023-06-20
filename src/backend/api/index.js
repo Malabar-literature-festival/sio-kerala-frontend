@@ -1,34 +1,61 @@
+import ObjectID from "bson-objectid";
 import { clearLogin } from "../../store/actions/login";
 import { GetAccessToken } from "../authentication";
 import axios from "axios";
+function objectToFormData(obj, formData = new FormData(), parentKey = "") {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      const fullKey = parentKey ? `${parentKey}[${key}]` : key;
+
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => {
+          if (typeof item === "object" && !Array.isArray(item)) {
+            objectToFormData(item, formData, `${fullKey}[${index}]`);
+          } else {
+            formData.append(`${fullKey}[${index}]`, item);
+          }
+        });
+      } else if (typeof value === "object" && value !== null) {
+        objectToFormData(value, formData, fullKey);
+      } else {
+        formData.append(fullKey, value);
+      }
+    }
+  }
+
+  return formData;
+}
+
+// You can now use the formData object as needed, such as sending it via AJAX or submitting a form
 
 const postData = async (fields, ulr, dispatch, navigate) => {
   const data = new Promise(async (resolve, reject) => {
     try {
       let token = GetAccessToken();
       const formData = new FormData();
+
       let isUplaoding = false;
       Object.entries(fields).forEach(([key, value]) => {
         if (typeof value === "object") {
-          isUplaoding = true;
-          formData.append(key, value[0]);
+          if (value[0] instanceof File) {
+            formData.append(key, value[0]);
+          } else {
+            value.forEach((item, index) => {
+              formData.append(`${key}[${index}]`, item);
+            });
+          }
         } else {
           formData.append(key, value);
         }
       });
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}${ulr}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": isUplaoding
-              ? "multipart/form-data"
-              : "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await axios.post(`${process.env.REACT_APP_API}${ulr}`, formData, {
+        headers: {
+          "Content-Type": isUplaoding ? "multipart/form-data" : "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.status === 440) {
         try {
@@ -61,24 +88,23 @@ const putData = async (fields, ulr, dispatch, navigate) => {
       let isUplaoding = false;
       Object.entries(fields).forEach(([key, value]) => {
         if (typeof value === "object") {
-          isUplaoding = true;
-          formData.append(key, value);
+          if (value[0] instanceof File) {
+            formData.append(key, value[0]);
+          } else {
+            value.forEach((item, index) => {
+              formData.append(`${key}[${index}]`, item);
+            });
+          }
         } else {
           formData.append(key, value);
         }
       });
-      const response = await axios.put(
-        `${process.env.REACT_APP_API}${ulr}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": isUplaoding
-              ? "multipart/form-data"
-              : "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await axios.put(`${process.env.REACT_APP_API}${ulr}`, formData, {
+        headers: {
+          "Content-Type": isUplaoding ? "multipart/form-data" : "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
       if (response.status === 440) {
         try {
           dispatch(clearLogin());
@@ -106,15 +132,12 @@ const getData = async (fields, ulr, dispatch, navigate) => {
         .map((key) => key + "=" + fields[key])
         .join("&");
       let token = GetAccessToken();
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}${ulr}?${queryString}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await axios.get(`${process.env.REACT_APP_API}${ulr}?${queryString}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
       if (response.status === 440) {
         try {
           localStorage.removeItem("user");
@@ -152,12 +175,9 @@ const deleteData = async (fields, ulr, dispatch, navigate) => {
       let queryString = Object.keys(fields)
         .map((key) => key + "=" + fields[key])
         .join("&");
-      const response = await axios.delete(
-        `${process.env.REACT_APP_API}${ulr}?${queryString}`,
-        {
-          headers: { Authorization: "Bearer " + token },
-        }
-      );
+      const response = await axios.delete(`${process.env.REACT_APP_API}${ulr}?${queryString}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
       if (response.status === 440) {
         try {
           localStorage.removeItem("user");

@@ -238,7 +238,7 @@ const CrudForm = (props) => {
       } else if (type === "search") {
         value = JSON.stringify(event);
       } else if (type === "image" || type === "file") {
-        value = event.target.files[0];
+        value = event.target.files;
       } else if (type === "datetime" || type === "time") {
         value = event.toISOString();
       } else if (type === "date") {
@@ -279,7 +279,6 @@ const CrudForm = (props) => {
   const closeModal = () => {
     props.isOpenHandler(false);
   };
-
   return (
     <Overlay>
       <Page className={props.formMode ?? "single"}>
