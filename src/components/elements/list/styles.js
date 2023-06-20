@@ -5,7 +5,7 @@ export const Table = styled.div`
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
-  &.record{
+  &.record {
     border-top: 0px solid #ccc;
   }
   &.double {
@@ -125,7 +125,7 @@ export const TrBody = styled.div`
     font-size: 13px;
   }
   &.single {
-        padding: 15px 17px 15px 26px;
+    padding: 15px 17px 15px 26px;
   }
 `;
 export const Title = styled.span`
@@ -140,11 +140,13 @@ export const Head = styled.span`
   width: "100%";
   display: flex;
   align-items: "center";
-
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
   svg {
     margin-right: 10px;
   }
-  
 `;
 export const DataItem = styled.span`
   background-color: #d7d7d7;
@@ -313,7 +315,6 @@ export const NoData = styled.div`
   display: flex;
   align-items: center;
   height: 100px;
-  align-self: center;
 `;
 export const Img = styled.img`
   height: 50px;
