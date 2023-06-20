@@ -1,31 +1,6 @@
-import ObjectID from "bson-objectid";
 import { clearLogin } from "../../store/actions/login";
 import { GetAccessToken } from "../authentication";
 import axios from "axios";
-function objectToFormData(obj, formData = new FormData(), parentKey = "") {
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const value = obj[key];
-      const fullKey = parentKey ? `${parentKey}[${key}]` : key;
-
-      if (Array.isArray(value)) {
-        value.forEach((item, index) => {
-          if (typeof item === "object" && !Array.isArray(item)) {
-            objectToFormData(item, formData, `${fullKey}[${index}]`);
-          } else {
-            formData.append(`${fullKey}[${index}]`, item);
-          }
-        });
-      } else if (typeof value === "object" && value !== null) {
-        objectToFormData(value, formData, fullKey);
-      } else {
-        formData.append(fullKey, value);
-      }
-    }
-  }
-
-  return formData;
-}
 
 // You can now use the formData object as needed, such as sending it via AJAX or submitting a form
 
