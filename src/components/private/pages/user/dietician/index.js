@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 //
-import Layout from "../../common/layout";
-import ListTable from "../../../elements/list/list";
-import { Container } from "../../common/layout/styels";
+import Layout from "../../../common/layout";
+import ListTable from "../../../../elements/list/list";
+import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const Dietician = (props) => {
+const Dietitian = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Dietician List - Diet Food Management Portal`;
+    document.title = `Dietitian List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -214,7 +214,7 @@ const Dietician = (props) => {
         api={`user`}
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Dietician`}
+        shortName={`Dietitian`}
         parentReference={"userType"}
         referenceId={"6471b34d9fb2b29fe0458878"}
         // formMode={`single`}
@@ -225,4 +225,4 @@ const Dietician = (props) => {
     </Container>
   );
 };
-export default Layout(Dietician);
+export default Layout(Dietitian);
