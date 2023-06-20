@@ -44,6 +44,7 @@ import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionR
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
+import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 import Dashboard from "../../private/pages/dashboard";
 import Subscriber from "../../private/pages/package/subscriber";
 import Notification from "../../private/pages/notification/notification";
@@ -52,6 +53,8 @@ import BlogCategory from "../../private/pages/blog/blogCategory";
 import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
 import PageSettings from "../../private/pages/settings/pageSettings";
 import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry/weeklyMealPlanEntry";
+import Admin from "../../private/pages/franchise/admin";
+// import Dietician from "../../private/pages/user/dietician";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -525,6 +528,24 @@ const Switch = ({
     case "weekly-meal-plan-entry":
       return (
         <WeeklyMealPlanEntry
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "active-admission":
+      return (
+        <ActiveAdmission
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "admin":
+      return (
+        <Admin
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

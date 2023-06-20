@@ -12,25 +12,28 @@ const Franchise = (props) => {
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
       type: "text",
-      // Placeholder text for the input field
       placeholder: "Franchise Name",
-      // Name of the input field
       name: "name",
-      // Validation rules for the input
       validation: "",
-      // Default value for the input field
       default: "",
-      // Label text for the input field
       label: "Franchise Name",
-      // Indicates if the input field is required
       required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
+      view: false,
       add: true,
-      // Indicates if the input field should be displayed in the update mode
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Owner",
+      name: "owner",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Owner",
+      required: true,
+      view: true,
+      add: true,
       update: true,
     },
     {
@@ -39,6 +42,7 @@ const Franchise = (props) => {
       name: "location",
       validation: "",
       default: "",
+      tag: true,
       label: "Location",
       required: true,
       view: true,
@@ -51,6 +55,7 @@ const Franchise = (props) => {
       name: "website",
       validation: "",
       default: "",
+      tag: true,
       label: "Website",
       required: true,
       view: true,
@@ -63,6 +68,7 @@ const Franchise = (props) => {
       name: "email",
       validation: "",
       default: "",
+      tag: true,
       label: "Email",
       required: true,
       view: true,
@@ -75,19 +81,8 @@ const Franchise = (props) => {
       name: "phone",
       validation: "",
       default: "",
+      tag: true,
       label: "Phone",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Owner",
-      name: "owner",
-      validation: "",
-      default: "",
-      label: "Owner",
       required: true,
       view: true,
       add: true,
@@ -118,150 +113,134 @@ const Franchise = (props) => {
     //   update: true,
     // },
   ]);
-  const [timingAttributes] = useState([
-    {
-      type: "text",
-      placeholder: "Label",
-      name: "label",
-      validation: "",
-      default: "",
-      label: "Label",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "number",
-      placeholder: "Sequence",
-      name: "sequence",
-      validation: "",
-      default: "",
-      label: "Sequence",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Icon",
-      name: "icon",
-      validation: "",
-      default: "",
-      label: "Icon",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Path",
-      name: "path",
-      validation: "",
-      default: "",
-      label: "Path",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Element Name",
-      name: "element",
-      validation: "",
-      default: "",
-      label: "Element Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Status",
-      name: "status",
-      validation: "",
-      default: "true",
-      label: "Status",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "checkbox",
-      placeholder: "Is Link",
-      name: "isLink",
-      validation: "",
-      default: "false",
-      label: "Is Link",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-  ]);
 
-  const [actions] = useState([
-    {
-      // Element type for rendering
-      element: "button",
-      // Type of action, in this case a sublist
-      type: "subList",
-      // Unique identifier for the submenu
-      id: "sub-menu",
-      // Displayed item title
-      itemTitle: "title",
-      // Title of the submenu
-      title: "Order",
-      // Additional attributes for timing
-      attributes: timingAttributes,
-      // Parameters for API and submenu configuration
-      params: {
-        // API endpoint for submenu data
-        api: `sub-menu`,
-        // Parent reference for the submenu
-        parentReference: "menu",
-        // Property name for the submenu item title
-        itemTitle: "label",
-        // Short name for the submenu
-        shortName: "Sub Menu",
-        // Privileges for adding submenu items
-        addPrivilege: true,
-        // Privileges for deleting submenu items
-        delPrivilege: true,
-        // Privileges for updating submenu items
-        updatePrivilege: true,
-        // Custom CSS class for styling
-        customClass: "medium",
-        formMode: "double",
-      },
-    },
-  ]);
-  // Use the useTranslation hook from react-i18next to handle translations
-  // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
+  // const [timingAttributes] = useState([
+  //   {
+  //     type: "text",
+  //     placeholder: "Label",
+  //     name: "label",
+  //     validation: "",
+  //     default: "",
+  //     label: "Label",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "number",
+  //     placeholder: "Sequence",
+  //     name: "sequence",
+  //     validation: "",
+  //     default: "",
+  //     label: "Sequence",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "text",
+  //     placeholder: "Icon",
+  //     name: "icon",
+  //     validation: "",
+  //     default: "",
+  //     label: "Icon",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "text",
+  //     placeholder: "Path",
+  //     name: "path",
+  //     validation: "",
+  //     default: "",
+  //     label: "Path",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "text",
+  //     placeholder: "Element Name",
+  //     name: "element",
+  //     validation: "",
+  //     default: "",
+  //     label: "Element Name",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "checkbox",
+  //     placeholder: "Status",
+  //     name: "status",
+  //     validation: "",
+  //     default: "true",
+  //     label: "Status",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  //   {
+  //     type: "checkbox",
+  //     placeholder: "Is Link",
+  //     name: "isLink",
+  //     validation: "",
+  //     default: "false",
+  //     label: "Is Link",
+  //     required: true,
+  //     view: true,
+  //     add: true,
+  //     update: true,
+  //   },
+  // ]);
+
+  // const [actions] = useState([
+  //   {
+  //     element: "button",
+  //     type: "subList",
+  //     id: "sub-menu",
+  //     itemTitle: "title",
+  //     title: "Order",
+  //     attributes: timingAttributes,
+  //     params: {
+  //       api: `sub-menu`,
+  //       parentReference: "menu",
+  //       itemTitle: "label",
+  //       shortName: "Sub Menu",
+  //       addPrivilege: true,
+  //       delPrivilege: true,
+  //       updatePrivilege: true,
+  //       customClass: "medium",
+  //       formMode: "double",
+  //     },
+  //   },
+  // ]);
+
   return (
     <Container className="noshadow">
-      {/* Render a ListTable component */}
       <ListTable
-        // Actions to be displayed in the ListTable
-        actions={actions}
-        // API endpoint for fetching menu data
+        // actions={actions}
         api={`franchise`}
-        // Property name for the title of each menu item
-        itemTitle={`label`}
-        // Short name or label for the menu
+        // itemTitle={`label`}
+        itemTitle={{
+          name: "name",
+          type: "text",
+          collection: "",
+        }}
         shortName={`Franchise`}
         formMode={`double`}
-        // Additional attributes related to the menu
         attributes={attributes}
         {...props}
       ></ListTable>
     </Container>
   );
 };
-// exporting the page with parent container layout..
+
 export default Layout(Franchise);
