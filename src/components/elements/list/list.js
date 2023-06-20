@@ -170,12 +170,15 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
             let bool = value[item.name]?.toString() === "true" ? true : false;
             updateValues[item.name] = bool;
           } else if (item.type === "number") {
-            console.log(parseInt(value[item.name]));
             updateValues[item.name] = parseInt(value[item.name]);
           } else if (item.type === "select") {
-            console.log(itemValue);
-            console.log(value[item.name]);
             updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
+          } else if (item.type === "multiSelect") {
+            try {
+              updateValues[item.name] = value[item.name].map((obj) => obj._id);
+            } catch (error) {
+              updateValues[item.name] = [];
+            }
           } else if (item.type === "image") {
             updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
             updateValues[item.name] = [];
@@ -409,7 +412,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
             {!signleRecord && (
               <More
                 onClick={() => {
-                  console.log("yes");
                   setIsOpen(true);
                   setOpenData({ actions, attributes, data });
                   setSubAttributes({ actions, attributes, data });
@@ -508,9 +510,9 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
               if (attribute.view && (attribute.tag ?? false)) {
                 try {
                   const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
-                  if (attribute.type === "image") {
-                    return "";
-                  }
+                  // if (attribute.type === "image") {
+                  //   return "";
+                  // }
                   return (
                     <Td key={index}>
                       <Title>{attribute.label}</Title>
