@@ -243,6 +243,8 @@ const CrudForm = (props) => {
         value = event.toISOString();
       } else if (type === "date") {
         value = event.toISOString();
+      } else if (type === "textarea") {
+        value = event;
       } else {
         value = event.target.getAttribute("value");
       }
