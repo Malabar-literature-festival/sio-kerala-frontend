@@ -852,6 +852,11 @@ export const AdmissionHistory = () => (
     />
   </Svg>
 );
+export const EnlargeIcon = () => (
+  <Svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+    <path fill="currentColor" d="M292.7 196.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L480 54.6V160c0 8.8 7.2 16 16 16s16-7.2 16-16V16c0-8.8-7.2-16-16-16H352c-8.8 0-16 7.2-16 16s7.2 16 16 16H457.4L292.7 196.7zM219.3 315.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L32 457.4V352c0-8.8-7.2-16-16-16s-16 7.2-16 16V496c0 8.8 7.2 16 16 16H160c8.8 0 16-7.2 16-16s-7.2-16-16-16H54.6L219.3 315.3z" />
+  </Svg>
+);
 export const GetIcon = ({ icon }) => {
   const trimmedIcon = icon && typeof icon === "string" ? icon.trim() : "";
 
@@ -1016,6 +1021,8 @@ export const GetIcon = ({ icon }) => {
       return <PatientIcon />;
     case "admissionHistory":
       return <AdmissionHistory />;
+    case "enlarge":
+      return <EnlargeIcon />;
     case "dashboard":
       return <DashboardIcon />;
     default:

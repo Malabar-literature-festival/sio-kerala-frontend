@@ -7,6 +7,7 @@ import { ErrorMessage } from "../form/styles";
 import { TickIcon, UploadIcon } from "../../../icons";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multiSelect";
+import EditorNew from "../editor";
 
 function FormInput(props) {
   // Initialize translation function for current language
@@ -117,7 +118,7 @@ function FormInput(props) {
         </FileContainer>
       );
     // Render a textarea
-    case "textarea":
+    case "plaintextarea":
       return (
         <InputContainer className="textarea">
           {props.error?.length ? (
@@ -133,6 +134,8 @@ function FormInput(props) {
           <TextArea theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} value={props.value} onChange={(event) => props.onChange(event, props.id)} />
         </InputContainer>
       );
+    case "textarea":
+      return <EditorNew key={props.id} type={props.type} placeholder={props.placeholder} value={props.value} id={props.id} onChange={props.onChange}></EditorNew>;
     // Render a submit button
     case "submit":
       return (
