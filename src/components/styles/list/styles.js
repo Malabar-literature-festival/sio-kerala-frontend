@@ -9,7 +9,7 @@ export const ListItemHead = styled.div`
   margin: 0;
   color: #1381c5;
   padding: 0.5em 1em;
-  margin-bottom: 0.5em;
+  margin-bottom: 3.5em;
   border-bottom: 1px solid white;
   text-transform: uppercase;
   &:first-child {

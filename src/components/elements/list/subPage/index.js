@@ -7,7 +7,7 @@ import { GetIcon } from "../../../../icons";
 import { CloseButton } from "../popup/styles";
 const SubPage = ({ themeColors, subAttributes, setLoaderBox, setMessage, closeModal, itemTitle }) => {
   const [t] = useTranslation();
-  const titleValue = (itemTitle.collection?.length > 0 ? subAttributes?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : subAttributes?.data?.[itemTitle.name]) || "Please update the itemTitle | - ItemTitle: Give item title for List Item Table inside each page. This array name should be there inside the array.";
+  const titleValue = (itemTitle.collection?.length > 0 ? subAttributes?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : subAttributes?.data?.[itemTitle.name]) || "Please update the itemTitle.";
   const viewMode = subAttributes.item.type ?? "subList";
   return (
     <Overlay>

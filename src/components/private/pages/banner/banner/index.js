@@ -21,6 +21,7 @@ const Banner = (props) => {
       validation: "",
       default: "",
       label: "Title",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -37,6 +38,7 @@ const Banner = (props) => {
       validation: "",
       default: "",
       label: "Banner Type",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -53,6 +55,7 @@ const Banner = (props) => {
       validation: "",
       default: "",
       label: "Franchise",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -63,12 +66,13 @@ const Banner = (props) => {
       type: "text",
       apiType: "",
       selectApi: "",
-      placeholder: "URL",
-      name: "link",
+      placeholder: "Video URL",
+      name: "videoUrl",
       showItem: "",
       validation: "",
       default: "",
-      label: "URL",
+      label: "Video URL",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -82,6 +86,7 @@ const Banner = (props) => {
       validation: "",
       default: "false",
       label: "Status",
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -110,11 +115,7 @@ const Banner = (props) => {
       <ListTable
         // actions={actions}
         api={`banner`}
-        itemTitle={{
-          name: "title",
-          type: "text",
-          collection: "",
-        }}
+        itemTitle={{ name: "title", type: "text", collection: "", }}
         shortName={`Banner`}
         // formMode={`single`}
         formMode={`double`}

@@ -50,6 +50,7 @@ import Notification from "../../private/pages/notification/notification";
 import Blog from "../../private/pages/blog/blogs";
 import BlogCategory from "../../private/pages/blog/blogCategory";
 import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
+import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 import PageSettings from "../../private/pages/settings/pageSettings";
 /**
  * Switch component to render different pages based on the provided page prop.
@@ -506,6 +507,15 @@ const Switch = ({
     case "social-media":
       return (
         <SocialMedia
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "active-admission":
+      return (
+        <ActiveAdmission
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

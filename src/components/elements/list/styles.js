@@ -5,13 +5,16 @@ export const Table = styled.div`
   font-family: Arial, sans-serif;
   margin-bottom: auto;
   border-top: 1px solid #ccc;
+  &.record{
+    border-top: 0px solid #ccc;
+  }
   &.double {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 768px) {
     &.double {
-      display: flex;
+      grid-template-columns: auto;
     }
   }
   &.auto {
@@ -50,9 +53,24 @@ export const Tr = styled.div`
   flex-direction: column;
   /* padding: 5px 26px; */
   padding-bottom: 12px;
+  &:first-child {
+    border-top: 0px solid #d9d9d9;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
   .double & {
     &:nth-child(even) {
       border-left: 1px solid #ccc;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:nth-last-child(2):nth-child(odd) {
+      /* Apply styles to second-to-last child in last row (odd index) */
+      border-bottom: 0;
+      /* Add any additional styles here */
     }
   }
   &:hover {
@@ -107,7 +125,7 @@ export const TrBody = styled.div`
     font-size: 13px;
   }
   &.single {
-    padding: 10px 30px;
+        padding: 15px 17px 15px 26px;
   }
 `;
 export const Title = styled.span`
@@ -126,6 +144,7 @@ export const Head = styled.span`
   svg {
     margin-right: 10px;
   }
+  
 `;
 export const DataItem = styled.span`
   background-color: #d7d7d7;
