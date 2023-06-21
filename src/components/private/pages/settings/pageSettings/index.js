@@ -38,7 +38,7 @@ const PageSettings = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "textarea",
       placeholder: "Page Content",
       name: "pageContent",
       validation: "",
