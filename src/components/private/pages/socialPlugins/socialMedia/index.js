@@ -17,7 +17,6 @@ const SocialMedia = (props) => {
       name: "instaId",
       validation: "",
       default: "",
-      tag: true,
       label: "instaId",
       required: true,
       view: true,

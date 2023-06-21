@@ -22,7 +22,6 @@ const Blog = (props) => {
       validation: "",
       // Default value for the input field
       default: "",
-      tag: true,
       // Label text for the input field
       label: "Title",
       // Indicates if the input field is required
@@ -61,7 +60,7 @@ const Blog = (props) => {
       update: true,
     },
     {
-      type: "number",
+      type: "date",
       placeholder: "Date",
       name: "date",
       validation: "",
@@ -286,6 +285,7 @@ const Blog = (props) => {
           collection: "",
         }}
         shortName={`Blog`}
+        formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
