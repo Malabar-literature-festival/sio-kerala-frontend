@@ -51,7 +51,7 @@ export const Page = styled.div`
   height: auto;
   animation: ${fadeIn} 1s ease-in-out;
   animation-duration: 0.2s;
-  margin: auto;
+  margin: 5vh auto auto auto;
   padding: 1em 0;
   &.medium {
     width: 70%;

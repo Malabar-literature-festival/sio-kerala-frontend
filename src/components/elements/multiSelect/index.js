@@ -11,7 +11,6 @@ import Search from "../search";
 function MultiSelect(props) {
   const themeColors = useSelector((state) => state.themeColors);
   const [optionsVisible, setOptionsVisible] = useState(false);
-  const [defaultValue] = useState(props.default);
   const [selectedId, setSelectedId] = useState([]);
   const [initialized, setInitialized] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -34,60 +33,59 @@ function MultiSelect(props) {
     }
   };
   const fetchData = useCallback(async () => {
+    const handleOptions = (data) => {
+      const selectedData = (props.value || [])
+        .map((item) => {
+          const foundItem = data.find((dataItem) => dataItem.id === item);
+          return foundItem ? { id: foundItem.id, value: foundItem.value } : null;
+        })
+        .filter(Boolean);
+      setSelectedId(selectedData);
+      setOptions(data);
+      setInitialized(true);
+    };
+
     if (props.apiType === "API") {
-      const optionHandler = (data) => {
-        setOptions(data);
-        setInitialized(true);
-        try {
-          setSelectedValue(selectedId.length > 0 ? `${selectedId[0].value} ${selectedId.length > 1 ? " (" + (selectedId.length - 1) + " more)" : ""}` : props.label);
-        } catch {}
-      };
       if (selectData) {
-        optionHandler(selectData);
-      } else {
-        if (initialized) {
-        } else {
-          await getData({}, `${props.selectApi}`)
-            .then((response) => {
-              if (response.status === 200) {
-                optionHandler(response.data);
-                dispatch(addSelectObject(response.data, props.selectApi));
-              } else if (response.status === 404) {
-                setInitialized(false);
-              } else {
-                setInitialized(false);
-              }
-            })
-            .catch((error) => {
-              setInitialized(false);
-            });
+        handleOptions(selectData);
+      } else if (!initialized) {
+        try {
+          const response = await getData({}, props.selectApi);
+          if (response.status === 200) {
+            handleOptions(response.data);
+            dispatch(addSelectObject(response.data, props.selectApi));
+          } else {
+            setInitialized(false);
+          }
+        } catch (error) {
+          setInitialized(false);
         }
       }
     } else if (props.apiType === "CSV") {
-      const options = props.selectApi.split(",").map((item) => {
-        return {
-          id: item.trim(),
-          value: item.trim().charAt(0).toUpperCase() + item.trim().slice(1),
-        };
-      });
+      const options = props.selectApi.split(",").map((item) => ({
+        id: item.trim(),
+        value: item.trim().charAt(0).toUpperCase() + item.trim().slice(1),
+      }));
       setOptions(options);
       setInitialized(true);
-      try {
-        setSelectedValue(selectedId.length > 0 ? `${selectedId[0].value} ${selectedId.length > 1 ? " (" + (selectedId.length - 1) + " more)" : ""}` : props.label);
-      } catch {}
     } else if (props.apiType === "JSON") {
-      const options = props.selectApi;
-      setOptions(options);
+      setOptions(props.selectApi);
       setInitialized(true);
-      try {
-        setSelectedValue(selectedId.length > 0 ? `${selectedId[0].value} ${selectedId.length > 1 ? " (" + (selectedId.length - 1) + " more)" : ""}` : props.label);
-      } catch {}
     }
-  }, [props.apiType, props.selectApi, props.placeHolder, initialized, selectedId, selectData, dispatch]);
+  }, [props.apiType, props.value, props.selectApi, initialized, selectData, dispatch]);
+
+  useEffect(() => {
+    try {
+      setSelectedValue(selectedId.length > 0 ? `${selectedId[0].value}${selectedId.length > 1 ? " (" + (selectedId.length - 1) + " more)" : ""}` : props.label);
+    } catch (error) {
+      setSelectedValue(props.label);
+    }
+  }, [selectedId, props.label]);
 
   useEffect(() => {
     fetchData();
   }, [props.selectApi, fetchData]);
+
   const selectRef = useRef(null);
 
   useEffect(() => {

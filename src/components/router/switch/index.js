@@ -34,7 +34,7 @@ import DiscountTypeName from "../../private/pages/dispatch/discountType";
 import Banner from "../../private/pages/banner/banner";
 import BannerType from "../../private/pages/banner/bannerType";
 import MealIngredient from "../../private/pages/mealSettings/mealIngredient";
-import Dietician from "../../private/pages/dietician";
+import Dietitian from "../../private/pages/user/dietitian";
 import Deliveryman from "../../private/pages/dispatch/deliveryman";
 import Ingredient from "../../private/pages/mealSettings/Ingredient/ingredient";
 import AddMeal from "../../private/pages/mealSettings/addMeal";
@@ -44,14 +44,16 @@ import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionR
 import Appointment from "../../private/pages/user/appointment/appointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
+import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 import Dashboard from "../../private/pages/dashboard";
 import Subscriber from "../../private/pages/package/subscriber";
 import Notification from "../../private/pages/notification/notification";
 import Blog from "../../private/pages/blog/blogs";
 import BlogCategory from "../../private/pages/blog/blogCategory";
 import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
-import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 import PageSettings from "../../private/pages/settings/pageSettings";
+// import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry";
+import Admin from "../../private/pages/franchise/admin";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -379,7 +381,7 @@ const Switch = ({
       );
     case "dietitian":
       return (
-        <Dietician
+        <Dietitian
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
@@ -525,6 +527,24 @@ const Switch = ({
     case "page-settings":
       return (
         <PageSettings
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    // case "weekly-meal-plan-entry":
+    //   return (
+    //     <WeeklyMealPlanEntry
+    //       key={key}
+    //       addPrivilege={addPrivilege}
+    //       delPrivilege={delPrivilege}
+    //       updatePrivilege={updatePrivilege}
+    //     />
+    //   );
+    case "admin":
+      return (
+        <Admin
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}

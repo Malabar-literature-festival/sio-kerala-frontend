@@ -44,6 +44,8 @@ export const TabLink = styled.div`
   text-align: center;
   height: 30px;
   border-left: 1px solid #c4d7d6;
+  flex: inherit;
+  min-width: 60px;
   &:first-child {
     border-left: 1px solid rgb(181 175 175 / 38%);
     border-top-left-radius: 10px;
@@ -67,5 +69,6 @@ export const TabLink = styled.div`
   }
   @media (max-width: 768px) {
     white-space: nowrap;
+    flex: none;
   }
 `;

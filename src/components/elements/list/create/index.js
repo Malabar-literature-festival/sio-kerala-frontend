@@ -233,7 +233,6 @@ const CrudForm = (props) => {
         }
 
         value = items;
-        console.log(items)
       } else if (type === "email" || type === "text" || type === "number" || type === "password") {
         value = event.target.value;
       } else if (type === "search") {
@@ -241,9 +240,7 @@ const CrudForm = (props) => {
       } else if (type === "image" || type === "file") {
         value = event.target.files;
       } else if (type === "datetime" || type === "time") {
-        console.log(event);
         value = event.toISOString();
-        console.log(value);
       } else if (type === "date") {
         value = event.toISOString();
       } else {
@@ -282,7 +279,6 @@ const CrudForm = (props) => {
   const closeModal = () => {
     props.isOpenHandler(false);
   };
-
   return (
     <Overlay>
       <Page className={props.formMode ?? "single"}>

@@ -21,6 +21,7 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -170,12 +171,15 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
             let bool = value[item.name]?.toString() === "true" ? true : false;
             updateValues[item.name] = bool;
           } else if (item.type === "number") {
-            console.log(parseInt(value[item.name]));
             updateValues[item.name] = parseInt(value[item.name]);
           } else if (item.type === "select") {
-            console.log(itemValue);
-            console.log(value[item.name]);
             updateValues[item.name] = typeof value[item.name] === "undefined" ? "" : typeof value[item.name] === "string" || typeof value[item.name] === "number" ? value[item.name] : value[item.name]?._id ? value[item.name]._id : "";
+          } else if (item.type === "multiSelect") {
+            try {
+              updateValues[item.name] = value[item.name].map((obj) => obj._id);
+            } catch (error) {
+              updateValues[item.name] = [];
+            }
           } else if (item.type === "image") {
             updateValues["old_" + item.name] = value[item.name] ? value[item.name] : "";
             updateValues[item.name] = [];
@@ -409,7 +413,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
             {!signleRecord && (
               <More
                 onClick={() => {
-                  console.log("yes");
                   setIsOpen(true);
                   setOpenData({ actions, attributes, data });
                   setSubAttributes({ actions, attributes, data });
@@ -750,10 +753,10 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
       <Table className={users.data?.response?.length === 0 ? "norecord" : "record"}>{users.data?.response?.length > 0 && <TableRowWithActions key={`${shortName}-${0}`} slNo={0} attributes={attributes} data={users.data?.response[0]} />}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
-
       {isCreating && (
         <CrudForm
           api={api}
+          formMode={formMode}
           formType={"post"}
           header={t("addNewTitle", {
             label: t(shortName ? shortName : "Form"),

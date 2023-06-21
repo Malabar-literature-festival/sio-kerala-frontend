@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 //
-import Layout from "../../common/layout";
-import ListTable from "../../../elements/list/list";
-import { Container } from "../../common/layout/styels";
+import Layout from "../../../common/layout";
+import ListTable from "../../../../elements/list/list";
+import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const Dietician = (props) => {
+const Dietitian = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Dietician List - Diet Food Management Portal`;
+    document.title = `Dietitian List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "CPR/Mobile",
+      placeholder: "Username",
       name: "username",
       validation: "",
       default: "",
-      label: "CPR/Mobile",
+      tag: true,
+      label: "Username",
       required: true,
       view: true,
       add: true,
@@ -31,6 +32,7 @@ const Dietician = (props) => {
       name: "userDisplayName",
       validation: "",
       default: "",
+      tag: true,
       label: "Name",
       required: true,
       view: true,
@@ -61,7 +63,7 @@ const Dietician = (props) => {
       required: false,
       view: false,
       add: true,
-      update: false,
+      update: true,
     },
     {
       type: "select",
@@ -90,7 +92,7 @@ const Dietician = (props) => {
       label: "Gender",
       showItem: "Gender",
       required: false,
-      view: false,
+      view: true,
       filter: false,
       add: true,
       update: true,
@@ -154,7 +156,7 @@ const Dietician = (props) => {
       tag: true,
       label: "Address",
       required: false,
-      view: false,
+      view: true,
       add: true,
       update: true,
     },
@@ -214,7 +216,7 @@ const Dietician = (props) => {
         api={`user`}
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Dietician`}
+        shortName={`Dietitian`}
         parentReference={"userType"}
         referenceId={"6471b34d9fb2b29fe0458878"}
         // formMode={`single`}
@@ -225,4 +227,4 @@ const Dietician = (props) => {
     </Container>
   );
 };
-export default Layout(Dietician);
+export default Layout(Dietitian);

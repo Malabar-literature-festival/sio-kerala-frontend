@@ -53,7 +53,6 @@ function FormInput(props) {
     // Render a date input with date picker
     case "date":
       let userFriendlyDate = props.value.length > 0 ? new Date(props.value) : null;
-      console.log(props.value.length);
       return (
         <InputContainer>
           <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
