@@ -75,7 +75,7 @@ const Admin = (props) => {
       tag: true,
       label: "Password",
       required: false,
-      view: false,
+      view: true,
       add: true,
       update: false,
     },
