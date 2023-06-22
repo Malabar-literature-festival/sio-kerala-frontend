@@ -20,7 +20,7 @@ export const DisplayInformations = ({ attributes, data, formMode }) => {
             return (
               <Td key={index}>
                 <Title>{attribute.label}</Title>
-                <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                <DataItem>{getValue(attribute, itemValue, true)} </DataItem>
               </Td>
             );
           } catch (error) {

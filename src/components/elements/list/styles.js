@@ -141,7 +141,7 @@ export const Head = styled.span`
   display: flex;
   align-items: "center";
   cursor: pointer;
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
   svg {
@@ -403,4 +403,16 @@ export const Actions = styled.div`
 
 export const ToolTipContainer = styled.div`
   display: flex;
+`;
+export const IconBox = styled.span`
+  padding-top: 5px;
+  &.display {
+    padding-top: 0px;
+    border: 1px solid;
+    display: flex;
+    height: 20px;
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+  }
 `;

@@ -54,7 +54,7 @@ const Menu = (props) => {
       default: "",
       label: "Icon",
       required: true,
-      tag:true,
+      tag: true,
       view: true,
       add: true,
       update: true,
@@ -145,7 +145,7 @@ const Menu = (props) => {
       validation: "",
       default: "",
       label: "Icon",
-      tag:true,
+      tag: true,
       required: true,
       view: true,
       add: true,
@@ -203,7 +203,90 @@ const Menu = (props) => {
       update: true,
     },
   ]);
-
+  const [menuRole] = useState([
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "user-type/select",
+      placeholder: "User Type",
+      name: "userType",
+      validation: "",
+      showItem: "role",
+      tag: true,
+      default: "role",
+      label: "User Type",
+      required: true,
+      view: false,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Add Permission",
+      name: "add",
+      validation: "",
+      default: "false",
+      label: "Add Permission",
+      tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Edit Permission",
+      name: "update",
+      validation: "",
+      default: "false",
+      label: "Edit Permission",
+      tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Delete Permission",
+      name: "delete",
+      validation: "",
+      default: "false",
+      label: "Delete Permission",
+      tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Export Permission",
+      name: "export",
+      validation: "",
+      default: "false",
+      label: "Export Permission",
+      tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "checkbox",
+      placeholder: "Status",
+      name: "status",
+      validation: "",
+      default: "false",
+      label: "Status",
+      tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+  ]);
   const [actions] = useState([
     {
       // Element type for rendering
@@ -226,6 +309,70 @@ const Menu = (props) => {
         itemTitle: { name: "label", type: "text", collection: "" },
         // Short name for the submenu
         shortName: "Sub Menu",
+        // Privileges for adding submenu items
+        addPrivilege: true,
+        // Privileges for deleting submenu items
+        delPrivilege: true,
+        // Privileges for updating submenu items
+        updatePrivilege: true,
+        // Custom CSS class for styling
+        customClass: "medium",
+        actions: [
+          {
+            // Element type for rendering
+            element: "button",
+            // Type of action, in this case a sublist
+            type: "subList",
+            // Unique identifier for the submenu
+            id: "submenu-role",
+            // Title of the submenu
+            title: "Sub Menu Role",
+            // Additional attributes for timing
+            attributes: menuRole,
+            // Parameters for API and submenu configuration
+            params: {
+              // API endpoint for submenu data
+              api: `submenu-role`,
+              // Parent reference for the submenu
+              parentReference: "subMenu",
+              // Property name for the submenu item title
+              itemTitle: { name: "roleDisplayName", type: "text", collection: "userType" },
+              // Short name for the submenu
+              shortName: "Sub Menu Role",
+              // Privileges for adding submenu items
+              addPrivilege: true,
+              // Privileges for deleting submenu items
+              delPrivilege: true,
+              // Privileges for updating submenu items
+              updatePrivilege: true,
+              // Custom CSS class for styling
+              customClass: "medium",
+            },
+          },
+        ],
+      },
+    },
+    {
+      // Element type for rendering
+      element: "button",
+      // Type of action, in this case a sublist
+      type: "subList",
+      // Unique identifier for the submenu
+      id: "menu-role",
+      // Title of the submenu
+      title: "Menu Role",
+      // Additional attributes for timing
+      attributes: menuRole,
+      // Parameters for API and submenu configuration
+      params: {
+        // API endpoint for submenu data
+        api: `menu-role`,
+        // Parent reference for the submenu
+        parentReference: "menu",
+        // Property name for the submenu item title
+        itemTitle: { name: "roleDisplayName", type: "text", collection: "userType" },
+        // Short name for the submenu
+        shortName: "Menu Role",
         // Privileges for adding submenu items
         addPrivilege: true,
         // Privileges for deleting submenu items

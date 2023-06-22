@@ -1,5 +1,6 @@
+import { GetIcon } from "../../../../icons";
 import { dateFormat, dateTimeFormat } from "../../../functions/date";
-import { Img } from "../styles";
+import { IconBox, Img } from "../styles";
 export function convertMinutesToHHMM(minutes) {
   const hours = Math.floor(minutes / 60);
   const mins = Math.floor(minutes % 60);
@@ -9,7 +10,7 @@ export function convertMinutesToHHMM(minutes) {
 
   return `${hoursStr}:${minsStr}`;
 }
-export const getValue = (attribute, itemValue) => {
+export const getValue = (attribute, itemValue, display = false) => {
   let response = "";
   switch (attribute.type) {
     case "minute":
@@ -23,13 +24,16 @@ export const getValue = (attribute, itemValue) => {
       break;
     case "multiSelect":
       console.log(itemValue, attribute.showItem);
-      response = itemValue.map(item => item[attribute.showItem].toString()).join(", ");
+      response = itemValue.map((item) => item[attribute.showItem].toString()).join(", ");
       break;
     case "date":
       response = dateFormat(itemValue);
       break;
     case "textarea":
       response = itemValue?.substring(0, 200);
+      break;
+    case "checkbox":
+      response = <IconBox className={display && "display"}>{itemValue ? <GetIcon icon={"checked"} /> : <GetIcon icon={"Close"} />}</IconBox>;
       break;
     case "icon":
       response = <i className={`fa-light ${itemValue}`} />;
