@@ -64,7 +64,7 @@ const WeeklyMealPlan = (props) => {
         displayColumn="double"
         // itemTitle={`label`}
         itemTitle={{
-          name: "userDisplayName",
+          name: "username",
           type: "text",
           collection: "user",
         }}
