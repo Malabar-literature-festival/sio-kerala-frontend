@@ -77,7 +77,7 @@ const PackageManagement = (props) => {
     //   update: true,
     // },
     {
-      type: "select",
+      type: "multiSelect",
       apiType: "API",
       selectApi: "mealtime-category/select",
       placeholder: "Meal Time Category",

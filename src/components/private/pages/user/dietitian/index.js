@@ -9,18 +9,17 @@ import { Container } from "../../../common/layout/styels";
 const Dietitian = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Dietitian List - Diet Food Management Portal`;
+    document.title = `Dietitian - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Username",
+      placeholder: "User Name",
       name: "username",
       validation: "",
       default: "",
-      tag: true,
-      label: "Username",
+      label: "User Name",
       required: true,
       view: true,
       add: true,
@@ -32,7 +31,6 @@ const Dietitian = (props) => {
       name: "userDisplayName",
       validation: "",
       default: "",
-      tag: true,
       label: "Name",
       required: true,
       view: true,
@@ -52,19 +50,7 @@ const Dietitian = (props) => {
       add: true,
       update: true,
     },
-    {
-      type: "password",
-      placeholder: "Password",
-      name: "password",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Password",
-      required: false,
-      view: false,
-      add: true,
-      update: true,
-    },
+
     {
       type: "select",
       placeholder: "Gender",
@@ -92,10 +78,10 @@ const Dietitian = (props) => {
       label: "Gender",
       showItem: "Gender",
       required: false,
-      view: true,
+      view: false,
       filter: false,
       add: true,
-      update: true,
+      update: false,
       apiType: "CSV",
       selectApi: "Male,Female",
     },
@@ -129,11 +115,25 @@ const Dietitian = (props) => {
     //   update: true,
     // },
     {
-      type: "text",
-      apiType: "API",
+      type: "password",
+      placeholder: "password",
+      name: "password",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "password",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "textarea",
+      apiType: "",
       selectApi: "",
       placeholder: "Address",
       name: "subscriber",
+      // collection: "subscribers",
       validation: "",
       showItem: "address",
       default: "",
@@ -144,9 +144,10 @@ const Dietitian = (props) => {
       add: false,
       update: false,
     },
+
     {
-      type: "text",
-      apiType: "API",
+      type: "textarea",
+      apiType: "",
       selectApi: "",
       placeholder: "Address",
       name: "address",
@@ -156,27 +157,44 @@ const Dietitian = (props) => {
       tag: true,
       label: "Address",
       required: false,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "hidden",
-      apiType: "API",
-      selectApi: "user-type/select",
-      placeholder: "User Type",
-      name: "userType",
-      validation: "",
-      showItem: "role",
-      default: "role",
-      tag: true,
-      label: "User Type",
-      required: true,
       view: false,
       add: true,
-      update: true,
-      filter: false,
+      update: false,
     },
+    // {
+    //   type: "hidden",
+    //   apiType: "API",
+    //   selectApi: "user-type/select",
+    //   placeholder: "User Type",
+    //   name: "userType",
+    //   validation: "",
+    //   showItem: "role",
+    //   default: "role",
+    //   tag: true,
+    //   label: "User Type",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    //   filter: false,
+    // },
+    // {
+    //   type: "hidden",
+    //   apiType: "",
+    //   selectApi: "",
+    //   placeholder: "User Type",
+    //   name: "userType",
+    //   validation: "",
+    //   showItem: "",
+    //   default: "6471b3849fb2b29fe045887b",
+    //   tag: true,
+    //   label: "User Type",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    //   filter: false,
+    // },
     // {
     //   type: "select",
     //   apiType: "API",
@@ -214,9 +232,10 @@ const Dietitian = (props) => {
       <ListTable
         // actions={actions}
         api={`user`}
+        displayColumn="double"
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Dietitian`}
+        shortName={`Delivery Man`}
         parentReference={"userType"}
         referenceId={"6471b34d9fb2b29fe0458878"}
         // formMode={`single`}

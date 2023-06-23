@@ -15,11 +15,11 @@ const DeliveryMan = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Username",
+      placeholder: "User Name",
       name: "username",
       validation: "",
       default: "",
-      label: "username",
+      label: "User Name",
       required: true,
       view: true,
       add: true,
@@ -144,7 +144,6 @@ const DeliveryMan = (props) => {
       add: false,
       update: false,
     },
-
     {
       type: "textarea",
       apiType: "",

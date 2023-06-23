@@ -42,6 +42,7 @@ import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionRecord";
 // import AddVariant from "../../private/pages/mealSettings/addVariant";
 import Appointment from "../../private/pages/user/appointment/appointment";
+import ActiveAppointment from "../../private/pages/user/appointment/activeAppointment";
 import OrderList from "../../private/pages/order/orderList";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
@@ -433,9 +434,9 @@ const Switch = ({
     //       updatePrivilege={updatePrivilege}
     //     />
     //   );
-    case "appointment":
+    case "active-appointment":
       return (
-        <Appointment
+        <ActiveAppointment
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
