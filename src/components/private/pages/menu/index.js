@@ -213,7 +213,7 @@ const Menu = (props) => {
       validation: "",
       showItem: "role",
       tag: true,
-      default: "role",
+      default: "",
       label: "User Type",
       required: true,
       view: false,
