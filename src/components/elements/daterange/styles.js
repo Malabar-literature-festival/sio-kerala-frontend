@@ -6,6 +6,7 @@ export const DateBox = styled.div`
 `;
 export const DateRange = styled(DateRangePicker)`
   position: absolute;
+  z-index: 1;
   display: none !important;
   top: 50px;
   border-radius: 10px;

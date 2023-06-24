@@ -58,8 +58,8 @@ export const Td = styled.div`
     text-align: right;
   }
   &:last-child {
-      border-bottom: 0 !important;
-    }
+    border-bottom: 0 !important;
+  }
   .double & {
     &:nth-child(odd) {
       border-right: 1px solid #ccc;
@@ -68,7 +68,8 @@ export const Td = styled.div`
       border-bottom: 0 !important;
     }
 
-    &:last-child,&:nth-last-child(2):nth-child(odd) {
+    &:last-child,
+    &:nth-last-child(2):nth-child(odd) {
       /* Apply styles to second-to-last child in last row (odd index) */
       border-bottom: 0 !important;
       /* Add any additional styles here */
@@ -112,10 +113,13 @@ export const Head = styled.span`
   width: "100%";
   display: flex;
   align-items: "center";
-padding: 20px 30px;
+  padding: 15px 17px 15px 26px;
   svg {
     margin-right: 10px;
   }
+`;
+export const DataHead = styled.span`
+  padding: 10px 5px;
 `;
 export const DataItem = styled.span`
   font-weight: bold;
