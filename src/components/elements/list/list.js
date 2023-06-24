@@ -21,7 +21,6 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
-
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -685,7 +684,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
           </AddButton>
         )}
       </ButtonPanel>
-      <Table className={displayColumn}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      <Table className={`table ${displayColumn}`}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
       {count > 0 ? (

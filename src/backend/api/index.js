@@ -15,6 +15,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
         if (typeof value === "object") {
           if (value[0] instanceof File) {
             formData.append(key, value[0]);
+            isUplaoding = true;
           } else {
             value.forEach((item, index) => {
               formData.append(`${key}[${index}]`, item);
@@ -58,12 +59,15 @@ const postData = async (fields, ulr, dispatch, navigate) => {
 const putData = async (fields, ulr, dispatch, navigate) => {
   const data = new Promise(async (resolve, reject) => {
     try {
+      console.log(fields);
       let token = GetAccessToken();
       const formData = new FormData();
       let isUplaoding = false;
       Object.entries(fields).forEach(([key, value]) => {
         if (typeof value === "object") {
           if (value[0] instanceof File) {
+            isUplaoding = true;
+            console.log(value[0] instanceof File);
             formData.append(key, value[0]);
           } else {
             value.forEach((item, index) => {

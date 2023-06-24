@@ -2,7 +2,7 @@ import { Header, Overlay, Page } from "../manage/styles";
 // import FormInput from "../../input";
 import { getValue } from "../functions";
 import { GetIcon } from "../../../../icons";
-import { CloseButton, DataItem, Head, Td, Title, TrBody } from "./styles";
+import { CloseButton, DataHead, DataItem, Head, Td, Title, TrBody } from "./styles";
 import Tabs from "../../tab";
 import { useCallback, useEffect, useState } from "react";
 import { RowContainer } from "../../../styles/containers/styles";
@@ -55,7 +55,13 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
       title: "Informations",
       element: (
         <>
-          <Head><GetIcon icon={''}></GetIcon><span>Basic Details</span></Head> <DisplayInformations formMode={formMode} attributes={openData.attributes} data={openData.data} />
+          <Head>
+            <DataHead>
+              <GetIcon icon={""}></GetIcon>
+              <span>Basic Details</span>
+            </DataHead>
+          </Head>
+          <DisplayInformations formMode={formMode} attributes={openData.attributes} data={openData.data} />
         </>
       ),
     });

@@ -127,7 +127,7 @@ function CustomSelect(props) {
       </button>
       {optionsVisible && initialized && (
         <ul className="options">
-          {(props.search ?? true) && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>}
+          {props.search && (options.length??0) > 10 && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange} />}
           {options.length &&
             (searchValue.length > 0 ? filteredOptions : options)?.map((option) => (
               <li
