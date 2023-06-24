@@ -227,18 +227,6 @@ const Patient = (props) => {
   ]);
 
   const [details] = useState([
-    // {
-    //   type: "text",
-    //   placeholder: "Subscriber ID",
-    //   name: "subscriberId",
-    //   validation: "",
-    //   default: "",
-    //   label: "Subscriber ID",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
     {
       type: "text",
       placeholder: "Father",
@@ -346,19 +334,6 @@ const Patient = (props) => {
       add: true,
       update: true,
     },
-    // {
-    //   type: "number",
-    //   placeholder: "Office Number",
-    //   name: "officeNumber",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "Office Number",
-    //   required: false,
-    //   view: true,
-    //   add: true,
-    //   update: false,
-    // },
     {
       type: "checkbox",
       placeholder: "Marital Status",
@@ -644,19 +619,6 @@ const Patient = (props) => {
   ]);
 
   const [admissionHistory] = useState([
-    // {
-    //   type: "text",
-    //   placeholder: "MR Number",
-    //   name: "mrNumber",
-    //   validation: "",
-    //   default: "",
-    //   tag: true//
-    // label: "MR Number",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
     {
       type: "select",
       placeholder: "Admission Type",
@@ -788,32 +750,6 @@ const Patient = (props) => {
       add: false,
       update: true,
     },
-    // {
-    //   type: "image",
-    //   placeholder: "Records",
-    //   name: "recordsImage",
-    //   validation: "",
-    //   default: "",
-    // tag: true//
-    // label: "Records",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
-    // {
-    //   type: "boolean",
-    //   placeholder: "Is Active",
-    //   name: "isActive",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "Is Active",
-    //   required: false,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
   ]);
 
   const [patientDiet] = useState([
@@ -946,37 +882,6 @@ const Patient = (props) => {
       update: true,
     },
   ]);
-
-  // const [discharge] = useState([
-  //   {
-  //     type: "datetime",
-  //     placeholder: "Discharge",
-  //     name: "dischargeDate",
-  //     showItem: "",
-  //     validation: "",
-  //     default: "",
-  //     tag: true,
-  //     label: "Discharge Date",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Remarks",
-  //     name: "remarks",
-  //     showItem: "",
-  //     validation: "",
-  //     default: "",
-  //     tag: true,
-  //     label: "Remarks",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  // ]);
 
   const [addMeal] = useState([
     {
