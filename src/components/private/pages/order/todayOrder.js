@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
-//src/components/styles/page/index.js
-//if you want to write custom style wirte in above file
-const OrderList = (props) => {
-  //to update the page title
+
+const TodayOrder = (props) => {
   useEffect(() => {
-    document.title = `Order List - Diet Food Management Portal`;
+    document.title = `Today Order - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -109,6 +107,23 @@ const OrderList = (props) => {
       update: true,
       filter: true,
     },
+    {
+      type: "hidden",
+      apiType: "",
+      selectApi: "",
+      placeholder: "",
+      name: "date",
+      showItem: "",
+      validation: "",
+      default: new Date(),
+      tag: true,
+      label: "",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: true,
+    },
   ]);
 
   const [dispatch] = useState([
@@ -156,7 +171,7 @@ const OrderList = (props) => {
       itemTitle: {
         name: "userDisplayName",
         type: "text",
-        collection: "user"
+        collection: "deliveryMen",
       },
       title: "Dispatch",
       attributes: dispatch,
@@ -166,7 +181,7 @@ const OrderList = (props) => {
         itemTitle: {
           name: "userDisplayName",
           type: "text",
-          collection: "user",
+          collection: "deliveryMen",
         },
         shortName: "Dispatch",
         addPrivilege: true,
@@ -178,26 +193,41 @@ const OrderList = (props) => {
     },
   ]);
 
+  const today = new Date();
+  const startOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    0,
+    0,
+    0
+  );
+  const endOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    23,
+    59,
+    59
+  );
+
   return (
     <Container className="noshadow">
       <ListTable
         actions={actions}
-        api={`weekly-meal-plan-entry`}
-        // itemTitle={`Weekly Meal Plan Entry`}
+        api="weekly-meal-plan-entry"
+        preFilter={{ startDate: startOfDay, endDate: endOfDay }}
         itemTitle={{
           name: "userDisplayName",
           type: "text",
           collection: "user",
         }}
-        shortName={`Order`}
-        // formMode={`single`}
-        formMode={`double`}
-        datefilter={true}
-        //
+        shortName="Order"
+        formMode="double"
         {...props}
         attributes={attributes}
-      ></ListTable>
+      />
     </Container>
   );
 };
-export default Layout(OrderList);
+export default Layout(TodayOrder);
