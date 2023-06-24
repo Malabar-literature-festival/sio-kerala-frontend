@@ -104,113 +104,6 @@ const Appointment = (props) => {
     //   update: true,
     // },
   ]);
-  // const [timingAttributes] = useState([
-  //   {
-  //     type: "text",
-  //     placeholder: "Label",
-  //     name: "label",
-  //     validation: "",
-  //     default: "",
-  //     label: "Label",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "number",
-  //     placeholder: "Sequence",
-  //     name: "sequence",
-  //     validation: "",
-  //     default: "",
-  //     label: "Sequence",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Icon",
-  //     name: "icon",
-  //     validation: "",
-  //     default: "",
-  //     label: "Icon",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Path",
-  //     name: "path",
-  //     validation: "",
-  //     default: "",
-  //     label: "Path",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Element Name",
-  //     name: "element",
-  //     validation: "",
-  //     default: "",
-  //     label: "Element Name",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Status",
-  //     name: "status",
-  //     validation: "",
-  //     default: "true",
-  //     label: "Status",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Is Link",
-  //     name: "isLink",
-  //     validation: "",
-  //     default: "false",
-  //     label: "Is Link",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  // ]);
-
-  // const [actions] = useState([
-  //   {
-  //     element: "button",
-  //     type: "subList",
-  //     id: "sub-menu",
-  //     itemTitle: "userDisplayName",
-  //     title: "Sub Menu1",
-  //     // attributes: timingAttributes,
-  //     params: {
-  //       api: `sub-menu`,
-  //       parentReference: "menu",
-  //       itemTitle: "userDisplayName",
-  //       shortName: "Sub Menu2",
-  //       addPrivilege: true,
-  //       delPrivilege: true,
-  //       updatePrivilege: true,
-  //       customClass: "medium",
-  //     },
-  //   },
-  // ]);
 
   return (
     <Container className="noshadow">
@@ -220,7 +113,7 @@ const Appointment = (props) => {
         api={`appointment`}
         // itemTitle={`label`}
         itemTitle={{
-          name: "userDisplayName",
+          name: "username",
           type: "text",
           collection: "user",
         }}
