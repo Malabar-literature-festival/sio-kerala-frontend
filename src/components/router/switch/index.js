@@ -44,6 +44,7 @@ import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionR
 import Appointment from "../../private/pages/user/appointment/appointment";
 import ActiveAppointment from "../../private/pages/user/appointment/activeAppointment";
 import OrderList from "../../private/pages/order/orderList";
+import TodayOrder from "../../private/pages/order/todayOrder";
 import AdmissionHistory from "../../private/pages/user/admissionHistory/admissionHistory";
 import ActiveAdmission from "../../private/pages/user/admissionHistory/activeAdmission";
 import Dashboard from "../../private/pages/dashboard";
@@ -446,6 +447,15 @@ const Switch = ({
     case "order-list":
       return (
         <OrderList
+          key={key}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "today-order":
+      return (
+        <TodayOrder
           key={key}
           addPrivilege={addPrivilege}
           delPrivilege={delPrivilege}
