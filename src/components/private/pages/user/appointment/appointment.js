@@ -74,7 +74,7 @@ const Appointment = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "user/select",
+      selectApi: "user/select?userType=6471b34d9fb2b29fe0458878",
       placeholder: "Dietician",
       name: "dietician",
       validation: "",
