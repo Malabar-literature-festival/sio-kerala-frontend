@@ -20,7 +20,7 @@ import { ToolTip } from "../../styles/list/styles";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
-const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -30,7 +30,6 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
           error: null,
         }
   );
-
   const [showSublist, setShowSubList] = useState(false);
   const [currentApi] = useState(`${api}`);
   const [subAttributes, setSubAttributes] = useState(null);
@@ -656,20 +655,22 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
           >
             <GetIcon icon={"reload"} />
           </Filter>
-          <Filter
-            theme={themeColors}
-            onClick={() => {
-              setMessage({
-                type: 2,
-                content: "Do you want export this page to excel?",
-                proceed: "Export Now",
-                onProceed: toExcel,
-                data: currentIndex,
-              });
-            }}
-          >
-            <GetIcon icon={"excel"} />
-          </Filter>
+          {exportPrivilege && (
+            <Filter
+              theme={themeColors}
+              onClick={() => {
+                setMessage({
+                  type: 2,
+                  content: "Do you want export this page to excel?",
+                  proceed: "Export Now",
+                  onProceed: toExcel,
+                  data: currentIndex,
+                });
+              }}
+            >
+              <GetIcon icon={"excel"} />
+            </Filter>
+          )}
           {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
         </FilterBox>
         <Filters>

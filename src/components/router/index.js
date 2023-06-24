@@ -4,11 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Switch from "./switch";
 import { useSelector } from "react-redux";
 import Page404 from "../private/pages/page404";
-import {
-  Container,
-  MainContainer,
-  SideBar,
-} from "../private/common/layout/styels";
+import { Container, MainContainer, SideBar } from "../private/common/layout/styels";
 import { RowContainer } from "../styles/containers/styles";
 import Header from "../private/common/layout/header";
 import Footer from "../private/common/layout/footer";
@@ -18,14 +14,9 @@ import Body from "../private/pages/dashboard";
 const PageRouter = () => {
   const user = useSelector((state) => state.login);
   const menuStatus = useSelector((state) => state.menuStatus);
-  const createRouter = (router) => {
-    return (
-      <Route
-        key={`${router._id}`}
-        path={`${router.path}`}
-        element={<Switch page={router.element} />}
-      />
-    );
+  const createRouter = (router, menu = true) => {
+    const role = menu ? router.menuRoles[0] : router.subMenuRoles[0];
+    return <Route key={`${router._id}`} path={`${router.path}`} element={<Switch addPrivilege={role.add??false} delPrivilege={role.delete??false} updatePrivilege={role.update??false} exportPrivilege={role.export??false} page={router.element} />} />;
   };
   const themeColors = useSelector((state) => state.themeColors);
   return user.data.token ? (
@@ -46,7 +37,7 @@ const PageRouter = () => {
                   return (
                     <React.Fragment key={menu._id}>
                       {createRouter(menu)}
-                      {menu.submenus.map((submenu) => createRouter(submenu))}
+                      {menu.submenus.map((submenu) => createRouter(submenu, false))}
                     </React.Fragment>
                   );
                 }
