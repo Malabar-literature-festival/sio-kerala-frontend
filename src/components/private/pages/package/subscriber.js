@@ -6,10 +6,10 @@ import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
-const Patient = (props) => {
+const SubscriberPackage = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Patient List - Diet Food Management Portal`;
+    document.title = `Subscriber Package List - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -19,7 +19,7 @@ const Patient = (props) => {
       selectApi: "user/select",
       placeholder: "User",
       name: "user",
-      showItem: "",
+      showItem: "userDisplayName",
       validation: "",
       default: "",
       tag: true,
@@ -45,29 +45,12 @@ const Patient = (props) => {
       add: false,
       update: false,
     },
-    // {
-    //   type: "text",
-    //   placeholder: "Package",
-    //   name: "package",
-    //   showItem: "packageName",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "Package",
-    //   required: false,
-    //   view: true,
-    //   filter: false,
-    //   add: false,
-    //   update: false,
-    //   apiType: "",
-    //   selectApi: "",
-    // },
     {
       type: "select",
       apiType: "API",
       selectApi: "package/select",
       placeholder: "Package",
-      name: "package",
+      name: "packageName",
       showItem: "packageName",
       validation: "",
       default: "",
@@ -196,4 +179,4 @@ const Patient = (props) => {
     </Container>
   );
 };
-export default Layout(Patient);
+export default Layout(SubscriberPackage);
