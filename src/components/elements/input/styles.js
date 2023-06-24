@@ -112,7 +112,7 @@ export const Label = styled.label`
   &.checkbox {
     position: initial;
     pointer-events: initial;
-    margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
   }

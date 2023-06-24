@@ -4,13 +4,14 @@ export const Table = styled.div`
   /* width: calc(100% + 60px); */
   font-family: Arial, sans-serif;
   margin-bottom: auto;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #d9d9d9;
   &.record {
-    border-top: 0px solid #ccc;
+    border-top: 0px solid #d9d9d9;
   }
   &.double {
     display: grid;
     grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid  #d9d9d9;
   }
   @media (max-width: 768px) {
     &.double {
@@ -44,7 +45,7 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.div`
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #d9d9d9;
   display: flex;
   padding: 0.5em 2em 12px;
   @media screen and (max-width: 768px) {
@@ -57,11 +58,11 @@ export const Tr = styled.div`
     border-top: 0px solid #d9d9d9;
   }
   &:last-child {
-    border-bottom: 0;
+    border-bottom: 1px solid #d9d9d9;
   }
-  .double & {
-    &:nth-child(even) {
-      border-left: 1px solid #ccc;
+  .double.table & {
+    &:nth-child(odd) {
+      border-right: 1px solid #d9d9d9;
     }
     &:last-child {
       border-bottom: 0;
@@ -220,7 +221,6 @@ export const ArrowButton = styled.button`
 `;
 export const ButtonPanel = styled.div`
   display: flex;
-  align-items: center;
   align-items: center;
   padding: 1em 2em 0.5em;
   justify-content: space-between;
