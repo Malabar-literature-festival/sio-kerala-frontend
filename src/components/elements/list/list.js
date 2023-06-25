@@ -20,7 +20,7 @@ import { ToolTip } from "../../styles/list/styles";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
-const ListTable = ({ displayColumn = "single", formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -669,6 +669,22 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
               }}
             >
               <GetIcon icon={"excel"} />
+            </Filter>
+          )}
+          {printPrivilege && (
+            <Filter
+              theme={themeColors}
+              onClick={() => {
+                setMessage({
+                  type: 2,
+                  content: "Do you want print?",
+                  proceed: "Print Now",
+                  onProceed: toExcel,
+                  data: currentIndex,
+                });
+              }}
+            >
+              <GetIcon icon={"print"} />
             </Filter>
           )}
           {datefilter && <DateRangeSelector onChange={dateRangeChange} themeColors={themeColors}></DateRangeSelector>}
