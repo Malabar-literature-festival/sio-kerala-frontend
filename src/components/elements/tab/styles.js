@@ -5,6 +5,9 @@ export const TabContainer = styled.div`
   flex-direction: column;
   flex: 1 1 100%;
   padding: 10px 30px;
+  @media (max-width: 768px) {
+    padding:0;
+  }
 `;
 
 export const TabHeader = styled.div`
@@ -36,7 +39,7 @@ export const TabLink = styled.div`
   cursor: pointer;
   padding: 10px;
   flex: 1 1 50%;
-  background-color: #ddedeb;
+  background-color: ${(props) => props.theme.pageBackground};
   color: #77998e;
   display: flex;
   align-items: center;

@@ -21,7 +21,7 @@ const Tabs = ({ tabs = [] }) => {
       {/* tab for parking process */}
       {tabs.map((tab) => {
         return (
-          <Tab key={`${tab.name}-tab-content`} active={activeTab === tab.name}>
+          <Tab theme={themeColors} key={`${tab.name}-tab-content`} active={activeTab === tab.name}>
             {tab.element}
           </Tab>
         );

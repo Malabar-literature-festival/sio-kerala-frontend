@@ -72,8 +72,8 @@ export const FileContainer = styled.div`
   box-shadow: none;
   -webkit-transition: all 0.2s ease-out 0s;
   transition: all 0.2s ease-out 0s;
-  color: ${(props) => props.theme.foreground};
-  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secForeground};
+  background: ${(props) => props.theme.secBackground};
   text-align: center;
   button {
     background-color: transparent;
@@ -167,8 +167,8 @@ export const Input = styled.input`
   font-weight: 700;
   box-shadow: none;
   transition: all 0.2s ease-out 0s;
-  color: ${(props) => props.theme.foreground};
-  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secForeground};
+  background: ${(props) => props.theme.secBackground};
   &.shrink {
     padding: 1.6em 13px 0;
   }
@@ -185,8 +185,8 @@ export const DatetimeInput = styled(DatePicker)`
   font-weight: 700;
   box-shadow: none;
   transition: all 0.2s ease-out 0s;
-  color: ${(props) => props.theme.foreground};
-  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secForeground};
+  background: ${(props) => props.theme.secBackground};
   &.shrink {
     padding: 1.6em 13px 0;
     color: black;
@@ -232,8 +232,8 @@ export const TextArea = styled.textarea`
   box-shadow: none;
   transition: all 0.2s ease-out 0s;
   padding: 13px 10px;
-  color: ${(props) => props.theme.foreground};
-  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secForeground};
+  background: ${(props) => props.theme.secBackground};
   &.shrink {
     padding: 2em 13px 0;
   }

@@ -20,14 +20,14 @@ const CheckboxCheckmark = styled.span`
   width: 12px;
   height: 12px;
   border-radius: 7px;
-   border: ${(props) => (props.checked ? '2px solid '+props.theme.background: "2px solid "+props.theme.background)};
+  border: ${(props) => (props.checked ? "2px solid " + props.theme.secBackground : "2px solid " + props.theme.secBackground)};
   margin-right: 8px;
   vertical-align: middle;
   padding: 5px;
   font-size: 14px;
   cursor: pointer;
-  background-color: ${(props) => (props.checked ? props.theme.background : "transparent")};
-  color: ${(props) => (props.checked ? props.theme.checked : "transparent")};
+  background-color: ${(props) => (props.checked ? props.theme.secBackground : "transparent")};
+  color: ${(props) => (props.checked ? props.theme.secBackground : "transparent")};
 `;
 const CheckboxLabel = styled.span`
   font-size: 14px;
