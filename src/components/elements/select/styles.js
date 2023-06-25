@@ -44,8 +44,8 @@ export const SelectBox = styled.div`
     box-shadow: none;
     -webkit-transition: all 0.2s ease-out 0s;
     transition: all 0.2s ease-out 0s;
-    color: ${(props) => props.theme.foreground};
-    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.secForeground};
+    background: ${(props) => props.theme.secBackground  };
     text-align: left;
     display: flex;
     align-items: center;
@@ -57,6 +57,7 @@ export const SelectBox = styled.div`
     height: 40px;
     margin: 4px 0;
     min-width: 150px;
+    background: ${(props) => props.theme.background  };
   }
   &.filter {
     margin-right: 0.5em;

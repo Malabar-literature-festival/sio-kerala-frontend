@@ -4,14 +4,14 @@ export const Table = styled.div`
   /* width: calc(100% + 60px); */
   font-family: Arial, sans-serif;
   margin-bottom: auto;
-  border-top: 1px solid #d9d9d9;
+  border-top: 0px solid #d9d9d9;
   &.record {
     border-top: 0px solid #d9d9d9;
   }
   &.double {
     display: grid;
     grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid  #d9d9d9;
+    border-bottom: 0px solid #d9d9d9;
   }
   @media (max-width: 768px) {
     &.double {
@@ -45,24 +45,46 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.div`
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid ${(props) => props.theme.border};
   display: flex;
-  padding: 0.5em 2em 12px;
-  @media screen and (max-width: 768px) {
-    padding: 1em 1em 0.5em;
+  margin: 0em 2em 0px;
+  padding: 10px;
+  background-color: ${(props) => props.theme.background};
+  && {
+    .popup-child & {
+      box-shadow: rgb(167 167 167 / 26%) 0px 0px 12px 0px;
+    }
+  }
+  &:hover h4 {
+    color: ${(props) => props.theme.themeBackground};
   }
   flex-direction: column;
   /* padding: 5px 26px; */
   padding-bottom: 12px;
   &:first-child {
-    border-top: 0px solid #d9d9d9;
+    border-top: 0px solid ${(props) => props.theme.border};
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   &:last-child {
-    border-bottom: 1px solid #d9d9d9;
+    border-bottom: 0px solid ${(props) => props.theme.border};
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
   .double.table & {
+    border-radius: 0px;
+    &:first-child {
+      border-top-left-radius: 12px;
+    }
+    &:nth-child(2) {
+      border-top-right-radius: 12px;
+    }
     &:nth-child(odd) {
-      border-right: 1px solid #d9d9d9;
+      border-right: 1px solid ${(props) => props.theme.border};
+      margin-right: 0;
+    }
+    &:nth-child(even) {
+      margin-left: 0;
     }
     &:last-child {
       border-bottom: 0;
@@ -71,23 +93,91 @@ export const Tr = styled.div`
     &:nth-last-child(2):nth-child(odd) {
       /* Apply styles to second-to-last child in last row (odd index) */
       border-bottom: 0;
+      border-bottom-left-radius: 12px;
+
       /* Add any additional styles here */
     }
+    &:nth-last-child(1):nth-child(even) {
+      border-bottom-right-radius: 12px;
+    }
+    &:nth-last-child(2):nth-child(even) {
+      border-bottom-right-radius: 12px;
+    }
+    &:nth-last-child(1):nth-child(odd) {
+      border-bottom-left-radius: 12px;
+    }
+    &:last-child {
+      border-bottom-right-radius: 12px;
+    }
   }
+  @media screen and (max-width: 768px) {
+    padding: 1em 1em 0.5em;
+    margin: 0em 1em 0px;
+
+    .double.table & {
+      border-radius: 0;
+      &:nth-last-child(2):nth-child(odd) {
+        /* Apply styles to second-to-last child in last row (odd index) */
+        border-bottom: 1px solid ${(props) => props.theme.border};
+        border-bottom-left-radius: 0px;
+
+        /* Add any additional styles here */
+      }
+      &:nth-child(2) {
+        border-top-right-radius: 0px;
+      }
+      &:nth-last-child(1):nth-child(even) {
+        border-bottom-right-radius: 0px;
+      }
+      &:nth-last-child(2):nth-child(even) {
+        border-bottom-right-radius: 0px;
+      }
+      &:nth-last-child(1):nth-child(odd) {
+        border-bottom-left-radius: 0px;
+      }
+      &:nth-child(odd) {
+        border-right: 0px solid ${(props) => props.theme.border};
+        margin: 0em 1em 0px !important;
+      }
+      &:nth-child(even) {
+        margin: 0em 1em 0px !important;
+      }
+      &:first-child {
+        border-top: 0px solid ${(props) => props.theme.border};
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
+      }
+      &:last-child {
+        border-bottom: 0px solid ${(props) => props.theme.border};
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+    }
+  }
+  /* box-shadow: rgb(167 167 167 / 26%) 0px 0px 12px 0px; */
   &:hover {
-    background-color: #ddedeb;
+    /* background-color: #ddedeb; */
+    box-shadow: 0px 4px 12px 0px rgba(136, 173, 74, 0.25);
+
+    /* border: 1px solid ${(props) => props.theme.border}; */
   }
   &.single {
     padding: 0;
+    margin: 0;
   }
   &.single:hover {
     background-color: initial;
+    box-shadow: none;
+    h4 {
+      color: initial;
+    }
   }
 `;
 export const Td = styled.div`
   text-align: left;
   padding: 10px 5px;
   position: relative;
+  font-size: 14px;
   &.no,
   &.name {
     border: 1px solid gray;
@@ -132,27 +222,32 @@ export const TrBody = styled.div`
 export const Title = styled.span`
   margin-right: 5px;
   margin-bottom: 5px;
+  color: #838894;
   &:after {
     content: " :";
   }
 `;
-export const Head = styled.span`
+export const Head = styled.h4`
   font-weight: bold;
   width: "100%";
   display: flex;
   align-items: "center";
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
+  margin: 0;
+  padding: 0;
+  span {
+    font-size: 16px;
   }
+  font-size: 16px;
+  cursor: pointer;
   svg {
     margin-right: 10px;
   }
 `;
 export const DataItem = styled.span`
-  background-color: #d7d7d7;
   padding: 5px 10px;
   border-radius: 10px;
+  font-weight: 500;
+  border: 1px solid #ddd;
 `;
 export const Button = styled.button`
   color: #fff;
@@ -236,20 +331,24 @@ export const ButtonPanel = styled.div`
   }
 `;
 export const AddButton = styled.button`
-  background: white;
-  padding: 4px 5px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  background-color: transparent;
+  background: ${(props) => props.theme.background};
   outline: 0px;
   border: 0px;
   margin: 0px;
   cursor: pointer;
-  padding: 0.5em 1em;
+  padding: 12px;
   margin-right: 0em;
   outline: none;
-  border: 1px solid #ddd;
   cursor: pointer;
+  && {
+    .popup-child & {
+      color: ${(props) => props.theme.secForeground};
+      background: ${(props) => props.theme.secBackground};
+    }
+  }
   &:hover {
     color: ${(props) => props.theme.bgPrimary};
   }
@@ -275,11 +374,18 @@ export const Filter = styled.button`
   margin-right: 10px;
   padding: 12px;
   background: ${(props) => props.theme.background};
-  border-radius: 50%;
+  color: ${(props) => props.theme.foreground};
+  border-radius: 12px;
   margin-top: 4px;
   cursor: pointer;
   &:hover {
     color: ${(props) => props.theme.bgPrimary};
+  }
+  && {
+    .popup-child & {
+      color: ${(props) => props.theme.secForeground};
+      background: ${(props) => props.theme.secBackground};
+    }
   }
 `;
 export const Filters = styled.div`

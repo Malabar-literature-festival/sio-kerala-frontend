@@ -13,12 +13,13 @@ export const Header = styled.div`
   }
 `;
 export const Nav = styled.nav`
-  padding-top: 0  em;
+  padding-top: 0 em;
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.secForeground};
-   overflow-y:auto;
-  a.main, .open {
+  overflow-y: auto;
+  a.main,
+  .open {
     text-decoration: none;
     color: ${(props) => props.theme.secForeground};
     padding-left: 1em;
@@ -28,6 +29,15 @@ export const Nav = styled.nav`
     justify-content: left;
     align-items: center;
   }
+  && {
+    .down {
+       a.main span,
+       .open span {
+        padding-right:1em;
+      }
+    }
+  }
+
   a.open {
     cursor: unset;
   }
@@ -45,22 +55,23 @@ export const Nav = styled.nav`
     background: rgb(82 103 96);
     margin-left: auto;
   }
-  a.main svg ,.open svg{
+  a.main svg,
+  .open svg {
     margin-right: 10px;
     width: 30px;
   }
 `;
 export const SubMenu = styled.nav`
-  margin-left: 2em;
+  margin-left: 1em;
   padding-left: 0em;
   border-left: 1px solid lightgrey;
-  &.close{
-    display:none;
+  &.close {
+    display: none;
   }
 `;
 export const MenuGroup = styled.div`
-cursor: pointer;
-  svg:last-child{
+  cursor: pointer;
+  svg:last-child {
     margin-left: auto;
   }
 `;

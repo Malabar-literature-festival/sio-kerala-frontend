@@ -20,15 +20,24 @@ export const SearchInput = styled.div`
     color: ${(props) => props.theme.foreground};
     background: ${(props) => props.theme.background};
     margin-right: 10px;
-    border-radius: 50%;
+    border-radius: 12px;
     width: 40px;
     color: transparent;
     padding-left: 30px;
+    
     &:focus {
       width: 200px;
       border-radius: 10px;
       color: ${(props) => props.theme.foreground};
       padding-left: 40px;
+    }
+  }
+  && {
+    .popup-child & {
+      input {
+        color: ${(props) => props.theme.secForeground};
+        background: ${(props) => props.theme.secBackground};
+      }
     }
   }
   &.active input {

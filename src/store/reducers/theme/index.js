@@ -6,11 +6,12 @@ const themColor =
   localStorage.getItem("_theme") !== null
     ? JSON.parse(localStorage.getItem("_menu"))
     : {
-      background: '#ddedeb',
+      pageBackground:'rgb(235, 244, 235)',
+      background: 'white',
       foreground: '#4f4f4f',
-      border: 'Black',
-      secBackground: '#08225f',
-      secForeground: 'white',
+      border: '#d9d9d9',
+      secBackground: 'rgb(235, 244, 235)',
+      secForeground: 'black',
       lightBackground: 'White',
       lightForeground: 'Black',
       lightBorder: 'Black',

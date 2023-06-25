@@ -13,7 +13,7 @@ export const CloseButton = styled.button`
   width: 40px;
   margin-right: 0px;
   padding: 12px;
-  background: ${(props) => props.theme.background};
+  background: ${(props) => props.theme.secBackground};
   border-radius: 50%;
   margin-top: 4px;
   cursor: pointer;
@@ -106,7 +106,7 @@ export const TrBody = styled.div`
 export const Title = styled.span`
   margin-right: 5px;
   margin-bottom: 5px;
-  color: grey;
+  color: #838894;
 `;
 export const Head = styled.span`
   font-weight: bold;

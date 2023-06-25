@@ -28,7 +28,7 @@ const PageRouter = () => {
         </SideBar>
         <RowContainer className="content">
           <Header user={user.data}></Header>
-          <Container className="nopadding">
+          <Container className="nopadding" theme={themeColors}>
             <Routes>
               <Route path="/" element={<Switch page="login" />} />
               <Route path="/dashboard" element={<Body />} />

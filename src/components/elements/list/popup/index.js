@@ -76,7 +76,7 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
 
   return (
     <Overlay>
-      <Page className={openData?.item?.params?.customClass ?? "medium"}>
+      <Page className={`${openData?.item?.params?.customClass ?? "medium"} popup-child`}>
         <Header>
           <span>{`${getValue(itemTitle, titleValue)}`}</span>
           <CloseButton theme={themeColors} onClick={closeModal}>

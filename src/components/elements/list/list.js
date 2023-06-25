@@ -335,7 +335,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
 
     return (
-      <Tr className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
+      <Tr theme={themeColors} className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody className={signleRecord ? "single" : ""}>
           <Td key={`row-head-${slNo}`}>
             {signleRecord ? (
@@ -504,7 +504,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
         {signleRecord ? (
           <DisplayInformations formMode={formMode} attributes={attributes} data={data} />
         ) : (
-          <TrBody className="small">
+          <TrBody>
             {attributes.map((attribute, index) => {
               if (attribute.view && (attribute.tag ?? false)) {
                 try {
@@ -643,7 +643,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
 
   //end crud functions
   return viewMode === "list" || viewMode === "subList" ? (
-    <RowContainer>
+    <RowContainer className={viewMode}>
       <ButtonPanel>
         <FilterBox>
           <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>
@@ -679,7 +679,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
           })}
         </Filters>
         {(addPrivilege ? addPrivilege : false) && (
-          <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+          <AddButton theme={themeColors} onClick={() => isCreatingHandler(true, refreshView)}>
             <AddIcon></AddIcon>
             {t("addNew", { label: t(shortName) })}
           </AddButton>
@@ -743,7 +743,7 @@ const ListTable = ({ displayColumn = "single", formMode = "single", parentRefere
       {users.data?.response?.length === 0 && (
         <ButtonPanel>
           {(addPrivilege ? addPrivilege : false) && users.data?.response?.length === 0 && (
-            <AddButton onClick={() => isCreatingHandler(true, refreshView)}>
+            <AddButton theme={themeColors} onClick={() => isCreatingHandler(true, refreshView)}>
               <AddIcon></AddIcon>
               {t("addNew", { label: t(shortName) })}
             </AddButton>
