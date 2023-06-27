@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
 import { useNavigate } from "react-router-dom";
-import { deleteData, postData, putData } from "../../../backend/api";
+import { deleteData, getData, postData, putData } from "../../../backend/api";
 import CrudForm from "./create";
 import { useTranslation } from "react-i18next";
 import { addPageObject } from "../../../store/actions/pages";
@@ -20,6 +20,7 @@ import { ToolTip } from "../../styles/list/styles";
 import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
+import Print from "./print/print";
 const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
@@ -142,6 +143,8 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
     } catch {}
   };
   const [isOpen, setIsOpen] = useState(false);
+  const [isPrint, setIsPrint] = useState(false);
+  const [printData, setPrintData] = useState([]);
   const [openData, setOpenData] = useState({});
   //crud functions
   const [isCreating, setIsCreating] = useState(false);
@@ -441,6 +444,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                 <Actions>
                   {updatePrivilege && (
                     <Button
+                      theme={themeColors}
                       key={`edit-${data._id}`}
                       onClick={() => {
                         isEditingHandler(data, udpateView);
@@ -455,6 +459,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                     return (
                       item.element === "button" && (
                         <Button
+                          theme={themeColors}
                           key={`custom-${item.id + "-" + index}-${data._id}`}
                           onClick={() => {
                             if (item.type === "callback") {
@@ -478,6 +483,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                   })}
                   {delPrivilege && !signleRecord && (
                     <Button
+                      theme={themeColors}
                       key={`delete-${data._id}`}
                       onClick={() => {
                         setMessage({
@@ -539,6 +545,8 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
   const closeModal = () => {
     setShowSubList(false);
     setIsOpen(false);
+    setIsPrint(false);
+    setPrintData([]);
   };
   const [searchValue, setSearchValue] = useState("");
   // const [filter, setFilter] = useState(false);
@@ -576,64 +584,90 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       alert(error);
     }
   };
-
-  const exportToExcel = () => {
-    // JSON data to be converted to Excel
-    const jsonData = users.data?.response;
-    if (jsonData) {
-      // Convert JSON to worksheet
-      const excelData = [];
-      jsonData.forEach((data) => {
-        const excelRow = {};
-        attributes.forEach((attribute) => {
-          if (attribute.view) {
-            const name = t(attribute.label);
-            switch (attribute.type) {
-              case "minute":
-                return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
-              case "datetime":
-                return (excelRow[name] = dateTimeFormat(data[attribute.name]));
-              case "date":
-                return (excelRow[name] = dateFormat(data[attribute.name]));
-              case "select":
-                if (attribute.apiType === "JSON") {
-                  return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
-                } else if (attribute.apiType === "CSV") {
-                  return (excelRow[name] = data[attribute.name]);
-                } else {
-                  return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
-                }
-
-              default:
-                switch (typeof data[attribute.name]) {
-                  case "undefined":
-                    return (excelRow[name] = "Not Found");
-                  case "object":
-                    return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
-                  case "boolean":
-                    return (excelRow[name] = data[attribute.name].toString());
-                  case "string":
-                  case "number":
-                  default:
-                    if (attribute.type === "select" && attribute.apiType === "JSON") {
-                      return attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem) => (excelRow[name] = filteredItem.value));
+  const printPage = async (currentIndex) => {
+    try {
+      setLoaderBox(true);
+      await getData({ ...filterView, skip: 0, limit: 0 }, api)
+        .then((response) => {
+          console.log(response.data);
+          setPrintData(response.data);
+          setLoaderBox(false);
+          setIsPrint(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoaderBox(false);
+        });
+    } catch (error) {
+      alert(error);
+    }
+  };
+  const exportToExcel = async () => {
+    setLoaderBox(true);
+    await getData({ ...filterView, skip: 0, limit: 0 }, api)
+      .then((response) => {
+        const jsonData = response.data.response;
+        console.log(jsonData);
+        if (jsonData) {
+          // Convert JSON to worksheet
+          const excelData = [];
+          jsonData.forEach((data) => {
+            const excelRow = {};
+            attributes.forEach((attribute) => {
+              if (attribute.view) {
+                const name = t(attribute.label);
+                switch (attribute.type) {
+                  case "minute":
+                    return (excelRow[name] = convertMinutesToHHMM(parseFloat(data[attribute.name] ?? 0)));
+                  case "datetime":
+                    return (excelRow[name] = dateTimeFormat(data[attribute.name]));
+                  case "date":
+                    return (excelRow[name] = dateFormat(data[attribute.name]));
+                  case "select":
+                    if (attribute.apiType === "JSON") {
+                      return (excelRow[name] = attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem, index) => filteredItem.value));
+                    } else if (attribute.apiType === "CSV") {
+                      return (excelRow[name] = data[attribute.name]);
                     } else {
-                      return (excelRow[name] = data[attribute.name]?.toString().substring(0, 200));
+                      return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                    }
+
+                  default:
+                    switch (typeof data[attribute.name]) {
+                      case "undefined":
+                        return (excelRow[name] = "Not Found");
+                      case "object":
+                        return (excelRow[name] = data[attribute.name]?.[attribute.showItem] ?? "Nil");
+                      case "boolean":
+                        return (excelRow[name] = data[attribute.name].toString());
+                      case "string":
+                      case "number":
+                      default:
+                        if (attribute.type === "select" && attribute.apiType === "JSON") {
+                          return attribute.selectApi.filter((item) => item.id.toString() === data[attribute.name]?.toString()).map((filteredItem) => (excelRow[name] = filteredItem.value));
+                        } else {
+                          return (excelRow[name] = data[attribute.name]?.toString().substring(0, 200));
+                        }
                     }
                 }
-            }
-          }
-        });
-        excelData.push(excelRow);
-      });
-      const worksheet = xlsx.utils.json_to_sheet(excelData);
+              }
+            });
+            excelData.push(excelRow);
+          });
+          const worksheet = xlsx.utils.json_to_sheet(excelData);
 
-      // Create workbook
-      const workbook = xlsx.utils.book_new();
-      xlsx.utils.book_append_sheet(workbook, worksheet, t(shortName));
-      // Convert workbook to Excel binary and download the file
-      xlsx.writeFile(workbook, t(shortName) + "-data.xlsx");
-    }
+          // Create workbook
+          const workbook = xlsx.utils.book_new();
+          xlsx.utils.book_append_sheet(workbook, worksheet, t(shortName));
+          // Convert workbook to Excel binary and download the file
+          xlsx.writeFile(workbook, t(shortName) + "-data.xlsx");
+          setLoaderBox(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoaderBox(false);
+      });
   };
   useEffect(() => {
     return () => {
@@ -679,7 +713,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                   type: 2,
                   content: "Do you want print?",
                   proceed: "Print Now",
-                  onProceed: toExcel,
+                  onProceed: printPage,
                   data: currentIndex,
                 });
               }}
@@ -753,6 +787,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       {showLoader && <Loader></Loader>}
       {isOpen && <Popup formMode={formMode} closeModal={closeModal} themeColors={themeColors} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} openData={openData}></Popup>}
       {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
+      {isPrint && <Print data={printData} themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} shortName={shortName} attributes={attributes}></Print>}
     </RowContainer>
   ) : (
     <RowContainer>
