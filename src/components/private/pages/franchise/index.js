@@ -70,7 +70,7 @@ const Franchise = (props) => {
       default: "",
       tag: true,
       label: "Email",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
