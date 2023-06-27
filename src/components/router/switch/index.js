@@ -56,6 +56,7 @@ import SocialMedia from "../../private/pages/socialPlugins/socialMedia";
 import PageSettings from "../../private/pages/settings/pageSettings";
 // import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry";
 import Admin from "../../private/pages/franchise/admin";
+import Student from "../../private/pages/user/student/student";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -618,6 +619,16 @@ const Switch = ({
     case "admin":
       return (
         <Admin
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "students":
+      return (
+        <Student
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
