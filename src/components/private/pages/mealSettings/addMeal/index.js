@@ -159,7 +159,7 @@ const AddMeal = (props) => {
       default: "",
       tag: true,
       label: "Meal",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,

@@ -129,7 +129,7 @@ const PackageManagement = (props) => {
       default: "",
       tag: true,
       label: "Image",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,

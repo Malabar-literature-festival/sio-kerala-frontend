@@ -11,28 +11,6 @@ const Blog = (props) => {
   }, []);
 
   const [attributes] = useState([
-    // {
-    //   // Type of input, in this case, a text input
-    //   type: "text",
-    //   // Placeholder text for the input field
-    //   placeholder: "Title",
-    //   // Name of the input field
-    //   name: "title",
-    //   // Validation rules for the input
-    //   validation: "",
-    //   // Default value for the input field
-    //   default: "",
-    //   // Label text for the input field
-    //   label: "Title",
-    //   // Indicates if the input field is required
-    //   required: true,
-    //   // Indicates if the input field should be displayed in the view mode
-    //   view: true,
-    //   // Indicates if the input field should be displayed in the add mode
-    //   add: true,
-    //   // Indicates if the input field should be displayed in the update mode
-    //   update: true,
-    // },
     {
       type: "text",
       placeholder: "Title",
@@ -128,32 +106,6 @@ const Blog = (props) => {
       update: true,
       filter: false,
     },
-    // {
-    //   type: "text",
-    //   placeholder: "category",
-    //   name: "category",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "category",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
-    // {
-    //   type: "text",
-    //   placeholder: "franchise",
-    //   name: "franchise",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "franchise",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
   ]);
   // const [timingAttributes] = useState([
   //   {
