@@ -35,19 +35,7 @@ const Blog = (props) => {
       add: true,
       update: true,
     },
-    {
-      type: "textarea",
-      placeholder: "Content",
-      name: "content",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Content",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
+
     {
       type: "date",
       placeholder: "Date",
@@ -105,6 +93,19 @@ const Blog = (props) => {
       add: true,
       update: true,
       filter: false,
+    },
+    {
+      type: "htmleditor",
+      placeholder: "Content",
+      name: "content",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Content",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
     },
   ]);
   // const [timingAttributes] = useState([

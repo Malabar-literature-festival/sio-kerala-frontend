@@ -31,9 +31,9 @@ export const Nav = styled.nav`
   }
   && {
     .down {
-       a.main span,
-       .open span {
-        padding-right:1em;
+      a.main span,
+      .open span {
+        padding-right: 1em;
       }
     }
   }
@@ -43,12 +43,21 @@ export const Nav = styled.nav`
   }
   a.main.active,
   a.main:hover {
-    background: rgb(2, 0, 36);
-    background: linear-gradient(102deg, rgba(2, 0, 36, 1) 0%, rgb(82 103 96) 0%, rgba(8, 34, 95, 0) 83%);
-    box-shadow: rgb(0 0 0 / 16%) -1px 0px 4px;
+    background: linear-gradient(102deg, rgb(2, 0, 36) 0%, rgb(235 244 235) 0%, rgb(255 255 255) 83%);
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.16) -1px 0px 4px;
+    
+  }
+  a.main.active:first-child,
+  a.main:hover:first-child {
+    border-top-left-radius: 12px;
+  }
+  a.main.active:last-child,
+  a.main:hover:last-child {
+    border-bottom-left-radius: 12px;
   }
   a.main.active::after {
-    content: "";
+    /* content: ""; */
     width: 6px;
     color: white;
     height: 100%;
@@ -65,6 +74,7 @@ export const SubMenu = styled.nav`
   margin-left: 1em;
   padding-left: 0em;
   border-left: 1px solid lightgrey;
+  border-radius: 12px 0 0 12px;
   &.close {
     display: none;
   }
