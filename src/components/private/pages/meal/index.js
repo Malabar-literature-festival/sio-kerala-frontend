@@ -64,7 +64,7 @@ const Meal = (props) => {
       validation: "",
       default: "",
       label: "Email",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
