@@ -14,7 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addPageObject } from "../../../../store/actions/pages";
 import withLayout from "../../common/layout";
-import { Count, DashboardSection, IconWrapper, Tile, Title, TitleBox } from "./styles";
+import {
+  Count,
+  DashboardSection,
+  IconWrapper,
+  Tile,
+  Title,
+  TitleBox,
+} from "./styles";
 import { GetIcon } from "../../../../icons";
 const Dashboard = (props) => {
   const dispatch = useDispatch();
@@ -23,10 +30,10 @@ const Dashboard = (props) => {
     state.pages[`dashboard`]
       ? state.pages[`dashboard`]
       : {
-        data: null,
-        isLoading: true,
-        error: null,
-      }
+          data: null,
+          isLoading: true,
+          error: null,
+        }
   );
   useEffect(() => {
     props.setLoaderBox(dashboard.isLoading);
@@ -38,20 +45,24 @@ const Dashboard = (props) => {
       dispatch(addPageObject("dashboard", 0, {}));
     }
   }, [initialized, dispatch]);
+
   useEffect(() => {
     console.log(dashboard);
   }, [dashboard]);
 
   return (
     <DashboardSection>
-      {dashboard.data?.length > 0 &&
-        dashboard.data.map((item, index) => (
+      {/* <h1>dasfasdfds</h1> */}
+      {dashboard?.data?.length > 0 &&
+        dashboard?.data?.map((item, index) => (
           <Tile key={index}>
             <TitleBox>
               <Count>{item.count}</Count>
               <Title>{item.title}</Title>
             </TitleBox>
-            <IconWrapper style={{ background: item.background, color: item.color }}>
+            <IconWrapper
+              style={{ background: item.background, color: item.color }}
+            >
               <GetIcon icon={item.icon} />
             </IconWrapper>
           </Tile>
