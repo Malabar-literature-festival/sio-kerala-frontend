@@ -186,6 +186,7 @@ const SubscriberPackage = (props) => {
         // referenceId={"6471b3849fb2b29fe045887b"}
         // formMode={`single`}
         formMode={`double`}
+        datefilter={true}
         {...props}
         attributes={attributes}
       ></ListTable>

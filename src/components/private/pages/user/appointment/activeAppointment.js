@@ -55,6 +55,19 @@ const ActiveAppointment = (props) => {
       update: true,
     },
     {
+      type: "date",
+      placeholder: "Admission Date",
+      name: "admissionDate",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Admission Date",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
       type: "select",
       apiType: "API",
       selectApi: "booking-slot/select",
@@ -105,12 +118,30 @@ const ActiveAppointment = (props) => {
     // },
   ]);
 
+  const today = new Date();
+  const startOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    0,
+    0,
+    0
+  );
+  const endOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    23,
+    59,
+    59
+  );
   return (
     <Container className="noshadow">
       {/* Render a ListTable component */}
       <ListTable
         // actions={actions}
-        api={`appointment/active`}
+        api={`appointment`}
+        preFilter={{ startDate: startOfDay, endDate: endOfDay }}
         // itemTitle={`label`}
         itemTitle={{
           name: "username",

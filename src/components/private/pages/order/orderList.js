@@ -156,7 +156,7 @@ const OrderList = (props) => {
       itemTitle: {
         name: "userDisplayName",
         type: "text",
-        collection: "user"
+        collection: "user",
       },
       title: "Dispatch",
       attributes: dispatch,
