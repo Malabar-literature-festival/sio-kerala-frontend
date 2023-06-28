@@ -75,7 +75,7 @@ const Patient = (props) => {
       // tag: true,
       label: "Password",
       required: false,
-      view: true,
+      view: false,
       add: true,
       update: false,
     },
@@ -775,7 +775,7 @@ const Patient = (props) => {
       update: true,
     },
     {
-      type: "text",
+      type: "textarea",
       placeholder: "Remarks",
       name: "remarks",
       showItem: "",
@@ -1174,7 +1174,7 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
-        // formMode: "double",
+        formMode: "double",
       },
     },
     {
@@ -1267,28 +1267,15 @@ const Patient = (props) => {
   return (
     <Container className="noshadow">
       <ListTable
-        // actions={actions}
-        // api={`user`}
-        // // itemTitle={`userDisplayName`}
-        // itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        // preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
-        // shortName={`Patient`}
-        // // parentReference={"userType"}
-        // // referenceId={"6471b3849fb2b29fe045887b"}
-        // // formMode={`single`}
-        // formMode={`double`}
-        // {...props}
-        // attributes={attributes}
-
         actions={actions}
         api={`user`}
-        displayColumn="double"
+        // displayColumn="double"
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
         shortName={`Patient`}
-        parentReference={"userType"}
-        referenceId={"6471b3849fb2b29fe045887b"}
-        // formMode={`single`}
+        // parentReference={"userType"}
+        // referenceId={"6471b3849fb2b29fe045887b"}
+        preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
         formMode={`double`}
         {...props}
         attributes={attributes}
