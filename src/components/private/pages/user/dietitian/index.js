@@ -235,7 +235,7 @@ const Dietitian = (props) => {
         displayColumn="double"
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Delivery Man`}
+        shortName={`Dietitian`}
         parentReference={"userType"}
         referenceId={"6471b34d9fb2b29fe0458878"}
         // formMode={`single`}
