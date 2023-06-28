@@ -98,7 +98,7 @@ const AdmissionRecord = (props) => {
       update: false,
     },
     {
-      type: "string",
+      type: "textarea",
       placeholder: "Remarks",
       name: "remarks",
       showItem: "",
@@ -106,7 +106,7 @@ const AdmissionRecord = (props) => {
       default: "remark",
       tag: true,
       label: "Remarks",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
