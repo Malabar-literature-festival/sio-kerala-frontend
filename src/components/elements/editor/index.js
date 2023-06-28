@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
 import styled, { keyframes } from "styled-components";
 import "react-quill/dist/quill.snow.css";
 import "./style.css";
 import { GetIcon } from "../../../icons";
+import { Editor } from "./styles";
 const modules = {
   toolbar: [
     [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -45,7 +45,7 @@ const EditorNew = (props) => {
   return (
     <Overlay className={showEditor && "open"}>
       <Page className={showEditor && "open"}>
-        <ReactQuill
+        <Editor
           theme="snow"
           value={props.value}
           formats={formats}

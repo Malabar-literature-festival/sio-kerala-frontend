@@ -269,7 +269,7 @@ export const Button = styled.button`
     margin-bottom: 0px;
   }
   &.edit {
-    background-color: gray;
+    background-color: ${(props) => props.theme.themeBackground};
   }
   &.delete {
     background-color: red;
