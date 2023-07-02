@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import CustomSelect from "../select";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, DatetimeInput, FileContainer, Input, InputContainer, Label, TextArea } from "./styles";
+import { Button, DatetimeInput, FileContainer, Info, Input, InputContainer, Label, SubHead, TextArea } from "./styles";
 import { ErrorMessage } from "../form/styles";
 import { TickIcon, UploadIcon } from "../../../icons";
 import Checkbox from "../checkbox";
@@ -24,7 +24,7 @@ function FormInput(props) {
     case "number":
     case "email":
       return (
-        <InputContainer animation={props.animation}>
+        <InputContainer className={`${props.dynamicClass ?? ""}`} animation={props.animation}>
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.toString().length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -43,7 +43,7 @@ function FormInput(props) {
     case "time":
       let userFriendlyTime = new Date(props.value);
       return (
-        <InputContainer>
+        <InputContainer className={`${props.dynamicClass ?? ""}`}>
           <DatetimeInput theme={themeColors} showTimeSelect showTimeSelectOnly timeIntervals={15} timeCaption="Time" selected={userFriendlyTime} dateFormat="h:mm aa" className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholder={t(props.placeholder)} type={props.type} onChange={(event) => props.onChange(event, props.id, props.type)} />
           <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
             {t(props.label)}
@@ -55,7 +55,7 @@ function FormInput(props) {
     case "date":
       let userFriendlyDate = props.value.length > 0 ? new Date(props.value) : null;
       return (
-        <InputContainer>
+        <InputContainer className={`${props.dynamicClass ?? ""}`}>
           <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
@@ -76,7 +76,7 @@ function FormInput(props) {
       let userFriendlyDateTime = props.value.length > 0 ? new Date(props.value) : null;
 
       return (
-        <InputContainer>
+        <InputContainer className={`${props.dynamicClass ?? ""}`}>
           <DatetimeInput theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime} dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
@@ -108,7 +108,7 @@ function FormInput(props) {
         fileInputRef.current.click();
       };
       return (
-        <FileContainer theme={themeColors}>
+        <FileContainer className={`${props.dynamicClass ?? ""}`} theme={themeColors}>
           <button onClick={handleButtonClick}>
             <UploadIcon />
             {t("upload", { label: t(props.label) }) + (props.required ? " *" : "") + (props.value.length > 0 ? ` : ${props.value[0].name} (${size})` : "")}
@@ -120,7 +120,7 @@ function FormInput(props) {
     // Render a textarea
     case "textarea":
       return (
-        <InputContainer className="textarea">
+        <InputContainer className={`textarea ${props.dynamicClass ?? ""}`}>
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -135,7 +135,7 @@ function FormInput(props) {
         </InputContainer>
       );
     case "htmleditor":
-      return <EditorNew key={props.id} type={props.type} placeholder={props.placeholder} value={props.value} id={props.id} onChange={props.onChange}></EditorNew>;
+      return <EditorNew className={`${props.dynamicClass ?? ""}`} key={props.id} type={props.type} placeholder={props.placeholder} value={props.value} id={props.id} onChange={props.onChange}></EditorNew>;
     // Render a submit button
     case "submit":
       return (
@@ -153,7 +153,7 @@ function FormInput(props) {
     // Render a cehckbox
     case "checkbox":
       return (
-        <InputContainer className="checkbox">
+        <InputContainer className={`checkbox ${props.dynamicClass ?? ""}`}>
           <Label className="checkbox">
             <Checkbox
               theme={themeColors}
@@ -174,6 +174,10 @@ function FormInput(props) {
       return <CustomSelect theme={themeColors} {...props} name={props.id} selected={props.value} onSelect={props.onChange}></CustomSelect>;
     case "multiSelect":
       return <MultiSelect theme={themeColors} {...props} name={props.id} selected={props.value} onSelect={props.onChange}></MultiSelect>;
+    case "info":
+      return <Info className={` ${props.dynamicClass}`}>{t(props.content ?? "")}</Info>;
+    case "title":
+      return <SubHead className={`title ${props.dynamicClass}`}>{t(props.title ?? "")}</SubHead>;
     default:
       return <></>;
   }

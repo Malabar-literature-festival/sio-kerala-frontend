@@ -13,6 +13,7 @@ export const SelectBox = styled.div`
     width: calc(50% - 5px);
     margin-right: 5px;
   }
+  flex: calc(50% - 10px);
   @media screen and (max-width: 768px) {
     &.half:nth-child(odd) {
       width: 100%;
@@ -22,8 +23,8 @@ export const SelectBox = styled.div`
       width: 100%;
       margin-right: 0px;
     }
-    &.filter{
-      width:calc(50% - 7px);
+    &.filter {
+      width: calc(50% - 7px);
     }
   }
   && {
@@ -45,7 +46,7 @@ export const SelectBox = styled.div`
     -webkit-transition: all 0.2s ease-out 0s;
     transition: all 0.2s ease-out 0s;
     color: ${(props) => props.theme.secForeground};
-    background: ${(props) => props.theme.secBackground  };
+    background: ${(props) => props.theme.secBackground};
     text-align: left;
     display: flex;
     align-items: center;
@@ -57,7 +58,7 @@ export const SelectBox = styled.div`
     height: 40px;
     margin: 4px 0;
     min-width: 150px;
-    background: ${(props) => props.theme.background  };
+    background: ${(props) => props.theme.background};
   }
   &.filter {
     margin-right: 0.5em;
@@ -125,9 +126,6 @@ export const SelectBox = styled.div`
     color: #0f0f0f;
     font-weight: bold;
     border-bottom: 1px solid rgb(224, 224, 227);
-    justify-content: left;
-    display: flex;
-    align-items: center;
   }
   .options li {
     cursor: pointer;
@@ -159,4 +157,46 @@ export const Label = styled.label`
   &.shrink {
     display: none;
   }
+`;
+export const Tag = styled.span`
+  margin-top: 5px;
+  display: flex;
+`;
+export const TagTitle = styled.span`
+  display: flex;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: rgb(131, 136, 148);
+  &:after {
+    content: " :";
+  }
+`;
+export const TagItem = styled.span`
+  padding: 0px;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-right: 10px;
+  &.image {
+    padding: 0;
+  }
+`;
+export const TagBox = styled.label`
+  display: flex;
+  font-size: 12px;
+  flex-direction: row;
+  margin-top: 10px;
+`;
+export const TagData = styled.div`
+  display: flex;
+  font-size: 12px;
+  flex-wrap: wrap;
+`;
+export const ImgBox = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 `;

@@ -6,9 +6,13 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   &.double {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-    grid-gap: 10px; /* Adjust the gap between columns if desired */
+    //display: grid;
+    //grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    //grid-gap: 10px; /* Adjust the gap between columns if desired */
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    flex-flow: wrap;
   }
   @media (max-width: 768px) {
     border: 0;
@@ -70,8 +74,8 @@ export const Page = styled.div`
     top: 0;
     padding: 0;
     &.double {
-    width: 100%;
-  }
+      width: 100%;
+    }
   }
 `;
 export const Header = styled.div`
