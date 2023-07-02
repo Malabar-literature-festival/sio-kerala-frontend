@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../../backend/api";
-import { ImgBox, Label, SelectBox, Tag, TagBox, TagData, TagItem, TagTitle } from "./styles";
+import { ImgBox, Label, SelectBox, TagBox, TagData, TagItem, TagTitle } from "./styles";
 import { DownIcon, TickIcon } from "../../../icons";
 import { useTranslation } from "react-i18next";
 import { addSelectObject } from "../../../store/actions/select";
 import { ErrorMessage } from "../form/styles";
 import Search from "../search";
 import { getValue } from "../list/functions";
-import { Img } from "../list/styles";
 
 function CustomSelect(props) {
   const themeColors = useSelector((state) => state.themeColors);
@@ -142,7 +141,7 @@ function CustomSelect(props) {
     };
   }, []);
   return (
-    <SelectBox  theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass} ${props.dynamicClass}`} ref={selectRef}>
+    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass} ${props.dynamicClass}`} ref={selectRef}>
       <button className={`${selectedId !== null && selectedId.length !== 0 ? "has" : ""}`} onClick={toggleOptions}>
         {props.error?.length ? (
           <>
@@ -166,7 +165,6 @@ function CustomSelect(props) {
           {props.search && (options.length ?? 0) > 10 && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange} />}
           {options.length &&
             (searchValue.length > 0 ? filteredOptions : options)?.map((option) => {
-              let image = null;
               return (
                 <li
                   value={option.id === selectedId}
@@ -195,7 +193,7 @@ function CustomSelect(props) {
                             <>
                               <TagTitle>{`${tag.title}`}</TagTitle>
                               <TagItem className={tag.type}>{getValue(tag, tag.collection.length > 0 ? option[tag.collection]?.[tag.item] ?? "" : option[tag.item])}</TagItem>
-                              </>
+                            </>
                           );
                         })}
                       </TagData>
