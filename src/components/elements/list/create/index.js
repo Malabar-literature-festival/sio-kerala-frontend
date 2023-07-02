@@ -35,17 +35,17 @@ const CrudForm = (props) => {
         if (item.type === "multiple") {
           item.forms.forEach((form, multipleIndex) => {
             form.forEach((inputs, index) => {
-              const res = fieldValidation(inputs, typeof udpatedValue[item.name][multipleIndex][inputs.name] === "undefined" ? "" : udpatedValue[item.name][multipleIndex][inputs.name]);
+              const res = fieldValidation(inputs, typeof udpatedValue[item.name][multipleIndex][inputs.name] === "undefined" ? "" : udpatedValue[item.name][multipleIndex][inputs.name], null, udpatedValue);
               tempformErrors[item.name][multipleIndex][inputs.name] = res.tempformError;
               flags += res.flag; //?res.flag:0;
             });
           });
         } else if (item.validation === "greater") {
-          const res = fieldValidation(item, typeof udpatedValue[item.name] === "undefined" ? "" : udpatedValue[item.name], typeof udpatedValue[item.reference] === "undefined" ? new Date() : udpatedValue[item.reference]);
+          const res = fieldValidation(item, typeof udpatedValue[item.name] === "undefined" ? "" : udpatedValue[item.name], typeof udpatedValue[item.reference] === "undefined" ? new Date() : udpatedValue[item.reference], udpatedValue);
           tempformErrors[item.name] = res.tempformError;
           flags += res.flag; //?res.flag:0;
         } else {
-          const res = fieldValidation(item, typeof udpatedValue[item.name] === "undefined" ? "" : udpatedValue[item.name]);
+          const res = fieldValidation(item, typeof udpatedValue[item.name] === "undefined" ? "" : udpatedValue[item.name], null, udpatedValue);
           tempformErrors[item.name] = res.tempformError;
           flags += res.flag; //?res.flag:0;
         }
@@ -65,7 +65,7 @@ const CrudForm = (props) => {
     }
   };
 
-  const fieldValidation = (field, value, ref = new Date()) => {
+  const fieldValidation = (field, value, ref = new Date(), udpatedValue = {}) => {
     let flag = 0;
     let tempformError = "";
 
@@ -79,7 +79,17 @@ const CrudForm = (props) => {
     if (!field.required && value.length === 0) {
       return { flag, tempformError };
     }
-
+    if (field.condition) {
+      if (udpatedValue[field.condition.item] === field.condition.if) {
+        if (field.condition.then === "disabled") {
+          return { flag, tempformError };
+        }
+      } else {
+        if (field.condition.else === "disabled") {
+          return { flag, tempformError };
+        }
+      }
+    }
     switch (field.validation) {
       case "email":
         const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -285,7 +295,25 @@ const CrudForm = (props) => {
     <Overlay>
       <Page className={props.formMode ?? "single"}>
         <Header>{props.header ? props.header : "Login"}</Header>
-        <Form className={props.formMode ?? "single"}>{formState?.length > 0 && formState.map((item, index) => ((props.formType === "put" && item.update) || (props.formType === "post" && item.add) ? <FormInput placeholder={item.placeHolder} key={`input` + index} id={index} error={formErrors[formState[index].name]} value={formValues[formState[index].name]} {...item} onChange={handleChange} /> : ""))}</Form>
+        <Form className={props.formMode ?? "single"}>
+          {formState?.length > 0 &&
+            formState.map((item, index) => {
+              let dynamicClass = "";
+              if (item.condition) {
+                if (formValues[item.condition.item] === item.condition.if) {
+                  dynamicClass = item.condition.then;
+                } else {
+                  dynamicClass = item.condition.else;
+                }
+              }
+              if ((props.formType === "put" && item.update) || (props.formType === "post" && item.add)) {
+                return <FormInput dynamicClass={dynamicClass} updateValue={formValues[item.updateOn]} placeholder={item.placeHolder} key={`input` + index} id={index} error={formErrors[formState[index].name]} value={formValues[formState[index].name]} {...item} onChange={handleChange} />;
+              } else {
+                return null;
+              }
+            })}
+        </Form>
+
         <Footer>
           <FormInput type="close" value={"Cancel"} onChange={closeModal} />
           <FormInput disabled={submitDisabled} type="submit" name="submit" value={props.button ? props.button : "Submit"} onChange={submitChange} />

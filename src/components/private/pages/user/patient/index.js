@@ -805,6 +805,7 @@ const Patient = (props) => {
       type: "date",
       placeholder: "Visit Shedule",
       name: "visitShedule",
+      condition: { item: "dieticianVisit", if: true, then: "enabled", else: "disabled" },
       showItem: "",
       validation: "",
       default: "",

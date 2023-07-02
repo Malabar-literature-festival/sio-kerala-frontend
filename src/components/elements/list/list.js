@@ -515,13 +515,15 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
               if (attribute.view && (attribute.tag ?? false)) {
                 try {
                   const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+                  const itemColor = attribute.collection?.length > 0 && attribute.color?.length > 0 ? data[attribute.collection][attribute.color] : "initial";
                   if (attribute.type === "image") {
                     return "";
                   }
+                  console.log(data[attribute.collection], attribute.showItem, attribute.color);
                   return (
                     <Td key={index}>
                       <Title>{attribute.label}</Title>
-                      <DataItem>{getValue(attribute, itemValue)} </DataItem>
+                      <DataItem style={{ color: itemColor}}>{getValue(attribute, itemValue)} </DataItem>
                     </Td>
                   );
                 } catch (error) {

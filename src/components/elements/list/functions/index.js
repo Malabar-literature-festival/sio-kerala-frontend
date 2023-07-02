@@ -30,7 +30,8 @@ export const getValue = (attribute, itemValue, display = false) => {
       response = dateFormat(itemValue);
       break;
     case "textarea":
-      response = itemValue?.toString()?.substring(0, 200);
+    case "htmleditor":
+      response = <span dangerouslySetInnerHTML={{ __html: itemValue?.toString()?.substring(0, 200) }}></span>;
       break;
     case "checkbox":
       response = <IconBox className={display && "display"}>{itemValue ? <GetIcon icon={"checked"} /> : <GetIcon icon={"Close"} />}</IconBox>;

@@ -11,6 +11,12 @@ export const InputContainer = styled.div`
   &.checkbox {
     flex: 100%;
   }
+  &.disabled {
+    display: none;
+  }
+  &.textarea{
+    flex: calc(100% - 10px);
+  }
   && {
     /* Styles to apply when parent has class shrink */
     .popup & {
@@ -237,4 +243,23 @@ export const TextArea = styled.textarea`
   &.shrink {
     padding: 2em 13px 0;
   }
+`;
+export const Info = styled.div`
+  padding-left: 0;
+  font-size: 14px;
+  width: 100%;
+  &.disabled {
+    display: none;
+  }
+  &.title {
+    font-size: 16px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+`;
+export const SubHead = styled.div`
+  padding-left: 0;
+  font-size: 16px;
+  width: 100%;
 `;

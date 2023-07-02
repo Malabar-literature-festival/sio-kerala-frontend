@@ -101,7 +101,7 @@ function MultiSelect(props) {
   }, []);
 
   return (
-    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass}`} ref={selectRef}>
+    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass}  ${props.dynamicClass}`} ref={selectRef}>
       <button className={`${selectedId !== null && selectedId.length !== 0 ? "has" : ""}`} onClick={toggleOptions}>
         {props.error?.length ? (
           <>

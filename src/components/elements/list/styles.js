@@ -248,6 +248,11 @@ export const DataItem = styled.span`
   border-radius: 10px;
   font-weight: 500;
   border: 1px solid #ddd;
+  p {
+    text-align: center;
+    white-space: pre-line;
+    display: contents;
+  }
 `;
 export const Button = styled.button`
   color: #fff;
