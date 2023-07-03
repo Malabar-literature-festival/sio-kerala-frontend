@@ -1211,8 +1211,22 @@ const ActiveAdmission = (props) => {
   ]);
 
   const today = new Date();
-  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
-  const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
+  const startOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    0,
+    0,
+    0
+  );
+  const endOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+    23,
+    59,
+    59
+  );
 
   return (
     <Container className="noshadow">
@@ -1220,7 +1234,11 @@ const ActiveAdmission = (props) => {
       <ListTable
         actions={actions}
         api={`appointment/active`}
-        preFilter={{ startDate: startOfDay, endDate: endOfDay }}
+        preFilter={{
+          startDate: startOfDay,
+          endDate: endOfDay,
+          userType: "6471b34d9fb2b29fe0458878",
+        }}
         // itemTitle={`label`}
         itemTitle={{
           name: "username",
