@@ -1227,6 +1227,7 @@ const ActiveAppointment = (props) => {
     //   },
     // },
   ]);
+
   const today = new Date();
   const startOfDay = new Date(
     today.getFullYear(),
