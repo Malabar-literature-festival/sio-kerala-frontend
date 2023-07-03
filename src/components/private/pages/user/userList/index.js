@@ -172,10 +172,10 @@ const UserList = (props) => {
       default: "",
       label: "Role",
       required: true,
-      view: false,
+      view: true,
       add: true,
       update: true,
-      filter: false,
+      filter: true,
     },
     {
       type: "textarea",
