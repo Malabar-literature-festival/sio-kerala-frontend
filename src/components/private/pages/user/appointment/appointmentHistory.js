@@ -1,164 +1,108 @@
 import React, { useEffect, useState } from "react";
-//
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-
-const Patient = (props) => {
+const AppointmentHistory = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Patient List - Diet Food Management Portal`;
+    document.title = `Appointment History - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "CPR/Mobile",
-      name: "username",
+      placeholder: "Booking ID",
+      name: "bookingId",
       validation: "",
       default: "",
       tag: true,
-      label: "CPR/Mobile",
-      required: true,
-      view: false,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "CPR/Mobile",
-      name: "username",
-      showItem: "",
-      tag: true,
-      validation: "",
-      default: "",
-      label: "CPR/Mobile",
+      label: "Booking ID",
       required: false,
       view: true,
       add: false,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "Name",
-      name: "userDisplayName",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Name",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "email",
-      placeholder: "E-Mail",
-      name: "email",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "E-Mail",
-      required: false,
-      view: true,
-      add: true,
-      update: false,
-    },
-    {
-      type: "password",
-      placeholder: "Password",
-      name: "password",
-      validation: "",
-      default: "",
-      // tag: true,
-      label: "Password",
-      required: false,
-      view: false,
-      add: true,
       update: false,
     },
     {
       type: "select",
-      placeholder: "Gender",
-      name: "subscriber",
+      apiType: "API",
+      selectApi: "user/select",
+      placeholder: "User",
+      name: "user",
+      validation: "",
+      showItem: "userDisplayName",
+      default: "",
+      tag: true,
+      label: "User",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "date",
+      placeholder: "Booking Date",
+      name: "bookingDate",
       validation: "",
       default: "",
       tag: true,
-      label: "Gender",
-      showItem: "gender",
+      label: "Booking Date",
       required: true,
       view: true,
-      add: false,
-      update: false,
-      filter: false,
-      // apiType: "CSV",
-      // selectApi: "Male,Female",
+      add: true,
+      update: true,
     },
     {
       type: "select",
-      placeholder: "Gender",
-      name: "gender",
+      apiType: "API",
+      selectApi: "booking-slot/select",
+      placeholder: "Time Slot",
+      name: "bookingSlot",
+      showItem: "bookingSlotsName",
       validation: "",
       default: "",
       tag: true,
-      label: "Gender",
-      showItem: "Gender",
-      required: false,
-      view: false,
-      filter: false,
-      add: true,
-      update: false,
-      apiType: "CSV",
-      selectApi: "Male,Female",
-    },
-    {
-      type: "textarea",
-      apiType: "",
-      selectApi: "",
-      placeholder: "Address",
-      name: "address",
-      collection: "subscriber",
-      validation: "",
-      showItem: "address",
-      default: "",
-      tag: true,
-      label: "Address",
-      required: false,
+      label: "Time Slot",
+      required: true,
       view: true,
       add: true,
-      update: false,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "user/select?userType=6471b34d9fb2b29fe0458878",
+      placeholder: "Dietician",
+      name: "dietician",
+      validation: "",
+      showItem: "userDisplayName",
+      default: "",
+      tag: true,
+      label: "Dietician",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: true,
     },
     // {
-    //   type: "textarea",
+    //   type: "select",
     //   apiType: "API",
-    //   selectApi: "",
-    //   placeholder: "Address",
-    //   name: "address",
+    //   selectApi: "user-type/select",
+    //   placeholder: "User Type",
+    //   name: "userType",
     //   validation: "",
-    //   showItem: "address",
+    //   showItem: "role",
     //   default: "",
-    //   tag: true,
-    //   label: "Address",
-    //   required: false,
-    //   view: false,
+    //   label: "User Type",
+    //   required: true,
+    //   view: true,
     //   add: true,
-    //   update: false,
+    //   update: true,
     // },
-    {
-      type: "image",
-      placeholder: "Image",
-      name: "userImage",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Image",
-      required: false,
-      view: true,
-      add: true,
-      update: true,
-    },
   ]);
 
   const [details] = useState([
@@ -571,6 +515,65 @@ const Patient = (props) => {
       apiType: "CSV",
       selectApi: "IN,OUT",
     },
+    // {
+    //   type: "select",
+    //   apiType: "API",
+    //   selectApi: "type-of-diet/select",
+    //   placeholder: "Type of Diet",
+    //   name: "typeOfDiet",
+    //   showItem: "typeOfDietName",
+    //   validation: "",
+    //   default: "",
+    // tag: true//
+    // label: "Type of Diet",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
+    // {
+    //   type: "select",
+    //   apiType: "API",
+    //   selectApi: "type-of-diet/select",
+    //   placeholder: "Type of Diet",
+    //   name: "typeOfDiet",
+    //   validation: "",
+    //   showItem: "role",
+    //   default: "",
+    // tag: true//
+    // label: "Type of Diet",
+    //   required: true,
+    //   view: false,
+    //   add: true,
+    //   update: true,
+    //   filter: false,
+    // },
+    // {
+    //   type: "textarea",
+    //   placeholder: "Diagnosis",
+    //   name: "diagnosis",
+    //   validation: "",
+    //   default: "",
+    // tag: true//
+    // label: "Diagnosis",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
+    // {
+    //   type: "date",
+    //   placeholder: "Admission Date",
+    //   name: "admissionDate",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "Admission Date",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: false,
+    // },
     {
       type: "text",
       placeholder: "Room Number",
@@ -595,7 +598,7 @@ const Patient = (props) => {
       label: "Admission Date",
       required: true,
       view: true,
-      add: true,
+      add: false,
       update: true,
     },
     {
@@ -667,8 +670,8 @@ const Patient = (props) => {
     //   showItem: "",
     //   validation: "",
     //   default: "",
-    //   tag: true//
-    //   label: "Start Time",
+    // tag: true//
+    // label: "Start Time",
     //   required: true,
     //   view: true,
     //   add: true,
@@ -747,12 +750,6 @@ const Patient = (props) => {
       type: "date",
       placeholder: "Visit Shedule",
       name: "visitShedule",
-      condition: {
-        item: "dieticianVisit",
-        if: true,
-        then: "enabled",
-        else: "disabled",
-      },
       showItem: "",
       validation: "",
       default: "",
@@ -814,23 +811,23 @@ const Patient = (props) => {
       update: false,
       filter: false,
     },
-    // {
-    //   type: "text",
-    //   apiType: "API",
-    //   selectApi: "",
-    //   placeholder: "Meal",
-    //   name: "meal",
-    //   validation: "",
-    //   showItem: "mealName",
-    //   default: "",
-    //   tag: true,
-    //   label: "Meal",
-    //   required: false,
-    //   view: true,
-    //   add: false,
-    //   update: false,
-    //   filter: false,
-    // },
+    {
+      type: "text",
+      apiType: "API",
+      selectApi: "",
+      placeholder: "Meal",
+      name: "meal",
+      validation: "",
+      showItem: "mealName",
+      default: "",
+      tag: true,
+      label: "Meal",
+      required: false,
+      view: true,
+      add: false,
+      update: false,
+      filter: false,
+    },
     // {
     //   type: "select",
     //   apiType: "API",
@@ -886,31 +883,15 @@ const Patient = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "meal/select",
-      updateOn: "mealTimeCategory",
-      iconImage: { collection: "", item: "mealPhoto" },
-      tags: [
-        {
-          type: "text",
-          item: "proteinCategoriesName",
-          title: "Protein Category",
-          collection: "proteinCategory",
-        },
-        {
-          type: "text",
-          item: "mealDescription",
-          title: "Description",
-          collection: "",
-        },
-      ],
       placeholder: "Meal",
       name: "meal",
       validation: "",
-      showItem: "mealName",
+      showItem: "",
       default: "",
       tag: true,
       label: "Meal",
       required: true,
-      view: true,
+      view: false,
       add: true,
       update: true,
       filter: false,
@@ -1230,21 +1211,26 @@ const Patient = (props) => {
 
   return (
     <Container className="noshadow">
+      {/* Render a ListTable component */}
       <ListTable
         actions={actions}
-        api={`user`}
-        // displayColumn="double"
-        // itemTitle={`userDisplayName`}
-        itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
-        shortName={`Patient`}
-        // parentReference={"userType"}
-        // referenceId={"6471b3849fb2b29fe045887b"}
-        preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
+        api={`appointment`}
+        // itemTitle={`label`}
+        itemTitle={{
+          name: "username",
+          type: "text",
+          collection: "user",
+        }}
+        shortName={`Appointment`}
+        // formMode={`single`}
         formMode={`double`}
+        //
         {...props}
         attributes={attributes}
       ></ListTable>
     </Container>
   );
 };
-export default Layout(Patient);
+
+// exporting the page with parent container layout..
+export default Layout(AppointmentHistory);
