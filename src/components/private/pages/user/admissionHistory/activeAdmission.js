@@ -1237,7 +1237,7 @@ const ActiveAdmission = (props) => {
         preFilter={{
           startDate: startOfDay,
           endDate: endOfDay,
-          userType: "6471b34d9fb2b29fe0458878",
+          // userType: "6471b34d9fb2b29fe0458878",
         }}
         // itemTitle={`label`}
         itemTitle={{

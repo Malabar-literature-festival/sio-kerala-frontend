@@ -14,7 +14,7 @@ const OrderList = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "user/select",
+      selectApi: "user/select?userType=6471b3849fb2b29fe045887b",
       placeholder: "User",
       name: "user",
       validation: "",
@@ -82,8 +82,18 @@ const OrderList = (props) => {
       updateOn: "mealTimeCategory",
       iconImage: { collection: "", item: "mealPhoto" },
       tags: [
-        { type: "text", item: "proteinCategoriesName", title: "Protein Category", collection: "proteinCategory" },
-        { type: "text", item: "mealDescription", title: "Description", collection: "" },
+        {
+          type: "text",
+          item: "proteinCategoriesName",
+          title: "Protein Category",
+          collection: "proteinCategory",
+        },
+        {
+          type: "text",
+          item: "mealDescription",
+          title: "Description",
+          collection: "",
+        },
       ],
       placeholder: "Meal",
       name: "meal",
