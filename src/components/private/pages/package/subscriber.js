@@ -49,6 +49,26 @@ const SubscriberPackage = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "package/select",
+      tags: [
+        {
+          type: "text",
+          item: "calories",
+          title: "Calories",
+          collection: "",
+        },
+        {
+          type: "text",
+          item: "days",
+          title: "Days",
+          collection: "",
+        },
+        {
+          type: "text",
+          item: "rate",
+          title: "Amount",
+          collection: "",
+        },
+      ],
       placeholder: "Package",
       name: "packageName",
       showItem: "packageName",
