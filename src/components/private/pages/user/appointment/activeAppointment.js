@@ -28,6 +28,26 @@ const ActiveAppointment = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "user/select?userType=6471b3849fb2b29fe045887b",
+      tags: [
+        {
+          type: "text",
+          item: "userDisplayName",
+          title: "Name",
+          collection: "",
+        },
+        {
+          type: "text",
+          item: "cprNumber",
+          title: "Cpr Number",
+          collection: "",
+        },
+        {
+          type: "text",
+          item: "email",
+          title: "Email",
+          collection: "",
+        },
+      ],
       placeholder: "User",
       name: "user",
       validation: "",
