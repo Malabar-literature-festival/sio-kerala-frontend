@@ -1237,9 +1237,9 @@ const Patient = (props) => {
         // itemTitle={`userDisplayName`}
         itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
         shortName={`Patient`}
-        // parentReference={"userType"}
-        // referenceId={"6471b3849fb2b29fe045887b"}
-        preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
+        parentReference={"userType"}
+        referenceId={"6471b3849fb2b29fe045887b"}
+        // preFilter={{ userType: "6471b3849fb2b29fe045887b" }}
         formMode={`double`}
         {...props}
         attributes={attributes}

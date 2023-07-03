@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+//
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Admin = (props) => {
+
+const FranchiseAdmin = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Admin - Diet Food Management Portal`;
+    document.title = `Franchise Admin - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -105,8 +107,10 @@ const Admin = (props) => {
         api={`user`}
         // itemTitle={`label`}
         itemTitle={{ name: "name", type: "text", collection: "franchise" }}
-        preFilter={{ userType: "6459f25d7f6e9664fbd7486f" }}
-        shortName={`Admin`}
+        // preFilter={{ userType: "6493e7bf0fba44683fd8f51c" }}
+        parentReference={"userType"}
+        referenceId={"6493e7bf0fba44683fd8f51c"}
+        shortName={`Franchise Admin`}
         formMode={`double`}
         attributes={attributes}
         {...props}
@@ -114,5 +118,4 @@ const Admin = (props) => {
     </Container>
   );
 };
-
-export default Layout(Admin);
+export default Layout(FranchiseAdmin);
