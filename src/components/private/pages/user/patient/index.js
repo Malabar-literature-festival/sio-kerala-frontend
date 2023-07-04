@@ -450,7 +450,7 @@ const Patient = (props) => {
       filter: false,
     },
     {
-      type: "select",
+      type: "multiSelect",
       apiType: "API",
       selectApi: "medical-conditions/select",
       placeholder: "Medical Condition",
