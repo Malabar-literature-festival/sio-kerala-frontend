@@ -4,50 +4,79 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const ActivenessStatus = (props) => {
+const Faq = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Activeness Status - Diet Food Management Portal`;
+    document.title = `Faq - DFMS Site Builder Portal`;
   }, []);
 
   const [attributes] = useState([
     {
-      // Type of input, in this case, a text input
-      type: "text",
-      // Placeholder text for the input field
-      placeholder: "Activeness Status",
-      // Name of the input field
-      name: "activenessStatusName",
-      // Validation rules for the input
+      type: "textarea",
+      apiType: "",
+      selectApi: "",
+      placeholder: "Question",
+      name: "question",
       validation: "",
-      // Default value for the input field
+      showItem: "",
       default: "",
-      tag: true,
-      // Label text for the input field
-      label: "Activeness Status",
-      // Indicates if the input field is required
-      required: true,
-      // Indicates if the input field should be displayed in the view mode
-      view: true,
-      // Indicates if the input field should be displayed in the add mode
-      add: true,
-      // Indicates if the input field should be displayed in the update mode
-      update: true,
-    },
-    {
-      type: "image",
-      placeholder: "Image",
-      name: "activenessStatusImage",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Image",
+      label: "Question",
       required: false,
       view: true,
       add: true,
       update: true,
+      filter: false,
+    },
+    {
+      type: "textarea",
+      apiType: "",
+      selectApi: "",
+      placeholder: "Answer",
+      name: "answer",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "Answer",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "franchise/select",
+      placeholder: "Franchise",
+      name: "franchise",
+      validation: "",
+      showItem: "name",
+      default: "",
+      label: "Franchise",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+      filter: true,
+    },
+    {
+      type: "text",
+      apiType: "",
+      selectApi: "",
+      placeholder: "link",
+      name: "link",
+      validation: "",
+      showItem: "",
+      default: "",
+      label: "link",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
     },
   ]);
+
   // const [timingAttributes] = useState([
   //   {
   //     type: "text",
@@ -179,18 +208,16 @@ const ActivenessStatus = (props) => {
         // Actions to be displayed in the ListTable
         // actions={actions}
         // API endpoint for fetching menu data
-        api={`activeness-status`}
-        displayColumn="double"
+        api={`faq`}
         // Property name for the title of each menu item
-        // itemTitle={`label`}
+        itemTitle={{ name: "question", type: "text", collection: "" }}
+        viewMode={"subItem"}
         // Short name or label for the menu
-        itemTitle={{
-          name: "activenessStatusName",
-          type: "text",
-          collection: "",
-        }}
-        shortName={`Activeness Status`}
+        shortName={`Faq`}
         // Privilege flag indicating whether the user can add menu items
+        // formMode={`single`}
+        formMode={`double`}
+        //
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
@@ -199,4 +226,4 @@ const ActivenessStatus = (props) => {
   );
 };
 // exporting the page with parent container layout..
-export default Layout(ActivenessStatus);
+export default Layout(Faq);
