@@ -686,8 +686,8 @@ const Student = (props) => {
         },
       ],
       placeholder: "Package",
-      name: "packageName",
-      showItem: "packageName",
+      name: "package",
+      showItem: "",
       validation: "",
       default: "",
       tag: true,
@@ -873,7 +873,8 @@ const Student = (props) => {
       title: "Package",
       attributes: studentPackage,
       params: {
-        api: `weekly-meal-plan-entry`,
+        api: `subscriber-package`,
+        // api: `weekly-meal-plan-entry`,
         parentReference: "user",
         // itemTitle: "username",
         itemTitle: {
