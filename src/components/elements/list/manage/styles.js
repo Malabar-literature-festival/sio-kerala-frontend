@@ -75,9 +75,12 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5em 30px .5em;
+  padding: 0.5em 30px 0.5em;
   font-weight: 500;
   font-size: 1.3em;
+  &.form {
+    padding: 0.5em 0.5em;
+  }
   /* border-bottom: 1px solid rgb(204, 204, 204); */
   @media (max-width: 768px) {
     position: sticky;

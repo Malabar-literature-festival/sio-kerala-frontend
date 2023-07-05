@@ -523,7 +523,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                   return (
                     <Td key={index}>
                       <Title>{attribute.label}</Title>
-                      <DataItem style={{ color: itemColor}}>{getValue(attribute, itemValue)} </DataItem>
+                      <DataItem style={{ color: itemColor }}>{getValue(attribute, itemValue)} </DataItem>
                     </Td>
                   );
                 } catch (error) {
@@ -739,7 +739,23 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       </ButtonPanel>
       <Table className={`table ${displayColumn}`}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
-      {users.data?.response?.length === 0 && <NoData>No {t(shortName)} found!</NoData>}
+      {users.data?.response?.length === 0 && (
+        <CrudForm
+          api={api}
+          formMode={formMode}
+          css="plain"
+          formType={"post"}
+          header={t("addNewTitle", {
+            label: t(shortName ? shortName : "Form"),
+          })}
+          formInput={formInput}
+          formValues={addValues}
+          formErrors={errroInput}
+          submitHandler={submitHandler}
+          isOpenHandler={isCreatingHandler}
+          isOpen={isCreating}
+        ></CrudForm>
+      )}
       {count > 0 ? (
         count > 10 ? (
           <Count>
