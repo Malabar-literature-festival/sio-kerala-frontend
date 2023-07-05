@@ -421,7 +421,7 @@ export const ToggleInput = styled.input`
 `;
 export const NoData = styled.div`
   padding: 10px;
-  border-bottom: 1px solid #ddedeb;
+  border: 1px solid #ddedeb;
   justify-content: center;
   display: flex;
   align-items: center;
