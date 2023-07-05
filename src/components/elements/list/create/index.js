@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import FormInput from "../../input";
-import { Footer, Form, Header, Page, Overlay } from "./styles";
+import { Footer, Form, Page, Overlay } from "./styles";
 import { useTranslation } from "react-i18next";
+import { CloseButton } from "../popup/styles";
+import { GetIcon } from "../../../../icons";
+import { useSelector } from "react-redux";
+import { Header } from "../manage/styles";
 const CrudForm = (props) => {
   // Use the useTranslation hook from react-i18next to handle translations
   const { t } = useTranslation();
@@ -17,7 +21,7 @@ const CrudForm = (props) => {
 
   // State to store the validation messages
   const [formErrors, setFormErrors] = useState(props.formErrors);
-
+  const themeColors = useSelector((state) => state.themeColors);
   /**
    * fieldValidation is a callback function to validate a form field based on its properties
    *
@@ -292,9 +296,16 @@ const CrudForm = (props) => {
     props.isOpenHandler(false);
   };
   return (
-    <Overlay>
-      <Page className={props.formMode ?? "single"}>
-        <Header>{props.header ? props.header : "Login"}</Header>
+    <Overlay className={props.css ?? ""}>
+      <Page className={`${props.css ?? ""} ${props.formMode ?? "single"}`}>
+        <Header className="form">
+          <span>{props.header ? props.header : "Login"}</span>
+          {(props.css ?? "") === "" && (
+            <CloseButton theme={themeColors} onClick={closeModal}>
+              <GetIcon icon={"Close"} />
+            </CloseButton>
+          )}
+        </Header>
         <Form className={props.formMode ?? "single"}>
           {formState?.length > 0 &&
             formState.map((item, index) => {
@@ -315,7 +326,7 @@ const CrudForm = (props) => {
         </Form>
 
         <Footer>
-          <FormInput type="close" value={"Cancel"} onChange={closeModal} />
+          {(props.css ?? "") === "" && <FormInput type="close" value={"Cancel"} onChange={closeModal} />}
           <FormInput disabled={submitDisabled} type="submit" name="submit" value={props.button ? props.button : "Submit"} onChange={submitChange} />
         </Footer>
       </Page>
