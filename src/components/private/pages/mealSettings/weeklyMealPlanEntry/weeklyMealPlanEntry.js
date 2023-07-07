@@ -14,7 +14,7 @@ const WeeklyMealPlanEntry = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "user/select",
+      selectApi: "user/select?userType=6471b3849fb2b29fe045887b",
       placeholder: "User",
       name: "user",
       showItem: "userDisplayName",

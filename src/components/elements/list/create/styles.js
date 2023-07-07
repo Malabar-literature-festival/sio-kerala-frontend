@@ -43,6 +43,11 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   overflow: auto;
   z-index: 1001;
+  &.plain{
+    position: initial;
+    background: transparent;
+    padding: 0;
+  }
   @media (max-width: 768px) {
     width: 100%;
     padding: 0;
@@ -67,6 +72,11 @@ export const Page = styled.div`
   padding: 1em;
   &.double {
     width: 50%;
+  }
+  &.plain{
+    border: 1px solid rgb(224, 224, 227);
+    padding: 1em;
+    border-radius: 10px;
   }
   @media (max-width: 768px) {
     width: 100%;
