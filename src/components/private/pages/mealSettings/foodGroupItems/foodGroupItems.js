@@ -11,10 +11,33 @@ const FoodGroupItems = (props) => {
     }, []);
 
     const [attributes] = useState([
+        // {
+        //     type: "select",
+        //     apiType: "API",
+        //     selectApi: "meal/select",
+        //     placeholder: "Meal",
+        //     name: "meal",
+        //     validation: "",
+        //     showItem: "mealName",
+        //     default: "",
+        //     tag: true,
+        //     label: "Meal",
+        //     required: true,
+        //     view: true,
+        //     add: true,
+        //     update: true,
+        //     filter: false,
+        // },
         {
             type: "select",
             apiType: "API",
             selectApi: "meal/select",
+            updateOn: "mealTimeCategory",
+            iconImage: { collection: "", item: "mealPhoto" },
+            tags: [
+                { type: "text", item: "proteinCategoriesName", title: "Protein Category", collection: "proteinCategory" },
+                { type: "text", item: "mealDescription", title: "Description", collection: "" },
+            ],
             placeholder: "Meal",
             name: "meal",
             validation: "",
@@ -84,7 +107,7 @@ const FoodGroupItems = (props) => {
                 // Actions to be displayed in the ListTable
                 // actions={actions}
                 // API endpoint for fetching menu data
-                api={``}
+                api={`food-group-item`}
                 displayColumn="double"
                 // Property name for the title of each menu item
                 // itemTitle={`label`}

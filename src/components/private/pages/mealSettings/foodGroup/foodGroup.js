@@ -50,6 +50,111 @@ const FoodGroup = (props) => {
             add: true,
             update: true,
         },
+        {
+            type: "number",
+            placeholder: "Price",
+            name: "price",
+            validation: "",
+            default: "",
+            tag: true,
+            label: "Price",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+    ]);
+
+    const [foodGroupItem] = useState([
+        {
+            type: "select",
+            apiType: "API",
+            selectApi: "meal/select",
+            updateOn: "mealTimeCategory",
+            iconImage: { collection: "", item: "mealPhoto" },
+            tags: [
+                { type: "text", item: "proteinCategoriesName", title: "Protein Category", collection: "proteinCategory" },
+                { type: "text", item: "mealDescription", title: "Description", collection: "" },
+            ],
+            placeholder: "Meal",
+            name: "meal",
+            validation: "",
+            showItem: "mealName",
+            default: "",
+            tag: true,
+            label: "Meal",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+            filter: false,
+        },
+        {
+            type: "select",
+            apiType: "API",
+            selectApi: "meal-variant/select",
+            placeholder: "Meal Variant",
+            name: "mealVariant",
+            validation: "",
+            showItem: "mealPrice",
+            default: "",
+            tag: true,
+            label: "Meal Variant",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+            filter: false,
+        },
+        {
+            type: "number",
+            apiType: "",
+            selectApi: "",
+            placeholder: "Quantity",
+            name: "quantity",
+            validation: "",
+            showItem: "",
+            default: "",
+            tag: true,
+            label: "Quantity",
+            required: false,
+            view: true,
+            add: true,
+            update: true,
+            filter: false,
+        },
+    ]);
+
+    const [actions] = useState([
+        {
+            element: "button",
+            type: "subList",
+            id: "foodGroupItem",
+            // itemTitle: "username",
+            itemTitle: {
+                name: "mealName",
+                type: "text",
+                collection: "meal",
+            },
+            title: "Food Group Items",
+            attributes: foodGroupItem,
+            params: {
+                api: `food-group-item`,
+                parentReference: "",
+                // itemTitle: "username",
+                itemTitle: {
+                    name: "mealName",
+                    type: "text",
+                    collection: "meal",
+                },
+                shortName: "Food Group Items",
+                addPrivilege: true,
+                delPrivilege: true,
+                updatePrivilege: true,
+                customClass: "medium",
+                // formMode: "double",
+            },
+        },
     ]);
 
     return (
@@ -57,15 +162,16 @@ const FoodGroup = (props) => {
             {/* Render a ListTable component */}
             <ListTable
                 // Actions to be displayed in the ListTable
-                // actions={actions}
+                actions={actions}
                 // API endpoint for fetching menu data
-                api={``}
+                api={`food-group`}
                 displayColumn="double"
                 // Property name for the title of each menu item
                 // itemTitle={`label`}
                 itemTitle={{ name: "packageName", type: "text", collection: "" }}
                 // Short name or label for the menu
                 shortName={`Food Group`}
+                formMode={`double`}
                 // Privilege flag indicating whether the user can add menu items
                 {...props}
                 // Additional attributes related to the menu
