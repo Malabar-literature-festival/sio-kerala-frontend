@@ -12,10 +12,13 @@ const FoodPackage = (props) => {
 
     const [attributes] = useState([
         {
-            type: "text",
+            type: "select",
+            apiType: "API",
+            selectApi: "dayof-week/select",
             placeholder: "Day",
             name: "day",
             validation: "",
+            showItem: "day",
             default: "",
             tag: true,
             label: "Day",
@@ -23,6 +26,7 @@ const FoodPackage = (props) => {
             view: true,
             add: true,
             update: true,
+            filter: false,
         },
         {
             type: "select",
