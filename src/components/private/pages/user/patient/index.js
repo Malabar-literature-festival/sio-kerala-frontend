@@ -16,7 +16,7 @@ const Patient = (props) => {
     {
       type: "text",
       placeholder: "CPR/Mobile",
-      name: "username",
+      name: "cprNumber",
       validation: "",
       default: "",
       tag: true,
