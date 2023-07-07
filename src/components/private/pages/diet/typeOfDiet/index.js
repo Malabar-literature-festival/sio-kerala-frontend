@@ -120,42 +120,75 @@ const TypeOfDiet = (props) => {
   //     update: true,
   //   },
   // ]);
+  const [dietPlan] = useState([
+    {
+      type: "text",
+      apiType: "",
+      selectApi: "",
+      placeholder: "Diet Plan",
+      name: "dietPlan",
+      validation: "",
+      showItem: "",
+      default: "",
+      tag: true,
+      label: "Diet Plan",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
 
-  // const [actions] = useState([
-  //   {
-  //     // Element type for rendering
-  //     element: "button",
-  //     // Type of action, in this case a sublist
-  //     type: "subList",
-  //     // Unique identifier for the submenu
-  //     id: "sub-menu",
-  //     // Displayed item title
-  //     itemTitle: "title",
-  //     // Title of the submenu
-  //     title: "Sub Menu",
-  //     // Additional attributes for timing
-  //     attributes: timingAttributes,
-  //     // Parameters for API and submenu configuration
-  //     params: {
-  //       // API endpoint for submenu data
-  //       api: `sub-menu`,
-  //       // Parent reference for the submenu
-  //       parentReference: "menu",
-  //       // Property name for the submenu item title
-  //       itemTitle: "label",
-  //       // Short name for the submenu
-  //       shortName: "Sub Menu",
-  //       // Privileges for adding submenu items
-  //       addPrivilege: true,
-  //       // Privileges for deleting submenu items
-  //       delPrivilege: true,
-  //       // Privileges for updating submenu items
-  //       updatePrivilege: true,
-  //       // Custom CSS class for styling
-  //       customClass: "medium",
-  //     },
-  //   },
-  // ]);
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "type-of-diet/select",
+      placeholder: "Type of Diet",
+      name: "dietPlanCategory",
+      validation: "",
+      showItem: "typeOfDietName",
+      default: "",
+      tag: true,
+      label: "Type of Diet",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
+    },
+  ]);
+
+  const [actions] = useState([
+    {
+      element: "button",
+      type: "subList",
+      id: "dietPlan",
+      // itemTitle: "username",
+      itemTitle: {
+        name: "dietPlan",
+        type: "text",
+        collection: "dietPlan",
+      },
+      title: "Diet Plan",
+      attributes: dietPlan,
+      params: {
+        api: `diet-plan`,
+        parentReference: "",
+        // itemTitle: "username",
+        itemTitle: {
+          name: "dietPlan",
+          type: "text",
+          collection: "",
+        },
+        shortName: "Diet Plan",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
+        customClass: "medium",
+        formMode: "double",
+      },
+    },
+  ]);
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
@@ -163,7 +196,7 @@ const TypeOfDiet = (props) => {
       {/* Render a ListTable component */}
       <ListTable
         // Actions to be displayed in the ListTable
-        // actions={actions}
+        actions={actions}
         // API endpoint for fetching menu data
         api={`type-of-diet`}
         displayColumn="double"
