@@ -57,6 +57,7 @@ import PageSettings from "../../private/pages/settings/pageSettings";
 // import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry";
 import Admin from "../../private/pages/franchise/admin";
 import Student from "../../private/pages/user/student/student";
+import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry/weeklyMealPlanEntry";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -607,15 +608,16 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    // case "weekly-meal-plan-entry":
-    //   return (
-    //     <WeeklyMealPlanEntry
-    //       key={key} exportPrivilege={exportPrivilege}
-    //       addPrivilege={addPrivilege}
-    //       delPrivilege={delPrivilege}
-    //       updatePrivilege={updatePrivilege}
-    //     />
-    //   );
+    case "weekly-meal-plan-entry":
+      return (
+        <WeeklyMealPlanEntry
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "admin":
       return (
         <Admin
