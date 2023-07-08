@@ -10,7 +10,6 @@ import Search from "../search";
 import { getValue } from "../list/functions";
 
 function CustomSelect(props) {
-  const themeColors = useSelector((state) => state.themeColors);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [updateValue, setUpdateValue] = useState("_");
   const [defaultValue] = useState(props.default);
