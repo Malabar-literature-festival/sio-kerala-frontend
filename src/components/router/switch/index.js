@@ -60,6 +60,10 @@ import Student from "../../private/pages/user/student/student";
 import WeeklyMealPlanEntry from "../../private/pages/mealSettings/weeklyMealPlanEntry/weeklyMealPlanEntry";
 import Faq from "../../private/pages/socialPlugins/faq";
 import TomorrowOrder from "../../private/pages/order/tomorrowOrder";
+import FoodGroup from "../../private/pages/mealSettings/foodGroup/foodGroup";
+import FoodPackage from "../../private/pages/mealSettings/foodPackage/foodPackage";
+import FoodGroupItems from "../../private/pages/mealSettings/foodGroupItems/foodGroupItems";
+import Nationality from "../../private/pages/registrationSettings/nationality";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -653,6 +657,46 @@ const Switch = ({
     case "tomorrow-order":
       return (
         <TomorrowOrder
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "food-group":
+      return (
+        <FoodGroup
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "food-package":
+      return (
+        <FoodPackage
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "food-group-items":
+      return (
+        <FoodGroupItems
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "nationality":
+      return (
+        <Nationality
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
