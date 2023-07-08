@@ -22,7 +22,6 @@ const Print = ({ themeColors, attributes, setLoaderBox, setMessage, closeModal, 
 
               return <Td key={index}>{getValue(attribute, itemValue)}</Td>;
             } catch (error) {
-              console.log(error);
               return <Td key={index}>{`--`}</Td>;
             }
           }

@@ -24,7 +24,6 @@ export const DisplayInformations = ({ attributes, data, formMode }) => {
               </Td>
             );
           } catch (error) {
-            console.log(error);
             return (
               <Td key={index}>
                 <Title>{attribute.label}</Title>

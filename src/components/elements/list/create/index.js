@@ -6,6 +6,7 @@ import { CloseButton } from "../popup/styles";
 import { GetIcon } from "../../../../icons";
 import { useSelector } from "react-redux";
 import { Header } from "../manage/styles";
+import { updateCaloriDetails, updateHealthDetails } from "../../../functions/health";
 const CrudForm = (props) => {
   // Use the useTranslation hook from react-i18next to handle translations
   const { t } = useTranslation();
@@ -262,11 +263,19 @@ const CrudForm = (props) => {
       } else {
         value = event.target.getAttribute("value");
       }
-      const udpateValue = {
+
+      let udpateValue = {
         ...formValues,
         [field.name]: value,
       };
-      // Creating an updated field
+      if (["gender", "presentWeight", "userActivenessStatus", "dateOfBirth", "height", "age", "wrist", "waist", "hip", "forearm"].includes(field.name)) {
+        updateHealthDetails(udpateValue);
+      }
+      if (["calories"].includes(field.name)) {
+        updateCaloriDetails(udpateValue);
+      }
+      console.log("udpateValue", udpateValue);
+      // Creating an updated fieldß
       // updating the formm values
       setFormValues(udpateValue);
       // Validating the fields
@@ -278,6 +287,7 @@ const CrudForm = (props) => {
       const field = main.forms[sub.multipleIndex][id];
       const udpateValue = { ...formValues };
       udpateValue[main.name][sub.multipleIndex][field.name] = event.target.value;
+
       setFormValues(udpateValue);
       // Validating the fields
       if (validation(formState, udpateValue, formErrors)) {

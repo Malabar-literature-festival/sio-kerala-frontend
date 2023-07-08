@@ -9,7 +9,6 @@ import { ErrorMessage } from "../form/styles";
 import Search from "../search";
 
 function MultiSelect(props) {
-  const themeColors = useSelector((state) => state.themeColors);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
   const [initialized, setInitialized] = useState(false);
@@ -101,17 +100,17 @@ function MultiSelect(props) {
   }, []);
 
   return (
-    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass}  ${props.dynamicClass}`} ref={selectRef}>
+    <SelectBox theme={props.theme} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass}  ${props.dynamicClass}`} ref={selectRef}>
       <button className={`${selectedId !== null && selectedId.length !== 0 ? "has" : ""}`} onClick={toggleOptions}>
         {props.error?.length ? (
           <>
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink error" : "error"}`}>
+            <Label theme={props.theme} className={`${!props.value.length > 0 ? "shrink error" : "error"}`}>
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           </>
         ) : (
           <>
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
+            <Label theme={props.theme} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
               <TickIcon />
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
@@ -122,7 +121,7 @@ function MultiSelect(props) {
       </button>
       {optionsVisible && initialized && (
         <ul className="options">
-          {(props.search ?? true) && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>}
+          {(props.search ?? true) && <Search className={"select"} title={"Search"} theme={props.theme} placeholder="Search" value={searchValue} onChange={handleChange}></Search>}
           {options.length &&
             (searchValue.length > 0 ? filteredOptions : options).map((option) => {
               const selectedIndex = selectedId.findIndex((item) => item.id === option.id);
