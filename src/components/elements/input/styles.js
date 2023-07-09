@@ -14,7 +14,7 @@ export const InputContainer = styled.div`
   &.disabled {
     display: none;
   }
-  &.textarea{
+  &.textarea {
     flex: calc(100% - 10px);
   }
   && {
@@ -245,9 +245,10 @@ export const TextArea = styled.textarea`
   }
 `;
 export const Info = styled.div`
-  padding-left: 0;
+  padding-left: 0px;
   font-size: 14px;
   width: 100%;
+  margin: 0px 10px 10px 15px;
   &.disabled {
     display: none;
   }
@@ -259,7 +260,11 @@ export const Info = styled.div`
   }
 `;
 export const SubHead = styled.div`
-  padding-left: 0;
-  font-size: 16px;
+  padding-left: 0px;
   width: 100%;
+  border-bottom: 1px solid rgb(235, 244, 235);
+  margin: 0px 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
 `;

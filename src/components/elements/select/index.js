@@ -37,7 +37,7 @@ function CustomSelect(props) {
 
   const fetchData = useCallback(
     async (item = "", force = false, name = "") => {
-      if (force) {
+      if (force && props.apiType === "API") {
         const optionHandler = (data) => {
           setOptions(data);
           setInitialized(true);
