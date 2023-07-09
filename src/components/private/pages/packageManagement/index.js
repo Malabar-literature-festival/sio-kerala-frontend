@@ -163,6 +163,30 @@ const PackageManagement = (props) => {
     },
   ]);
 
+
+  // const [actions] = useState([
+  //   {
+  //     element: "button",
+  //     type: "subList",
+  //     id: "sub-menu",
+  //     itemTitle: "title",
+  //     title: "Order",
+  //     attributes: timingAttributes,
+  //     params: {
+  //       api: `sub-menu`,
+  //       parentReference: "menu",
+  //       itemTitle: "label",
+  //       shortName: "Sub Menu",
+  //       addPrivilege: true,
+  //       delPrivilege: true,
+  //       updatePrivilege: true,
+  //       customClass: "medium",
+  //       formMode: "double",
+  //     },
+  //   },
+  // ]);
+  // Use the useTranslation hook from react-i18next to handle translations
+  // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
     <Container className="noshadow">
       {/* Render a ListTable component */}
