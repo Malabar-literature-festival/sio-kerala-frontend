@@ -49,7 +49,6 @@ function CustomSelect(props) {
         await getData({ [name]: item }, `${props.selectApi}`)
           .then((response) => {
             if (response.status === 200) {
-              console.log(props)
               optionHandler(response.data);
               dispatch(addSelectObject(response.data, props.selectApi));
             } else if (response.status === 404) {
