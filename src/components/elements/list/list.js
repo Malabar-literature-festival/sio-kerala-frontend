@@ -166,7 +166,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       const updateValues = {};
       setUpdateId(value._id);
       formInput.forEach((item) => {
-        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection][item.showItem] : value[item.name] ?? "";
+        const itemValue = item.collection?.length > 0 && item.showItem?.length > 0 ? value[item.collection]?.[item.showItem] : value[item.name] ?? "";
         if (item.update) {
           if (item.type === "checkbox") {
             let bool = value[item.name]?.toString() === "true" ? true : false;
