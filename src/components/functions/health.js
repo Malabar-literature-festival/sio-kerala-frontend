@@ -49,12 +49,12 @@ export const updateHealthDetails = (data = {}) => {
     const percentageOfProtein = (calories * 0.2) / 4; // 20% of total calories, assuming 4 calories per gram of protein
 
     // Update the data object with the calculated values
-    data.bmi = bmi;
-    data.bmr = bmr;
-    data.calories = calories;
-    data.percentageOfCarbs = percentageOfCarbs;
-    data.percentageOfFat = percentageOfFat;
-    data.percentageOfProtein = percentageOfProtein;
+    data.bmi = isNaN(bmi) ? 0 : bmi;
+    data.bmr = isNaN(bmr) ? 0 : bmr;
+    data.calories = isNaN(calories) ? 0 : calories;
+    data.percentageOfCarbs = isNaN(percentageOfCarbs) ? 0 : percentageOfCarbs;
+    data.percentageOfFat = isNaN(percentageOfFat) ? 0 : percentageOfFat;
+    data.percentageOfProtein = isNaN(percentageOfProtein) ? 0 : percentageOfProtein;
 
     console.log(data);
   } catch (error) {
@@ -72,9 +72,9 @@ export const updateCaloriDetails = (data = {}) => {
     const percentageOfProtein = (calories * 0.2) / 4; // 20% of total calories, assuming 4 calories per gram of protein
 
     // Update the data object with the calculated values
-    data.percentageOfCarbs = percentageOfCarbs;
-    data.percentageOfFat = percentageOfFat;
-    data.percentageOfProtein = percentageOfProtein;
+    data.percentageOfCarbs = isNaN(percentageOfCarbs) ? 0 : percentageOfCarbs;
+    data.percentageOfFat = isNaN(percentageOfFat) ? 0 : percentageOfFat;
+    data.percentageOfProtein = isNaN(percentageOfProtein) ? 0 : percentageOfProtein;
 
     console.log("updateCaloriDetails", data);
   } catch (error) {

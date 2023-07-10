@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
+import moment from "moment";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
@@ -309,33 +310,36 @@ const Patient = (props) => {
   ]);
 
   const [medicalRecord] = useState([
-    {
-      type: "date",
-      apiType: "API",
-      selectApi: "",
-      placeholder: "DOB",
-      // collection: "subscriber",
-      name: "dateOfBirth",
-      showItem: "",
-      tag: true,
-      validation: "",
-      default: "",
-      label: "DOB",
-      required: true,
-      view: true,
-      add: false,
-      update: false,
-    },
+    // {
+    //   type: "date",
+    //   apiType: "API",
+    //   selectApi: "",
+    //   placeholder: "DOB",
+    //   // collection: "subscriber",
+    //   name: "dateOfBirth",
+    //   showItem: "",
+    //   tag: true,
+    //   validation: "",
+    //   default: "",
+    //   label: "DOB",
+    //   required: true,
+    //   view: true,
+    //   add: false,
+    //   update: false,
+    // },
     {
       type: "date",
       placeholder: "",
       name: "dateOfBirth",
+      showItem: "dateOfBirth",
+      collection: "subscriber",
       validation: "",
-      default: "",
+      minDate: moment().add(-70, "years").toDate(),
+      default: moment().toDate(),
       tag: true,
       label: "DOB",
       required: true,
-      view: false,
+      view: true,
       add: true,
       update: true,
     },
@@ -424,6 +428,13 @@ const Patient = (props) => {
       filter: false,
     },
     {
+      type: "title",
+      title: "Body Composition and Energy",
+      name: "bmr",
+      add: true,
+      update: true,
+    },
+    {
       selectApi: "diet-plan/get-typeofdiet-dietplan",
       updateOn: "userActivenessStatus",
       type: "text",
@@ -439,6 +450,7 @@ const Patient = (props) => {
       add: true,
       update: true,
     },
+
     {
       type: "text",
       placeholder: "BMR",
@@ -510,6 +522,13 @@ const Patient = (props) => {
       label: "% Of Fat",
       required: false,
       view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "info",
+      content: "All the above fields are auto calculated.",
+      name: "bmr",
       add: true,
       update: true,
     },
