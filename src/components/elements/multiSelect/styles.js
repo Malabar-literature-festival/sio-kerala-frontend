@@ -13,6 +13,7 @@ export const SelectBox = styled.div`
     width: calc(50% - 5px);
     margin-right: 5px;
   }
+  flex: calc(50% - 10px);
   @media screen and (max-width: 768px) {
     &.half:nth-child(odd) {
       width: 100%;
@@ -22,8 +23,8 @@ export const SelectBox = styled.div`
       width: 100%;
       margin-right: 0px;
     }
-    &.filter{
-      width:calc(50% - 7px);
+    &.filter {
+      width: calc(50% - 7px);
     }
   }
   && {
@@ -44,8 +45,8 @@ export const SelectBox = styled.div`
     box-shadow: none;
     -webkit-transition: all 0.2s ease-out 0s;
     transition: all 0.2s ease-out 0s;
-    color: ${(props) => props.theme.foreground};
-    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.secForeground};
+    background: ${(props) => props.theme.secBackground};
     text-align: left;
     display: flex;
     align-items: center;

@@ -10,7 +10,6 @@ import Search from "../search";
 import { getValue } from "../list/functions";
 
 function CustomSelect(props) {
-  const themeColors = useSelector((state) => state.themeColors);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [updateValue, setUpdateValue] = useState("_");
   const [defaultValue] = useState(props.default);
@@ -38,7 +37,7 @@ function CustomSelect(props) {
 
   const fetchData = useCallback(
     async (item = "", force = false, name = "") => {
-      if (force) {
+      if (force && props.apiType === "API") {
         const optionHandler = (data) => {
           setOptions(data);
           setInitialized(true);
@@ -109,7 +108,6 @@ function CustomSelect(props) {
         setOptions(options);
         setInitialized(true);
         try {
-          console.log(options);
           const selected = options.filter((item) => item.id === selectedId)[0].value;
           setSelectedValue(selected ? selected : props.placeHolder);
         } catch {}
@@ -127,7 +125,6 @@ function CustomSelect(props) {
       setUpdateValue(props.updateValue);
       fetchData(props.updateValue, true, props.updateOn);
     }
-    console.log(props.updateValue, updateValue);
   }, [props.updateValue, updateValue, fetchData, props.updateOn]);
   useEffect(() => {
     function handleClick(event) {
@@ -141,17 +138,17 @@ function CustomSelect(props) {
     };
   }, []);
   return (
-    <SelectBox theme={themeColors} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass} ${props.dynamicClass}`} ref={selectRef}>
+    <SelectBox theme={props.theme} className={`custom-select ${optionsVisible ? "open" : "close"} ${props.customClass} ${props.dynamicClass}`} ref={selectRef}>
       <button className={`${selectedId !== null && selectedId.length !== 0 ? "has" : ""}`} onClick={toggleOptions}>
         {props.error?.length ? (
           <>
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink error" : "error"}`}>
+            <Label theme={props.theme} className={`${!props.value.length > 0 ? "shrink error" : "error"}`}>
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           </>
         ) : (
           <>
-            <Label theme={themeColors} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
+            <Label theme={props.theme} className={`${!props.value.length > 0 ? "shrink" : ""}`}>
               <TickIcon />
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
@@ -162,7 +159,7 @@ function CustomSelect(props) {
       </button>
       {optionsVisible && initialized && (
         <ul className="options">
-          {props.search && (options.length ?? 0) > 10 && <Search className={"select"} title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange} />}
+          {props.search && (options.length ?? 0) > 10 && <Search className={"select"} title={"Search"} theme={props.theme} placeholder="Search" value={searchValue} onChange={handleChange} />}
           {options.length &&
             (searchValue.length > 0 ? filteredOptions : options)?.map((option) => {
               return (

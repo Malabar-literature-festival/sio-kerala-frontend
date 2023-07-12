@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Button, DatetimeInput, FileContainer, Info, Input, InputContainer, Label, SubHead, TextArea } from "./styles";
 import { ErrorMessage } from "../form/styles";
-import { TickIcon, UploadIcon } from "../../../icons";
+import { GetIcon, TickIcon, UploadIcon } from "../../../icons";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multiSelect";
 import EditorNew from "../editor";
+import moment from "moment";
 
 function FormInput(props) {
   // Initialize translation function for current language
@@ -35,7 +36,7 @@ function FormInput(props) {
               {`${t(props.label)}${props.required ? " *" : ""}`}
             </Label>
           )}
-          <Input autoComplete="on" theme={themeColors} className={`input ${props.value.toString().length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type, props.sub)} />
+          <Input disabled={props.disabled ?? false} autoComplete="on" theme={themeColors} className={`input ${props.value.toString().length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type, props.sub)} />
           {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
         </InputContainer>
       );
@@ -56,7 +57,7 @@ function FormInput(props) {
       let userFriendlyDate = props.value.length > 0 ? new Date(props.value) : null;
       return (
         <InputContainer className={`${props.dynamicClass ?? ""}`}>
-          <DatetimeInput dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput showYearDropdown yearDropdownItemNumber={70} minDate={props.minDate ?? moment().toDate()} maxDate={props.maxDate ?? moment().add(1, "year").toDate()} dateFormat={"yyyy-MM-dd"} theme={themeColors} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDate} selected={userFriendlyDate} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -72,12 +73,11 @@ function FormInput(props) {
       );
     // Render a datetime input with date and time pickers
     case "datetime":
-      console.log(props.value);
       let userFriendlyDateTime = props.value.length > 0 ? new Date(props.value) : null;
 
       return (
         <InputContainer className={`${props.dynamicClass ?? ""}`}>
-          <DatetimeInput theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime} dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
+          <DatetimeInput showYearDropdown yearDropdownItemNumber={70} minDate={props.minDate ?? moment().toDate()} maxDate={props.maxDate ?? moment().add(1, "year").toDate()} theme={themeColors} showTimeSelect timeIntervals={1} className={`input ${props.value.length > 0 ? "shrink" : ""}`} placeholderText={`${t(props.label)}${props.required ? " *" : ""}`} type={props.type} value={userFriendlyDateTime} selected={userFriendlyDateTime} dateFormat={"yyyy-MM-dd hh:mm a"} onChange={(event) => props.onChange(event, props.id, props.type)} />
           {props.error?.length ? (
             <Label theme={themeColors} className={`${!props.value.length > 0 ? "error shrink" : "error"}`}>
               {props.error}
@@ -175,9 +175,17 @@ function FormInput(props) {
     case "multiSelect":
       return <MultiSelect theme={themeColors} {...props} name={props.id} selected={props.value} onSelect={props.onChange}></MultiSelect>;
     case "info":
-      return <Info className={` ${props.dynamicClass}`}>{t(props.content ?? "")}</Info>;
+      return (
+        <Info className={` ${props.dynamicClass}`}>
+          <GetIcon icon={"info"}></GetIcon> {t(props.content ?? "")}
+        </Info>
+      );
     case "title":
-      return <SubHead className={`title ${props.dynamicClass}`}>{t(props.title ?? "")}</SubHead>;
+      return (
+        <SubHead theme={themeColors} className={`title ${props.dynamicClass}`}>
+          {t(props.title ?? "")}
+        </SubHead>
+      );
     default:
       return <></>;
   }
