@@ -23,7 +23,6 @@ export const Nav = styled.nav`
     text-decoration: none;
     color: ${(props) => props.theme.secForeground};
     padding-left: 1em;
-    color: white;
     height: 50px;
     display: flex;
     justify-content: left;
@@ -43,10 +42,9 @@ export const Nav = styled.nav`
   }
   a.main.active,
   a.main:hover {
-    background: linear-gradient(102deg, rgb(2, 0, 36) 0%, rgb(235 244 235) 0%, rgb(255 255 255) 83%);
+    background: linear-gradient(102deg, rgb(2, 0, 36) 0%, rgb(232 232 232) 0%, rgb(255, 255, 255) 83%);
     color: black;
     box-shadow: rgba(0, 0, 0, 0.16) -1px 0px 4px;
-    
   }
   a.main.active:first-child,
   a.main:hover:first-child {

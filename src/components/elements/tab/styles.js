@@ -40,7 +40,7 @@ export const TabLink = styled.div`
   padding: 10px;
   flex: 1 1 50%;
   background-color: ${(props) => props.theme.pageBackground};
-  color: #77998e;
+  color: ${(props) => props.theme.pageForeground};;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@ export const TabLink = styled.div`
   }
   &.active {
     background-color: rgb(255, 255, 255);
-    color: rgb(119, 153, 142);
+    color: ${(props) => props.theme.pageForeground};;
     box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
     font-weight: 600;
     font-size: 16px;

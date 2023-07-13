@@ -6,6 +6,12 @@ export const Table = styled.table`
   margin: 0 auto;
   font-family: Arial, sans-serif;
   margin-bottom: auto;
+  th {
+    background-color: ${(props) => props.theme.pageBackground};
+  }
+  tr:hover {
+    background-color: ${(props) => props.theme.pageBackground};;
+  }
   &.auto {
     width: auto;
   }
@@ -21,7 +27,6 @@ export const DataLayout = styled.div`
 export const Th = styled.th`
   text-align: left;
   padding: 15px 8px 10px;
-  background-color: #ddedeb;
   white-space: nowrap;
   color: #444;
   font-weight: bolder;

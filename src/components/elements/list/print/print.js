@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header, Overlay, Page } from "./../manage/styles";
 import { GetIcon } from "../../../../icons";
 import { CloseButton } from "../popup/styles";
@@ -6,12 +6,18 @@ import { Footer } from "../create/styles";
 import { DataLayout, Table, Td, Th, Tr } from "./styles";
 import { getValue } from "../functions";
 
-const Print = ({ themeColors, attributes, setLoaderBox, setMessage, closeModal, shortName, data = [] }) => {
-  //   const titleValue = (itemTitle.collection?.length > 0 ? subAttributes?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : subAttributes?.data?.[itemTitle.name]) || "Please update the itemTitle.";
-  //   const viewMode = subAttributes.item.type ?? "subList";
-  //   const handlePrint = () => {
-  //     window.print();
-  //   };
+const Print = ({ key, style, themeColors, attributes, setLoaderBox, setMessage, closeModal, shortName, data = [] }) => {
+  // const titleValue = (itemTitle.collection?.length > 0 ? subAttributes?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : subAttributes?.data?.[itemTitle.name]) || "Please update the itemTitle.";
+  // const viewMode = subAttributes.item.type ?? "subList";
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+      console.log(isLoaded);
+      // window.print();
+    }
+  }, [isLoaded]); // Empty dependency array ensures the effect runs only once
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     return (
       <Tr key={`${shortName}-${slNo}`}>
@@ -32,7 +38,7 @@ const Print = ({ themeColors, attributes, setLoaderBox, setMessage, closeModal, 
     );
   };
   return (
-    <Overlay>
+    <Overlay key={key} style={style}>
       <Page className={"medium"}>
         <Header>
           <span>{`${shortName}`}</span>
@@ -41,7 +47,7 @@ const Print = ({ themeColors, attributes, setLoaderBox, setMessage, closeModal, 
           </CloseButton>
         </Header>
         <DataLayout>
-          <Table>
+          <Table theme={themeColors}>
             <thead>
               <Tr>
                 {attributes.map((attribute) => {

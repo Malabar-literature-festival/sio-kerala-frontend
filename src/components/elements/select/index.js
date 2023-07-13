@@ -205,7 +205,7 @@ function CustomSelect(props) {
         <ul key={0} className="options">
           <li
             onClick={() => {
-              fetchData();
+              fetchData(props.updateValue, true, props.updateOn);
             }}
           >
             Refresh

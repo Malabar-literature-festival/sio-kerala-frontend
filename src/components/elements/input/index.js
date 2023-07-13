@@ -22,7 +22,6 @@ function FormInput(props) {
     // Render a regular text input
     case "text":
     case "password":
-    case "number":
     case "email":
       return (
         <InputContainer className={`${props.dynamicClass ?? ""}`} animation={props.animation}>
@@ -37,6 +36,23 @@ function FormInput(props) {
             </Label>
           )}
           <Input disabled={props.disabled ?? false} autoComplete="on" theme={themeColors} className={`input ${props.value.toString().length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type, props.sub)} />
+          {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
+        </InputContainer>
+      );
+    case "number":
+      return (
+        <InputContainer className={`${props.dynamicClass ?? ""}`} animation={props.animation}>
+          {props.error?.length ? (
+            <Label theme={themeColors} className={`${!props.value.toString().length > 0 ? "error shrink" : "error"}`}>
+              {props.error}
+            </Label>
+          ) : (
+            <Label theme={themeColors} className={`${!props.value.toString().length > 0 ? "shrink" : ""}`}>
+              <TickIcon />
+              {`${t(props.label)}${props.required ? " *" : ""}`}
+            </Label>
+          )}
+          <Input min={0} disabled={props.disabled ?? false} autoComplete="on" theme={themeColors} className={`input ${props.value.toString().length > 0 ? "shrink" : ""}`} placeholder={`${t(props.placeholder)}${props.required ? " *" : ""}`} type={props.type} value={props.value} onChange={(event) => props.onChange(event, props.id, props.type, props.sub)} />
           {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
         </InputContainer>
       );

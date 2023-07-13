@@ -777,7 +777,6 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       ) : (
         <Count>{`No records found`}</Count>
       )}
-
       {isCreating && (
         <CrudForm
           formMode={formMode}
@@ -799,7 +798,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       {showLoader && <Loader></Loader>}
       {isOpen && <Popup formMode={formMode} closeModal={closeModal} themeColors={themeColors} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} openData={openData}></Popup>}
       {showSublist && subAttributes?.item?.attributes?.length > 0 && <SubPage themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} itemTitle={itemTitle} subAttributes={subAttributes}></SubPage>}
-      {isPrint && <Print data={printData} themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} shortName={shortName} attributes={attributes}></Print>}
+      {isPrint && <Print key={shortName} data={printData} themeColors={themeColors} formMode={formMode} closeModal={closeModal} setMessage={setMessage} setLoaderBox={setLoaderBox} shortName={shortName} attributes={attributes}></Print>}
     </RowContainer>
   ) : (
     <RowContainer>

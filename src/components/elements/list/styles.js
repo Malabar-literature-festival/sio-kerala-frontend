@@ -56,7 +56,7 @@ export const Tr = styled.div`
     }
   }
   &:hover h4 {
-    color: ${(props) => props.theme.themeBackground};
+    color: ${(props) => props.theme.themeForegound};
   }
   flex-direction: column;
   /* padding: 5px 26px; */
@@ -255,7 +255,7 @@ export const DataItem = styled.span`
   }
 `;
 export const Button = styled.button`
-  color: #fff;
+  color: ${(props) => props.theme.pageForeground};
   border: none;
   padding: 6px 12px;
   margin-right: 8px;
@@ -274,10 +274,11 @@ export const Button = styled.button`
     margin-bottom: 0px;
   }
   &.edit {
-    background-color: ${(props) => props.theme.themeBackground};
+    background-color: ${(props) => props.theme.pageBackground};
   }
   &.delete {
     background-color: red;
+    color:white;
   }
   &:hover {
     transform: scale(1.1);

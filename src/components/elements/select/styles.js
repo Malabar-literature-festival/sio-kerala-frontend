@@ -122,7 +122,7 @@ export const SelectBox = styled.div`
     transition: all 1s ease-out 0s;
   }
   .options li.true {
-    background: #ddedeb;
+    background: ${(props) => props.theme.pageBackground};
     color: #0f0f0f;
     font-weight: bold;
     border-bottom: 1px solid rgb(224, 224, 227);
@@ -142,7 +142,7 @@ export const SelectBox = styled.div`
     border-bottom: 0px solid rgb(224, 224, 227);
   }
   .options li:hover {
-    background: #ddedeb;
+    background: ${(props) => props.theme.pageBackground};
     color: #0f0f0f;
   }
 `;
