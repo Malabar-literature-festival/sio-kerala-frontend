@@ -199,9 +199,9 @@ export const DatetimeInput = styled(DatePicker)`
   }
 `;
 export const Button = styled.button`
-  background: ${(props) => props.theme.themeBackground};
+  background: ${(props) => props.theme.backgroundInvert};
   border-radius: 12px;
-  color: ${(props) => props.theme.themeForeground};
+  color: ${(props) => props.theme.foregroundInvert};
   transition: all 0.5s ease;
   margin-top: 10px;
   max-width: 400px;

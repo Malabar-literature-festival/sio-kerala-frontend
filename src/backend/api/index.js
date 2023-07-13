@@ -96,7 +96,7 @@ const putData = async (fields, ulr, dispatch, navigate) => {
       resolve({ status: response.status, data: response.data });
     } catch (error) {
       resolve({
-        status: error.response.status,
+        status: error.response?.status,
         data: error.response?.data?.message,
       });
     }
@@ -128,8 +128,8 @@ const getData = async (fields, ulr, dispatch, navigate) => {
       }
       resolve({ status: response.status, data: response.data });
     } catch (error) {
-      if (error.response.status) {
-        if (error.response.status === 440) {
+      if (error.response?.status) {
+        if (error.response?.status === 440) {
           try {
             localStorage.removeItem("user");
             navigate("/");
@@ -140,7 +140,7 @@ const getData = async (fields, ulr, dispatch, navigate) => {
         }
       }
       resolve({
-        status: error.response.status,
+        status: error.response?.status,
         data: error.response?.data?.message,
       });
     }
