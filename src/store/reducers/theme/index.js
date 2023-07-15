@@ -6,22 +6,23 @@ const themColor =
   localStorage.getItem("_theme") !== null
     ? JSON.parse(localStorage.getItem("_menu"))
     : {
-      pageBackground:'rgb(235, 244, 235)',
+      pageBackground:'#EAEAEA;',
       background: 'white',
       foreground: '#4f4f4f',
       border: '#d9d9d9',
-      secBackground: 'rgb(235, 244, 235)',
+      secBackground: 'rgb(243, 243, 243)',
       secForeground: 'black',
       lightBackground: 'White',
       lightForeground: 'Black',
       lightBorder: 'Black',
       lightSecBackground: 'White',
-      lightSecForeground: "#1381c5",
+      lightSecForeground: "#969696",
       foregroundInvert:'white',
+      backgroundInvert:'#969696;',
       borderThinkness:'0px',
-      themeBackground:'#7C9D45',
-      themeForeground:'white',
-      disabledBackground:'#77998e69',
+      themeBackground:'#FFFFFF',
+      themeForeground:'black',
+      disabledBackground:'rgba(156, 156, 156, 0.41)',
       disabledForeground:'white',
       };
 

@@ -64,6 +64,7 @@ import FoodGroup from "../../private/pages/mealSettings/foodGroup/foodGroup";
 import FoodPackage from "../../private/pages/mealSettings/foodPackage/foodPackage";
 import FoodGroupItems from "../../private/pages/mealSettings/foodGroupItems/foodGroupItems";
 import Nationality from "../../private/pages/registrationSettings/nationality";
+import FoodMenu from "../../private/pages/mealSettings/foodMenu";
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -73,407 +74,88 @@ import Nationality from "../../private/pages/registrationSettings/nationality";
  * @param {boolean} updatePrivilege - Flag indicating whether the user has update privilege.
  * @returns {JSX.Element} - The JSX element representing the rendered page.
  */
-const Switch = ({
-  page,
-  key,
-  addPrivilege = false,
-  delPrivilege = false,
-  updatePrivilege = false,
-  exportPrivilege = false,
-}) => {
+const Switch = ({ page, key, addPrivilege = false, delPrivilege = false, updatePrivilege = false, exportPrivilege = false }) => {
   switch (page) {
     case "login":
       return <Login key={key} />;
     case "menu":
-      return (
-        <Menu
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Menu key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "franchise":
-      return (
-        <Franchise
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Franchise key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "recepe":
-      return (
-        <Meal
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Meal key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "user-role":
-      return (
-        <UserType
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <UserType key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "user-list":
-      return (
-        <UserList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <UserList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "delivery-slot":
-      return (
-        <DeliverySlot
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <DeliverySlot key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "protein-category":
-      return (
-        <ProteinCategory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <ProteinCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "delivery-instruction":
-      return (
-        <DeliveryInstruction
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <DeliveryInstruction key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "type-of-diet":
-      return (
-        <TypeOfDiet
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <TypeOfDiet key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "order-status":
-      return (
-        <OrderStatus
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <OrderStatus key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "mealtime-category":
-      return (
-        <MealTimeCategory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <MealTimeCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "meal-tag":
-      return (
-        <MealTag
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <MealTag key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "variant-group":
-      return (
-        <VariantGroup
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <VariantGroup key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "variant-level":
-      return (
-        <VaraiantLevel
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <VaraiantLevel key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "day-of-week":
-      return (
-        <DayOfWeek
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <DayOfWeek key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "aimof-program":
-      return (
-        <AimOfProgram
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AimOfProgram key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "medical-condition":
-      return (
-        <MedicalCondition
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <MedicalCondition key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "foodlike-list":
-      return (
-        <FoodlikeList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <FoodlikeList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "fooddislike-list":
-      return (
-        <FoodDislikeList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <FoodDislikeList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "addiction-list":
-      return (
-        <AddictionList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AddictionList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "weekly-meal-plan":
-      return (
-        <WeeklyMealPlan
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <WeeklyMealPlan key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "redeem-coupon":
-      return (
-        <RedeemCoupen
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <RedeemCoupen key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "patient":
-      return (
-        <Patient
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Patient key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "Cuisine-Category":
-      return (
-        <CuisineCategory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <CuisineCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "medication-list":
-      return (
-        <MedicationList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <MedicationList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "activeness-Status":
-      return (
-        <ActivenessStatus
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <ActivenessStatus key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "package-management":
-      return (
-        <PackageManagement
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <PackageManagement key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "discount-type":
-      return (
-        <DiscountTypeName
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <DiscountTypeName key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "supplement":
-      return (
-        <Supplement
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Supplement key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "banner":
-      return (
-        <Banner
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Banner key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "delivery-status":
-      return (
-        <DeliveryStatus
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <DeliveryStatus key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "banner-type":
-      return (
-        <BannerType
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <BannerType key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "meal-ingredient":
-      return (
-        <MealIngredient
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <MealIngredient key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "recipe-ingredient":
-      return (
-        <Ingredient
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Ingredient key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "dietitian":
-      return (
-        <Dietitian
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Dietitian key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "delivery-man":
-      return (
-        <Deliveryman
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Deliveryman key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "add-meal":
-      return (
-        <AddMeal
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AddMeal key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "vehicle-category":
-      return (
-        <VehicleCategory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <VehicleCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "admission-record":
-      return (
-        <AdmissionRecord
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AdmissionRecord key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     // case "add-variant":
     //   return (
     //     <AddVariant
@@ -484,226 +166,52 @@ const Switch = ({
     //     />
     //   );
     case "appointment":
-      return (
-        <AppointmentHistory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AppointmentHistory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "active-appointment":
-      return (
-        <ActiveAppointment
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <ActiveAppointment key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "order-list":
-      return (
-        <OrderList
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <OrderList key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "today-order":
-      return (
-        <TodayOrder
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <TodayOrder key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "admission-history":
-      return (
-        <AdmissionHistory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <AdmissionHistory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "dashboard":
-      return (
-        <Dashboard
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Dashboard key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "blog":
-      return (
-        <Blog
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Blog key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "subscriber":
-      return (
-        <Subscriber
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Subscriber key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "blog-category":
-      return (
-        <BlogCategory
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <BlogCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "notification":
-      return (
-        <Notification
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Notification key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
 
     case "social-media":
-      return (
-        <SocialMedia
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <SocialMedia key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "active-admission":
-      return (
-        <ActiveAdmission
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <ActiveAdmission key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "page-settings":
-      return (
-        <PageSettings
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <PageSettings key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "weekly-meal-plan-entry":
-      return (
-        <WeeklyMealPlanEntry
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <WeeklyMealPlanEntry key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "admin":
-      return (
-        <Admin
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Admin key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "students":
-      return (
-        <Student
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Student key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "faq":
-      return (
-        <Faq
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Faq key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "tomorrow-order":
-      return (
-        <TomorrowOrder
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <TomorrowOrder key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "food-group":
-      return (
-        <FoodGroup
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <FoodGroup key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "food-package":
-      return (
-        <FoodPackage
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <FoodPackage key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "food-group-items":
-      return (
-        <FoodGroupItems
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <FoodGroupItems key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "nationality":
-      return (
-        <Nationality
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
+      return <Nationality key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
+    case "food-menu":
+      return <FoodMenu key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     default:
       return <Page404 key={key}></Page404>;
   }
