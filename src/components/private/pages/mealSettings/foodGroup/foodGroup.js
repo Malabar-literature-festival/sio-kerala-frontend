@@ -4,10 +4,13 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
+
+// FOOD GROUP IS A MEAL //
+
 const FoodGroup = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Food Group - Diet Food Management Portal`;
+    document.title = `Meal - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
@@ -180,7 +183,7 @@ const FoodGroup = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "packageName", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Food Group`}
+        shortName={`Meal`}
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

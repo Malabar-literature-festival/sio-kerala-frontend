@@ -9,17 +9,18 @@ const AdmissionRecord = (props) => {
   }, []);
 
   const [attributes] = useState([
+    // TYPE OF DIET IS A DIET //
     {
       type: "select",
       apiType: "API",
       selectApi: "type-of-diet/select",
-      placeholder: "Type of Diet",
+      placeholder: "Diet",
       name: "typeOfDiet",
       validation: "",
       showItem: "role",
       default: "",
       tag: true,
-      label: "Type of Diet",
+      label: "Diet",
       required: true,
       view: false,
       add: true,
@@ -28,13 +29,13 @@ const AdmissionRecord = (props) => {
     },
     {
       type: "text",
-      placeholder: "Type of Diet",
+      placeholder: "Diet",
       name: "typeOfDiet",
       showItem: "typeOfDietName",
       validation: "",
       default: "",
       tag: true,
-      label: "Type of Diet",
+      label: "Diet",
       required: false,
       view: true,
       add: false,

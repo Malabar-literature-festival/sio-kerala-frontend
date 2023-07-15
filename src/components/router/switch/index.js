@@ -104,6 +104,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    // MEAL IS A RECIPE //
     case "recepe":
       return (
         <Meal
@@ -164,6 +165,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    // TYPE OF DIET IS A DIET //
     case "type-of-diet":
       return (
         <TypeOfDiet
@@ -664,6 +666,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    // FOOD GROUP IS A MEAL //
     case "food-group":
       return (
         <FoodGroup
