@@ -13,7 +13,7 @@ const MealTag = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Meat Tag Name",
+      placeholder: "Meal Tag Name",
       name: "mealTagName",
       validation: "",
       default: "",

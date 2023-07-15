@@ -65,13 +65,13 @@ const FoodGroupItems = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "meal-variant/select",
-      placeholder: "Meal Variant",
+      placeholder: "Recipe Variant",
       name: "mealVariant",
       validation: "",
       showItem: "variantGroupName",
       default: "",
       tag: true,
-      label: "Meal Variant",
+      label: "Recipe Variant",
       required: true,
       view: true,
       add: true,
@@ -123,7 +123,7 @@ const FoodGroupItems = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "mealName", type: "text", collection: "meal" }}
         // Short name or label for the menu
-        shortName={`Food Group Items`}
+        shortName={`Recipe Items`}
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

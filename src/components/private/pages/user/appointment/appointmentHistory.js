@@ -824,6 +824,7 @@ const AppointmentHistory = (props) => {
   ]);
 
   const [addMeal] = useState([
+    // MEAL IS A RECIPE //
     {
       type: "date",
       placeholder: "Order Date",
@@ -943,13 +944,13 @@ const AppointmentHistory = (props) => {
           collection: "",
         },
       ],
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "meal",
       validation: "",
       showItem: "mealName",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: true,
       add: true,
@@ -961,13 +962,13 @@ const AppointmentHistory = (props) => {
       apiType: "API",
       selectApi: "meal-variant/get-mealvariant-meals",
       updateOn: "meal",
-      placeholder: "Meal Variant",
+      placeholder: "Recipe Variant",
       name: "variantGroup",
       validation: "",
       showItem: "variantGroup",
       default: "",
       tag: true,
-      label: "Meal Variant",
+      label: "Recipe Variant",
       required: true,
       view: true,
       add: true,
@@ -1201,6 +1202,7 @@ const AppointmentHistory = (props) => {
         formMode: "double",
       },
     },
+    // MEAL IS A RECIPE //
     {
       element: "button",
       type: "subList",
@@ -1211,7 +1213,7 @@ const AppointmentHistory = (props) => {
         type: "text",
         collection: "meal",
       },
-      title: "Meals",
+      title: "Recipe",
       attributes: addMeal,
       params: {
         api: `weekly-meal-plan-entry`,
@@ -1222,7 +1224,7 @@ const AppointmentHistory = (props) => {
           type: "text",
           collection: "meal",
         },
-        shortName: "Meals",
+        shortName: "Recipe",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
