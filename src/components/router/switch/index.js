@@ -82,6 +82,16 @@ const Switch = ({ page, key, addPrivilege = false, delPrivilege = false, updateP
       return <Menu key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "franchise":
       return <Franchise key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
+    // return (
+    //   <Franchise
+    //     key={key}
+    //     exportPrivilege={exportPrivilege}
+    //     addPrivilege={addPrivilege}
+    //     delPrivilege={delPrivilege}
+    //     updatePrivilege={updatePrivilege}
+    //   />
+    // );
+    // MEAL IS A RECIPE //
     case "recepe":
       return <Meal key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "user-role":
@@ -94,6 +104,16 @@ const Switch = ({ page, key, addPrivilege = false, delPrivilege = false, updateP
       return <ProteinCategory key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "delivery-instruction":
       return <DeliveryInstruction key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
+    // return (
+    //   <DeliveryInstruction
+    //     key={key}
+    //     exportPrivilege={exportPrivilege}
+    //     addPrivilege={addPrivilege}
+    //     delPrivilege={delPrivilege}
+    //     updatePrivilege={updatePrivilege}
+    //   />
+    // );
+    // TYPE OF DIET IS A DIET //
     case "type-of-diet":
       return <TypeOfDiet key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "order-status":
@@ -202,6 +222,16 @@ const Switch = ({ page, key, addPrivilege = false, delPrivilege = false, updateP
       return <Faq key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "tomorrow-order":
       return <TomorrowOrder key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
+    // return (
+    //   <TomorrowOrder
+    //     key={key}
+    //     exportPrivilege={exportPrivilege}
+    //     addPrivilege={addPrivilege}
+    //     delPrivilege={delPrivilege}
+    //     updatePrivilege={updatePrivilege}
+    //   />
+    // );
+    // FOOD GROUP IS A MEAL //
     case "food-group":
       return <FoodGroup key={key} exportPrivilege={exportPrivilege} addPrivilege={addPrivilege} delPrivilege={delPrivilege} updatePrivilege={updatePrivilege} />;
     case "food-package":

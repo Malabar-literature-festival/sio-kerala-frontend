@@ -7,17 +7,17 @@ import { Container } from "../../../common/layout/styels";
 const AddMeal = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Meal - Diet Food Management Portal`;
+    document.title = `Recipe - Diet Food Management Portal`;
   }, []);
 
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "mealName",
       validation: "",
       default: "",
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: true,
       add: true,
@@ -87,13 +87,13 @@ const AddMeal = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "mealtime-category/select",
-      placeholder: "Meal Time Category",
+      placeholder: "Recipe Time Category",
       name: "mealTimeCategory",
       validation: "",
       showItem: "mealtimeCategoriesName",
       default: "",
       tag: true,
-      label: "Meal Time Category",
+      label: "Recipe Time Category",
       required: true,
       view: true,
       add: true,
@@ -104,13 +104,13 @@ const AddMeal = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "meal-tag/select",
-      placeholder: "Meal Tag",
+      placeholder: "Recipe Tag",
       name: "mealTag",
       validation: "",
       showItem: "mealTagName",
       default: "",
       tag: true,
-      label: "Meal Tag",
+      label: "Recipe Tag",
       required: true,
       view: true,
       add: true,
@@ -136,12 +136,12 @@ const AddMeal = (props) => {
     // },
     {
       type: "image",
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "mealPhoto",
       validation: "",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: false,
       view: true,
       add: true,
@@ -166,13 +166,13 @@ const AddMeal = (props) => {
     //   type: "select",
     //   apiType: "API",
     //   selectApi: "meal/select",
-    //   placeholder: "Meal",
+    //   placeholder: "Recipe",
     //   name: "mealName",
     //   validation: "",
     //   showItem: "mealName",
     //   default: "",
     //   tag: true,
-    //   label: "Meal",
+    //   label: "Recipe",
     //   required: true,
     //   view: true,
     //   add: false,
@@ -215,12 +215,12 @@ const AddMeal = (props) => {
     },
     {
       type: "text",
-      placeholder: "Meal Price",
+      placeholder: "Recipe Price",
       name: "mealPrice",
       validation: "",
       default: "",
       tag: true,
-      label: "Meal Price",
+      label: "Recipe Price",
       required: true,
       view: true,
       add: true,
@@ -228,12 +228,12 @@ const AddMeal = (props) => {
     },
     {
       type: "text",
-      placeholder: "Meal OfferPrice",
+      placeholder: "Recipe OfferPrice",
       name: "mealOfferPrice",
       validation: "",
       default: "",
       tag: true,
-      label: "Meal OfferPrice",
+      label: "Recipe OfferPrice",
       required: true,
       view: true,
       add: true,
@@ -259,13 +259,13 @@ const AddMeal = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "meal/select",
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "meal",
       validation: "",
       showItem: "mealName",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: false,
       add: false,
@@ -311,13 +311,13 @@ const AddMeal = (props) => {
       type: "subList",
       id: "meal-variant",
       itemTitle: { name: "mealName", type: "text", collection: "meal" },
-      title: "Meal Variant",
+      title: "Recipe Variant",
       attributes: addVariant,
       params: {
         api: `meal-variant`,
         parentReference: "meal",
         itemTitle: { name: "mealName", type: "text", collection: "meal" },
-        shortName: "Meal Variant",
+        shortName: "Recipe Variant",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
@@ -330,13 +330,13 @@ const AddMeal = (props) => {
       type: "subList",
       id: "meal-ingredients",
       itemTitle: { name: "mealName", type: "text", collection: "meal" },
-      title: "Meal Ingredient",
+      title: "Recipe Ingredient",
       attributes: mealIngredient,
       params: {
         api: `meal-ingredients`,
         parentReference: "meal",
         itemTitle: { name: "mealName", type: "text", collection: "meal" },
-        shortName: "Meal Ingredient",
+        shortName: "Recipe Ingredient",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
@@ -352,9 +352,9 @@ const AddMeal = (props) => {
       <ListTable
         actions={actions}
         api={`meal`}
-        // itemTitle={`Meal`}
+        // itemTitle={`Recipe`}
         itemTitle={{ name: "mealName", type: "text", collection: "" }}
-        shortName={`Meal`}
+        shortName={`Recipe`}
         // formMode={`single`}
         formMode={`double`}
         //

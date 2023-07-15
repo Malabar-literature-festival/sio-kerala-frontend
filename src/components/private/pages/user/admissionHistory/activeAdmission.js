@@ -658,35 +658,38 @@ const ActiveAdmission = (props) => {
   ]);
 
   const [patientDiet] = useState([
+    // TYPE OF DIET IS A DIET //
     {
       type: "select",
       apiType: "API",
       selectApi: "type-of-diet/select",
-      placeholder: "Type of Diet",
+      placeholder: "Diet",
       name: "typeOfDiet",
       validation: "",
       showItem: "typeOfDietName",
       default: "",
       tag: true,
-      label: "Type of Diet",
+      label: "Diet",
       required: true,
       view: true,
       add: true,
       update: true,
       filter: false,
     },
+    // TYPE OF DIET IS A DIET //
+    // DIET PLAN IS A SUB DIET //
     {
       type: "select",
       apiType: "API",
       selectApi: "diet-plan/get-typeofdiet-dietplan",
       updateOn: "typeOfDiet",
-      placeholder: "Diet Plan",
+      placeholder: "Sub Diet",
       name: "dietPlan",
       validation: "",
       showItem: "dietPlan",
       default: "",
       tag: true,
-      label: "Diet Plan",
+      label: "Sub Diet",
       required: true,
       view: true,
       add: true,
@@ -1169,6 +1172,7 @@ const ActiveAdmission = (props) => {
         formMode: "double",
       },
     },
+    // TYPE OF DIET IS A DIET //
     {
       element: "button",
       type: "subList",
