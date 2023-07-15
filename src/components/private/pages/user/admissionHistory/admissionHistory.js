@@ -655,35 +655,38 @@ const AdmissionHistory = (props) => {
   ]);
 
   const [patientDiet] = useState([
+    // TYPE OF DIET IS A DIET //
     {
       type: "select",
       apiType: "API",
       selectApi: "type-of-diet/select",
-      placeholder: "Type of Diet",
+      placeholder: "Diet",
       name: "typeOfDiet",
       validation: "",
       showItem: "typeOfDietName",
       default: "",
       tag: true,
-      label: "Type of Diet",
+      label: "Diet",
       required: true,
       view: true,
       add: true,
       update: true,
       filter: false,
     },
+    // TYPE OF DIET IS A DIET //
+    // DIET PLAN IS A SUB DIET //
     {
       type: "select",
       apiType: "API",
       selectApi: "diet-plan/get-typeofdiet-dietplan",
       updateOn: "typeOfDiet",
-      placeholder: "Diet Plan",
+      placeholder: "Sub Diet",
       name: "dietPlan",
       validation: "",
       showItem: "dietPlan",
       default: "",
       tag: true,
-      label: "Diet Plan",
+      label: "Sub Diet",
       required: true,
       view: true,
       add: true,
@@ -824,6 +827,7 @@ const AdmissionHistory = (props) => {
   ]);
 
   const [addMeal] = useState([
+    //MEAL IS A RECIPE//
     {
       type: "date",
       placeholder: "Order Date",
@@ -926,13 +930,13 @@ const AdmissionHistory = (props) => {
           collection: "",
         },
       ],
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "meal",
       validation: "",
       showItem: "mealName",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: true,
       add: true,
@@ -944,13 +948,13 @@ const AdmissionHistory = (props) => {
       apiType: "API",
       selectApi: "meal-variant/get-mealvariant-meals",
       updateOn: "meal",
-      placeholder: "Meal Variant",
+      placeholder: "Recipe Variant",
       name: "variantGroup",
       validation: "",
       showItem: "variantGroup",
       default: "",
       tag: true,
-      label: "Meal Variant",
+      label: "Recipe Variant",
       required: true,
       view: true,
       add: true,
@@ -1154,6 +1158,7 @@ const AdmissionHistory = (props) => {
         formMode: "double",
       },
     },
+    // TYPE OF DIET IS A DIET //
     {
       element: "button",
       type: "subList",
@@ -1183,6 +1188,7 @@ const AdmissionHistory = (props) => {
         formMode: "double",
       },
     },
+    // MEAL IS A RECIPE //
     {
       element: "button",
       type: "subList",
@@ -1193,7 +1199,7 @@ const AdmissionHistory = (props) => {
         type: "text",
         collection: "meal",
       },
-      title: "Meals",
+      title: "Recipe",
       attributes: addMeal,
       params: {
         api: `weekly-meal-plan-entry`,
@@ -1204,7 +1210,7 @@ const AdmissionHistory = (props) => {
           type: "text",
           collection: "meal",
         },
-        shortName: "Meals",
+        shortName: "Recipe",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
