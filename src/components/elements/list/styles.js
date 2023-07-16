@@ -51,9 +51,9 @@ export const Tr = styled.div`
   padding: 10px;
   background-color: ${(props) => props.theme.background};
   && {
-    .popup-child & {
+    /* .popup-child & {
       box-shadow: rgb(167 167 167 / 26%) 0px 0px 12px 0px;
-    }
+    } */
   }
   &:hover h4 {
     color: ${(props) => props.theme.themeForegound};
@@ -350,10 +350,10 @@ export const AddButton = styled.button`
   outline: none;
   cursor: pointer;
   && {
-    .popup-child & {
+    /* .popup-child & {
       color: ${(props) => props.theme.secForeground};
       background: ${(props) => props.theme.secBackground};
-    }
+    } */
   }
   &:hover {
     color: ${(props) => props.theme.bgPrimary};
@@ -388,10 +388,10 @@ export const Filter = styled.button`
     color: ${(props) => props.theme.bgPrimary};
   }
   && {
-    .popup-child & {
+    /* .popup-child & {
       color: ${(props) => props.theme.secForeground};
       background: ${(props) => props.theme.secBackground};
-    }
+    } */
   }
 `;
 export const Filters = styled.div`

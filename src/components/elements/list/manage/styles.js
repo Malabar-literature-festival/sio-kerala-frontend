@@ -43,7 +43,6 @@ export const Page = styled.div`
   display: flex;
   flex-direction: column;
   display: flex;
-  background-color: white;
   border-radius: 10px;
   width: 30%;
   min-width: 250px;
@@ -52,7 +51,8 @@ export const Page = styled.div`
   animation: ${fadeIn} 1s ease-in-out;
   animation-duration: 0.2s;
   margin: 5vh auto auto auto;
-  padding: 1em 0;
+  padding: 0em 0;
+  background-color:white;
   &.medium {
     width: 70%;
     min-width: 250px;

@@ -93,10 +93,16 @@ export const RowContainer = styled.div`
   flex-direction: column;
   flex: 1 1 100%;
   margin-bottom: auto;
+  background-color: ${(props) => props.theme.pageBackground};
   &.content {
     flex: 1 1 calc(100% - 15em);
     max-width: calc(100% - 15em);
     height: 100vh;
+  }
+  &.popup-data {
+    overflow: auto;
+    padding:1em 0;
+    border-radius:12px;
   }
   &.marginright {
     margin-right: 15px;

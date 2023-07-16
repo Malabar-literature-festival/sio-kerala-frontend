@@ -2,31 +2,18 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
+import { useSelector } from "react-redux";
+import PopupView from "../../../../elements/popupview";
+import SetupMenu from "./setupMenu";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const FoodMenu = (props) => {
+  const themeColors = useSelector((state) => state.themeColors);
   //to update the page title
   useEffect(() => {
     document.title = `Food Menu - Diet Food Management Portal`;
   }, []);
-  // title: {
-  //     type: String,
-  //   },
-  //   dietCategory: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "DietCategory",
-  //   },
-  //   menuType: {
-  //     type: String,
-  //     enum: ["Breakfast", "Lunch", "Dinner"],
-  //   },
-  //   franchise: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Franchise",
-  //   },
-  //   enable: {
-  //     type: Boolean,
-  //   },
+  
   const [attributes] = useState([
     {
       type: "text",
@@ -68,7 +55,7 @@ const FoodMenu = (props) => {
       view: true,
       add: true,
       update: true,
-      apiType:'CSV',
+      apiType: "CSV",
       selectApi: "Fixed,Optional,Dynamic",
     },
     {
@@ -145,19 +132,27 @@ const FoodMenu = (props) => {
       filter: false,
     },
   ]);
-
+  const [menuSetup, setMenuSetup] = useState(false);
+  const [openData, setOpenData] = useState(null);
+  const closeModal = () => {
+    setMenuSetup(false);
+    setOpenData(null);
+  };
   const [actions] = useState([
     {
       element: "button",
       type: "callback",
-      callback: ()=>{alert("yes")},
+      callback: (item, data) => {
+        setOpenData({ item, data });
+        setMenuSetup(true);
+      },
       // itemTitle: "username",
       itemTitle: {
         name: "mealName",
         type: "text",
         collection: "meal",
       },
-      title: "Food Group Items",
+      title: "Setup Menu",
       attributes: foodGroupItem,
       params: {
         api: `food-group-item`,
@@ -198,6 +193,7 @@ const FoodMenu = (props) => {
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
+      {menuSetup && openData && <PopupView popupData={<SetupMenu openData={openData}></SetupMenu>} themeColors={themeColors} closeModal={closeModal} itemTitle={{ name: "title", type: "text", collection: "" }} openData={openData} customClass={"medium"}></PopupView>}
     </Container>
   );
 };
