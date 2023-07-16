@@ -4,6 +4,9 @@ import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
+
+// TYPE OF DIET IS A DIET //
+
 const TypeOfDiet = (props) => {
   //to update the page title
   useEffect(() => {
@@ -15,7 +18,7 @@ const TypeOfDiet = (props) => {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
-      placeholder: "Type Of Diet",
+      placeholder: "Diet",
       // Name of the input field
       name: "typeOfDietName",
       // Validation rules for the input
@@ -23,7 +26,7 @@ const TypeOfDiet = (props) => {
       // Default value for the input field
       default: "",
       // Label text for the input field
-      label: "Type Of Diet",
+      label: "Diet",
       // Indicates if the input field is required
       required: true,
       // Indicates if the input field should be displayed in the view mode
@@ -121,17 +124,18 @@ const TypeOfDiet = (props) => {
   //   },
   // ]);
   const [dietPlan] = useState([
+    // DIET PLAN IS A SUB DIET //
     {
       type: "text",
       apiType: "",
       selectApi: "",
-      placeholder: "Diet Plan",
+      placeholder: "Sub Diet",
       name: "dietPlan",
       validation: "",
       showItem: "",
       default: "",
       tag: true,
-      label: "Diet Plan",
+      label: "Sub Diet",
       required: false,
       view: true,
       add: true,
@@ -139,26 +143,27 @@ const TypeOfDiet = (props) => {
       filter: false,
     },
 
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "type-of-diet/select",
-      placeholder: "Type of Diet",
-      name: "dietPlanCategory",
-      validation: "",
-      showItem: "typeOfDietName",
-      default: "",
-      tag: true,
-      label: "Type of Diet",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
+    // {
+    //   type: "select",
+    //   apiType: "API",
+    //   selectApi: "type-of-diet/select",
+    //   placeholder: "Type of Diet",
+    //   name: "dietPlanCategory",
+    //   validation: "",
+    //   showItem: "typeOfDietName",
+    //   default: "",
+    //   tag: true,
+    //   label: "Type of Diet",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    //   filter: false,
+    // },
   ]);
 
   const [actions] = useState([
+    // DIET PLAN IS A SUB DIET //
     {
       element: "button",
       type: "subList",
@@ -169,7 +174,7 @@ const TypeOfDiet = (props) => {
         type: "text",
         collection: "dietPlan",
       },
-      title: "Diet Plan",
+      title: "Sub Diet",
       attributes: dietPlan,
       params: {
         api: `diet-plan`,
@@ -180,7 +185,7 @@ const TypeOfDiet = (props) => {
           type: "text",
           collection: "",
         },
-        shortName: "Diet Plan",
+        shortName: "Sub Diet",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
@@ -202,9 +207,10 @@ const TypeOfDiet = (props) => {
         displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
+        // TYPE OF DIET IS A DIET //
         itemTitle={{ name: "typeOfDietName", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Type Of Diet`}
+        shortName={`Diet`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu

@@ -75,6 +75,7 @@ const OrderList = (props) => {
       update: true,
       filter: true,
     },
+    //MEAL IS A RECIPE//
     {
       type: "select",
       apiType: "API",
@@ -95,13 +96,13 @@ const OrderList = (props) => {
           collection: "",
         },
       ],
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "meal",
       validation: "",
       showItem: "mealName",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: true,
       add: true,

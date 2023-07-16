@@ -74,6 +74,7 @@ const FoodMenu = (props) => {
   ]);
 
   const [foodGroupItem] = useState([
+    //MEAL IS A RECIPE//
     {
       type: "select",
       apiType: "API",
@@ -84,13 +85,13 @@ const FoodMenu = (props) => {
         { type: "text", item: "proteinCategoriesName", title: "Protein Category", collection: "proteinCategory" },
         { type: "text", item: "mealDescription", title: "Description", collection: "" },
       ],
-      placeholder: "Meal",
+      placeholder: "Recipe",
       name: "meal",
       validation: "",
       showItem: "mealName",
       default: "",
       tag: true,
-      label: "Meal",
+      label: "Recipe",
       required: true,
       view: true,
       add: true,
@@ -101,13 +102,13 @@ const FoodMenu = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "meal-variant/select",
-      placeholder: "Meal Variant",
+      placeholder: "Recipe Variant",
       name: "mealVariant",
       validation: "",
       showItem: "mealPrice",
       default: "",
       tag: true,
-      label: "Meal Variant",
+      label: "Recipe Variant",
       required: true,
       view: true,
       add: true,
@@ -146,7 +147,6 @@ const FoodMenu = (props) => {
         setOpenData({ item, data });
         setMenuSetup(true);
       },
-      // itemTitle: "username",
       itemTitle: {
         name: "mealName",
         type: "text",
@@ -163,7 +163,7 @@ const FoodMenu = (props) => {
           type: "text",
           collection: "meal",
         },
-        shortName: "Food Group Items",
+        shortName: "Recipe Items",
         addPrivilege: true,
         delPrivilege: true,
         updatePrivilege: true,
@@ -186,7 +186,7 @@ const FoodMenu = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Food Group`}
+        shortName={`Meal`}
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}

@@ -35,14 +35,15 @@ const MedicalRecord = (props) => {
       add: true,
       update: true,
     },
+    // TYPE OF DIET IS A DIET //
     {
       type: "text",
-      placeholder: "Type of Diet",
+      placeholder: "Diet",
       name: "typeOfDiet",
       showItem: "typeOfDietName",
       validation: "",
       default: "",
-      label: "Type of Diet",
+      label: "Diet",
       required: true,
       view: true,
       add: true,
