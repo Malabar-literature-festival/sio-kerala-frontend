@@ -53,7 +53,7 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
       name: `information-${titleValue}`,
       title: "Informations",
       element: (
-        <>
+        <div style={{backgroundColor:'white'}}>
           <Head>
             <DataHead>
               <GetIcon icon={""}></GetIcon>
@@ -61,7 +61,7 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
             </DataHead>
           </Head>
           <DisplayInformations formMode={formMode} attributes={openData.attributes} data={openData.data} />
-        </>
+        </div>
       ),
     });
     setTabs(tempTab);
@@ -82,7 +82,7 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
             <GetIcon icon={"Close"} />
           </CloseButton>
         </Header>
-        <RowContainer>{tabs.length > 0 && <Tabs tabs={tabs}></Tabs>}</RowContainer>
+        <RowContainer  theme={themeColors} className="popup-data">{tabs.length > 0 && <Tabs tabs={tabs}></Tabs>}</RowContainer>
       </Page>
     </Overlay>
   );

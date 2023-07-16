@@ -33,12 +33,12 @@ export const SearchInput = styled.div`
     }
   }
   && {
-    .popup-child & {
-      input {
-        color: ${(props) => props.theme.secForeground};
-        background: ${(props) => props.theme.secBackground};
-      }
-    }
+      /* .popup-child & {
+        input {
+          color: ${(props) => props.theme.secForeground};
+          background: ${(props) => props.theme.secBackground};
+        }
+      } */
   }
   &.active input {
     width: 200px;
