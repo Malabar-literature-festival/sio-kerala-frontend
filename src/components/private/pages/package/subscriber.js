@@ -162,33 +162,6 @@ const SubscriberPackage = (props) => {
     },
   ]);
 
-  //   const [actions] = useState([
-  //     {
-  //       element: "button",
-  //       type: "subItem",
-  //       id: "patient-details",
-  //       itemTitle: "username",
-  //       title: "Details",
-  //       attributes: details,
-  //       // formMode: `double`,
-  //       params: {
-  //         api: `user/subscriber`,
-  //         parentReference: "user",
-  //         itemTitle: {
-  //           name: "mobileNumber",
-  //           type: "text",
-  //           collection: "",
-  //         },
-  //         shortName: "Patient Details",
-  //         addPrivilege: true,
-  //         delPrivilege: true,
-  //         updatePrivilege: true,
-  //         customClass: "medium",
-  //         formMode: `double`,
-  //       },
-  //     },
-  //   ]);
-
   return (
     <Container className="noshadow">
       <ListTable
