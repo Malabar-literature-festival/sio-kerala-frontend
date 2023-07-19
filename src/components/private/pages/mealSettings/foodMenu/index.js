@@ -13,7 +13,7 @@ const FoodMenu = (props) => {
   useEffect(() => {
     document.title = `Food Menu - Diet Food Management Portal`;
   }, []);
-  
+
   const [attributes] = useState([
     {
       type: "text",
@@ -152,6 +152,7 @@ const FoodMenu = (props) => {
         type: "text",
         collection: "meal",
       },
+      icon: "menu",
       title: "Setup Menu",
       attributes: foodGroupItem,
       params: {
@@ -193,7 +194,7 @@ const FoodMenu = (props) => {
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
-      {menuSetup && openData && <PopupView popupData={<SetupMenu openData={openData}></SetupMenu>} themeColors={themeColors} closeModal={closeModal} itemTitle={{ name: "title", type: "text", collection: "" }} openData={openData} customClass={"medium"}></PopupView>}
+      {menuSetup && openData && <PopupView popupData={<SetupMenu openData={openData}></SetupMenu>} themeColors={themeColors} closeModal={closeModal} itemTitle={{ name: "title", type: "text", collection: "" }} openData={openData} customClass={"large"}></PopupView>}
     </Container>
   );
 };

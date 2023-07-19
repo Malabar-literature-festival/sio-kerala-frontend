@@ -4,7 +4,7 @@ export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
-  padding: 10px 30px;
+  padding: 0px 0px;
   @media (max-width: 768px) {
     padding: 0;
   }
@@ -18,13 +18,15 @@ export const TabHeader = styled.div`
   height: 60px;
   justify-content: flex-start;
   overflow: auto;
+  margin: 0px 30px 0;
+  border-bottom: 1px solid rgb(208, 208, 208);
 `;
 
 export const Tab = styled.div`
   padding: 0px;
-  background-color: ${(props) => props.theme.pageForeground};
+  /* border-top: 1px solid #d0d0d0; */
   display: none;
-  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+  /* box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px; */
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   flex-direction: column;

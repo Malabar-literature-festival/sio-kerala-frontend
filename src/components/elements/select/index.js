@@ -25,18 +25,24 @@ function CustomSelect(props) {
     setOptionsVisible(!optionsVisible);
   };
   const [searchValue, setSearchValue] = useState("");
+  const [searchKey, setSearchKey] = useState("");
   const handleChange = (event) => {
-    // clearTimeout(searchTimeoutRef.current);
-    setSearchValue(event.target.value);
-    const filteredOptions = options.filter((option) => option.value.toLowerCase().includes(event.target.value.toString().toLowerCase()));
-    setFilteredOptions(filteredOptions);
-    if (event.target.value.toString() === "") {
-      setFilteredOptions([]);
+    if (props.apiSearch) {
+      fetchData(props.updateValue, true, "", event.target.value.toString());
+      setSearchKey(event.target.value);
+    } else {
+      setSearchValue(event.target.value);
+      const filteredOptions = options.filter((option) => option.value?.toLowerCase().includes(event.target.value.toString().toLowerCase()));
+      setFilteredOptions(filteredOptions);
+      if (event.target.value.toString() === "") {
+        setFilteredOptions([]);
+      }
     }
+    // clearTimeout(searchTimeoutRef.current);
   };
 
   const fetchData = useCallback(
-    async (item = "", force = false, name = "") => {
+    async (item = "", force = false, name = "", searchKey = "") => {
       if (force && props.apiType === "API") {
         const optionHandler = (data) => {
           setOptions(data);
@@ -46,10 +52,11 @@ function CustomSelect(props) {
             setSelectedValue(selected ? selected : props.placeHolder);
           } catch {}
         };
-        await getData({ [name]: item }, `${props.selectApi}`)
+        await getData({ [name]: item, searchKey, limit: props.apiSearch ? 20 : 0 }, `${props.selectApi}`)
           .then((response) => {
             if (response.status === 200) {
               optionHandler(response.data);
+              console.log(response.data);
               dispatch(addSelectObject(response.data, props.selectApi));
             } else if (response.status === 404) {
               setInitialized(false);
@@ -157,15 +164,17 @@ function CustomSelect(props) {
         {`${props.value.length === 0 ? `${t(props.label)}${props.required ? " *" : ""}` : `${selectedValue}`}`}
         <DownIcon className="down" />
       </button>
-      {optionsVisible && initialized && (
-        <ul className="options">
-          {props.search && (options.length ?? 0) > 10 && <Search className={"select"} title={"Search"} theme={props.theme} placeholder="Search" value={searchValue} onChange={handleChange} />}
-          {options.length &&
-            (searchValue.length > 0 ? filteredOptions : options)?.map((option) => {
-              return (
+
+      <ul className="options">
+        {props.search && options.length > 10 && <Search key="search-inside" className="select" title="Search" theme={props.theme} placeholder="Search" value={searchValue} onChange={handleChange} />}
+        {props.apiSearch && <Search key="search-api-2" className="select" title="Search" theme={props.theme} placeholder="Search" value={searchKey} onChange={handleChange} />}
+        {optionsVisible && initialized && (
+          <>
+            {options.length > 0 &&
+              (searchValue.length > 0 ? filteredOptions : options).map((option) => (
                 <li
                   value={option.id === selectedId}
-                  className={`${option.id === selectedId}`}
+                  className={option.id === selectedId ? "selected" : ""}
                   key={option.id}
                   onClick={() => {
                     if (selectedId === option.id) {
@@ -185,33 +194,30 @@ function CustomSelect(props) {
                     <TagBox>
                       {props.iconImage && <ImgBox src={process.env.REACT_APP_CDN + (props.iconImage.collection.length > 0 ? option[props.iconImage.collection]?.[props.iconImage.item] ?? "" : option[props.iconImage.item])} />}
                       <TagData>
-                        {props.tags.map((tag) => {
-                          return (
-                            <>
-                              <TagTitle>{`${tag.title}`}</TagTitle>
-                              <TagItem className={tag.type}>{getValue(tag, tag.collection.length > 0 ? option[tag.collection]?.[tag.item] ?? "" : option[tag.item])}</TagItem>
-                            </>
-                          );
-                        })}
+                        {props.tags.map((tag) => (
+                          <>
+                            <TagTitle>{`${tag.title}`}</TagTitle>
+                            <TagItem className={tag.type}>{getValue(tag, tag.collection.length > 0 ? option[tag.collection]?.[tag.item] ?? "" : option[tag.item])}</TagItem>
+                          </>
+                        ))}
                       </TagData>
                     </TagBox>
                   )}
                 </li>
-              );
-            })}
-        </ul>
-      )}
-      {initialized && options.length === 0 && (
-        <ul key={0} className="options">
-          <li
-            onClick={() => {
-              fetchData(props.updateValue, true, props.updateOn);
-            }}
-          >
-            Refresh
-          </li>
-        </ul>
-      )}
+              ))}
+            {initialized && options.length === 0 && (
+                <li
+                  onClick={() => {
+                    fetchData(props.updateValue, true, props.updateOn);
+                  }}
+                >
+                  Refresh
+                </li>
+            )}
+          </>
+        )}
+      </ul>
+
       {props.error?.length > 0 && <ErrorMessage dangerouslySetInnerHTML={{ __html: props.error }}></ErrorMessage>}
     </SelectBox>
   );

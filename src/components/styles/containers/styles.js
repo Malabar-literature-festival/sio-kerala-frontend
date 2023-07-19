@@ -94,6 +94,9 @@ export const RowContainer = styled.div`
   flex: 1 1 100%;
   margin-bottom: auto;
   background-color: ${(props) => props.theme.pageBackground};
+  &.mealSelection {
+    padding-right: 30px;
+  }
   &.content {
     flex: 1 1 calc(100% - 15em);
     max-width: calc(100% - 15em);
@@ -101,8 +104,8 @@ export const RowContainer = styled.div`
   }
   &.popup-data {
     overflow: auto;
-    padding:1em 0;
-    border-radius:12px;
+    padding: 2em 0 0;
+    border-radius: 12px;
   }
   &.marginright {
     margin-right: 15px;
@@ -199,7 +202,9 @@ export const RowContainer = styled.div`
   &.width40 {
     flex: 1 1 40%;
   }
-
+  &.subList {
+    border-radius: 12px;
+  }
   @media screen and (max-width: 768px) {
     max-width: 100%;
     margin-right: 0px;
