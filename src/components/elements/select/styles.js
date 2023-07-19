@@ -2,12 +2,16 @@ import styled from "styled-components";
 export const SelectBox = styled.div`
   position: relative;
   width: 100%;
+  
   &.half {
     width: 40%;
   }
   &.half:nth-child(odd) {
     width: calc(50% - 5px);
     margin-left: 5px;
+  }
+  .select{
+    display:none;
   }
   &.half:nth-child(even) {
     width: calc(50% - 5px);
@@ -96,6 +100,12 @@ export const SelectBox = styled.div`
     transform: rotate(180deg);
     color: black;
   }
+  &.open .options {
+    border: 1px solid rgb(224, 224, 227);
+  }
+  &.open .select{
+    display:inherit;
+  }
   button svg {
     margin-left: auto;
     margin-right: 1em;
@@ -110,7 +120,7 @@ export const SelectBox = styled.div`
     overflow-y: auto;
     width: 100%;
     background-color: white;
-    border: 1px solid rgb(224, 224, 227);
+    border-color: rgb(224, 224, 227);
     border-radius: 12px;
     list-style: none;
     padding: inherit;
@@ -130,8 +140,9 @@ export const SelectBox = styled.div`
   .options li {
     cursor: pointer;
     border-bottom: 1px solid rgb(224, 224, 227);
-    padding: 10px 10px;
-    margin: 0 00px;
+    padding: 8px 12px;
+    margin: 0px;
+    font-size: 14px;
   }
   .options li svg {
     color: ${(props) => props.theme.lightSecForeground};
@@ -144,6 +155,8 @@ export const SelectBox = styled.div`
   .options li:hover {
     background: ${(props) => props.theme.pageBackground};
     color: #0f0f0f;
+    transform: scale(1.005);
+    transition: all 0.4s;
   }
 `;
 export const Label = styled.label`

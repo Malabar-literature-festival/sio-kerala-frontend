@@ -9,7 +9,7 @@ import OrderStatus from "../../private/pages/dispatch/orderStatus";
 import UserList from "../../private/pages/user/userList";
 import ProteinCategory from "../../private/pages/mealSettings/proteinCategory";
 import MealTimeCategory from "../../private/pages/mealSettings/mealTimeCategory";
-// import RecipeTag from "../../private/pages/mealSettings/mealTag";
+// import RecipeTag from "../../private/pages/mealSettings/RecipeTag";
 import VariantGroup from "../../private/pages/mealSettings/variantGroup";
 import VaraiantLevel from "../../private/pages/mealSettings/varaiantLevel";
 import DayOfWeek from "../../private/pages/mealSettings/dayOfWeek";
@@ -37,7 +37,6 @@ import MealIngredient from "../../private/pages/mealSettings/mealIngredient";
 import Dietitian from "../../private/pages/user/dietitian";
 import Deliveryman from "../../private/pages/dispatch/deliveryman";
 import Ingredient from "../../private/pages/mealSettings/Ingredient/ingredient";
-import AddMeal from "../../private/pages/mealSettings/addMeal";
 import VehicleCategory from "../../private/pages/dispatch/vechileCategory";
 import AdmissionRecord from "../../private/pages/user/admissionRecord/admissionRecord";
 // import AddVariant from "../../private/pages/mealSettings/addVariant";
@@ -68,6 +67,7 @@ import FoodMenu from "../../private/pages/mealSettings/foodMenu";
 import Recipe from "../../private/pages/mealSettings/recipe/recipe";
 import Variant from "../../private/pages/recipe/variant";
 import RecipeTag from "../../private/pages/mealSettings/recipeTag/recipeTag";
+import AddRecipe from "../../private/pages/mealSettings/addRecipe";
 
 /**
  * Switch component to render different pages based on the provided page prop.
@@ -470,9 +470,9 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "add-meal":
+    case "add-recipe":
       return (
-        <AddMeal
+        <AddRecipe
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}

@@ -110,6 +110,12 @@ export const Tr = styled.div`
       border-bottom-right-radius: 12px;
     }
   }
+  /* &:hover {
+    transform: scale(1.005);
+    transition: all 0.4s;
+    border-radius:12px !important;
+    z-index: 1000;
+  } */
   @media screen and (max-width: 768px) {
     padding: 1em 1em 0.5em;
     margin: 0em 1em 0px;
@@ -278,7 +284,7 @@ export const Button = styled.button`
   }
   &.delete {
     background-color: red;
-    color:white;
+    color: white;
   }
   &:hover {
     transform: scale(1.1);
@@ -475,6 +481,16 @@ export const More = styled.div`
   align-items: center;
   right: 0;
   margin-top: 5px;
+  &.callBack {
+    width: auto;
+    border-radius: 10px;
+    padding: 0 10px;
+    border:1px solid rgb(221, 221, 221);
+    font-size:12px;
+    svg{
+      margin-right:5px;
+    }
+  }
   &.active,
   &:hover {
     color: white;

@@ -355,7 +355,7 @@ const Variant = (props) => {
       <ListTable
         // actions={actions}
         // api={`recipe-ingredients`}
-        api={`variant`}
+        api={`recipe-variant`}
         // itemTitle={`label`}
         itemTitle={{
           name: "variant",

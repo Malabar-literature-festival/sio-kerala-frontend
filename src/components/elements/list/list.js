@@ -360,7 +360,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
           </Td>
 
           <Td key={`actions-${shortName}-${data._id}`} className="actions">
-            {actions.map((item) => {
+            {actions.map((item, index) => {
               return (
                 item.element !== "button" && (
                   <ToggleContainer key={`${item.id}-${data._id}`}>
@@ -408,6 +408,19 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                     />
                     <ToggleSlider />
                   </ToggleContainer>
+                ),
+                item.type === "callback" && (
+                  <More
+                    theme={themeColors}
+                    key={`custom-${item.id + "-" + index}-${data._id}`}
+                    onClick={() => {
+                      item.callback(item, data);
+                    }}
+                    className="edit menu callBack"
+                  >
+                    <GetIcon icon={item.icon} />
+                    <span>{t(item.title)}</span>
+                  </More>
                 )
               );
             })}
@@ -673,7 +686,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
 
   //end crud functions
   return viewMode === "list" || viewMode === "subList" ? (
-    <RowContainer className={viewMode}>
+    <RowContainer theme={themeColors} className={viewMode}>
       <ButtonPanel>
         <FilterBox>
           <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={handleChange}></Search>

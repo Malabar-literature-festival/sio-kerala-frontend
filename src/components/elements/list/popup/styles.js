@@ -126,3 +126,8 @@ export const DataItem = styled.span`
   border-radius: 10px;
   text-align: right;
 `;
+export const TabContainer = styled.div`
+  border-radius: 12px;
+  background-color:white;
+  margin: 20px 30px 30px;
+`;

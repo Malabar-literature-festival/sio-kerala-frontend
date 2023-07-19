@@ -52,9 +52,14 @@ export const Page = styled.div`
   animation-duration: 0.2s;
   margin: 5vh auto auto auto;
   padding: 0em 0;
-  background-color:white;
+  background-color: white;
   &.medium {
     width: 70%;
+    min-width: 250px;
+    max-width: 100%;
+  }
+  &.large {
+    width: 80%;
     min-width: 250px;
     max-width: 100%;
   }

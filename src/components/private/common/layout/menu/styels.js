@@ -17,7 +17,9 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.secForeground};
+  
   overflow-y: auto;
+
   a.main,
   .open {
     text-decoration: none;
@@ -27,6 +29,8 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: left;
     align-items: center;
+    font-size: 14px;
+    transition: all 0.2s;
   }
   && {
     .down {
@@ -45,6 +49,8 @@ export const Nav = styled.nav`
     background: linear-gradient(102deg, rgb(2, 0, 36) 0%, rgb(232 232 232) 0%, rgb(255, 255, 255) 83%);
     color: black;
     box-shadow: rgba(0, 0, 0, 0.16) -1px 0px 4px;
+    font-weight: bold;
+    opacity: 1; 
   }
   a.main.active:first-child,
   a.main:hover:first-child {
@@ -64,8 +70,14 @@ export const Nav = styled.nav`
   }
   a.main svg,
   .open svg {
+    transition: all 0.2s;
     margin-right: 10px;
     width: 30px;
+  }
+  a.main.active svg,
+  a.main:hover svg {
+    width: 30px;
+    transform: scale(1.1);
   }
 `;
 export const SubMenu = styled.nav`
@@ -79,7 +91,13 @@ export const SubMenu = styled.nav`
 `;
 export const MenuGroup = styled.div`
   cursor: pointer;
+  transition: all 0.2s;
   svg:last-child {
     margin-left: auto;
+  }
+  &.active svg:last-child{
+    transform:rotate(180deg) scale(1.1);
+    font-weight:bold;
+    opacity:1;
   }
 `;
