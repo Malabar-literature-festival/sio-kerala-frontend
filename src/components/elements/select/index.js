@@ -120,7 +120,7 @@ function CustomSelect(props) {
         } catch {}
       }
     },
-    [props.apiType, props.selectApi, props.placeHolder, initialized, selectedId, selectData, dispatch]
+    [props.apiType, props.selectApi, props.placeHolder,props.apiSearch, initialized, selectedId, selectData, dispatch]
   );
 
   useEffect(() => {
