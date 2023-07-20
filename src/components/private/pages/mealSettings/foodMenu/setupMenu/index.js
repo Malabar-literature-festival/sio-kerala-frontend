@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { GetIcon } from "../../../../../../icons";
 import { getData } from "../../../../../../backend/api";
 import { NoData } from "../../../../../elements/list/styles";
@@ -8,6 +7,7 @@ import {
   RowContainer,
 } from "../../../../../styles/containers/styles";
 import Search from "../../../../../elements/search";
+<<<<<<< HEAD
 
 const TabContainer = styled.div`
   display: flex;
@@ -130,6 +130,9 @@ const Variant = styled.div`
     font-size: 14px;
   }
 `;
+=======
+import { TabContainer, TabButton, Table, TableHeader, TableBody, TableRow, MealCategoryCell, Div, TableCell, FoodButton, TabData, TabDataItem, MealItem, Title, Variants, Variant } from "./styles"; // Import styles from styles.js
+>>>>>>> origin/master
 const SetupMenu = ({ openData, themeColors }) => {
   const daysOfWeek = [
     "Sunday",
@@ -181,7 +184,7 @@ const SetupMenu = ({ openData, themeColors }) => {
   }, [openData.data._id]);
 
   return menuData ? (
-    <ColumnContainer>
+    <ColumnContainer style={{marginBottom:'30px'}}>
       <RowContainer>
         <Table>
           <thead>

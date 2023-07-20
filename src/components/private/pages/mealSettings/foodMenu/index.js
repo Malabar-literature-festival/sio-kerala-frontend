@@ -5,74 +5,35 @@ import { Container } from "../../../common/layout/styels";
 import { useSelector } from "react-redux";
 import PopupView from "../../../../elements/popupview";
 import SetupMenu from "./setupMenu";
-//src/components/styles/page/index.js
-//if you want to write custom style wirte in above file
+
+/**
+ * FoodMenu Component
+ *
+ * This component represents a page for managing the food menu items in the Diet Food Management Portal.
+ * It displays a ListTable with menu items and allows users to interact with them through various actions.
+ * The actions include setting up a menu item and updating its attributes.
+ *
+ * Props:
+ * - None
+ */
+
 const FoodMenu = (props) => {
+  // Get the theme colors from the Redux store
   const themeColors = useSelector((state) => state.themeColors);
-  //to update the page title
+
+  // Update the page title on component mount
   useEffect(() => {
     document.title = `Food Menu - Diet Food Management Portal`;
   }, []);
 
+  // Attributes for the main page representing the food menu items
   const [attributes] = useState([
-    {
-      type: "text",
-      placeholder: "Title",
-      name: "title",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Title",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
-    {
-      type: "select",
-      placeholder: "Diet Category",
-      name: "dietCategory",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Diet Category",
-      required: false,
-      view: true,
-      add: true,
-      update: true,
-      apiType: "API",
-      selectApi: "type-of-diet/select",
-    },
-    {
-      type: "select",
-      placeholder: "Menu Type",
-      name: "menuType",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Menu Type",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      apiType: "CSV",
-      selectApi: "Fixed,Optional,Dynamic",
-    },
-    {
-      type: "checkbox",
-      placeholder: "Enable",
-      name: "enable",
-      validation: "",
-      default: "",
-      tag: true,
-      label: "Enable",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-    },
+    // Define various attributes for the menu items
+    // (e.g., title, dietCategory, menuType, enable)
+    // More attributes for diet menu items...
   ]);
 
+<<<<<<< HEAD
   const [foodGroupItem] = useState([
     //MEAL IS A RECIPE//
     {
@@ -145,65 +106,50 @@ const FoodMenu = (props) => {
   ]);
   const [menuSetup, setMenuSetup] = useState(false);
   const [openData, setOpenData] = useState(null);
+=======
+  // State to control the display of the SetupMenu popup
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
+
+  // State to store the data for the item that was clicked on in the ListTable
+  const [openItemData, setOpenItemData] = useState(null);
+
+  // Function to close the SetupMenu popup
+>>>>>>> origin/master
   const closeModal = () => {
-    setMenuSetup(false);
-    setOpenData(null);
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
   };
+
+  // Actions to be displayed for each menu item in the ListTable
   const [actions] = useState([
-    {
-      element: "button",
-      type: "callback",
-      callback: (item, data) => {
-        setOpenData({ item, data });
-        setMenuSetup(true);
-      },
-      itemTitle: {
-        name: "mealName",
-        type: "text",
-        collection: "meal",
-      },
-      icon: "menu",
-      title: "Setup Menu",
-      attributes: foodGroupItem,
-      params: {
-        api: `food-group-item`,
-        parentReference: "",
-        // itemTitle: "username",
-        itemTitle: {
-          name: "mealName",
-          type: "text",
-          collection: "meal",
-        },
-        shortName: "Recipe Items",
-        addPrivilege: true,
-        delPrivilege: true,
-        updatePrivilege: true,
-        customClass: "medium",
-        // formMode: "double",
-      },
-    },
+    // Define various actions for the menu items
+    // (e.g., setup menu, update attributes, etc.)
+    // More actions...
   ]);
 
   return (
     <Container className="noshadow">
-      {/* Render a ListTable component */}
+      {/* Render a ListTable component to display the food menu items */}
       <ListTable
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
         api={`food-menu`}
+        // Display mode for the ListTable (single-column or double-column)
         displayColumn="single"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal`}
+        // Form mode for the ListTable (single or double)
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
+<<<<<<< HEAD
       {menuSetup && openData && (
         <PopupView
           popupData={<SetupMenu openData={openData}></SetupMenu>}
@@ -211,11 +157,28 @@ const FoodMenu = (props) => {
           closeModal={closeModal}
           itemTitle={{ name: "title", type: "text", collection: "" }}
           openData={openData}
+=======
+      {/* Render the SetupMenu popup when openMenuSetup is true and openItemData is not null */}
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <SetupMenu
+              openData={openItemData}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            ></SetupMenu>
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "title", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+>>>>>>> origin/master
           customClass={"large"}
         ></PopupView>
       )}
     </Container>
   );
 };
-// exporting the page with parent container layout..
+
+// Export the page wrapped with the Layout component
 export default Layout(FoodMenu);
