@@ -27,8 +27,8 @@ const Dashboard = (props) => {
   const dispatch = useDispatch();
   const [initialized, setInitialized] = useState(false);
   const dashboard = useSelector((state) =>
-    state.pages[`dashboard`]
-      ? state.pages[`dashboard`]
+    state.pages[`dashboard1`]
+      ? state.pages[`dashboard1`]
       : {
           data: null,
           isLoading: true,
@@ -42,11 +42,11 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     if (initialized) {
-      dispatch(addPageObject("dashboard", 0, {}));
+      dispatch(addPageObject("dashboard1", 0, {}));
     }
   }, [initialized, dispatch]);
   useEffect(() => {
-    console.log(dashboard);
+    // console.log(dashboard);
   }, [dashboard]);
 
   return (

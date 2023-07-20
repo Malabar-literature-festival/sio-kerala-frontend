@@ -56,7 +56,6 @@ function CustomSelect(props) {
           .then((response) => {
             if (response.status === 200) {
               optionHandler(response.data);
-              console.log(response.data);
               dispatch(addSelectObject(response.data, props.selectApi));
             } else if (response.status === 404) {
               setInitialized(false);
@@ -84,7 +83,7 @@ function CustomSelect(props) {
             await getData({ id: item }, `${props.selectApi + item}`)
               .then((response) => {
                 if (response.status === 200) {
-                  optionHandler(response.data);
+                  optionHandler(props.selectApi + item);
                   dispatch(addSelectObject(response.data, props.selectApi + item));
                 } else if (response.status === 404) {
                   setInitialized(false);
@@ -128,10 +127,14 @@ function CustomSelect(props) {
   }, [props.selectApi, fetchData]);
   const selectRef = useRef(null);
   useEffect(() => {
-    if (updateValue !== props.updateValue) {
+    if(props.updateOn)
+    {
+       if (updateValue !== props.updateValue) {
       setUpdateValue(props.updateValue);
       fetchData(props.updateValue, true, props.updateOn);
     }
+    }
+   
   }, [props.updateValue, updateValue, fetchData, props.updateOn]);
   useEffect(() => {
     function handleClick(event) {

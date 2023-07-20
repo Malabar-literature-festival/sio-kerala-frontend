@@ -47,7 +47,7 @@ const Dashboard = (props) => {
   }, [initialized, dispatch]);
 
   useEffect(() => {
-    console.log(dashboard);
+    // console.log(dashboard);
   }, [dashboard]);
 
   return (

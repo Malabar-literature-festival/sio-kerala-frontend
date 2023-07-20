@@ -170,9 +170,10 @@ export const Tr = styled.div`
   &.single {
     padding: 0;
     margin: 0;
+    margin: 20px 30px 30px;
   }
   &.single:hover {
-    background-color: initial;
+    /* background-color: initial; */
     box-shadow: none;
     h4 {
       color: initial;
@@ -485,10 +486,10 @@ export const More = styled.div`
     width: auto;
     border-radius: 10px;
     padding: 0 10px;
-    border:1px solid rgb(221, 221, 221);
-    font-size:12px;
-    svg{
-      margin-right:5px;
+    border: 1px solid rgb(221, 221, 221);
+    font-size: 12px;
+    svg {
+      margin-right: 5px;
     }
   }
   &.active,
