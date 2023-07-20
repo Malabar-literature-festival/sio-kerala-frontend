@@ -82,8 +82,18 @@ const FoodMenu = (props) => {
       updateOn: "mealTimeCategory",
       iconImage: { collection: "", item: "mealPhoto" },
       tags: [
-        { type: "text", item: "proteinCategoriesName", title: "Protein Category", collection: "proteinCategory" },
-        { type: "text", item: "mealDescription", title: "Description", collection: "" },
+        {
+          type: "text",
+          item: "proteinCategoriesName",
+          title: "Protein Category",
+          collection: "proteinCategory",
+        },
+        {
+          type: "text",
+          item: "mealDescription",
+          title: "Description",
+          collection: "",
+        },
       ],
       placeholder: "Recipe",
       name: "meal",
@@ -194,7 +204,16 @@ const FoodMenu = (props) => {
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
-      {menuSetup && openData && <PopupView popupData={<SetupMenu openData={openData}></SetupMenu>} themeColors={themeColors} closeModal={closeModal} itemTitle={{ name: "title", type: "text", collection: "" }} openData={openData} customClass={"large"}></PopupView>}
+      {menuSetup && openData && (
+        <PopupView
+          popupData={<SetupMenu openData={openData}></SetupMenu>}
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "title", type: "text", collection: "" }}
+          openData={openData}
+          customClass={"large"}
+        ></PopupView>
+      )}
     </Container>
   );
 };

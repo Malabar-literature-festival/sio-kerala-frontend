@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { GetIcon } from "../../../../../../icons";
 import { getData } from "../../../../../../backend/api";
 import { NoData } from "../../../../../elements/list/styles";
-import { ColumnContainer, RowContainer } from "../../../../../styles/containers/styles";
+import {
+  ColumnContainer,
+  RowContainer,
+} from "../../../../../styles/containers/styles";
 import Search from "../../../../../elements/search";
 
 const TabContainer = styled.div`
@@ -110,8 +113,8 @@ const Variant = styled.div`
   font-weight: bolder;
   font-size: 14px;
   width: auto;
-  flex-direction:column;
-  display:flex;
+  flex-direction: column;
+  display: flex;
   span {
     font-size: 10px;
   }
@@ -128,7 +131,15 @@ const Variant = styled.div`
   }
 `;
 const SetupMenu = ({ openData, themeColors }) => {
-  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const [menuId] = useState(openData.data._id);
   const [menuData, setMenuData] = useState(null);
   const [meals, setMeals] = useState([]);
@@ -141,22 +152,32 @@ const SetupMenu = ({ openData, themeColors }) => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    getData({}, tab === "meals" ? "food-group" : "recipe/search").then((result) => {
-      tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
-      console.log("meals", meals, "recipes", recipes);
-    });
+    getData({}, tab === "meals" ? "food-group" : "recipe/search").then(
+      (result) => {
+        tab === "meals"
+          ? setMeals(result.data.response)
+          : setRecipes(result.data.response);
+        console.log("meals", meals, "recipes", recipes);
+      }
+    );
   };
   const handleAddFood = (mealTimeCategoryId, dayIndex) => {
     // Handle adding food to the selected cell
-    console.log(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
-    alert(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
+    console.log(
+      `Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`
+    );
+    alert(
+      `Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`
+    );
   };
 
   useEffect(() => {
-    getData({ menuId: openData.data._id }, "food-menu/get-a-menu").then((response) => {
-      setMenuData(response.data);
-      console.log(response);
-    });
+    getData({ menuId: openData.data._id }, "food-menu/get-a-menu").then(
+      (response) => {
+        setMenuData(response.data);
+        console.log(response);
+      }
+    );
   }, [openData.data._id]);
 
   return menuData ? (
@@ -172,36 +193,59 @@ const SetupMenu = ({ openData, themeColors }) => {
             </tr>
           </thead>
           <TableBody>
-            {menuData.mealTimeCategories.map((mealTimeCategory, categoryIndex) => (
-              <TableRow key={mealTimeCategory._id}>
-                <MealCategoryCell>{mealTimeCategory.mealtimeCategoriesName}</MealCategoryCell>
-                {daysOfWeek.map((day, dayIndex) => (
-                  <TableCell className={dayIndex === 0 ? "first" : ""} key={dayIndex}>
-                    <Div>
-                      <FoodButton onClick={() => handleAddFood(mealTimeCategory._id, dayIndex)}>
-                        <GetIcon icon={"add"}></GetIcon>
-                      </FoodButton>
-                    </Div>
-                  </TableCell>
-                ))}
-                <MealCategoryCell></MealCategoryCell>
-              </TableRow>
-            ))}
+            {menuData.mealTimeCategories.map(
+              (mealTimeCategory, categoryIndex) => (
+                <TableRow key={mealTimeCategory._id}>
+                  <MealCategoryCell>
+                    {mealTimeCategory.mealtimeCategoriesName}
+                  </MealCategoryCell>
+                  {daysOfWeek.map((day, dayIndex) => (
+                    <TableCell
+                      className={dayIndex === 0 ? "first" : ""}
+                      key={dayIndex}
+                    >
+                      <Div>
+                        <FoodButton
+                          onClick={() =>
+                            handleAddFood(mealTimeCategory._id, dayIndex)
+                          }
+                        >
+                          <GetIcon icon={"add"}></GetIcon>
+                        </FoodButton>
+                      </Div>
+                    </TableCell>
+                  ))}
+                  <MealCategoryCell></MealCategoryCell>
+                </TableRow>
+              )
+            )}
           </TableBody>
         </Table>
       </RowContainer>
       <RowContainer className="mealSelection">
         <TabContainer>
-          <TabButton active={activeTab === "meals"} onClick={() => handleTabClick("meals")}>
+          <TabButton
+            active={activeTab === "meals"}
+            onClick={() => handleTabClick("meals")}
+          >
             Meals
           </TabButton>
-          <TabButton active={activeTab === "recipes"} onClick={() => handleTabClick("recipes")}>
+          <TabButton
+            active={activeTab === "recipes"}
+            onClick={() => handleTabClick("recipes")}
+          >
             Recipes
           </TabButton>
         </TabContainer>
 
         <TabData>
-          <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={searchChange} />
+          <Search
+            title={"Search"}
+            theme={themeColors}
+            placeholder="Search"
+            value={searchValue}
+            onChange={searchChange}
+          />
           {activeTab === "meals" && meals && (
             <TabDataItem>
               {meals.map((meal) => (
