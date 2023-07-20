@@ -131,7 +131,7 @@ export const SelectBox = styled.div`
     top: 36px;
     transition: all 1s ease-out 0s;
   }
-  .options li.true {
+  .options li.selected {
     background: ${(props) => props.theme.pageBackground};
     color: #0f0f0f;
     font-weight: bold;
