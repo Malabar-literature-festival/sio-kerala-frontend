@@ -1,3 +1,4 @@
+// Import necessary dependencies and components (not included in this snippet)
 import React, { useEffect, useState } from "react";
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
@@ -6,17 +7,7 @@ import { useSelector } from "react-redux";
 import PopupView from "../../../../elements/popupview";
 import SetupMenu from "./setupMenu";
 
-/**
- * FoodMenu Component
- *
- * This component represents a page for managing the food menu items in the Diet Food Management Portal.
- * It displays a ListTable with menu items and allows users to interact with them through various actions.
- * The actions include setting up a menu item and updating its attributes.
- *
- * Props:
- * - None
- */
-
+// FoodMenu Component
 const FoodMenu = (props) => {
   // Get the theme colors from the Redux store
   const themeColors = useSelector((state) => state.themeColors);
@@ -28,8 +19,62 @@ const FoodMenu = (props) => {
 
   // Attributes for the main page representing the food menu items
   const [attributes] = useState([
-    // Define various attributes for the menu items
-    // (e.g., title, dietCategory, menuType, enable)
+    {
+      type: "text",
+      placeholder: "Title",
+      name: "title",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Title",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "select",
+      placeholder: "Diet Category",
+      name: "dietCategory",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Diet Category",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+      apiType: "API",
+      selectApi: "type-of-diet/select",
+    },
+    {
+      type: "select",
+      placeholder: "Menu Type",
+      name: "menuType",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Menu Type",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      apiType: "CSV",
+      selectApi: "Fixed,Optional,Dynamic",
+    },
+    {
+      type: "checkbox",
+      placeholder: "Enable",
+      name: "enable",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Enable",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
     // More attributes for diet menu items...
   ]);
 
@@ -47,8 +92,38 @@ const FoodMenu = (props) => {
 
   // Actions to be displayed for each menu item in the ListTable
   const [actions] = useState([
-    // Define various actions for the menu items
-    // (e.g., setup menu, update attributes, etc.)
+    {
+      element: "button",
+      type: "callback",
+      callback: (item, data) => {
+        // Set the data for the clicked item and open the SetupMenu popup
+        setOpenItemData({ item, data });
+        setOpenMenuSetup(true);
+      },
+      itemTitle: {
+        name: "mealName",
+        type: "text",
+        collection: "meal",
+      },
+      icon: "menu",
+      title: "Setup Menu",
+      params: {
+        api: `food-group-item`,
+        parentReference: "",
+        // itemTitle: "username",
+        itemTitle: {
+          name: "mealName",
+          type: "text",
+          collection: "meal",
+        },
+        shortName: "Recipe Items",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
+        customClass: "medium",
+        // formMode: "double",
+      },
+    },
     // More actions...
   ]);
 

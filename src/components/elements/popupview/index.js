@@ -8,7 +8,6 @@ import { Overlay } from "../message/styles";
 import { CloseButton } from "./styles";
 
 const PopupView = ({ themeColors, closeModal, itemTitle, popupData, customClass, openData }) => {
-  console.log(openData);
   const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle.";
   return (
     <Overlay>
