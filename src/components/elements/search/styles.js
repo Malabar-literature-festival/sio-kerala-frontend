@@ -22,7 +22,6 @@ export const SearchInput = styled.div`
     margin-right: 10px;
     border-radius: 12px;
     width: 40px;
-    color: transparent;
     padding-left: 30px;
     
     &:focus {

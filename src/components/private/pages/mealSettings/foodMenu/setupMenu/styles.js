@@ -45,6 +45,7 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position:relative;
 `;
 
 export const TableCell = styled.td`
@@ -96,17 +97,24 @@ export const Variants = styled.div`
   overflow-wrap: anywhere;
   margin-top: 10px;
   column-gap: 10px;
+  &.vertical
+  {
+    flex-direction: column;
+    row-gap:5px;
+    overflow-wrap: initial;
+  }
 `;
 export const Variant = styled.div`
   width: 100%;
   border: 1px solid;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 5px;
+  padding: 5px 5px;
   font-weight: bolder;
   font-size: 14px;
   width: auto;
   flex-direction: column;
   display: flex;
+  border: 1px solid #ccc;
   span {
     font-size: 10px;
   }
@@ -116,9 +124,21 @@ export const Variant = styled.div`
   }
   .offer {
     font-size: 14px;
-    font-weight: bolder;
+   
   }
   .variant {
-    font-size: 14px;
+    font-size: 9px;
+    text-align:left;
   }
+  .recipe {
+    font-size: 10px;
+    font-weight: bolder;
+    text-align:left;
+  }
+  &.vertical .offer{
+    justify-content:left;
+    text-align:left;
+    display:flex;
+  }
+ 
 `;
