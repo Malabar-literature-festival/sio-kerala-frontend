@@ -16,12 +16,12 @@ const FoodGroup = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Package Name",
-      name: "packageName",
+      placeholder: "Meal Goup",
+      name: "title",
       validation: "",
       default: "",
-      tag: true,
-      label: "Package Name",
+      tag: false,
+      label: "Meal Goup",
       required: true,
       view: true,
       add: true,
@@ -103,9 +103,9 @@ const FoodGroup = (props) => {
       placeholder: "Recipe Variant",
       name: "recipeVariant",
       validation: "",
-      updateOn:'recipe',
+      updateOn: "recipe",
       showItem: "price",
-      collection:"recipeVariant",
+      collection: "recipeVariant",
       default: "",
       tag: true,
       label: "Recipe Variant",
@@ -132,7 +132,7 @@ const FoodGroup = (props) => {
       attributes: foodGroupItem,
       params: {
         api: `food-group-item`,
-        parentReference: "",
+        parentReference: "foodGroup",
         // itemTitle: "username",
         itemTitle: {
           name: "variant",
@@ -158,11 +158,12 @@ const FoodGroup = (props) => {
         // API endpoint for fetching menu data
         api={`food-group`}
         displayColumn="double"
+        parentReference="foodGroup"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "packageName", type: "text", collection: "" }}
+        itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Meal`}
+        shortName={`Meal Group`}
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
