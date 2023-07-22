@@ -23,7 +23,7 @@ const SetupMenu = ({ openData, themeColors }) => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    getData({}, tab === "meals" ? "food-group" : "recipe/search").then((result) => {
+    getData({}, tab === "meals" ? "food-group/search" : "recipe/search").then((result) => {
       tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
       console.log("meals", meals, "recipes", recipes);
     });
@@ -42,13 +42,11 @@ const SetupMenu = ({ openData, themeColors }) => {
       menuDataTemp.foodMenu.push({ ...data, meals: [], recipeVariants: [{ ...item, ...data }] });
     }
     setMenuData(menuDataTemp);
-    console.log(menuDataTemp);
-    await postData({ ...data, mealOrRecepe: "recipe", foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
+    await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
   };
   useEffect(() => {
     getData({ menuId: openData.data._id }, "food-menu/get-a-menu").then((response) => {
       setMenuData(response.data);
-      console.log(response.data);
     });
   }, [openData.data._id]);
 
@@ -71,7 +69,6 @@ const SetupMenu = ({ openData, themeColors }) => {
                   <MealCategoryCell>{mealTimeCategory.mealtimeCategoriesName}</MealCategoryCell>
                   {daysOfWeek.map((day, dayNumber) => {
                     const items = menuData.foodMenu.find((item) => item.mealTimeCategory === mealTimeCategory._id && item.dayNumber === dayNumber);
-                    console.log(items);
                     return (
                       <TableCell className={dayNumber === 0 ? "first" : ""} key={dayNumber}>
                         <Div>
@@ -124,9 +121,33 @@ const SetupMenu = ({ openData, themeColors }) => {
             {activeTab === "meals" && meals && (
               <TabDataItem>
                 {meals.map((meal) => (
-                  <MealItem key={meal._id}>
-                    <div>{meal.packageName ?? "Title not found!"}</div>
-                  </MealItem>
+                  // <MealItem key={meal._id}>
+                  //   <div>{meal.title ?? "Title not found!"}</div>
+                  // </MealItem>
+                  <DraggableItem
+                    key={meal._id}
+                    item={{ ...meal, mealOrRecepe: "meal", meal: { title: meal.title } }}
+                    element={
+                      <MealItem key={meal._id}>
+                        <Title>{meal.title ?? "Title not found!"}</Title>
+                        <Variants>
+                          {meal.foodGroupItems.map((item) => {
+                            const recipeVariant = item.recipeVariant;
+                            return (
+                              <Variant key={item._id}>
+                                <span>
+                                  <span>BHD</span>
+                                  <span className="price">{recipeVariant.price}</span>
+                                  <span className="offer">{recipeVariant.offerPrice}</span>{" "}
+                                </span>
+                                <span className="variant">{recipeVariant.variant}</span>
+                              </Variant>
+                            );
+                          })}
+                        </Variants>
+                      </MealItem>
+                    }
+                  />
                 ))}
               </TabDataItem>
             )}
@@ -140,7 +161,7 @@ const SetupMenu = ({ openData, themeColors }) => {
                         return (
                           <DraggableItem
                             key={variant._id}
-                            item={{ ...variant, recipe: { title: recipe.title } }}
+                            item={{ ...variant, mealOrRecepe: "recipe", recipe: { title: recipe.title } }}
                             element={
                               <Variant>
                                 <span>

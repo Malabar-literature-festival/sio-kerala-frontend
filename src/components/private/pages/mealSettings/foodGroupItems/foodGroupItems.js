@@ -119,6 +119,7 @@ const FoodGroupItems = (props) => {
         // API endpoint for fetching menu data
         api={`food-group-item`}
         displayColumn="double"
+        parentReference="foodGroup"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "mealName", type: "text", collection: "meal" }}
