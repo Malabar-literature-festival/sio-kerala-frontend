@@ -13,8 +13,12 @@ const DropTarget = ({ element, data, onDrop }) => {
       isOver: !!monitor.isOver(),
     }),
   });
-  
-  return <Div ref={drop}>{element}</Div>;
+
+  return (
+    <Div ref={drop} className={isOver ? "hover" : ""}>
+      {element}
+    </Div>
+  );
 };
 
 export default DropTarget;

@@ -45,7 +45,13 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position:relative;
+  position: relative;
+  flex-direction: column;
+  &.hover {
+    border: 1px dashed;
+    border-radius: 10px;
+    padding: 5px;
+  }
 `;
 
 export const TableCell = styled.td`
@@ -97,10 +103,9 @@ export const Variants = styled.div`
   overflow-wrap: anywhere;
   margin-top: 10px;
   column-gap: 10px;
-  &.vertical
-  {
+  &.vertical {
     flex-direction: column;
-    row-gap:5px;
+    row-gap: 5px;
     overflow-wrap: initial;
   }
 `;
@@ -124,21 +129,19 @@ export const Variant = styled.div`
   }
   .offer {
     font-size: 14px;
-   
   }
   .variant {
     font-size: 9px;
-    text-align:left;
+    text-align: left;
   }
   .recipe {
     font-size: 10px;
     font-weight: bolder;
-    text-align:left;
+    text-align: left;
   }
-  &.vertical .offer{
-    justify-content:left;
-    text-align:left;
-    display:flex;
+  &.vertical .offer {
+    justify-content: left;
+    text-align: left;
+    display: flex;
   }
- 
 `;
