@@ -95,6 +95,17 @@ export const MealItem = styled.div`
 `;
 export const Title = styled.div`
   width: 100%;
+  span {
+    font-size: 10px;
+  }
+  .price {
+    font-size: 10px;
+    text-decoration: line-through;
+  }
+  .offer {
+    font-size: 14px;
+    font-weight: bolder;
+  }
 `;
 export const Variants = styled.div`
   width: 100%;
@@ -114,12 +125,14 @@ export const Variant = styled.div`
   border: 1px solid;
   border-radius: 5px;
   padding: 5px 5px;
+
   font-weight: bolder;
   font-size: 14px;
   width: auto;
   flex-direction: column;
   display: flex;
   border: 1px solid #ccc;
+  position: relative;
   span {
     font-size: 10px;
   }
@@ -143,5 +156,24 @@ export const Variant = styled.div`
     justify-content: left;
     text-align: left;
     display: flex;
+  }
+  .delete {
+    display: none;
+    font-size: 8px;
+    position: absolute;
+    padding: 2px;
+    right: -5px;
+    top: -5px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid;
+    background-color: white;
+    height: 10px;
+    width: 10px;
+  }
+  &:hover .delete {
+    display: flex;
+    justify-content:center;
+    align-items:center;
   }
 `;

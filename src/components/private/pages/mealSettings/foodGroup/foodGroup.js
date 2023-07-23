@@ -66,6 +66,19 @@ const FoodGroup = (props) => {
       add: true,
       update: true,
     },
+    {
+      type: "number",
+      placeholder: "Offer Price",
+      name: "offerPrice",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Offer Price",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
   ]);
 
   const [foodGroupItem] = useState([
@@ -121,7 +134,7 @@ const FoodGroup = (props) => {
     {
       element: "button",
       type: "subList",
-      id: "food-group-item",
+      id: "meal-item",
       // itemTitle: "username",
       itemTitle: {
         name: "variant",
@@ -131,8 +144,8 @@ const FoodGroup = (props) => {
       title: "Recipe Items",
       attributes: foodGroupItem,
       params: {
-        api: `food-group-item`,
-        parentReference: "foodGroup",
+        api: `meal-item`,
+        parentReference: "meal",
         // itemTitle: "username",
         itemTitle: {
           name: "variant",
@@ -156,14 +169,14 @@ const FoodGroup = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`food-group`}
+        api={`meal`}
         displayColumn="double"
-        parentReference="foodGroup"
+        parentReference="meal"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Meal Group`}
+        shortName={`Meal`}
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
