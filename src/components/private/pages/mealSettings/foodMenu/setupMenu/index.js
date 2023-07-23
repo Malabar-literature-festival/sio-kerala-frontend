@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GetIcon } from "../../../../../../icons";
-import { getData, postData } from "../../../../../../backend/api";
+import { deleteData, getData, postData } from "../../../../../../backend/api";
 import { NoData } from "../../../../../elements/list/styles";
 import { ColumnContainer, RowContainer } from "../../../../../styles/containers/styles";
 import Search from "../../../../../elements/search";
@@ -9,7 +9,7 @@ import DraggableItem from "./dragdrop/drag";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import DropTarget from "./dragdrop/drop";
-const SetupMenu = ({ openData, themeColors }) => {
+const SetupMenu = ({ openData, themeColors, setMessage }) => {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [menuId] = useState(openData.data._id);
   const [menuData, setMenuData] = useState(null);
@@ -21,24 +21,46 @@ const SetupMenu = ({ openData, themeColors }) => {
     setSearchValue(item.target.value);
   };
 
-  const handleTabClick = (tab) => {
+  const handleTabClick = useCallback((tab) => {
     setActiveTab(tab);
     getData({}, tab === "meals" ? "meal/search" : "recipe/search").then((result) => {
       tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
-      console.log("meals", meals, "recipes", recipes);
     });
-  };
+  }, []);
+  useEffect(() => {
+    handleTabClick("meals");
+  }, [handleTabClick]);
   // const handleAddFood = (mealTimeCategoryId, dayIndex) => {
   //   // Handle adding food to the selected cell
   //   console.log(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
   //   alert(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
   // };
+  const deleteItem = async (id, index, mealOrRecepe, mealTimeCategory, dayNumber) => {
+    setMessage({
+      type: 2,
+      content: "Are you sure do delete?",
+      proceed: "Delete",
+      onProceed: async () => {
+        const menuDataTemp = { ...menuData };
+        await deleteData({ id }, "food-menu-item");
+        const items = menuDataTemp.foodMenu.find((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber);
+        if (mealOrRecepe === "recipe") {
+          delete items.recipeVariants[index];
+        } else {
+          delete items.meals[index];
+        }
+        setMenuData(menuDataTemp);
+      },
+      data: { id },
+    });
+  };
+
   const onDrop = async (item, data) => {
     const menuDataTemp = { ...menuData };
     const items = menuDataTemp.foodMenu.find((cat) => data.mealTimeCategory === cat.mealTimeCategory && data.dayNumber === cat.dayNumber);
     if (item.mealOrRecepe === "recipe") {
       const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
-      console.log(response)
+      console.log(response);
       if (items) {
         items.recipeVariants.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
       } else {
@@ -46,7 +68,7 @@ const SetupMenu = ({ openData, themeColors }) => {
       }
     } else {
       const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, meal: item._id }, "food-menu-item");
-      console.log(response)
+      console.log(response);
       if (items) {
         items.meals.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
       } else {
@@ -89,7 +111,7 @@ const SetupMenu = ({ openData, themeColors }) => {
                             element={
                               <Variants className="vertical">
                                 {items?.recipeVariants?.length > 0
-                                  ? items.recipeVariants.map((item) => {
+                                  ? items.recipeVariants.map((item, index) => {
                                       // Render your items inside the FoodButton here
                                       // For example, you can render a list of items like this
                                       return (
@@ -99,7 +121,7 @@ const SetupMenu = ({ openData, themeColors }) => {
                                           <span
                                             className="delete"
                                             onClick={() => {
-                                              alert(item.foodMenuItem);
+                                              deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber);
                                             }}
                                           >
                                             <GetIcon icon={"close"} />
@@ -109,7 +131,7 @@ const SetupMenu = ({ openData, themeColors }) => {
                                     })
                                   : ""}
                                 {items?.meals?.length > 0
-                                  ? items.meals.map((item) => {
+                                  ? items.meals.map((item, index) => {
                                       // Render your items inside the FoodButton here
                                       // For example, you can render a list of items like this
                                       return (
@@ -119,7 +141,7 @@ const SetupMenu = ({ openData, themeColors }) => {
                                           <span
                                             className="delete"
                                             onClick={() => {
-                                              alert(item.foodMenuItem);
+                                              deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber);
                                             }}
                                           >
                                             <GetIcon icon={"close"} />

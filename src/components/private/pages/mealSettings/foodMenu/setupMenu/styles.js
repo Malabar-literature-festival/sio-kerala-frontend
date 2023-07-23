@@ -50,7 +50,7 @@ export const Div = styled.div`
   &.hover {
     border: 1px dashed;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
   }
 `;
 
