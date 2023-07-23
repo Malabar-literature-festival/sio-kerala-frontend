@@ -4,7 +4,7 @@ import { getData, postData } from "../../../../../../backend/api";
 import { NoData } from "../../../../../elements/list/styles";
 import { ColumnContainer, RowContainer } from "../../../../../styles/containers/styles";
 import Search from "../../../../../elements/search";
-import { TabContainer, TabButton, Table, TableHeader, TableBody, TableRow, MealCategoryCell, Div, TableCell, FoodButton, TabData, TabDataItem, MealItem, Title, Variants, Variant } from "./styles"; // Import styles from styles.js
+import { TabContainer, TabButton, Table, TableHeader, TableBody, TableRow, MealCategoryCell, Div, TableCell, TabData, TabDataItem, MealItem, Title, Variants, Variant } from "./styles"; // Import styles from styles.js
 import DraggableItem from "./dragdrop/drag";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
@@ -28,11 +28,11 @@ const SetupMenu = ({ openData, themeColors }) => {
       console.log("meals", meals, "recipes", recipes);
     });
   };
-  const handleAddFood = (mealTimeCategoryId, dayIndex) => {
-    // Handle adding food to the selected cell
-    console.log(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
-    alert(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
-  };
+  // const handleAddFood = (mealTimeCategoryId, dayIndex) => {
+  //   // Handle adding food to the selected cell
+  //   console.log(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
+  //   alert(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
+  // };
   const onDrop = async (item, data) => {
     const menuDataTemp = { ...menuData };
     const items = menuDataTemp.foodMenu.find((cat) => data.mealTimeCategory === cat.mealTimeCategory && data.dayNumber === cat.dayNumber);
