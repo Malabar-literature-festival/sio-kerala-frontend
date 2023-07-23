@@ -23,7 +23,7 @@ const SetupMenu = ({ openData, themeColors }) => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    getData({}, tab === "meals" ? "food-group/search" : "recipe/search").then((result) => {
+    getData({}, tab === "meals" ? "meal/search" : "recipe/search").then((result) => {
       tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
       console.log("meals", meals, "recipes", recipes);
     });
@@ -36,13 +36,24 @@ const SetupMenu = ({ openData, themeColors }) => {
   const onDrop = async (item, data) => {
     const menuDataTemp = { ...menuData };
     const items = menuDataTemp.foodMenu.find((cat) => data.mealTimeCategory === cat.mealTimeCategory && data.dayNumber === cat.dayNumber);
-    if (items) {
-      items.recipeVariants.push({ ...item, ...data });
+    if (item.mealOrRecepe === "recipe") {
+      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
+      console.log(response)
+      if (items) {
+        items.recipeVariants.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
+      } else {
+        menuDataTemp.foodMenu.push({ ...data, meals: [], recipeVariants: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+      }
     } else {
-      menuDataTemp.foodMenu.push({ ...data, meals: [], recipeVariants: [{ ...item, ...data }] });
+      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, meal: item._id }, "food-menu-item");
+      console.log(response)
+      if (items) {
+        items.meals.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
+      } else {
+        menuDataTemp.foodMenu.push({ ...data, recipeVariants: [], meals: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+      }
     }
     setMenuData(menuDataTemp);
-    await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
   };
   useEffect(() => {
     getData({ menuId: openData.data._id }, "food-menu/get-a-menu").then((response) => {
@@ -77,22 +88,46 @@ const SetupMenu = ({ openData, themeColors }) => {
                             data={{ mealTimeCategory: mealTimeCategory._id, dayNumber }}
                             element={
                               <Variants className="vertical">
-                                {items?.recipeVariants?.length > 0 ? (
-                                  items.recipeVariants.map((item) => {
-                                    // Render your items inside the FoodButton here
-                                    // For example, you can render a list of items like this
-                                    return (
-                                      <Variant className="vertical">
-                                        <span className="recipe">{item.recipe.title} </span>
-                                        <span className="variant">{item.variant} </span>
-                                      </Variant>
-                                    );
-                                  })
-                                ) : (
-                                  <FoodButton onClick={() => handleAddFood(mealTimeCategory._id, dayNumber)}>
-                                    <GetIcon icon={"add"}></GetIcon>
-                                  </FoodButton>
-                                )}
+                                {items?.recipeVariants?.length > 0
+                                  ? items.recipeVariants.map((item) => {
+                                      // Render your items inside the FoodButton here
+                                      // For example, you can render a list of items like this
+                                      return (
+                                        <Variant className="vertical">
+                                          <span className="recipe">{item.recipe.title} </span>
+                                          <span className="variant">{item.variant} </span>
+                                          <span
+                                            className="delete"
+                                            onClick={() => {
+                                              alert(item.foodMenuItem);
+                                            }}
+                                          >
+                                            <GetIcon icon={"close"} />
+                                          </span>
+                                        </Variant>
+                                      );
+                                    })
+                                  : ""}
+                                {items?.meals?.length > 0
+                                  ? items.meals.map((item) => {
+                                      // Render your items inside the FoodButton here
+                                      // For example, you can render a list of items like this
+                                      return (
+                                        <Variant className="vertical">
+                                          <span className="recipe">{item.title} </span>
+                                          <span className="variant">{"Items: " + item.mealItems.length} </span>
+                                          <span
+                                            className="delete"
+                                            onClick={() => {
+                                              alert(item.foodMenuItem);
+                                            }}
+                                          >
+                                            <GetIcon icon={"close"} />
+                                          </span>
+                                        </Variant>
+                                      );
+                                    })
+                                  : ""}
                               </Variants>
                             }
                           ></DropTarget>
@@ -130,15 +165,18 @@ const SetupMenu = ({ openData, themeColors }) => {
                     element={
                       <MealItem key={meal._id}>
                         <Title>{meal.title ?? "Title not found!"}</Title>
+                        <Title>
+                          <span>BHD</span>
+                          <span className="price">{meal.price}</span>
+                          <span className="offer">{meal.offerPrice}</span>
+                        </Title>
                         <Variants>
-                          {meal.foodGroupItems.map((item) => {
+                          {meal.mealItems.map((item) => {
                             const recipeVariant = item.recipeVariant;
                             return (
                               <Variant key={item._id}>
                                 <span>
-                                  <span>BHD</span>
-                                  <span className="price">{recipeVariant.price}</span>
-                                  <span className="offer">{recipeVariant.offerPrice}</span>{" "}
+                                  <span className="recipe">{recipeVariant.recipe.title}</span>
                                 </span>
                                 <span className="variant">{recipeVariant.variant}</span>
                               </Variant>
