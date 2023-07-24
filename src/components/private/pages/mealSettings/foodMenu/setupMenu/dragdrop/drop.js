@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import { Div } from "../styles";
+import styled from "styled-components";
 
 const DropTarget = ({ element, data, onDrop }) => {
   const [{ isOver }, drop] = useDrop({
@@ -20,5 +20,15 @@ const DropTarget = ({ element, data, onDrop }) => {
     </Div>
   );
 };
-
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  padding: 10px 10px;
+  &.hover {
+    border: 1px dashed rgb(204, 204, 204);
+  }
+`;
 export default DropTarget;

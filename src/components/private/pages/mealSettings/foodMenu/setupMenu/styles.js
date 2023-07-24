@@ -41,21 +41,27 @@ export const MealCategoryCell = styled.th`
 `;
 
 export const Div = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   flex-direction: column;
+  border-top: 1px solid rgb(204, 204, 204);
+  border-bottom: 1px solid rgb(204, 204, 204);
+  &:first-child {
+    border-top: 0px solid rgb(204, 204, 204);
+  }
+  &:last-child {
+    border-top: 0px solid rgb(204, 204, 204);
+    border-bottom: 0px solid rgb(204, 204, 204);
+  }
   &.hover {
-    border: 1px dashed;
     border-radius: 10px;
-    padding: 10px;
   }
 `;
 
 export const TableCell = styled.td`
-  padding: 10px;
+  padding: 0px;
   border: 1px solid #ccc;
   background-color: white;
   text-align: center;
@@ -173,7 +179,7 @@ export const Variant = styled.div`
   }
   &:hover .delete {
     display: flex;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
   }
 `;

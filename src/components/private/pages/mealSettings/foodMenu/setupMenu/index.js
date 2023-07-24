@@ -57,22 +57,24 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
 
   const onDrop = async (item, data) => {
     const menuDataTemp = { ...menuData };
-    const items = menuDataTemp.foodMenu.find((cat) => data.mealTimeCategory === cat.mealTimeCategory && data.dayNumber === cat.dayNumber);
+    const items = menuDataTemp.foodMenu.find((cat) => data.mealTimeCategory === cat.mealTimeCategory && data.dayNumber === cat.dayNumber && data.optionNo === cat.optionNo);
     if (item.mealOrRecepe === "recipe") {
-      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id }, "food-menu-item");
-      console.log(response);
-      if (items) {
-        items.recipeVariants.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
-      } else {
-        menuDataTemp.foodMenu.push({ ...data, meals: [], recipeVariants: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, recipeVariant: item._id, optionNo: data.optionNo }, "food-menu-item");
+      if (response?.data?.success === true) {
+        if (items) {
+          items.recipeVariants.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
+        } else {
+          menuDataTemp.foodMenu.push({ ...data, meals: [], recipeVariants: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+        }
       }
     } else {
-      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, meal: item._id }, "food-menu-item");
-      console.log(response);
-      if (items) {
-        items.meals.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
-      } else {
-        menuDataTemp.foodMenu.push({ ...data, recipeVariants: [], meals: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+      const response = await postData({ ...data, mealOrRecepe: item.mealOrRecepe, foodMenu: menuId, meal: item._id, optionNo: data.optionNo }, "food-menu-item");
+      if (response?.data?.success === true) {
+        if (items) {
+          items.meals.push({ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id });
+        } else {
+          menuDataTemp.foodMenu.push({ ...data, recipeVariants: [], meals: [{ ...item, ...data, foodMenuItem: response.data.foodMenuItem._id }] });
+        }
       }
     }
     setMenuData(menuDataTemp);
@@ -101,59 +103,75 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                 <TableRow key={mealTimeCategory._id}>
                   <MealCategoryCell>{mealTimeCategory.mealtimeCategoriesName}</MealCategoryCell>
                   {daysOfWeek.map((day, dayNumber) => {
-                    const items = menuData.foodMenu.find((item) => item.mealTimeCategory === mealTimeCategory._id && item.dayNumber === dayNumber);
+                    const options = menuData.foodMenu.filter((item) => item.mealTimeCategory === mealTimeCategory._id && item.dayNumber === dayNumber && (item.meals.length > 0 || item.recipeVariants.length > 0));
+                    // const items = options[0];
                     return (
                       <TableCell className={dayNumber === 0 ? "first" : ""} key={dayNumber}>
-                        <Div>
-                          <DropTarget
-                            onDrop={onDrop}
-                            data={{ mealTimeCategory: mealTimeCategory._id, dayNumber }}
-                            element={
-                              <Variants className="vertical">
-                                {items?.recipeVariants?.length > 0
-                                  ? items.recipeVariants.map((item, index) => {
-                                      // Render your items inside the FoodButton here
-                                      // For example, you can render a list of items like this
-                                      return (
-                                        <Variant className="vertical">
-                                          <span className="recipe">{item.recipe.title} </span>
-                                          <span className="variant">{item.variant} </span>
-                                          <span
-                                            className="delete"
-                                            onClick={() => {
-                                              deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber);
-                                            }}
-                                          >
-                                            <GetIcon icon={"close"} />
-                                          </span>
-                                        </Variant>
-                                      );
-                                    })
-                                  : ""}
-                                {items?.meals?.length > 0
-                                  ? items.meals.map((item, index) => {
-                                      // Render your items inside the FoodButton here
-                                      // For example, you can render a list of items like this
-                                      return (
-                                        <Variant className="vertical">
-                                          <span className="recipe">{item.title} </span>
-                                          <span className="variant">{"Items: " + item.mealItems.length} </span>
-                                          <span
-                                            className="delete"
-                                            onClick={() => {
-                                              deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber);
-                                            }}
-                                          >
-                                            <GetIcon icon={"close"} />
-                                          </span>
-                                        </Variant>
-                                      );
-                                    })
-                                  : ""}
-                              </Variants>
-                            }
-                          ></DropTarget>
-                        </Div>
+                        {options.map((items) => {
+                          return (
+                            <Div>
+                              <DropTarget
+                                onDrop={onDrop}
+                                data={{ mealTimeCategory: mealTimeCategory._id, dayNumber, optionNo: items.optionNo }}
+                                element={
+                                  <Variants className="vertical">
+                                    {items?.recipeVariants?.length > 0
+                                      ? items.recipeVariants.map((item, index) => {
+                                          // Render your items inside the FoodButton here
+                                          // For example, you can render a list of items like this
+                                          return (
+                                            <Variant className="vertical">
+                                              <span className="recipe">{item.recipe.title} </span>
+                                              <span className="variant">{item.variant} </span>
+                                              <span
+                                                className="delete"
+                                                onClick={() => {
+                                                  deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber);
+                                                }}
+                                              >
+                                                <GetIcon icon={"close"} />
+                                              </span>
+                                            </Variant>
+                                          );
+                                        })
+                                      : ""}
+                                    {items?.meals?.length > 0
+                                      ? items.meals.map((item, index) => {
+                                          return (
+                                            <Variant className="vertical">
+                                              <span className="recipe">{item.title} </span>
+                                              <span className="variant">{"Items: " + item.mealItems.length} </span>
+                                              <span
+                                                className="delete"
+                                                onClick={() => {
+                                                  deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber);
+                                                }}
+                                              >
+                                                <GetIcon icon={"close"} />
+                                              </span>
+                                            </Variant>
+                                          );
+                                        })
+                                      : ""}
+                                  </Variants>
+                                }
+                              ></DropTarget>
+                            </Div>
+                          );
+                        })}
+                        {
+                          <Div>
+                            <DropTarget
+                              onDrop={onDrop}
+                              data={{ mealTimeCategory: mealTimeCategory._id, dayNumber, optionNo: options.length ? options.length + 1 : 0 }}
+                              element={
+                                <Variants className="vertical">
+                                  <GetIcon icon={"add"}></GetIcon>
+                                </Variants>
+                              }
+                            />
+                          </Div>
+                        }
                       </TableCell>
                     );
                   })}
