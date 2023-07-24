@@ -13,6 +13,9 @@ export const SelectBox = styled.div`
   .select{
     display:none;
   }
+   &.disabled {
+    display: none;
+  }
   &.half:nth-child(even) {
     width: calc(50% - 5px);
     margin-right: 5px;
