@@ -1,5 +1,8 @@
 import styled from "styled-components";
 export const SelectBox = styled.div`
+  &.disabled {
+    display: none;
+  }
   position: relative;
   width: 100%;
   &.half {
