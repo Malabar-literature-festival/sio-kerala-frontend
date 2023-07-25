@@ -12,6 +12,7 @@ import DropTarget from "./dragdrop/drop";
 const SetupMenu = ({ openData, themeColors, setMessage }) => {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [menuId] = useState(openData.data._id);
+  const [data] = useState(openData.data);
   const [menuData, setMenuData] = useState(null);
   const [meals, setMeals] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -29,27 +30,52 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   }, []);
   useEffect(() => {
     handleTabClick("meals");
+    // console.log(openData.data);
   }, [handleTabClick]);
   // const handleAddFood = (mealTimeCategoryId, dayIndex) => {
   //   // Handle adding food to the selected cell
   //   console.log(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
   //   alert(`Adding food to Meal Time Category ${mealTimeCategoryId} on Day ${dayIndex} to ${menuId}`);
   // };
-  const deleteItem = async (id, index, mealOrRecepe, mealTimeCategory, dayNumber) => {
+  const deleteItem = async (id, index, mealOrRecepe, mealTimeCategory, dayNumber, optionNo) => {
     setMessage({
       type: 2,
-      content: "Are you sure do delete?",
+      content: "Are you sure you want to delete?",
       proceed: "Delete",
       onProceed: async () => {
-        const menuDataTemp = { ...menuData };
-        await deleteData({ id }, "food-menu-item");
-        const items = menuDataTemp.foodMenu.find((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber);
-        if (mealOrRecepe === "recipe") {
-          delete items.recipeVariants[index];
-        } else {
-          delete items.meals[index];
+        try {
+          // Call the deleteData function to delete the item with the given id from the server (Assuming this is an asynchronous function)
+          await deleteData({ id }, "food-menu-item");
+
+          // Create a copy of menuData.foodMenu to work with
+          const menuDataTemp = { ...menuData };
+
+          // Find the items object based on the provided parameters (mealTimeCategory, dayNumber, optionNo)
+          const items = menuDataTemp.foodMenu.find((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber && cat.optionNo === optionNo);
+
+          // Check the value of mealOrRecepe to decide whether to delete from recipeVariants or meals
+          if (mealOrRecepe === "recipe") {
+            // Delete the recipeVariant at the specified index
+            items.recipeVariants.splice(index, 1);
+          } else {
+            // Delete the meal at the specified index
+            items.meals.splice(index, 1);
+          }
+
+          // If both recipeVariants and meals are empty, remove the entire items object from menuDataTemp.foodMenu
+          if (items.recipeVariants.length === 0 && items.meals.length === 0) {
+            const itemIndex = menuDataTemp.foodMenu.findIndex((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber && cat.optionNo === optionNo);
+            if (itemIndex !== -1) {
+              menuDataTemp.foodMenu.splice(itemIndex, 1);
+            }
+          }
+
+          // Update the state with the modified menuDataTemp
+          setMenuData(menuDataTemp);
+        } catch (error) {
+          // Handle any errors that occur during the deletion process
+          console.log(error);
         }
-        setMenuData(menuDataTemp);
       },
       data: { id },
     });
@@ -77,6 +103,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
         }
       }
     }
+    console.log(menuDataTemp);
     setMenuData(menuDataTemp);
   };
   useEffect(() => {
@@ -104,7 +131,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                   <MealCategoryCell>{mealTimeCategory.mealtimeCategoriesName}</MealCategoryCell>
                   {daysOfWeek.map((day, dayNumber) => {
                     const options = menuData.foodMenu.filter((item) => item.mealTimeCategory === mealTimeCategory._id && item.dayNumber === dayNumber && (item.meals.length > 0 || item.recipeVariants.length > 0));
-                    // const items = options[0];
+
                     return (
                       <TableCell className={dayNumber === 0 ? "first" : ""} key={dayNumber}>
                         {options.map((items) => {
@@ -126,7 +153,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                               <span
                                                 className="delete"
                                                 onClick={() => {
-                                                  deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber);
+                                                  deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber, items.optionNo);
                                                 }}
                                               >
                                                 <GetIcon icon={"close"} />
@@ -144,7 +171,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                               <span
                                                 className="delete"
                                                 onClick={() => {
-                                                  deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber);
+                                                  deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber, items.optionNo);
                                                 }}
                                               >
                                                 <GetIcon icon={"close"} />
@@ -159,11 +186,11 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                             </Div>
                           );
                         })}
-                        {
+                        {(data.menuType == "Optional" || options.length==0) && (
                           <Div>
                             <DropTarget
                               onDrop={onDrop}
-                              data={{ mealTimeCategory: mealTimeCategory._id, dayNumber, optionNo: options.length ? options.length + 1 : 0 }}
+                              data={{ mealTimeCategory: mealTimeCategory._id, dayNumber, optionNo: options.length + 1 }}
                               element={
                                 <Variants className="vertical">
                                   <GetIcon icon={"add"}></GetIcon>
@@ -171,7 +198,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                               }
                             />
                           </Div>
-                        }
+                        )}
                       </TableCell>
                     );
                   })}
