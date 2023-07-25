@@ -40,6 +40,8 @@ const FoodMenu = (props) => {
       default: "",
       tag: true,
       label: "Diet Category",
+      showItem:'typeOfDietName',
+      collection:'dietCategory',
       required: false,
       view: true,
       add: true,

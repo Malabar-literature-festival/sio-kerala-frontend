@@ -27,6 +27,9 @@ const Div = styled.div`
   position: relative;
   flex-direction: column;
   padding: 10px 10px;
+  padding: 5px 5px;
+  width: calc(100% - 10px);
+
   &.hover {
     border: 1px dashed rgb(204, 204, 204);
   }
