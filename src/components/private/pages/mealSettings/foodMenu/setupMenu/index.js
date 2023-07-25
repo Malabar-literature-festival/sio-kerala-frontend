@@ -186,7 +186,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                             </Div>
                           );
                         })}
-                        {(data.menuType == "Optional" || options.length==0) && (
+                        {(data.menuType === "Optional" || options.length === 0) && (
                           <Div>
                             <DropTarget
                               onDrop={onDrop}
