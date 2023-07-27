@@ -45,7 +45,7 @@ const postData = async (fields, ulr, dispatch, navigate) => {
 
       resolve({ status: response.status, data: response.data });
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       resolve({
         status: error.response.status,
         data: error.response?.data?.message,

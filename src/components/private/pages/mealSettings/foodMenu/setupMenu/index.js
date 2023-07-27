@@ -39,6 +39,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
     "Saturday",
   ];
   const [menuId] = useState(openData.data._id);
+  const [data] = useState(openData.data);
   const [menuData, setMenuData] = useState(null);
   const [meals, setMeals] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -62,6 +63,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
 
   useEffect(() => {
     handleTabClick("meals");
+    // console.log(openData.data);
   }, [handleTabClick]);
 
   // const handleAddFood = (mealTimeCategoryId, dayIndex) => {
@@ -78,7 +80,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   ) => {
     setMessage({
       type: 2,
-      content: "Are you sure do delete?",
+      content: "Are you sure you want to delete?",
       proceed: "Delete",
       onProceed: async () => {
         const menuDataTemp = { ...menuData };
@@ -92,8 +94,39 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
           delete items.recipeVariants[index];
         } else {
           delete items.meals[index];
+        try {
+          // Call the deleteData function to delete the item with the given id from the server (Assuming this is an asynchronous function)
+          await deleteData({ id }, "food-menu-item");
+
+          // Create a copy of menuData.foodMenu to work with
+          const menuDataTemp = { ...menuData };
+
+          // Find the items object based on the provided parameters (mealTimeCategory, dayNumber, optionNo)
+          const items = menuDataTemp.foodMenu.find((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber && cat.optionNo === optionNo);
+
+          // Check the value of mealOrRecepe to decide whether to delete from recipeVariants or meals
+          if (mealOrRecepe === "recipe") {
+            // Delete the recipeVariant at the specified index
+            items.recipeVariants.splice(index, 1);
+          } else {
+            // Delete the meal at the specified index
+            items.meals.splice(index, 1);
+          }
+
+          // If both recipeVariants and meals are empty, remove the entire items object from menuDataTemp.foodMenu
+          if (items.recipeVariants.length === 0 && items.meals.length === 0) {
+            const itemIndex = menuDataTemp.foodMenu.findIndex((cat) => cat.mealTimeCategory === mealTimeCategory && cat.dayNumber === dayNumber && cat.optionNo === optionNo);
+            if (itemIndex !== -1) {
+              menuDataTemp.foodMenu.splice(itemIndex, 1);
+            }
+          }
+
+          // Update the state with the modified menuDataTemp
+          setMenuData(menuDataTemp);
+        } catch (error) {
+          // Handle any errors that occur during the deletion process
+          console.log(error);
         }
-        setMenuData(menuDataTemp);
       },
       data: { id },
     });
@@ -159,6 +192,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
         });
       }
     }
+    console.log(menuDataTemp);
     setMenuData(menuDataTemp);
   };
   useEffect(() => {
