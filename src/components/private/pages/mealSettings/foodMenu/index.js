@@ -78,80 +78,6 @@ const FoodMenu = (props) => {
     // More attributes for diet menu items...
   ]);
 
-<<<<<<< HEAD
-  const [foodGroupItem] = useState([
-    //MEAL IS A RECIPE//
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "meal/select",
-      updateOn: "mealTimeCategory",
-      iconImage: { collection: "", item: "mealPhoto" },
-      tags: [
-        {
-          type: "text",
-          item: "proteinCategoriesName",
-          title: "Protein Category",
-          collection: "proteinCategory",
-        },
-        {
-          type: "text",
-          item: "mealDescription",
-          title: "Description",
-          collection: "",
-        },
-      ],
-      placeholder: "Recipe",
-      name: "meal",
-      validation: "",
-      showItem: "mealName",
-      default: "",
-      tag: true,
-      label: "Recipe",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "select",
-      apiType: "API",
-      selectApi: "meal-variant/select",
-      placeholder: "Recipe Variant",
-      name: "mealVariant",
-      validation: "",
-      showItem: "mealPrice",
-      default: "",
-      tag: true,
-      label: "Recipe Variant",
-      required: true,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
-    {
-      type: "number",
-      apiType: "",
-      selectApi: "",
-      placeholder: "Quantity",
-      name: "quantity",
-      validation: "",
-      showItem: "",
-      default: "",
-      tag: true,
-      label: "Quantity",
-      required: false,
-      view: true,
-      add: true,
-      update: true,
-      filter: false,
-    },
-  ]);
-  const [menuSetup, setMenuSetup] = useState(false);
-  const [openData, setOpenData] = useState(null);
-=======
   // State to control the display of the SetupMenu popup
   const [openMenuSetup, setOpenMenuSetup] = useState(false);
 
@@ -159,7 +85,6 @@ const FoodMenu = (props) => {
   const [openItemData, setOpenItemData] = useState(null);
 
   // Function to close the SetupMenu popup
->>>>>>> origin/master
   const closeModal = () => {
     setOpenMenuSetup(false);
     setOpenItemData(null);
@@ -224,15 +149,6 @@ const FoodMenu = (props) => {
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
-<<<<<<< HEAD
-      {menuSetup && openData && (
-        <PopupView
-          popupData={<SetupMenu openData={openData}></SetupMenu>}
-          themeColors={themeColors}
-          closeModal={closeModal}
-          itemTitle={{ name: "title", type: "text", collection: "" }}
-          openData={openData}
-=======
       {/* Render the SetupMenu popup when openMenuSetup is true and openItemData is not null */}
       {openMenuSetup && openItemData && (
         <PopupView
@@ -240,6 +156,7 @@ const FoodMenu = (props) => {
           popupData={
             <SetupMenu
               openData={openItemData}
+              setMessage={props.setMessage}
               // Pass selected item data (Menu Title) to the popup for setting the time
             ></SetupMenu>
           }
@@ -247,7 +164,6 @@ const FoodMenu = (props) => {
           closeModal={closeModal}
           itemTitle={{ name: "title", type: "text", collection: "" }}
           openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
->>>>>>> origin/master
           customClass={"large"}
         ></PopupView>
       )}

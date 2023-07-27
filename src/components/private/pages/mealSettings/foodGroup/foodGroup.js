@@ -16,12 +16,12 @@ const FoodGroup = (props) => {
   const [attributes] = useState([
     {
       type: "text",
-      placeholder: "Package Name",
-      name: "packageName",
+      placeholder: "Meal Goup",
+      name: "title",
       validation: "",
       default: "",
-      tag: true,
-      label: "Package Name",
+      tag: false,
+      label: "Meal Goup",
       required: true,
       view: true,
       add: true,
@@ -66,6 +66,19 @@ const FoodGroup = (props) => {
       add: true,
       update: true,
     },
+    {
+      type: "number",
+      placeholder: "Offer Price",
+      name: "offerPrice",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Offer Price",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
   ]);
 
   const [foodGroupItem] = useState([
@@ -103,9 +116,9 @@ const FoodGroup = (props) => {
       placeholder: "Recipe Variant",
       name: "recipeVariant",
       validation: "",
-      updateOn:'recipe',
+      updateOn: "recipe",
       showItem: "price",
-      collection:"recipeVariant",
+      collection: "recipeVariant",
       default: "",
       tag: true,
       label: "Recipe Variant",
@@ -121,7 +134,7 @@ const FoodGroup = (props) => {
     {
       element: "button",
       type: "subList",
-      id: "food-group-item",
+      id: "meal-item",
       // itemTitle: "username",
       itemTitle: {
         name: "variant",
@@ -131,8 +144,8 @@ const FoodGroup = (props) => {
       title: "Recipe Items",
       attributes: foodGroupItem,
       params: {
-        api: `food-group-item`,
-        parentReference: "",
+        api: `meal-item`,
+        parentReference: "meal",
         // itemTitle: "username",
         itemTitle: {
           name: "variant",
@@ -156,11 +169,12 @@ const FoodGroup = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`food-group`}
+        api={`meal`}
         displayColumn="double"
+        parentReference="meal"
         // Property name for the title of each menu item
         // itemTitle={`label`}
-        itemTitle={{ name: "packageName", type: "text", collection: "" }}
+        itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal`}
         formMode={`double`}

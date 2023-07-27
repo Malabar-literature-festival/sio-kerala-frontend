@@ -45,6 +45,13 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  flex-direction: column;
+  &.hover {
+    border: 1px dashed;
+    border-radius: 10px;
+    padding: 10px;
+  }
 `;
 
 export const TableCell = styled.td`
@@ -88,25 +95,6 @@ export const MealItem = styled.div`
 `;
 export const Title = styled.div`
   width: 100%;
-`;
-export const Variants = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  overflow-wrap: anywhere;
-  margin-top: 10px;
-  column-gap: 10px;
-`;
-export const Variant = styled.div`
-  width: 100%;
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-weight: bolder;
-  font-size: 14px;
-  width: auto;
-  flex-direction: column;
-  display: flex;
   span {
     font-size: 10px;
   }
@@ -118,7 +106,74 @@ export const Variant = styled.div`
     font-size: 14px;
     font-weight: bolder;
   }
-  .variant {
+`;
+export const Variants = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-wrap: anywhere;
+  margin-top: 10px;
+  column-gap: 10px;
+  &.vertical {
+    flex-direction: column;
+    row-gap: 5px;
+    overflow-wrap: initial;
+  }
+`;
+export const Variant = styled.div`
+  width: 100%;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px 5px;
+
+  font-weight: bolder;
+  font-size: 14px;
+  width: auto;
+  flex-direction: column;
+  display: flex;
+  border: 1px solid #ccc;
+  position: relative;
+  span {
+    font-size: 10px;
+  }
+  .price {
+    font-size: 10px;
+    text-decoration: line-through;
+  }
+  .offer {
     font-size: 14px;
+  }
+  .variant {
+    font-size: 9px;
+    text-align: left;
+  }
+  .recipe {
+    font-size: 10px;
+    font-weight: bolder;
+    text-align: left;
+  }
+  &.vertical .offer {
+    justify-content: left;
+    text-align: left;
+    display: flex;
+  }
+  .delete {
+    display: none;
+    font-size: 8px;
+    position: absolute;
+    padding: 2px;
+    right: -5px;
+    top: -5px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid;
+    background-color: white;
+    height: 10px;
+    width: 10px;
+  }
+  &:hover .delete {
+    display: flex;
+    justify-content:center;
+    align-items:center;
   }
 `;
