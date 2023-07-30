@@ -28,7 +28,7 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   overflow: auto;
   z-index: 1001;
   @media (max-width: 768px) {
@@ -39,6 +39,15 @@ export const Overlay = styled.div`
     border-top: 1px solid rgb(224, 224, 227);
   }
 `;
+const zoomAnimation = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
+
 export const Page = styled.div`
   display: flex;
   flex-direction: column;
@@ -49,10 +58,13 @@ export const Page = styled.div`
   max-width: 100%;
   height: auto;
   animation: ${fadeIn} 1s ease-in-out;
+  /* animation: ${zoomAnimation} 1s ease-in-out; */
   animation-duration: 0.2s;
   margin: 5vh auto auto auto;
   padding: 0em 0;
   background-color: white;
+  max-height: 90%;
+  box-shadow: 0px 0px 3px 1px rgb(181 181 181 / 45%);
   &.medium {
     width: 70%;
     min-width: 250px;
@@ -85,6 +97,24 @@ export const Header = styled.div`
   font-size: 1.3em;
   &.form {
     padding: 0.5em 0.5em;
+  }
+  &.small {
+    padding: 5px;
+    padding: 5px;
+    border-bottom: 1px solid rgb(243, 243, 243);
+    margin-bottom:10px;
+  }
+  &.small button {
+    background-color: rgb(243, 243, 243);
+    height: 30px;
+    padding:5px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &.small > span {
+    font-size: 12px;
   }
   /* border-bottom: 1px solid rgb(204, 204, 204); */
   @media (max-width: 768px) {
