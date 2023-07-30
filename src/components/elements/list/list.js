@@ -572,7 +572,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
     }, 300);
   };
   const selectRef = useRef([]);
-  const [currentAction, setCurrentAction] = useState("0");
+  const [currentAction, setCurrentAction] = useState("");
   useEffect(() => {
     const handleClickOutside = (event) => {
       const clickedInsideRefs = selectRef.current.filter((ref) => ref.current && ref.current.contains(event.target));

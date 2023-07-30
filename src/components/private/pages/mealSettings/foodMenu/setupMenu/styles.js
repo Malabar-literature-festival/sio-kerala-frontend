@@ -115,7 +115,7 @@ export const Variants = styled.div`
   overflow-wrap: anywhere;
   margin-top: 10px;
   column-gap: 10px;
-  
+
   &.vertical {
     flex-direction: column;
     row-gap: 5px;
@@ -173,9 +173,46 @@ export const Variant = styled.div`
     height: 10px;
     width: 10px;
   }
+  .replace {
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+    left: 5px;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 2px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+  &.selected {
+    background-color: black;
+    color: white;
+  }
   &:hover .delete {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+`;
+
+export const ReplacableItems = styled.div`
+  position: fixed;
+  top: 0;
+  left: 10%;
+  width: 200px;
+  top: auto;
+  min-height: 200px;
+  right: auto;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
+  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0px 0px 3px 1px rgb(181 181 181 / 45%);
+`;
+export const SideHead = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
 `;

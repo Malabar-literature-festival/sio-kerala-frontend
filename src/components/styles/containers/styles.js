@@ -96,6 +96,8 @@ export const RowContainer = styled.div`
   background-color: ${(props) => props.theme.pageBackground};
   &.mealSelection {
     padding-right: 30px;
+    position: sticky;
+    top: 0;
   }
   &.content {
     flex: 1 1 calc(100% - 15em);
