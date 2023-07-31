@@ -4,7 +4,7 @@ import { deleteData, getData, postData } from "../../../../../../backend/api";
 import { NoData } from "../../../../../elements/list/styles";
 import { ColumnContainer, RowContainer } from "../../../../../styles/containers/styles";
 import Search from "../../../../../elements/search";
-import { TabContainer, TabButton, Table, TableHeader, TableBody, TableRow, MealCategoryCell, Div, TableCell, TabData, TabDataItem, MealItem, Title, Variants, Variant, ReplacableItems, SideHead } from "./styles"; // Import styles from styles.js
+import { TabContainer, TabButton, Table, TableHeader, TableBody, TableRow, MealCategoryCell, Div, TableCell, TabData, TabDataItem, MealItem, Title, Variants, Variant, ReplacableItems } from "./styles"; // Import styles from styles.js
 import DraggableItem from "./dragdrop/drag";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
@@ -40,7 +40,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   const openReplacableItems = (foodMenuItem, mealOrRecepe) => {
     setShowReplcable(foodMenuItem);
     getData({ foodMenuItem: foodMenuItem }, "food-menu/replacable-items").then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         const tempReplacableItems = { ...replacableItems };
         if (mealOrRecepe === "recipe") {
           tempReplacableItems[`replacable-${mealOrRecepe}-${foodMenuItem}`] = response.data.replacableItems?.[0]?.recipeVariants ?? [];
@@ -197,7 +197,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   };
   useEffect(() => {
     getData({ menuId: openData.data._id }, "food-menu/get-a-menu").then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         setMenuData(response.data);
       }
     });
