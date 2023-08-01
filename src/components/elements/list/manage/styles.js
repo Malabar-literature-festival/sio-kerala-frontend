@@ -65,6 +65,7 @@ export const Page = styled.div`
   background-color: white;
   max-height: 90%;
   box-shadow: 0px 0px 3px 1px rgb(181 181 181 / 45%);
+  
   &.medium {
     width: 70%;
     min-width: 250px;
@@ -74,6 +75,13 @@ export const Page = styled.div`
     width: 80%;
     min-width: 250px;
     max-width: 100%;
+  }
+  &.full-page
+  {
+    height:100vh;
+    max-height:100vh;
+     margin: 0;
+     width:100%;
   }
   @media (max-width: 768px) {
     width: 100%;

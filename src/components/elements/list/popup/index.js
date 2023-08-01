@@ -82,7 +82,9 @@ const Popup = ({ formMode, viewMode, themeColors, openData, setLoaderBox, setMes
             <GetIcon icon={"Close"} />
           </CloseButton>
         </Header>
-        <RowContainer  theme={themeColors} className="popup-data">{tabs.length > 0 && <Tabs tabs={tabs}></Tabs>}</RowContainer>
+        <RowContainer theme={themeColors} className="popup-data">
+          {tabs.length > 0 && <Tabs tabs={tabs}></Tabs>}
+        </RowContainer>
       </Page>
     </Overlay>
   );

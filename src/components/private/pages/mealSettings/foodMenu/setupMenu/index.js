@@ -11,6 +11,7 @@ import { DndProvider } from "react-dnd";
 import DropTarget from "./dragdrop/drop";
 import { CloseButton } from "../../../../../elements/list/popup/styles";
 import { Header } from "../../../../../elements/list/manage/styles";
+import { useRef } from "react";
 const SetupMenu = ({ openData, themeColors, setMessage }) => {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const [menuId] = useState(openData.data._id);
@@ -20,13 +21,24 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   const [recipes, setRecipes] = useState([]);
   const [activeTab, setActiveTab] = useState("meals");
   const [searchValue, setSearchValue] = useState("");
-  const searchChange = (item) => {
-    setSearchValue(item.target.value);
+  const searchTimeoutRef = useRef();
+
+  const searchChange = (event) => {
+    clearTimeout(searchTimeoutRef.current);
+    setSearchValue(event.target.value);
+    searchTimeoutRef.current = setTimeout(() => {
+      handleTabClick(activeTab, event.target.value);
+    }, 300);
   };
 
-  const handleTabClick = useCallback((tab) => {
+  //------------
+  // const searchChange = (item) => {
+  //   setSearchValue(item.target.value);
+  // };
+
+  const handleTabClick = useCallback((tab, searchKey) => {
     setActiveTab(tab);
-    getData({}, tab === "meals" ? "meal/search" : "recipe/search").then((result) => {
+    getData({ searchKey }, tab === "meals" ? "meal/search" : "recipe/search").then((result) => {
       tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
     });
   }, []);
@@ -35,6 +47,9 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
     handleTabClick("meals");
     // console.log(openData.data);
   }, [handleTabClick]);
+
+  // const [filter, setFilter] = useState(false);
+
   const [showReplacable, setShowReplcable] = useState(0);
   const [replacableItems, setReplacableItems] = useState({});
   const openReplacableItems = (foodMenuItem, mealOrRecepe) => {
@@ -204,9 +219,9 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   }, [openData.data._id]);
 
   return menuData ? (
-    <ColumnContainer style={{ marginBottom: "30px" }}>
+    <ColumnContainer style={{ marginBottom: "30px", position: "relative", height: "90%" }}>
       <DndProvider backend={HTML5Backend}>
-        <RowContainer>
+        <RowContainer className="menu">
           <Table>
             <thead>
               <tr>
@@ -402,10 +417,10 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
         </RowContainer>
         <RowContainer className="mealSelection">
           <TabContainer>
-            <TabButton active={activeTab === "meals"} onClick={() => handleTabClick("meals")}>
+            <TabButton active={activeTab === "meals"} onClick={() => handleTabClick("meals", searchValue)}>
               Meals
             </TabButton>
-            <TabButton active={activeTab === "recipes"} onClick={() => handleTabClick("recipes")}>
+            <TabButton active={activeTab === "recipes"} onClick={() => handleTabClick("recipes", searchValue)}>
               Recipes
             </TabButton>
           </TabContainer>
@@ -428,7 +443,9 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                           <span>BHD</span>
                           <span className="price">{meal.price}</span>
                           <span className="offer">{meal.offerPrice}</span>
+                          <span className="calories">{`${meal.calories} calories`}</span>
                         </Title>
+
                         <Variants>
                           {meal.mealItems.map((item) => {
                             const recipeVariant = item.recipeVariant;
@@ -452,7 +469,11 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
               <TabDataItem>
                 {recipes.map((recipe) => (
                   <MealItem key={recipe._id}>
-                    <Title>{recipe.title ?? "Title not found!"}</Title>
+                    <Title>
+                      {recipe.title ?? "Title not found!"}
+                      <span className="calories">{`${recipe.calories} calories`}</span>
+                    </Title>
+
                     <Variants>
                       {recipe.recipeVariants.map((variant) => {
                         return (
@@ -464,8 +485,9 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                 <span>
                                   <span>BHD</span>
                                   <span className="price">{variant.price}</span>
-                                  <span className="offer">{variant.price}</span>{" "}
+                                  <span className="offer">{variant.price}</span>
                                 </span>
+                                <span className="calories">{`${((recipe.calories * variant.percentage) / 100).toFixed(0)} calories`}</span>
                                 <span className="variant">{variant.variant} </span>
                               </Variant>
                             }
