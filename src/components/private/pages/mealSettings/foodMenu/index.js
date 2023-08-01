@@ -40,14 +40,32 @@ const FoodMenu = (props) => {
       default: "",
       tag: true,
       label: "Diet Category",
-      showItem:'typeOfDietName',
-      collection:'dietCategory',
+      showItem: 'typeOfDietName',
+      collection: 'dietCategory',
       required: false,
       view: true,
       add: true,
       update: true,
       apiType: "API",
       selectApi: "type-of-diet/select",
+    },
+    {
+      type: "select",
+      apiType: "API",
+      selectApi: "diet-plan/get-typeofdiet-dietplan",
+      updateOn: "typeOfDiet",
+      placeholder: "Sub Diet",
+      name: "dietPlan",
+      validation: "",
+      showItem: "dietPlan",
+      default: "",
+      tag: true,
+      label: "Sub Diet",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+      filter: false,
     },
     {
       type: "select",
@@ -143,7 +161,7 @@ const FoodMenu = (props) => {
         // itemTitle={`label`}
         itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
-        shortName={`Meal`}
+        shortName={`Week Menu`}
         // Form mode for the ListTable (single or double)
         formMode={`double`}
         // Privilege flag indicating whether the user can add menu items
@@ -159,7 +177,7 @@ const FoodMenu = (props) => {
             <SetupMenu
               openData={openItemData}
               setMessage={props.setMessage}
-              // Pass selected item data (Menu Title) to the popup for setting the time
+            // Pass selected item data (Menu Title) to the popup for setting the time
             ></SetupMenu>
           }
           themeColors={themeColors}
