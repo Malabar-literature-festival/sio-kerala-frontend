@@ -96,7 +96,24 @@ export const RowContainer = styled.div`
   background-color: ${(props) => props.theme.pageBackground};
   &.mealSelection {
     padding-right: 30px;
-    position: sticky;
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-width: 400px;
+    width: 400px;
+    flex: 1 1 400px;
+    bottom: 0;
+    top: 0;
+    overflow: scroll;
+  }
+  &.menu {
+    max-width: calc(100% - 450px);
+    width: calc(100% - 450px);
+    position: absolute;
+    left: 0;
+    flex: 1 1 calc(100% - 450px);
+    overflow: scroll;
+    bottom: 0;
     top: 0;
   }
   &.content {

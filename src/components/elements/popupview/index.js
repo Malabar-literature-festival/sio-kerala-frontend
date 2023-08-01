@@ -10,7 +10,7 @@ import { CloseButton } from "./styles";
 const PopupView = ({ themeColors, closeModal, itemTitle, popupData, customClass, openData }) => {
   const titleValue = (itemTitle.collection?.length > 0 ? openData?.data?.[itemTitle.collection]?.[itemTitle.name] ?? "" : openData?.data?.[itemTitle.name]) || "Please update the itemTitle.";
   return (
-    <Overlay>
+    <Overlay className={`${customClass ?? "medium"}`}>
       <Page className={`${customClass ?? "medium"} popup-child`}>
         <Header>
           <span>{`${getValue(itemTitle, titleValue)}`}</span>
@@ -18,7 +18,9 @@ const PopupView = ({ themeColors, closeModal, itemTitle, popupData, customClass,
             <GetIcon icon={"Close"} />
           </CloseButton>
         </Header>
-        <RowContainer theme={themeColors} className="popup-data">{popupData}</RowContainer>
+        <RowContainer theme={themeColors} className="popup-data">
+          {popupData}
+        </RowContainer>
       </Page>
     </Overlay>
   );

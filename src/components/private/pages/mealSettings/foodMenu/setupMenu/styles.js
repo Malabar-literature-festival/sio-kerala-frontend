@@ -33,11 +33,16 @@ export const TableBody = styled.tbody``;
 export const TableRow = styled.tr``;
 
 export const MealCategoryCell = styled.th`
-  position: sticky;
+  /* position: sticky; */
   left: 0;
   top: 0;
-  padding: 0px 10px 0 30px;
+
   text-align: left;
+  width: 0;
+  &:first-child {
+    width: 10%;
+    padding: 0px 10px 0 30px;
+  }
 `;
 
 export const Div = styled.div`
@@ -60,6 +65,7 @@ export const TableCell = styled.td`
   border: 1px solid #ccc;
   background-color: white;
   text-align: center;
+  width: 12%;
 `;
 
 export const FoodButton = styled.button`
@@ -106,6 +112,12 @@ export const Title = styled.div`
   .offer {
     font-size: 14px;
     font-weight: bolder;
+  }
+  .calories {
+    border-left:1px solid;
+    padding-left:5px;
+    font-size: 14px;
+    margin-left:5px;
   }
 `;
 export const Variants = styled.div`
@@ -183,6 +195,7 @@ export const Variant = styled.div`
     padding: 2px;
     margin-top: 5px;
     cursor: pointer;
+    max-width: 50px;
   }
   &.selected {
     background-color: black;

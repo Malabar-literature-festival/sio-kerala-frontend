@@ -32,6 +32,9 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   overflow: auto;
   z-index: 1001;
+  &.full-page {
+    padding: 0;
+  }
   @media (max-width: 768px) {
     width: 100%;
     padding: 0;

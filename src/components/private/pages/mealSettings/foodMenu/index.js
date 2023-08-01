@@ -166,7 +166,7 @@ const FoodMenu = (props) => {
           closeModal={closeModal}
           itemTitle={{ name: "title", type: "text", collection: "" }}
           openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
-          customClass={"large"}
+          customClass={"full-page"}
         ></PopupView>
       )}
     </Container>
