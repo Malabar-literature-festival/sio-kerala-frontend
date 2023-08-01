@@ -545,3 +545,108 @@ export const IconBox = styled.span`
     align-items: center;
   }
 `;
+export const TableContaner = styled.div`
+  margin: 0em 2em 0px;
+  overflow: auto;
+`;
+export const TableView = styled.table`
+  border-collapse: collapse;
+
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  margin-bottom: auto;
+
+  th {
+    background-color: ${(props) => props.theme.pageBackground};
+  }
+  tr:hover {
+    background-color: ${(props) => props.theme.pageBackground};
+  }
+  &.auto {
+    width: auto;
+  }
+  &&.plain {
+    tr {
+      border: 1px solid;
+    }
+  }
+`;
+export const ThView = styled.th`
+  text-align: left;
+  padding: 15px 8px 10px;
+  white-space: nowrap;
+  background-color: white;
+  color: #444;
+  font-weight: bolder;
+  border-radius: 0px;
+  :first-child {
+    border-top-left-radius: 12px;
+  }
+  :last-child {
+    border-top-right-radius: 12px;
+  }
+  && {
+    .plain & {
+      background-color: transparent;
+    }
+  }
+
+  &.actions {
+    display: flex;
+    justify-content: right;
+    padding-right: 20px;
+  }
+`;
+
+export const TrView = styled.tr`
+  border-top: 1px solid #ccc;
+  &:hover {
+    background-color: #eaeaea;
+    border-radius: 12px;
+  }
+  &:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+  }
+  &:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+`;
+
+export const TdView = styled.td`
+  text-align: left;
+  background-color: white;
+  padding: 8px;
+  height: 30px;
+  position: relative;
+  &.no,
+  &.name {
+    border: 1px solid gray;
+  }
+  &.has {
+    border: 2px solid black;
+    cursor: pointer;
+  }
+  &.no,
+  &.has {
+    text-align: center;
+  }
+  &.no svg {
+    fill: grey;
+  }
+  &.name {
+    text-overflow: "no-wrap";
+  }
+  &.actions {
+    display: flex;
+    justify-content: right;
+    overflow-wrap: normal;
+  }
+  &.right {
+    text-align: right;
+  }
+`;
+export const TrBodyView = styled.tbody``;

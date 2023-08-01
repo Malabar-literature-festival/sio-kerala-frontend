@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody } from "./styles";
+import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody, TableView, TrView, ThView, TdView, TableContaner } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
 import { AddIcon, GetIcon, NextIcon, PreviousIcon } from "../../../icons";
@@ -21,6 +21,20 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 import Print from "./print/print";
+const SetTd = (props) => {
+  if (props.viewMode === "table") {
+    return <TdView {...props}></TdView>;
+  } else {
+    return <Td {...props}></Td>;
+  }
+};
+const SetTr = (props) => {
+  if (props.viewMode === "table") {
+    return <TrView {...props}></TrView>;
+  } else {
+    return <Tr {...props}></Tr>;
+  }
+};
 const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
@@ -334,13 +348,192 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
   const TableRowWithActions = ({ attributes, data, slNo }) => {
     selectRef.current[slNo] = useRef(null);
     const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle";
-    const signleRecord = viewMode === "list" || viewMode === "subList" ? false : true;
+    const signleRecord = viewMode === "list" || viewMode === "subList" || viewMode === "table" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
+    console.log(viewMode);
+    const ActionDiv = (
+      <Td key={`actions-${shortName}-${data._id}`} className="actions">
+        {actions.map((item, index) => {
+          return (
+            item.element !== "button" && (
+              <ToggleContainer key={`${item.id}-${data._id}`}>
+                <ToggleInput
+                  type="checkbox"
+                  checked={data[item.id]}
+                  onChange={async (event) => {
+                    // item.callback(item, data);
+                    setLoaderBox(true);
+                    await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
+                      .then((response) => {
+                        if (response.status === 200) {
+                          if (response.data?.message) {
+                            setMessage({
+                              type: 1,
+                              content: t(response.data?.message),
+                              proceed: t("okay"),
+                            });
+                          }
+                          //
+                          refreshView();
+                          // setIsEditing(false);
+                        } else if (response.status === 404) {
+                          refreshView();
+                          setMessage({
+                            type: 1,
+                            content: t("error"),
+                            proceed: "Okay",
+                          });
+                        } else {
+                          refreshView();
+                          setMessage({
+                            type: 1,
+                            content: t("error"),
+                            proceed: "Okay",
+                          });
+                        }
+                        // setLoaderBox(false);
+                      })
+                      .catch((error) => {
+                        alert(error);
+                        // setLoaderBox(false);
+                      });
+                  }}
+                />
+                <ToggleSlider />
+              </ToggleContainer>
+            ),
+            item.type === "callback" && (
+              <More
+                theme={themeColors}
+                key={`custom-${item.id + "-" + index}-${data._id}`}
+                onClick={() => {
+                  item.callback(item, data);
+                }}
+                className="edit menu callBack"
+              >
+                <GetIcon icon={item.icon} />
+                <span>{t(item.title)}</span>
+              </More>
+            )
+          );
+        })}
+        {!signleRecord && (
+          <More
+            onClick={() => {
+              setIsOpen(true);
+              setOpenData({ actions, attributes, data });
+              setSubAttributes({ actions, attributes, data });
+            }}
+          >
+            <GetIcon icon={"open"}></GetIcon>
+          </More>
+        )}
+        {signleRecord && (
+          <More
+            onClick={() => {
+              refreshView(currentIndex);
+            }}
+          >
+            <GetIcon icon={"reload"}></GetIcon>
+          </More>
+        )}
+        <ToolTipContainer
+          ref={selectRef.current[slNo]}
+          onClick={() => {
+            setCurrentAction(data._id);
+          }}
+        >
+          <More className={currentAction === data._id ? `active` : ``}>
+            <GetIcon icon={"dots"}></GetIcon>
+          </More>
+          <ToolTip className={currentAction === data._id ? `actions` : `actions hide`}>
+            <Actions>
+              {updatePrivilege && (
+                <Button
+                  theme={themeColors}
+                  key={`edit-${data._id}`}
+                  onClick={() => {
+                    isEditingHandler(data, udpateView);
+                  }}
+                  className="edit menu"
+                >
+                  <GetIcon icon={"edit"} />
+                  <span>{t("edit")}</span>
+                </Button>
+              )}
+              {actions.map((item, index) => {
+                return (
+                  item.element === "button" && (
+                    <Button
+                      theme={themeColors}
+                      key={`custom-${item.id + "-" + index}-${data._id}`}
+                      onClick={() => {
+                        if (item.type === "callback") {
+                          item.callback(item, data);
+                        } else if (item.type === "call") {
+                          window.location.href = `tel:${data.mobileNumber}`;
+                        } else if (item.type === "subList" || item.type === "subItem") {
+                          setSubAttributes({ item, data });
+                          setShowSubList(true);
+                        } else {
+                          openAction(item, data);
+                        }
+                      }}
+                      className="edit menu"
+                    >
+                      <GetIcon icon={item.icon} />
+                      <span>{t(item.title)}</span>
+                    </Button>
+                  )
+                );
+              })}
+              {delPrivilege && !signleRecord && (
+                <Button
+                  theme={themeColors}
+                  key={`delete-${data._id}`}
+                  onClick={() => {
+                    setMessage({
+                      type: 2,
+                      content: t("deleteRequest", {
+                        label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item",
+                      }),
+                      proceed: t("delete"),
+                      onProceed: deleteHandler,
+                      data: data,
+                    });
+                  }}
+                  className="delete menu"
+                >
+                  <GetIcon icon={"delete"} />
+                  <span>{t("delete")}</span>
+                </Button>
+              )}
+            </Actions>
+          </ToolTip>
+        </ToolTipContainer>
+      </Td>
+    );
+    return viewMode === "table" ? (
+      <TrView key={`${shortName}-${slNo}`}>
+        {attributes.map((attribute, index) => {
+          if (attribute.view) {
+            try {
+              const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
 
-    return (
-      <Tr theme={themeColors} className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
+              return <TdView key={index}>{getValue(attribute, itemValue)}</TdView>;
+            } catch (error) {
+              return <TdView key={index}>{`--`}</TdView>;
+            }
+          }
+
+          return null;
+        })}
+        {ActionDiv}
+      </TrView>
+    ) : (
+      <SetTr viewMode={viewMode} theme={themeColors} className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
         <TrBody className={signleRecord ? "single" : ""}>
-          <Td key={`row-head-${slNo}`}>
+          <SetTd key={`row-head-${slNo}`}>
             {signleRecord ? (
               <Head>
                 <GetIcon icon={selectedMenuItem.icon} />
@@ -357,168 +550,9 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                 <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
               </Head>
             )}
-          </Td>
+          </SetTd>
 
-          <Td key={`actions-${shortName}-${data._id}`} className="actions">
-            {actions.map((item, index) => {
-              return (
-                item.element !== "button" && (
-                  <ToggleContainer key={`${item.id}-${data._id}`}>
-                    <ToggleInput
-                      type="checkbox"
-                      checked={data[item.id]}
-                      onChange={async (event) => {
-                        // item.callback(item, data);
-                        setLoaderBox(true);
-                        await postData({ status: event.target.checked }, `${item.api}/${data._id}`)
-                          .then((response) => {
-                            if (response.status === 200) {
-                              if (response.data?.message) {
-                                setMessage({
-                                  type: 1,
-                                  content: t(response.data?.message),
-                                  proceed: t("okay"),
-                                });
-                              }
-                              //
-                              refreshView();
-                              // setIsEditing(false);
-                            } else if (response.status === 404) {
-                              refreshView();
-                              setMessage({
-                                type: 1,
-                                content: t("error"),
-                                proceed: "Okay",
-                              });
-                            } else {
-                              refreshView();
-                              setMessage({
-                                type: 1,
-                                content: t("error"),
-                                proceed: "Okay",
-                              });
-                            }
-                            // setLoaderBox(false);
-                          })
-                          .catch((error) => {
-                            alert(error);
-                            // setLoaderBox(false);
-                          });
-                      }}
-                    />
-                    <ToggleSlider />
-                  </ToggleContainer>
-                ),
-                item.type === "callback" && (
-                  <More
-                    theme={themeColors}
-                    key={`custom-${item.id + "-" + index}-${data._id}`}
-                    onClick={() => {
-                      item.callback(item, data);
-                    }}
-                    className="edit menu callBack"
-                  >
-                    <GetIcon icon={item.icon} />
-                    <span>{t(item.title)}</span>
-                  </More>
-                )
-              );
-            })}
-            {!signleRecord && (
-              <More
-                onClick={() => {
-                  setIsOpen(true);
-                  setOpenData({ actions, attributes, data });
-                  setSubAttributes({ actions, attributes, data });
-                }}
-              >
-                <GetIcon icon={"open"}></GetIcon>
-              </More>
-            )}
-            {signleRecord && (
-              <More
-                onClick={() => {
-                  refreshView(currentIndex);
-                }}
-              >
-                <GetIcon icon={"reload"}></GetIcon>
-              </More>
-            )}
-            <ToolTipContainer
-              ref={selectRef.current[slNo]}
-              onClick={() => {
-                setCurrentAction(data._id);
-              }}
-            >
-              <More className={currentAction === data._id ? `active` : ``}>
-                <GetIcon icon={"dots"}></GetIcon>
-              </More>
-              <ToolTip className={currentAction === data._id ? `actions` : `actions hide`}>
-                <Actions>
-                  {updatePrivilege && (
-                    <Button
-                      theme={themeColors}
-                      key={`edit-${data._id}`}
-                      onClick={() => {
-                        isEditingHandler(data, udpateView);
-                      }}
-                      className="edit menu"
-                    >
-                      <GetIcon icon={"edit"} />
-                      <span>{t("edit")}</span>
-                    </Button>
-                  )}
-                  {actions.map((item, index) => {
-                    return (
-                      item.element === "button" && (
-                        <Button
-                          theme={themeColors}
-                          key={`custom-${item.id + "-" + index}-${data._id}`}
-                          onClick={() => {
-                            if (item.type === "callback") {
-                              item.callback(item, data);
-                            } else if (item.type === "call") {
-                              window.location.href = `tel:${data.mobileNumber}`;
-                            } else if (item.type === "subList" || item.type === "subItem") {
-                              setSubAttributes({ item, data });
-                              setShowSubList(true);
-                            } else {
-                              openAction(item, data);
-                            }
-                          }}
-                          className="edit menu"
-                        >
-                          <GetIcon icon={item.icon} />
-                          <span>{t(item.title)}</span>
-                        </Button>
-                      )
-                    );
-                  })}
-                  {delPrivilege && !signleRecord && (
-                    <Button
-                      theme={themeColors}
-                      key={`delete-${data._id}`}
-                      onClick={() => {
-                        setMessage({
-                          type: 2,
-                          content: t("deleteRequest", {
-                            label: getValue({ type: itemTitle.type ?? "text" }, titleValue) ? getValue({ type: itemTitle.type ?? "text" }, titleValue) : "Item",
-                          }),
-                          proceed: t("delete"),
-                          onProceed: deleteHandler,
-                          data: data,
-                        });
-                      }}
-                      className="delete menu"
-                    >
-                      <GetIcon icon={"delete"} />
-                      <span>{t("delete")}</span>
-                    </Button>
-                  )}
-                </Actions>
-              </ToolTip>
-            </ToolTipContainer>
-          </Td>
+          {ActionDiv}
         </TrBody>
         {signleRecord ? (
           <DisplayInformations formMode={formMode} attributes={attributes} data={data} />
@@ -552,7 +586,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
             })}
           </TrBody>
         )}
-      </Tr>
+      </SetTr>
     );
   };
   const closeModal = () => {
@@ -685,7 +719,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
   }, []);
 
   //end crud functions
-  return viewMode === "list" || viewMode === "subList" ? (
+  return viewMode === "list" || viewMode === "subList" || viewMode === "table" ? (
     <RowContainer theme={themeColors} className={viewMode}>
       <ButtonPanel>
         <FilterBox>
@@ -744,7 +778,22 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
           </AddButton>
         )}
       </ButtonPanel>
-      <Table className={`table ${displayColumn}`}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      {viewMode === "table" ? (
+        <TableContaner>
+          <TableView>
+            <thead>
+              <tr>
+                {attributes.map((attribute) => {
+                  return attribute.view === true ? <ThView key={shortName + attribute.name}>{attribute.label}</ThView> : "";
+                })}
+              </tr>
+            </thead>
+            <tbody>{users.data?.response?.length > 0 && users.data?.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</tbody>
+          </TableView>
+        </TableContaner>
+      ) : (
+        <Table className={`table ${displayColumn}`}>{users.data?.response?.length > 0 && users.data.response.map((item, index) => <TableRowWithActions key={`${shortName}-${index}`} slNo={index} attributes={attributes} data={item} />)}</Table>
+      )}
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && (
         <CrudForm
