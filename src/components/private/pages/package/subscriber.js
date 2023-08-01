@@ -178,6 +178,7 @@ const SubscriberPackage = (props) => {
         // parentReference={"userType"}
         // referenceId={"6471b3849fb2b29fe045887b"}
         // formMode={`single`}
+        viewMode="table"
         formMode={`double`}
         datefilter={true}
         {...props}
