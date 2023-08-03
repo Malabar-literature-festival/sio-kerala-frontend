@@ -36,7 +36,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   //   setSearchValue(item.target.value);
   // };
 
-  const handleTabClick = useCallback((tab, searchKey) => {
+  const handleTabClick = useCallback((tab, searchKey = "") => {
     setActiveTab(tab);
     getData({ searchKey }, tab === "meals" ? "meal/search" : "recipe/search").then((result) => {
       tab === "meals" ? setMeals(result.data.response) : setRecipes(result.data.response);
@@ -221,7 +221,7 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
   return menuData ? (
     <ColumnContainer style={{ marginBottom: "30px", position: "relative", height: "90%" }}>
       <DndProvider backend={HTML5Backend}>
-        <RowContainer className="menu">
+        <RowContainer className={`menu ${openData.item.viewOnly}`}>
           <Table>
             <thead>
               <tr>
@@ -255,14 +255,16 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                             <Variant key={item._id} className="vertical">
                                               <span className="recipe">{item.recipe.title} </span>
                                               <span className="variant">{item.variant} </span>
-                                              <span
-                                                className="delete"
-                                                onClick={() => {
-                                                  deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber, items.optionNo);
-                                                }}
-                                              >
-                                                <GetIcon icon={"close"} />
-                                              </span>
+                                              {!(openData.item.viewOnly ?? false) && (
+                                                <span
+                                                  className="delete"
+                                                  onClick={() => {
+                                                    deleteItem(item.foodMenuItem, index, "recipe", mealTimeCategory._id, dayNumber, items.optionNo);
+                                                  }}
+                                                >
+                                                  <GetIcon icon={"close"} />
+                                                </span>
+                                              )}
                                               {data.menuType === "Dynamic" && (
                                                 <span
                                                   title="Replacable Items"
@@ -293,15 +295,17 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                                             <Variant key={replacableItem._id} className="vertical">
                                                               <span className="recipe">{replacableItem.recipe?.title}</span>
                                                               <span className="variant">{replacableItem.variant}</span>
-                                                              <span
-                                                                className="delete"
-                                                                title="Remove Item"
-                                                                onClick={() => {
-                                                                  deleteReplcableItem(replacableItem.foodMenuReplacableItem, index);
-                                                                }}
-                                                              >
-                                                                <GetIcon icon={"close"} />
-                                                              </span>
+                                                              {!(openData.item.viewOnly ?? false) && (
+                                                                <span
+                                                                  className="delete"
+                                                                  title="Remove Item"
+                                                                  onClick={() => {
+                                                                    deleteReplcableItem(replacableItem.foodMenuReplacableItem, index);
+                                                                  }}
+                                                                >
+                                                                  <GetIcon icon={"close"} />
+                                                                </span>
+                                                              )}
                                                             </Variant>
                                                           ))
                                                         ) : (
@@ -324,15 +328,17 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
                                             <Variant key={item._id} className="vertical">
                                               <span className="recipe">{item.title} </span>
                                               <span className="variant">{"Items: " + item.mealItems.length} </span>
-                                              <span
-                                                className="delete"
-                                                title="Remove Item"
-                                                onClick={() => {
-                                                  deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber, items.optionNo);
-                                                }}
-                                              >
-                                                <GetIcon icon={"close"} />
-                                              </span>
+                                              {!(openData.item.viewOnly ?? false) && (
+                                                <span
+                                                  className="delete"
+                                                  title="Remove Item"
+                                                  onClick={() => {
+                                                    deleteItem(item.foodMenuItem, index, "meals", mealTimeCategory._id, dayNumber, items.optionNo);
+                                                  }}
+                                                >
+                                                  <GetIcon icon={"close"} />
+                                                </span>
+                                              )}
                                               {data.menuType === "Dynamic" && (
                                                 <span
                                                   title="Replacable Items"
@@ -415,92 +421,94 @@ const SetupMenu = ({ openData, themeColors, setMessage }) => {
             </TableBody>
           </Table>
         </RowContainer>
-        <RowContainer className="mealSelection">
-          <TabContainer>
-            <TabButton active={activeTab === "meals"} onClick={() => handleTabClick("meals", searchValue)}>
-              Meals
-            </TabButton>
-            <TabButton active={activeTab === "recipes"} onClick={() => handleTabClick("recipes", searchValue)}>
-              Recipes
-            </TabButton>
-          </TabContainer>
+        {(!openData.item.viewOnly ?? false) && (
+          <RowContainer className="mealSelection">
+            <TabContainer>
+              <TabButton active={activeTab === "meals"} onClick={() => handleTabClick("meals", searchValue)}>
+                Meals
+              </TabButton>
+              <TabButton active={activeTab === "recipes"} onClick={() => handleTabClick("recipes", searchValue)}>
+                Recipes
+              </TabButton>
+            </TabContainer>
 
-          <TabData>
-            <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={searchChange} />
-            {activeTab === "meals" && meals && (
-              <TabDataItem>
-                {meals.map((meal) => (
-                  // <MealItem key={meal._id}>
-                  //   <div>{meal.title ?? "Title not found!"}</div>
-                  // </MealItem>
-                  <DraggableItem
-                    key={meal._id}
-                    item={{ ...meal, mealOrRecepe: "meal", meal: { title: meal.title } }}
-                    element={
-                      <MealItem key={meal._id}>
-                        <Title>{meal.title ?? "Title not found!"}</Title>
-                        <Title>
-                          <span>BHD</span>
-                          <span className="price">{meal.price}</span>
-                          <span className="offer">{meal.offerPrice}</span>
-                          <span className="calories">{`${meal.calories} calories`}</span>
-                        </Title>
+            <TabData>
+              <Search title={"Search"} theme={themeColors} placeholder="Search" value={searchValue} onChange={searchChange} />
+              {activeTab === "meals" && meals && (
+                <TabDataItem>
+                  {meals.map((meal) => (
+                    // <MealItem key={meal._id}>
+                    //   <div>{meal.title ?? "Title not found!"}</div>
+                    // </MealItem>
+                    <DraggableItem
+                      key={meal._id}
+                      item={{ ...meal, mealOrRecepe: "meal", meal: { title: meal.title } }}
+                      element={
+                        <MealItem key={meal._id}>
+                          <Title>{meal.title ?? "Title not found!"}</Title>
+                          <Title>
+                            <span>BHD</span>
+                            <span className="price">{meal.price}</span>
+                            <span className="offer">{meal.offerPrice}</span>
+                            <span className="calories">{`${meal.calories} calories`}</span>
+                          </Title>
 
-                        <Variants>
-                          {meal.mealItems.map((item) => {
-                            const recipeVariant = item.recipeVariant;
-                            return (
-                              <Variant key={item._id}>
-                                <span>
-                                  <span className="recipe">{recipeVariant.recipe.title}</span>
-                                </span>
-                                <span className="variant">{recipeVariant.variant}</span>
-                              </Variant>
-                            );
-                          })}
-                        </Variants>
-                      </MealItem>
-                    }
-                  />
-                ))}
-              </TabDataItem>
-            )}
-            {activeTab === "recipes" && recipes && (
-              <TabDataItem>
-                {recipes.map((recipe) => (
-                  <MealItem key={recipe._id}>
-                    <Title>
-                      {recipe.title ?? "Title not found!"}
-                      <span className="calories">{`${recipe.calories} calories`}</span>
-                    </Title>
+                          <Variants>
+                            {meal.mealItems.map((item) => {
+                              const recipeVariant = item.recipeVariant;
+                              return (
+                                <Variant key={item._id}>
+                                  <span>
+                                    <span className="recipe">{recipeVariant.recipe.title}</span>
+                                  </span>
+                                  <span className="variant">{recipeVariant.variant}</span>
+                                </Variant>
+                              );
+                            })}
+                          </Variants>
+                        </MealItem>
+                      }
+                    />
+                  ))}
+                </TabDataItem>
+              )}
+              {activeTab === "recipes" && recipes && (
+                <TabDataItem>
+                  {recipes.map((recipe) => (
+                    <MealItem key={recipe._id}>
+                      <Title>
+                        {recipe.title ?? "Title not found!"}
+                        <span className="calories">{`${recipe.calories} calories`}</span>
+                      </Title>
 
-                    <Variants>
-                      {recipe.recipeVariants.map((variant) => {
-                        return (
-                          <DraggableItem
-                            key={variant._id}
-                            item={{ ...variant, mealOrRecepe: "recipe", recipe: { title: recipe.title } }}
-                            element={
-                              <Variant>
-                                <span>
-                                  <span>BHD</span>
-                                  <span className="price">{variant.price}</span>
-                                  <span className="offer">{variant.price}</span>
-                                </span>
-                                <span className="calories">{`${((recipe.calories * variant.percentage) / 100).toFixed(0)} calories`}</span>
-                                <span className="variant">{variant.variant} </span>
-                              </Variant>
-                            }
-                          />
-                        );
-                      })}
-                    </Variants>
-                  </MealItem>
-                ))}
-              </TabDataItem>
-            )}
-          </TabData>
-        </RowContainer>
+                      <Variants>
+                        {recipe.recipeVariants.map((variant) => {
+                          return (
+                            <DraggableItem
+                              key={variant._id}
+                              item={{ ...variant, mealOrRecepe: "recipe", recipe: { title: recipe.title } }}
+                              element={
+                                <Variant>
+                                  <span>
+                                    <span>BHD</span>
+                                    <span className="price">{variant.price}</span>
+                                    <span className="offer">{variant.price}</span>
+                                  </span>
+                                  <span className="calories">{`${((recipe.calories * variant.percentage) / 100).toFixed(0)} calories`}</span>
+                                  <span className="variant">{variant.variant} </span>
+                                </Variant>
+                              }
+                            />
+                          );
+                        })}
+                      </Variants>
+                    </MealItem>
+                  ))}
+                </TabDataItem>
+              )}
+            </TabData>
+          </RowContainer>
+        )}
       </DndProvider>
     </ColumnContainer>
   ) : (

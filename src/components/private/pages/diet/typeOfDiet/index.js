@@ -13,14 +13,14 @@ const TypeOfDiet = (props) => {
     document.title = `Type Of Diet - Diet Food Management Portal`;
   }, []);
 
-  const [attributes] = useState([
+  const [diet] = useState([
     {
       // Type of input, in this case, a text input
       type: "text",
       // Placeholder text for the input field
       placeholder: "Diet",
       // Name of the input field
-      name: "typeOfDietName",
+      name: "title",
       // Validation rules for the input
       validation: "",
       // Default value for the input field
@@ -37,100 +37,15 @@ const TypeOfDiet = (props) => {
       update: true,
     },
   ]);
-  // const [timingAttributes] = useState([
-  //   {
-  //     type: "text",
-  //     placeholder: "Label",
-  //     name: "label",
-  //     validation: "",
-  //     default: "",
-  //     label: "Label",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "number",
-  //     placeholder: "Sequence",
-  //     name: "sequence",
-  //     validation: "",
-  //     default: "",
-  //     label: "Sequence",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Icon",
-  //     name: "icon",
-  //     validation: "",
-  //     default: "",
-  //     label: "Icon",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Path",
-  //     name: "path",
-  //     validation: "",
-  //     default: "",
-  //     label: "Path",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "text",
-  //     placeholder: "Element Name",
-  //     name: "element",
-  //     validation: "",
-  //     default: "",
-  //     label: "Element Name",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Status",
-  //     name: "status",
-  //     validation: "",
-  //     default: "true",
-  //     label: "Status",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  //   {
-  //     type: "checkbox",
-  //     placeholder: "Is Link",
-  //     name: "isLink",
-  //     validation: "",
-  //     default: "false",
-  //     label: "Is Link",
-  //     required: true,
-  //     view: true,
-  //     add: true,
-  //     update: true,
-  //   },
-  // ]);
-  const [dietPlan] = useState([
+
+  const [subDiet] = useState([
     // DIET PLAN IS A SUB DIET //
     {
       type: "text",
       apiType: "",
       selectApi: "",
       placeholder: "Sub Diet",
-      name: "dietPlan",
+      name: "title",
       validation: "",
       showItem: "",
       default: "",
@@ -142,24 +57,6 @@ const TypeOfDiet = (props) => {
       update: true,
       filter: false,
     },
-
-    // {
-    //   type: "select",
-    //   apiType: "API",
-    //   selectApi: "type-of-diet/select",
-    //   placeholder: "Type of Diet",
-    //   name: "dietPlanCategory",
-    //   validation: "",
-    //   showItem: "typeOfDietName",
-    //   default: "",
-    //   tag: true,
-    //   label: "Type of Diet",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    //   filter: false,
-    // },
   ]);
 
   const [actions] = useState([
@@ -170,18 +67,18 @@ const TypeOfDiet = (props) => {
       id: "dietPlan",
       // itemTitle: "username",
       itemTitle: {
-        name: "dietPlan",
+        name: "title",
         type: "text",
-        collection: "dietPlan",
+        collection: "diet",
       },
       title: "Sub Diet",
-      attributes: dietPlan,
+      attributes: subDiet,
       params: {
-        api: `diet-plan`,
-        parentReference: "",
+        api: `sub-diet`,
+        parentReference: "diet",
         // itemTitle: "username",
         itemTitle: {
-          name: "dietPlan",
+          name: "title",
           type: "text",
           collection: "",
         },
@@ -203,18 +100,18 @@ const TypeOfDiet = (props) => {
         // Actions to be displayed in the ListTable
         actions={actions}
         // API endpoint for fetching menu data
-        api={`type-of-diet`}
+        api={`diet`}
         displayColumn="double"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         // TYPE OF DIET IS A DIET //
-        itemTitle={{ name: "typeOfDietName", type: "text", collection: "" }}
+        itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Diet`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
-        attributes={attributes}
+        attributes={diet}
       ></ListTable>
     </Container>
   );

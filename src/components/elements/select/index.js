@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../../backend/api";
-import { ImgBox, Label, SelectBox, TagBox, TagData, TagItem, TagTitle } from "./styles";
+import { Button, ImgBox, Label, SelectBox, TagBox, TagData, TagItem, TagTitle } from "./styles";
 import { DownIcon, TickIcon } from "../../../icons";
 import { useTranslation } from "react-i18next";
 import { addSelectObject } from "../../../store/actions/select";
@@ -119,7 +119,7 @@ function CustomSelect(props) {
         } catch {}
       }
     },
-    [props.apiType, props.selectApi, props.placeHolder,props.apiSearch, initialized, selectedId, selectData, dispatch]
+    [props.apiType, props.selectApi, props.placeHolder, props.apiSearch, initialized, selectedId, selectData, dispatch]
   );
 
   useEffect(() => {
@@ -127,14 +127,12 @@ function CustomSelect(props) {
   }, [props.selectApi, fetchData]);
   const selectRef = useRef(null);
   useEffect(() => {
-    if(props.updateOn)
-    {
-       if (updateValue !== props.updateValue) {
-      setUpdateValue(props.updateValue);
-      fetchData(props.updateValue, true, props.updateOn);
+    if (props.updateOn) {
+      if (updateValue !== props.updateValue) {
+        setUpdateValue(props.updateValue);
+        fetchData(props.updateValue, true, props.updateOn);
+      }
     }
-    }
-   
   }, [props.updateValue, updateValue, fetchData, props.updateOn]);
   useEffect(() => {
     function handleClick(event) {
@@ -206,16 +204,25 @@ function CustomSelect(props) {
                       </TagData>
                     </TagBox>
                   )}
+                  {props.viewButton && (
+                    <Button
+                      onClick={() => {
+                        props.viewButton?.callback(option);
+                      }}
+                    >
+                      View Menu
+                    </Button>
+                  )}
                 </li>
               ))}
             {initialized && options.length === 0 && (
-                <li
-                  onClick={() => {
-                    fetchData(props.updateValue, true, props.updateOn);
-                  }}
-                >
-                  Refresh
-                </li>
+              <li
+                onClick={() => {
+                  fetchData(props.updateValue, true, props.updateOn);
+                }}
+              >
+                Refresh
+              </li>
             )}
           </>
         )}

@@ -4,6 +4,9 @@ import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
 import moment from "moment";
+import { useSelector } from "react-redux";
+import PopupView from "../../../../elements/popupview";
+import SetupMenu from "../../mealSettings/foodMenu/setupMenu";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
@@ -12,7 +15,18 @@ const Patient = (props) => {
   useEffect(() => {
     document.title = `Patient List - Diet Food Management Portal`;
   }, []);
+  const themeColors = useSelector((state) => state.themeColors);
+  // State to control the display of the SetupMenu popup
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
 
+  // State to store the data for the item that was clicked on in the ListTable
+  const [openItemData, setOpenItemData] = useState(null);
+
+  // Function to close the SetupMenu popup
+  const closeModal = () => {
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
+  };
   const [attributes] = useState([
     {
       type: "text",
@@ -687,6 +701,7 @@ const Patient = (props) => {
       validation: "",
       default: "",
       tag: true,
+      editable: true,
       label: "Admission Type",
       showItem: "Admission Type",
       required: false,
@@ -759,11 +774,11 @@ const Patient = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "type-of-diet/select",
+      selectApi: "diet/select",
       placeholder: "Diet",
-      name: "typeOfDiet",
+      name: "diet",
       validation: "",
-      showItem: "typeOfDietName",
+      showItem: "title",
       default: "",
       tag: true,
       label: "Diet",
@@ -778,12 +793,12 @@ const Patient = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "diet-plan/get-typeofdiet-dietplan",
-      updateOn: "typeOfDiet",
+      selectApi: "sub-diet/get-sub-diet-by-diet",
+      updateOn: "diet",
       placeholder: "Sub Diet",
-      name: "dietPlan",
+      name: "subDiet",
       validation: "",
-      showItem: "dietPlan",
+      showItem: "title",
       default: "",
       tag: true,
       label: "Sub Diet",
@@ -796,15 +811,62 @@ const Patient = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "food-menu/getfoodmenu-typeofdiet",
-      updateOn: "typeOfDiet",
-      placeholder: "Week Menu",
-      name: "title",
+      selectApi: "package/select",
+      updateOn: "subDiet",
+      placeholder: "Package",
+      tags: [
+        {
+          type: "text",
+          item: "calories",
+          title: "Calories",
+          collection: "",
+        },
+      ],
+      viewButton: {
+        title: "View Menu",
+        callback: (item, data) => {
+          console.log(item);
+          // Set the data for the clicked item and open the SetupMenu popup
+          setOpenItemData({
+            data: { ...item, _id: item.foodMenu },
+            item: {
+              viewOnly: true,
+              itemTitle: {
+                name: "value",
+                type: "text",
+                collection: "",
+              },
+              icon: "menu",
+              title: "Setup Menu",
+              params: {
+                api: `food-group-item`,
+                parentReference: "",
+                // itemTitle: "username",
+                itemTitle: {
+                  name: "value",
+                  type: "text",
+                  collection: "",
+                },
+                shortName: "Recipe Items",
+                addPrivilege: true,
+                delPrivilege: true,
+                updatePrivilege: true,
+                customClass: "medium",
+                // formMode: "double",
+              },
+            },
+          });
+
+          setOpenMenuSetup(true);
+        },
+      },
+      name: "foodMenu",
       validation: "",
-      showItem: "title",
+      showItem: "value",
+      collection: "diet",
       default: "",
       tag: true,
-      label: "Week Menu",
+      label: "Package",
       required: false,
       view: true,
       add: true,
@@ -1313,9 +1375,9 @@ const Patient = (props) => {
       type: "subList",
       id: "patient-diet",
       itemTitle: {
-        name: "typeOfDietName",
+        name: "title",
         type: "text",
-        collection: "typeOfDiet",
+        collection: "diet",
       },
       // itemTitle: "username",
       title: "Diet",
@@ -1324,9 +1386,9 @@ const Patient = (props) => {
         api: `patient-diet`,
         parentReference: "user",
         itemTitle: {
-          name: "typeOfDietName",
+          name: "title",
           type: "text",
-          collection: "typeOfDiet",
+          collection: "diet",
         },
         // itemTitle: "username",
         shortName: "Diet",
@@ -1334,39 +1396,11 @@ const Patient = (props) => {
         delPrivilege: true,
         updatePrivilege: true,
         customClass: "medium",
+        viewMode: "table",
         formMode: "double",
       },
     },
-    // MEAL IS A RECIPE //
-    // {
-    //   element: "button",
-    //   type: "subList",
-    //   id: "weekly-meal-plan-entry",
-    //   // itemTitle: "username",
-    //   itemTitle: {
-    //     name: "mealName",
-    //     type: "text",
-    //     collection: "meal",
-    //   },
-    //   title: "Recipe",
-    //   attributes: addMeal,
-    //   params: {
-    //     api: `weekly-meal-plan-entry`,
-    //     parentReference: "user",
-    //     // itemTitle: "username",
-    //     itemTitle: {
-    //       name: "mealName",
-    //       type: "text",
-    //       collection: "meal",
-    //     },
-    //     shortName: "Recipe",
-    //     addPrivilege: true,
-    //     delPrivilege: true,
-    //     updatePrivilege: true,
-    //     customClass: "medium",
-    //     formMode: "double",
-    //   },
-    // },
+
     {
       element: "button",
       type: "subList",
@@ -1441,6 +1475,23 @@ const Patient = (props) => {
         {...props}
         attributes={attributes}
       ></ListTable>
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <SetupMenu
+              openData={openItemData}
+              setMessage={props.setMessage}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            ></SetupMenu>
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "value", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+          customClass={"full-page"}
+        ></PopupView>
+      )}
     </Container>
   );
 };
