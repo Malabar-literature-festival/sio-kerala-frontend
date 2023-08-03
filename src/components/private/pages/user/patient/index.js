@@ -805,7 +805,7 @@ const Patient = (props) => {
       default: "",
       tag: true,
       label: "Week Menu",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
