@@ -28,7 +28,7 @@ const FoodMenu = (props) => {
       tag: true,
       label: "Title",
       required: true,
-      view: true,
+      view: false,
       add: true,
       update: true,
     },
@@ -52,11 +52,11 @@ const FoodMenu = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "type-of-diet/select",
+      selectApi: "diet/select",
       placeholder: "Diet",
-      name: "typeOfDiet",
+      name: "diet",
       validation: "",
-      showItem: "typeOfDietName",
+      showItem: "title",
       default: "",
       tag: true,
       label: "Diet",
@@ -71,12 +71,13 @@ const FoodMenu = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "diet-plan/get-typeofdiet-dietplan",
-      updateOn: "typeOfDiet",
+      selectApi: "sub-diet/get-sub-diet-by-diet",
+      updateOn: "diet",
       placeholder: "Sub Diet",
-      name: "dietPlan",
+      name: "subDiet",
       validation: "",
-      showItem: "dietPlan",
+      showItem: "title",
+      collection: "subDiet",
       default: "",
       tag: true,
       label: "Sub Diet",
@@ -136,6 +137,7 @@ const FoodMenu = (props) => {
       type: "callback",
       callback: (item, data) => {
         // Set the data for the clicked item and open the SetupMenu popup
+        console.log(item, data);
         setOpenItemData({ item, data });
         setOpenMenuSetup(true);
       },
@@ -196,7 +198,7 @@ const FoodMenu = (props) => {
             <SetupMenu
               openData={openItemData}
               setMessage={props.setMessage}
-            // Pass selected item data (Menu Title) to the popup for setting the time
+              // Pass selected item data (Menu Title) to the popup for setting the time
             ></SetupMenu>
           }
           themeColors={themeColors}

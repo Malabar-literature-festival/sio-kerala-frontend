@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const SelectBox = styled.div`
   position: relative;
   width: 100%;
-  
+
   &.half {
     width: 40%;
   }
@@ -10,10 +10,10 @@ export const SelectBox = styled.div`
     width: calc(50% - 5px);
     margin-left: 5px;
   }
-  .select{
-    display:none;
+  .select {
+    display: none;
   }
-   &.disabled {
+  &.disabled {
     display: none;
   }
   &.half:nth-child(even) {
@@ -106,8 +106,8 @@ export const SelectBox = styled.div`
   &.open .options {
     border: 1px solid rgb(224, 224, 227);
   }
-  &.open .select{
-    display:inherit;
+  &.open .select {
+    display: inherit;
   }
   button svg {
     margin-left: auto;
@@ -215,4 +215,19 @@ export const ImgBox = styled.img`
   margin-right: 10px;
   display: flex;
   align-items: center;
+`;
+export const Button = styled.div`
+  border: none;
+  padding: 6px 6px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  /* white-space: nowrap; */
+  border: 1px solid lightgray;
+  margin-top: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  &:hover {
+    background: white;
+  }
 `;

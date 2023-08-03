@@ -185,6 +185,9 @@ export const Td = styled.div`
   padding: 10px 5px;
   position: relative;
   font-size: 14px;
+  &.disabled {
+    display: none;
+  }
   &.no,
   &.name {
     border: 1px solid gray;
@@ -210,6 +213,17 @@ export const Td = styled.div`
     margin-left: auto;
     margin-right: 5px;
     padding: 0;
+    display: flex;
+    justify-content: right;
+    overflow-wrap: normal;
+    margin-left: auto;
+    margin-right: 5px;
+    padding: 9px;
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    background: #ffffffe0;
+    border-left: 1px solid lightgray;
   }
   &.right {
     text-align: right;
@@ -580,6 +594,9 @@ export const ThView = styled.th`
   color: #444;
   font-weight: bolder;
   border-radius: 0px;
+  min-width:100px;
+  background-color: #5a5a5a;
+  color: rgb(255 255 255);
   :first-child {
     border-top-left-radius: 12px;
   }
@@ -590,6 +607,11 @@ export const ThView = styled.th`
     .plain & {
       background-color: transparent;
     }
+  }
+  &.true {
+    position: sticky;
+    left: 0px;
+    z-index: 1001;
   }
 
   &.actions {
@@ -622,6 +644,12 @@ export const TdView = styled.td`
   padding: 8px;
   height: 30px;
   position: relative;
+  &.true {
+    position: sticky;
+    left: 0px;
+    z-index: 1001;
+    background: white;
+  }
   &.no,
   &.name {
     border: 1px solid gray;

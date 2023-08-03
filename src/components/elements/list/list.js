@@ -21,6 +21,8 @@ import { dateFormat, dateTimeFormat } from "../../functions/date";
 import { convertMinutesToHHMM, getValue } from "./functions";
 import Popup, { DisplayInformations } from "./popup";
 import Print from "./print/print";
+import Highlight from "./highlight";
+import Editable from "./editable";
 const SetTd = (props) => {
   if (props.viewMode === "table") {
     return <TdView {...props}></TdView>;
@@ -35,7 +37,7 @@ const SetTr = (props) => {
     return <Tr {...props}></Tr>;
   }
 };
-const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, datefilter = false, preFilter = {}, viewMode = "list" }) => {
+const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode = "single", parentReference = "_id", referenceId = 0, actions = [], api, setMessage, attributes = [], exportPrivilege = false, addPrivilege = true, delPrivilege = true, updatePrivilege = true, shortName = "Item", itemTitle = { type: "text", name: "title" }, highlight = null, datefilter = false, preFilter = {}, viewMode = "list" }) => {
   const users = useSelector((state) =>
     state.pages[`${api}`]
       ? state.pages[`${api}`]
@@ -50,6 +52,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
   const [subAttributes, setSubAttributes] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [count, setCount] = useState(0);
+  const [editable, setEditable] = useState({});
   const themeColors = useSelector((state) => state.themeColors);
   const selectedMenuItem = useSelector((state) => state.selectedMenu);
   const dispatch = useDispatch();
@@ -350,9 +353,9 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
     const titleValue = (itemTitle.collection?.length > 0 ? (data[itemTitle.collection] ? data[itemTitle.collection][itemTitle.name] : "NIl") : data[itemTitle.name]) ?? "Please udpate the itemTitle";
     const signleRecord = viewMode === "list" || viewMode === "subList" || viewMode === "table" ? false : true;
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
-    console.log(viewMode);
+
     const ActionDiv = (
-      <Td key={`actions-${shortName}-${data._id}`} className="actions">
+      <Td style={{ zIndex: count - slNo }} key={`actions-${shortName}-${data._id}`} className="actions">
         {actions.map((item, index) => {
           return (
             item.element !== "button" && (
@@ -513,16 +516,43 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
         </ToolTipContainer>
       </Td>
     );
+    let sticky = true;
     return viewMode === "table" ? (
       <TrView key={`${shortName}-${slNo}`}>
         {attributes.map((attribute, index) => {
           if (attribute.view) {
             try {
               const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
+              let dynamicClass = "";
+              if (attribute.condition) {
+                if (data[attribute.condition.item] === attribute.condition.if) {
+                  dynamicClass = attribute.condition.then;
+                } else {
+                  dynamicClass = attribute.condition.else;
+                }
+              }
 
-              return <TdView key={index}>{getValue(attribute, itemValue)}</TdView>;
+              const result = (
+                <TdView
+                  className={sticky}
+                  key={index}
+                  onClick={() => {
+                    if (attribute.editable === true) {
+                      alert("yes");
+                    } else {
+                      alert("no");
+                    }
+                  }}
+                >
+                  {dynamicClass === "disabled" ? "--" : getValue(attribute, itemValue)}
+                </TdView>
+              );
+              sticky = false;
+              return result;
             } catch (error) {
-              return <TdView key={index}>{`--`}</TdView>;
+              const result = <TdView className={sticky} key={index}>{`--`}</TdView>;
+              sticky = false;
+              return result;
             }
           }
 
@@ -548,6 +578,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                 }}
               >
                 <GetIcon icon={selectedMenuItem.icon} /> <span>{` ${getValue({ type: itemTitle.type ?? "text" }, titleValue)}`}</span>
+                <Highlight highlight={highlight}>Delivered</Highlight>
               </Head>
             )}
           </SetTd>
@@ -563,13 +594,34 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
                 try {
                   const itemValue = attribute.collection?.length > 0 && attribute.showItem?.length > 0 ? data[attribute.collection][attribute.showItem] : data[attribute.name];
                   const itemColor = attribute.collection?.length > 0 && attribute.color?.length > 0 ? data[attribute.collection][attribute.color] : "initial";
+                  let dynamicClass = "";
+                  if (attribute.condition) {
+                    if (data[attribute.condition.item] === attribute.condition.if) {
+                      dynamicClass = attribute.condition.then;
+                    } else {
+                      dynamicClass = attribute.condition.else;
+                    }
+                  }
                   if (attribute.type === "image") {
                     return "";
                   }
                   return (
-                    <Td key={index}>
+                    <Td className={dynamicClass} key={index}>
                       <Title>{attribute.label}</Title>
-                      <DataItem style={{ color: itemColor }}>{getValue(attribute, itemValue)}</DataItem>
+                      <DataItem
+                        onClick={() => {
+                          if (attribute.editable === true) {
+                            const temp = { ...editable };
+                            temp[`${index}-${attribute.name}`] = temp[`${index}-${attribute.name}`] ? !temp[`${index}-${attribute.name}`] : true;
+                            setEditable(temp);
+                            console.log(temp);
+                          }
+                        }}
+                        style={{ color: itemColor }}
+                      >
+                        {getValue(attribute, itemValue)}
+                      </DataItem>
+                      {editable[`${index}-${attribute.name}`] ? <Editable item={attribute} /> : ""}
                     </Td>
                   );
                 } catch (error) {
@@ -717,7 +769,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       clearTimeout(searchTimeoutRef.current);
     };
   }, []);
-
+  let headerSticky = true;
   //end crud functions
   return viewMode === "list" || viewMode === "subList" || viewMode === "table" ? (
     <RowContainer theme={themeColors} className={viewMode}>
@@ -784,7 +836,16 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
             <thead>
               <tr>
                 {attributes.map((attribute) => {
-                  return attribute.view === true ? <ThView key={shortName + attribute.name}>{attribute.label}</ThView> : "";
+                  const result =
+                    attribute.view === true ? (
+                      <ThView className={headerSticky} key={shortName + attribute.name}>
+                        {attribute.label}
+                      </ThView>
+                    ) : (
+                      ""
+                    );
+                  headerSticky = false;
+                  return result;
                 })}
               </tr>
             </thead>

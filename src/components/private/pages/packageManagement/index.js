@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
+import PopupView from "../../../elements/popupview";
+import SetupMenu from "../mealSettings/foodMenu/setupMenu";
+import { useSelector } from "react-redux";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const PackageManagement = (props) => {
@@ -9,7 +12,8 @@ const PackageManagement = (props) => {
   useEffect(() => {
     document.title = `PackageManagement - Diet Food Management Portal`;
   }, []);
-
+  // Get the theme colors from the Redux store
+ 
   const [attributes] = useState([
     {
       type: "text",
@@ -53,82 +57,69 @@ const PackageManagement = (props) => {
       update: true,
     },
     {
-      type: "number",
-      placeholder: "Days",
-      name: "days",
+      type: "select",
+      placeholder: "Package For",
+      name: "packageType",
       validation: "",
       default: "",
-      label: "Days",
       tag: true,
-      required: true,
+      label: "Package For",
+      showItem: "Package For",
+      required: false,
       view: true,
+      filter: false,
       add: true,
       update: true,
+      apiType: "CSV",
+      selectApi: "Patient,Bystander",
     },
-    // {
-    //   type: "multiSelect",
-    //   apiType: "API",
-    //   selectApi: "mealtime-category/select",
-    //   placeholder: "Meal Time Category",
-    //   name: "mealTimeCategory",
-    //   showItem: "mealtimeCategoriesName",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "Meal Time Category",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    //   filter: false,
-    // },
     {
-      type: "text",
-      placeholder: "Price",
+      type: "number",
+      placeholder: "Cost(Per Day)",
       name: "price",
       validation: "",
       default: "",
       tag: true,
-      label: "Price",
+      label: "Cost(Per Day)",
       required: true,
       view: true,
       add: true,
       update: true,
     },
     {
-      type: "text",
-      placeholder: "Offer Price",
-      name: "offerPrice",
+      type: "number",
+      placeholder: "Week Discount %",
+      name: "weekDiscount",
       validation: "",
       default: "",
       tag: true,
-      label: "Offer Price",
+      label: "Week Discount %",
       required: true,
       view: true,
       add: true,
       update: true,
     },
-    // {
-    //   type: "text",
-    //   placeholder: "Currency",
-    //   name: "currency",
-    //   validation: "",
-    //   default: "",
-    //   tag: true,
-    //   label: "Currency",
-    //   required: true,
-    //   view: true,
-    //   add: true,
-    //   update: true,
-    // },
+    {
+      type: "number",
+      placeholder: "Month Discount %",
+      name: "monthDiscount",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Month Discount %",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
     {
       type: "select",
       apiType: "API",
-      selectApi: "type-of-diet/select",
+      selectApi: "diet/select",
       placeholder: "Diet",
-      name: "typeOfDiet",
+      name: "diet",
       validation: "",
-      showItem: "typeOfDietName",
+      showItem: "title",
       default: "",
       tag: true,
       label: "Diet",
@@ -141,12 +132,12 @@ const PackageManagement = (props) => {
     {
       type: "select",
       apiType: "API",
-      selectApi: "diet-plan/get-typeofdiet-dietplan",
-      updateOn: "typeOfDiet",
+      selectApi: "sub-diet/get-sub-diet-by-diet",
+      updateOn: "diet",
       placeholder: "Sub Diet",
-      name: "dietPlan",
+      name: "subDiet",
       validation: "",
-      showItem: "dietPlan",
+      showItem: "title",
       default: "",
       tag: true,
       label: "Sub Diet",
@@ -160,15 +151,54 @@ const PackageManagement = (props) => {
       type: "select",
       apiType: "API",
       selectApi: "food-menu/getfoodmenu-typeofdiet",
-      updateOn: "typeOfDiet",
+      updateOn: "subDiet",
       placeholder: "Week Menu",
-      name: "title",
+      viewButton: {
+        title: "View Menu",
+        callback: (item, data) => {
+          console.log(item);
+          // Set the data for the clicked item and open the SetupMenu popup
+          setOpenItemData({
+            data: { ...item, _id: item.id },
+            item: {
+              viewOnly: true,
+              itemTitle: {
+                name: "value",
+                type: "text",
+                collection: "",
+              },
+              icon: "menu",
+              title: "Setup Menu",
+              params: {
+                api: `food-group-item`,
+                parentReference: "",
+                // itemTitle: "username",
+                itemTitle: {
+                  name: "value",
+                  type: "text",
+                  collection: "",
+                },
+                shortName: "Recipe Items",
+                addPrivilege: true,
+                delPrivilege: true,
+                updatePrivilege: true,
+                customClass: "medium",
+                // formMode: "double",
+              },
+            },
+          });
+
+          setOpenMenuSetup(true);
+        },
+      },
+      name: "foodMenu",
       validation: "",
-      showItem: "title",
+      showItem: "value",
+      collection: "diet",
       default: "",
       tag: true,
       label: "Week Menu",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
@@ -215,29 +245,19 @@ const PackageManagement = (props) => {
       update: true,
     },
   ]);
+  const themeColors = useSelector((state) => state.themeColors);
+  // State to control the display of the SetupMenu popup
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
 
+  // State to store the data for the item that was clicked on in the ListTable
+  const [openItemData, setOpenItemData] = useState(null);
 
-  // const [actions] = useState([
-  //   {
-  //     element: "button",
-  //     type: "subList",
-  //     id: "sub-menu",
-  //     itemTitle: "title",
-  //     title: "Order",
-  //     attributes: timingAttributes,
-  //     params: {
-  //       api: `sub-menu`,
-  //       parentReference: "menu",
-  //       itemTitle: "label",
-  //       shortName: "Sub Menu",
-  //       addPrivilege: true,
-  //       delPrivilege: true,
-  //       updatePrivilege: true,
-  //       customClass: "medium",
-  //       formMode: "double",
-  //     },
-  //   },
-  // ]);
+  // Function to close the SetupMenu popup
+  const closeModal = () => {
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
+  };
+
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
   return (
@@ -253,6 +273,23 @@ const PackageManagement = (props) => {
         {...props}
         attributes={attributes}
       ></ListTable>
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <SetupMenu
+              openData={openItemData}
+              setMessage={props.setMessage}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            ></SetupMenu>
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "value", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+          customClass={"full-page"}
+        ></PopupView>
+      )}
     </Container>
   );
 };

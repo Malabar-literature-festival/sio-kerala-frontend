@@ -116,6 +116,11 @@ export const RowContainer = styled.div`
     bottom: 0;
     top: 0;
   }
+  &.true {
+    max-width: calc(100% - 0px);
+    width: calc(100% - 0px);
+    flex: 1 1 calc(100% - 0px);
+  }
   &.content {
     flex: 1 1 calc(100% - 15em);
     max-width: calc(100% - 15em);
