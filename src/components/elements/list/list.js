@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Table, Button, Td, Tr, Count, ArrowButton, AddButton, ButtonPanel, Filter, Filters, ToggleContainer, ToggleInput, ToggleSlider, NoData, FilterBox, More, Actions, Title, DataItem, ToolTipContainer, Head, TrBody, TableView, TrView, ThView, TdView, TableContaner } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RowContainer } from "../../styles/containers/styles";
@@ -355,7 +355,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
     // data[attribute.name]?.title ? data[attribute.name]?.title : data[attribute.name]?.toString()
 
     const ActionDiv = (
-      <Td style={{ zIndex: count - slNo }} key={`actions-${shortName}-${data._id}`} className="actions">
+      <React.Fragment style={{ zIndex: users.data?.response?.length - slNo }} key={`actions-${shortName}-${data._id}`} className="actions">
         {actions.map((item, index) => {
           return (
             item.element !== "button" && (
@@ -514,7 +514,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
             </Actions>
           </ToolTip>
         </ToolTipContainer>
-      </Td>
+      </React.Fragment>
     );
     let sticky = true;
     return viewMode === "table" ? (
@@ -558,7 +558,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
 
           return null;
         })}
-        {ActionDiv}
+       <TdView style={{ zIndex: users.data?.response?.length - slNo }} key={`actions-${shortName}-${data._id}`} className="actions">{ActionDiv}</TdView>
       </TrView>
     ) : (
       <SetTr viewMode={viewMode} theme={themeColors} className={signleRecord ? "single" : ""} key={`row-${shortName}-${data._id ?? slNo}`}>
@@ -583,7 +583,7 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
             )}
           </SetTd>
 
-          {ActionDiv}
+          <Td style={{ zIndex: users.data?.response?.length - slNo }} key={`actions-${shortName}-${data._id}`} className="actions">{ActionDiv}</Td>
         </TrBody>
         {signleRecord ? (
           <DisplayInformations formMode={formMode} attributes={attributes} data={data} />
@@ -857,21 +857,22 @@ const ListTable = ({ displayColumn = "single", printPrivilege = true, formMode =
       )}
       {!users.data && !users.data?.response && <NoData>No {t(shortName)} found!</NoData>}
       {users.data?.response?.length === 0 && (
-        <CrudForm
-          api={api}
-          formMode={formMode}
-          css="plain"
-          formType={"post"}
-          header={t("addNewTitle", {
-            label: t(shortName ? shortName : "Form"),
-          })}
-          formInput={formInput}
-          formValues={addValues}
-          formErrors={errroInput}
-          submitHandler={submitHandler}
-          isOpenHandler={isCreatingHandler}
-          isOpen={isCreating}
-        ></CrudForm>
+        // <CrudForm
+        //   api={api}
+        //   formMode={formMode}
+        //   css="plain"
+        //   formType={"post"}
+        //   header={t("addNewTitle", {
+        //     label: t(shortName ? shortName : "Form"),
+        //   })}
+        //   formInput={formInput}
+        //   formValues={addValues}
+        //   formErrors={errroInput}
+        //   submitHandler={submitHandler}
+        //   isOpenHandler={isCreatingHandler}
+        //   isOpen={isCreating}
+        // ></CrudForm>
+        <NoData>No records found for {shortName}.</NoData>
       )}
       {count > 0 ? (
         count > 10 ? (

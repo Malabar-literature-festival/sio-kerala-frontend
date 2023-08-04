@@ -218,7 +218,7 @@ export const Td = styled.div`
     overflow-wrap: normal;
     margin-left: auto;
     margin-right: 5px;
-    padding: 9px;
+    padding: 0px 0px 0px 5px;
     position: sticky;
     right: 0;
     bottom: 0;
@@ -594,7 +594,7 @@ export const ThView = styled.th`
   color: #444;
   font-weight: bolder;
   border-radius: 0px;
-  min-width:100px;
+  min-width: 100px;
   background-color: #5a5a5a;
   color: rgb(255 255 255);
   :first-child {

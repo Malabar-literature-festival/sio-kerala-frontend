@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
+import { ColumnContainer, RowContainer } from "../../../styles/containers/styles";
 
 const TodayOrder = (props) => {
   useEffect(() => {
@@ -227,26 +228,12 @@ const TodayOrder = (props) => {
   ]);
 
   const today = new Date();
-  const startOfDay = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
-    0,
-    0,
-    0
-  );
-  const endOfDay = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
-    23,
-    59,
-    59
-  );
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+  const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
 
   return (
     <Container className="noshadow">
-      <ListTable
+      {/* <ListTable
         actions={actions}
         api="weekly-meal-plan-entry"
         preFilter={{ startDate: startOfDay, endDate: endOfDay }}
@@ -259,7 +246,12 @@ const TodayOrder = (props) => {
         formMode="double"
         {...props}
         attributes={attributes}
-      />
+      /> */}
+      <ColumnContainer>
+        <ColumnContainer style={{ backgroundColor: "#ffecec" }}>1</ColumnContainer>
+        <ColumnContainer style={{ backgroundColor: "#fffff8" }}>2</ColumnContainer>
+        <ColumnContainer style={{ backgroundColor: "#e4ffe4" }}>3</ColumnContainer>
+      </ColumnContainer>
     </Container>
   );
 };

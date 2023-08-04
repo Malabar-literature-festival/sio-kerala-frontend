@@ -7,6 +7,7 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex:1 1 100%;
   &.shadow {
     box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
   }
