@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import FormInput from "../../input";
 
-
-
 const Editable = ({ item }) => {
   const [selected, setSelected] = useState("");
 
