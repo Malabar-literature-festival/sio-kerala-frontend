@@ -152,7 +152,7 @@ const PackageManagement = (props) => {
       apiType: "API",
       selectApi: "food-menu/getfoodmenu-typeofdiet",
       updateOn: "subDiet",
-      placeholder: "Week Menu",
+      placeholder: "Food Menu",
       viewButton: {
         title: "View Menu",
         callback: (item, data) => {
@@ -193,11 +193,11 @@ const PackageManagement = (props) => {
       },
       name: "foodMenu",
       validation: "",
-      showItem: "value",
-      collection: "diet",
+      showItem: "title",
+      collection: "foodMenu",
       default: "",
       tag: true,
-      label: "Week Menu",
+      label: "Food Menu",
       required: false,
       view: true,
       add: true,
