@@ -37,37 +37,37 @@ const Patient = (props) => {
       tag: true,
       label: "CPR/Mobile",
       required: true,
-      view: false,
-      add: true,
-      update: true,
-    },
-    {
-      type: "text",
-      placeholder: "CPR/Mobile",
-      name: "username",
-      showItem: "",
-      tag: true,
-      validation: "",
-      default: "",
-      label: "CPR/Mobile",
-      required: false,
       view: true,
-      add: false,
+      add: true,
       update: true,
     },
     {
       type: "text",
       placeholder: "Name",
-      name: "userDisplayName",
+      name: "username",
+      showItem: "",
+      tag: true,
       validation: "",
       default: "",
-      tag: true,
       label: "Name",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
     },
+    // {
+    //   type: "email",
+    //   placeholder: "Email",
+    //   name: "userDisplayName",
+    //   validation: "",
+    //   default: "",
+    //   tag: true,
+    //   label: "Name",
+    //   required: true,
+    //   view: true,
+    //   add: true,
+    //   update: true,
+    // },
     {
       type: "email",
       placeholder: "E-Mail",
@@ -79,7 +79,7 @@ const Patient = (props) => {
       required: false,
       view: true,
       add: true,
-      update: false,
+      update: true,
     },
     {
       type: "password",
@@ -92,7 +92,7 @@ const Patient = (props) => {
       required: false,
       view: false,
       add: true,
-      update: false,
+      update: true,
     },
     {
       type: "select",
@@ -124,7 +124,7 @@ const Patient = (props) => {
       view: false,
       filter: false,
       add: true,
-      update: false,
+      update: true,
       apiType: "CSV",
       selectApi: "Male,Female",
     },
@@ -143,7 +143,7 @@ const Patient = (props) => {
       required: false,
       view: true,
       add: true,
-      update: false,
+      update: true,
     },
     // {
     //   type: "textarea",
@@ -435,7 +435,7 @@ const Patient = (props) => {
       default: "",
       tag: true,
       label: "User Activeness Status",
-      required: true,
+      required: false,
       view: true,
       add: true,
       update: true,
@@ -1466,7 +1466,7 @@ const Patient = (props) => {
         api={`user`}
         // displayColumn="double"
         // itemTitle={`userDisplayName`}
-        itemTitle={{ name: "userDisplayName", type: "text", collection: "" }}
+        itemTitle={{ name: "username", type: "text", collection: "" }}
         shortName={`Patient`}
         parentReference={"userType"}
         referenceId={"6471b3849fb2b29fe045887b"}
