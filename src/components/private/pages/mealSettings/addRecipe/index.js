@@ -446,7 +446,7 @@ const AddRecipe = (props) => {
         shortName: "Recipe Ingredient",
         addPrivilege: true,
         delPrivilege: true,
-        updatePrivilege: true,
+        updatePrivilege: false,
         customClass: "medium",
       },
     },

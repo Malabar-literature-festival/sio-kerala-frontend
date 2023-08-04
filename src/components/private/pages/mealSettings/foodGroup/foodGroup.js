@@ -155,7 +155,7 @@ const FoodGroup = (props) => {
         shortName: "Recipe Items",
         addPrivilege: true,
         delPrivilege: true,
-        updatePrivilege: true,
+        updatePrivilege: false,
         customClass: "medium",
         // formMode: "double",
       },
