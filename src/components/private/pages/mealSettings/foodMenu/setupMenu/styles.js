@@ -66,6 +66,7 @@ export const TableCell = styled.td`
   background-color: white;
   text-align: center;
   width: 12%;
+  height: 50px;
 `;
 
 export const FoodButton = styled.button`
@@ -114,10 +115,10 @@ export const Title = styled.div`
     font-weight: bolder;
   }
   .calories {
-    border-left:1px solid;
-    padding-left:5px;
+    border-left: 1px solid;
+    padding-left: 5px;
     font-size: 14px;
-    margin-left:5px;
+    margin-left: 5px;
   }
 `;
 export const Variants = styled.div`
