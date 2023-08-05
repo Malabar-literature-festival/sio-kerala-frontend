@@ -459,7 +459,7 @@ const AddRecipe = (props) => {
       title: "Nutrition Info",
       attributes: nutritionInfo,
       params: {
-        api: `recipe/nutrition-info`,
+        api: `meal-item/nutrition-info`,
         parentReference: "recipe",
         itemTitle: {
           name: "ingredientsName",
