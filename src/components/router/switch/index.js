@@ -69,6 +69,7 @@ import Variant from "../../private/pages/recipe/variant";
 import RecipeTag from "../../private/pages/mealSettings/recipeTag/recipeTag";
 import AddRecipe from "../../private/pages/mealSettings/addRecipe";
 import DaySlot from "../../private/pages/daySlot";
+import PackageOrder from "../../private/pages/order/packageOrder";
 
 /**
  * Switch component to render different pages based on the provided page prop.
@@ -774,6 +775,16 @@ const Switch = ({
     case "day-slot":
       return (
         <DaySlot
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "package-orders":
+      return (
+        <PackageOrder
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
