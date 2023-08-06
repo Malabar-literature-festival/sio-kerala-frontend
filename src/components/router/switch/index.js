@@ -70,6 +70,10 @@ import RecipeTag from "../../private/pages/mealSettings/recipeTag/recipeTag";
 import AddRecipe from "../../private/pages/mealSettings/addRecipe";
 import DaySlot from "../../private/pages/daySlot";
 import PackageOrder from "../../private/pages/order/packageOrder";
+import AvailableCalories from "../../private/pages/Calories/availableCalories";
+import AvailableSizes from "../../private/pages/Calories/availableSizes";
+import DietPrice from "../../private/pages/Calories/dietPrice";
+import Incredientmedicalcondition from "../../private/pages/Calories/Incredientmedicalcondition";
 
 /**
  * Switch component to render different pages based on the provided page prop.
@@ -785,6 +789,46 @@ const Switch = ({
     case "package-orders":
       return (
         <PackageOrder
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "available-calories":
+      return (
+        <AvailableCalories
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "available-sizes":
+      return (
+        <AvailableSizes
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "diet-price":
+      return (
+        <DietPrice
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "incredient-medical-connection":
+      return (
+        <Incredientmedicalcondition
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
