@@ -74,6 +74,7 @@ import AvailableCalories from "../../private/pages/Calories/availableCalories";
 import AvailableSizes from "../../private/pages/Calories/availableSizes";
 import DietPrice from "../../private/pages/Calories/dietPrice";
 import Incredientmedicalcondition from "../../private/pages/Calories/Incredientmedicalcondition";
+import DeliveryManLocation from "../../private/pages/dispatch/deliveryManLocation/index.js";
 
 import DeliveryLocation from "../../private/pages/registrationSettings/DeliveryLocation";
 import RecipeNew from "../../private/pages/recipe/recipeNew"
@@ -851,9 +852,10 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "recipe-new":
+
+    case "deliveryman-location":
       return (
-        <RecipeNew
+        <DeliveryManLocation
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}

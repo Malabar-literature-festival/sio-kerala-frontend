@@ -321,6 +321,26 @@ const Patient = (props) => {
       add: true,
       update: true,
     },
+    {
+      type: "date",
+      placeholder: "Wedding Day",
+      name: "weddingDay",
+      condition: {
+        item: "maritalStatus",
+        if: true,
+        then: "enabled",
+        else: "disabled",
+      },
+      showItem: "",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Wedding Day",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+    },
   ]);
 
   const [medicalRecord] = useState([
