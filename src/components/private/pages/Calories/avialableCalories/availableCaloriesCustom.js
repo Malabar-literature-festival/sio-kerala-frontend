@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { GetIcon } from "../../../../../../icons";
-import { deleteData, getData, postData } from "../../../../../../backend/api";
-import { NoData } from "../../../../../elements/list/styles";
+import { GetIcon } from "../../../../../icons";
+import { deleteData, getData, postData } from "../../../../../backend/api";
+import { NoData } from "../../../../elements/list/styles";
 import {
   ColumnContainer,
   RowContainer,
-} from "../../../../../styles/containers/styles";
-import Search from "../../../../../elements/search";
+} from "../../../../styles/containers/styles";
+import Search from "../../../../elements/search";
 import {
   TabContainer,
   TabButton,
@@ -29,7 +29,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import DropTarget from "./dragdrop/drop";
 
-const Meal = ({ openData, themeColors, setMessage }) => {
+const AvailableCaloriesCustom = ({ openData, themeColors, setMessage }) => {
   const daysOfWeek = ["Recipe Variant"];
   const [menuId] = useState(openData?.data?._id);
   const [menuData, setMenuData] = useState(null);
@@ -438,4 +438,4 @@ const Meal = ({ openData, themeColors, setMessage }) => {
   );
 };
 
-export default Meal;
+export default AvailableCaloriesCustom;
