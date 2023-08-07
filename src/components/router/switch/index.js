@@ -76,6 +76,9 @@ import DietPrice from "../../private/pages/Calories/dietPrice";
 import Incredientmedicalcondition from "../../private/pages/Calories/Incredientmedicalcondition";
 import DeliveryManLocation from "../../private/pages/dispatch/deliveryManLocation/index.js";
 
+import DeliveryLocation from "../../private/pages/registrationSettings/DeliveryLocation";
+import RecipeNew from "../../private/pages/recipe/recipeNew"
+
 /**
  * Switch component to render different pages based on the provided page prop.
  * @param {string} page - The page to be rendered.
@@ -94,6 +97,7 @@ const Switch = ({
   updatePrivilege = false,
   exportPrivilege = false,
 }) => {
+  console.log(page);
   switch (page) {
     case "login":
       return <Login key={key} />;
@@ -117,6 +121,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+      
     // return (
     //   <Franchise
     //     key={key}
@@ -167,6 +172,16 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+      case "delivery-location":
+        return (
+          <DeliveryLocation
+            key={key}
+            exportPrivilege={exportPrivilege}
+            addPrivilege={addPrivilege}
+            delPrivilege={delPrivilege}
+            updatePrivilege={updatePrivilege}
+          />
+        );
     case "protein-category":
       return (
         <ProteinCategory
@@ -837,6 +852,7 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+
     case "deliveryman-location":
       return (
         <DeliveryManLocation

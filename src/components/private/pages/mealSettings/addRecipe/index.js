@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+//
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
+import RecipeNew from "../../recipe/recipeNew";
+import PopupView from "../../../../elements/popupview";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const AddRecipe = (props) => {
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
+  const [openItemData, setOpenItemData] = useState(null);
+
+  // Function to close the SetupMenu popup
+  const closeModal = () => {
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
+  };
+
   //to update the page title
   useEffect(() => {
     document.title = `Recipe - Diet Food Management Portal`;
   }, []);
+
+  const themeColors = useSelector((state) => state.themeColors);
 
   const [attributes] = useState([
     {
@@ -474,6 +489,38 @@ const AddRecipe = (props) => {
         formMode: "double",
       },
     },
+    {
+      element: "button",
+      type: "callback",
+      callback: (item, data) => {
+        // Set the data for the clicked item and open the SetupMenu popup
+        setOpenItemData({ item, data });
+        setOpenMenuSetup(true);
+      },
+      itemTitle: {
+        name: "mealName",
+        type: "text",
+        collection: "meal",
+      },
+      icon: "menu",
+      title: "Recipe",
+      params: {
+        api: `food-group-item`,
+        parentReference: "",
+        // itemTitle: "username",
+        itemTitle: {
+          name: "mealName",
+          type: "text",
+          collection: "meal",
+        },
+        shortName: "Recipe Items",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
+        customClass: "medium",
+        // formMode: "double",
+      },
+    },
   ]);
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
@@ -492,6 +539,23 @@ const AddRecipe = (props) => {
         {...props}
         attributes={attributes}
       ></ListTable>
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <RecipeNew
+              openData={openItemData}
+              setMessage={props.setMessage}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            ></RecipeNew>
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "title", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+          customClass={"large"}
+        ></PopupView>
+      )}
     </Container>
   );
 };
