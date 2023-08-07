@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 //
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
+import PopupView from "../../../elements/popupview";
+import AvailableCaloriesCustom from "./avialableCalories/availableCaloriesCustom";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
 const AvailableCalories = (props) => {
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
+  const [openItemData, setOpenItemData] = useState(null);
+
+  // Function to close the SetupMenu popup
+  const closeModal = () => {
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
+  };
   //to update the page title
   useEffect(() => {
     document.title = `Available Calories - Diet Food Management Portal`;
   }, []);
+
+  const themeColors = useSelector((state) => state.themeColors);
 
   const [attributes] = useState([
     {
@@ -150,6 +163,23 @@ const AvailableCalories = (props) => {
         {...props}
         attributes={attributes}
       ></ListTable>
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <AvailableCaloriesCustom
+              openData={openItemData}
+              setMessage={props.setMessage}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            />
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "title", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+          customClass={"large"}
+        ></PopupView>
+      )}
     </Container>
   );
 };

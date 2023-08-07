@@ -74,8 +74,9 @@ import AvailableCalories from "../../private/pages/Calories/availableCalories";
 import AvailableSizes from "../../private/pages/Calories/availableSizes";
 import DietPrice from "../../private/pages/Calories/dietPrice";
 import Incredientmedicalcondition from "../../private/pages/Calories/Incredientmedicalcondition";
-import DeliveryLocation from "../../private/pages/registrationSettings/DeliveryLocation";
 
+import DeliveryLocation from "../../private/pages/registrationSettings/DeliveryLocation";
+import RecipeNew from "../../private/pages/recipe/recipeNew"
 
 /**
  * Switch component to render different pages based on the provided page prop.
@@ -843,6 +844,16 @@ const Switch = ({
     case "incredient-medical-connection":
       return (
         <Incredientmedicalcondition
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "recipe-new":
+      return (
+        <RecipeNew
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}

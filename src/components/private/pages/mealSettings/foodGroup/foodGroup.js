@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+//
 import Layout from "../../../common/layout";
 import ListTable from "../../../../elements/list/list";
 import { Container } from "../../../common/layout/styels";
+import PopupView from "../../../../elements/popupview";
+import Meal from "./meal/meal";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 
 // FOOD GROUP IS A MEAL //
 
 const FoodGroup = (props) => {
+  const [openMenuSetup, setOpenMenuSetup] = useState(false);
+  const [openItemData, setOpenItemData] = useState(null);
+
+  // Function to close the SetupMenu popup
+  const closeModal = () => {
+    setOpenMenuSetup(false);
+    setOpenItemData(null);
+  };
+
   //to update the page title
   useEffect(() => {
     document.title = `Meal - Diet Food Management Portal`;
   }, []);
+
+  const themeColors = useSelector((state) => state.themeColors);
 
   const [attributes] = useState([
     {
@@ -331,6 +346,38 @@ const FoodGroup = (props) => {
         formMode: "double",
       },
     },
+    {
+      element: "button",
+      type: "callback",
+      callback: (item, data) => {
+        // Set the data for the clicked item and open the SetupMenu popup
+        setOpenItemData({ item, data });
+        setOpenMenuSetup(true);
+      },
+      itemTitle: {
+        name: "mealName",
+        type: "text",
+        collection: "meal",
+      },
+      icon: "menu",
+      title: "Recipe",
+      params: {
+        api: `food-group-item`,
+        parentReference: "",
+        // itemTitle: "username",
+        itemTitle: {
+          name: "mealName",
+          type: "text",
+          collection: "meal",
+        },
+        shortName: "Recipe Items",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
+        customClass: "medium",
+        // formMode: "double",
+      },
+    },
   ]);
 
   return (
@@ -341,19 +388,36 @@ const FoodGroup = (props) => {
         actions={actions}
         // API endpoint for fetching menu data
         api={`meal`}
-        displayColumn="double"
+        displayColumn="single"
         parentReference="meal"
         // Property name for the title of each menu item
         // itemTitle={`label`}
         itemTitle={{ name: "title", type: "text", collection: "" }}
         // Short name or label for the menu
         shortName={`Meal`}
-        formMode={`double`}
+        formMode={`single`}
         // Privilege flag indicating whether the user can add menu items
         {...props}
         // Additional attributes related to the menu
         attributes={attributes}
       ></ListTable>
+      {openMenuSetup && openItemData && (
+        <PopupView
+          // Popup data is a JSX element which is binding to the Popup Data Area like HOC
+          popupData={
+            <Meal
+              openData={openItemData}
+              setMessage={props.setMessage}
+              // Pass selected item data (Menu Title) to the popup for setting the time
+            />
+          }
+          themeColors={themeColors}
+          closeModal={closeModal}
+          itemTitle={{ name: "title", type: "text", collection: "" }}
+          openData={openItemData} // Pass selected item data to the popup for setting the time and taking menu id and other required data from the list item
+          customClass={"large"}
+        ></PopupView>
+      )}
     </Container>
   );
 };
