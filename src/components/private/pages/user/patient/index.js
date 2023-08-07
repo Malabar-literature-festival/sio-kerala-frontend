@@ -347,7 +347,7 @@ const Patient = (props) => {
       placeholder: "",
       name: "dateOfBirth",
       showItem: "dateOfBirth",
-      collection: "subscriber",
+      collection: "",
       validation: "",
       minDate: moment().add(-70, "years").toDate(),
       default: moment().toDate(),
