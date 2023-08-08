@@ -18,7 +18,7 @@ const ContactUs = (props) => {
             validation: "",
             default: "",
             label: "Name",
-            tag: true,
+            // tag: true,
             required: true,
             view: true,
             add: true,

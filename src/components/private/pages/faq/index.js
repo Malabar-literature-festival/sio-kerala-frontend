@@ -18,7 +18,6 @@ const Faq = (props) => {
             validation: "",
             default: "",
             label: "Question",
-            tag: true,
             required: true,
             view: true,
             add: true,

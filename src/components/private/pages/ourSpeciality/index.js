@@ -13,11 +13,11 @@ const OurSpeciality = (props) => {
     const [attributes] = useState([
         {
             type: "text",
-            placeholder: "Title",
-            name: "title",
+            placeholder: "Name",
+            name: "name",
             validation: "",
             default: "",
-            label: "Title",
+            label: "Name",
             // tag: true,
             required: true,
             view: true,
@@ -25,12 +25,25 @@ const OurSpeciality = (props) => {
             update: true,
         },
         {
-            type: "textarea",
-            placeholder: "Content",
-            name: "content",
+            type: "text",
+            placeholder: "Designation",
+            name: "designation",
             validation: "",
             default: "",
-            label: "Content",
+            tag: true,
+            label: "Designation",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "textarea",
+            placeholder: "Description",
+            name: "description",
+            validation: "",
+            default: "",
+            label: "Description",
             tag: true,
             required: true,
             view: true,
@@ -51,12 +64,12 @@ const OurSpeciality = (props) => {
             update: true,
         },
         {
-            type: "text",
-            placeholder: "Author",
-            name: "author",
+            type: "checkbox",
+            placeholder: "Active",
+            name: "active",
             validation: "",
-            default: "",
-            label: "Author",
+            default: "false",
+            label: "Active",
             tag: true,
             required: true,
             view: true,
@@ -70,7 +83,7 @@ const OurSpeciality = (props) => {
             <ListTable
                 // actions={actions}
                 api={`our-speciality`}
-                itemTitle={{ name: "title", type: "text", collection: "" }}
+                itemTitle={{ name: "name", type: "text", collection: "" }}
                 shortName={`Our Speciality`}
                 formMode={`single`}
                 {...props}

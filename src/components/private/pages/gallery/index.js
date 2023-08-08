@@ -37,22 +37,6 @@ const Gallery = (props) => {
             add: true,
             update: true,
         },
-        {
-            type: "select",
-            placeholder: "Language",
-            name: "language",
-            validation: "",
-            default: "",
-            tag: true,
-            label: "Language",
-            required: true,
-            view: true,
-            filter: true,
-            add: true,
-            update: true,
-            apiType: "CSV",
-            selectApi: "English,Arabic,Urdu",
-        },
     ]);
 
     return (

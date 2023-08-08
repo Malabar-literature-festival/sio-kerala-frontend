@@ -70,6 +70,7 @@ const OurTeam = (props) => {
             validation: "",
             default: "false",
             label: "Active",
+            tag: true,
             required: true,
             view: true,
             add: true,
