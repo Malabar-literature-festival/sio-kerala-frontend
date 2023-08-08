@@ -10,6 +10,8 @@ import AboutUs from "../../private/pages/aboutUs";
 import Faq from "../../private/pages/faq";
 import Gallery from "../../private/pages/gallery";
 import News from "../../private/pages/news";
+import Speakers from "../../private/pages/speakers";
+import Registration from "../../private/pages/registration";
 import Testimonial from "../../private/pages/testimonial";
 
 
@@ -118,6 +120,26 @@ const Switch = ({
     case "news":
       return (
         <News
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "speakers":
+      return (
+        <Speakers
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "registration":
+      return (
+        <Registration
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
