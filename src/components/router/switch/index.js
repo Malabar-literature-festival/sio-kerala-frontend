@@ -7,12 +7,9 @@ import UserType from "../../private/pages/user/userType";
 import Dashboard from "../../private/pages/dashboard";
 import Admin from "../../private/pages/franchise/admin";
 import AboutUs from "../../private/pages/aboutUs";
-import ContactUs from "../../private/pages/contactUs";
 import Faq from "../../private/pages/faq";
 import Gallery from "../../private/pages/gallery";
 import News from "../../private/pages/news";
-import OurSpeciality from "../../private/pages/ourSpeciality";
-import OurTeam from "../../private/pages/ourTeam";
 import Testimonial from "../../private/pages/testimonial";
 
 
@@ -98,16 +95,6 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
-    case "contact-us":
-      return (
-        <ContactUs
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
     case "faq":
       return (
         <Faq
@@ -131,26 +118,6 @@ const Switch = ({
     case "news":
       return (
         <News
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
-    case "our-speciality":
-      return (
-        <OurSpeciality
-          key={key}
-          exportPrivilege={exportPrivilege}
-          addPrivilege={addPrivilege}
-          delPrivilege={delPrivilege}
-          updatePrivilege={updatePrivilege}
-        />
-      );
-    case "our-team":
-      return (
-        <OurTeam
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
