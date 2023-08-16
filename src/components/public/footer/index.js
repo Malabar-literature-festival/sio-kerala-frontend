@@ -13,7 +13,7 @@ const Footer = ({ fixed = true }) => {
     <FooterContainer className={fixed && "fixed"}>
       <ColumnContainer className="container">
         {/* Copyright information */}
-        <Copy>©{currentYear} Diet Food Management System</Copy>
+        <Copy>©{currentYear} Malabar Literature Fest System</Copy>
         {/* Navigation links */}
         <Nav>
           {/* Link to the privacy page */}

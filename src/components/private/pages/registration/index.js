@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Registration = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Registration - DataHex Security Website Portal`;
+        document.title = `Registration - DataHex Malabar Literature Fest Portal`;
     }, []);
 
     const [attributes] = useState([
@@ -38,7 +38,7 @@ const Registration = (props) => {
             update: true,
         },
         {
-            type: "text",
+            type: "email",
             placeholder: "Email",
             name: "email",
             validation: "",
@@ -47,6 +47,19 @@ const Registration = (props) => {
             tag: true,
             required: true,
             view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "password",
+            placeholder: "Password",
+            name: "password",
+            validation: "",
+            default: "",
+            // tag: true,
+            label: "Password",
+            required: true,
+            view: false,
             add: true,
             update: true,
         },
@@ -68,13 +81,52 @@ const Registration = (props) => {
             selectApi: "Male,Female",
         },
         {
+            type: "textarea",
+            placeholder: "Address",
+            name: "address",
+            validation: "",
+            default: "",
+            tag: true,
+            label: "Address",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
             type: "text",
             placeholder: "District",
             name: "district",
             validation: "",
-            default: "false",
+            default: "",
             tag: true,
             label: "District",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "text",
+            placeholder: "Profession",
+            name: "profession",
+            validation: "",
+            default: "",
+            tag: true,
+            label: "Profession",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "text",
+            placeholder: "Matter Of Interest",
+            name: "matterOfInterest",
+            validation: "",
+            default: "",
+            tag: true,
+            label: "Matter Of Interest",
             required: true,
             view: true,
             add: true,
@@ -119,6 +171,19 @@ const Registration = (props) => {
             add: true,
             update: true,
         },
+        {
+            type: "image",
+            placeholder: "Image",
+            name: "image",
+            validation: "",
+            default: "false",
+            tag: true,
+            label: "Image",
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
     ]);
 
     return (
@@ -128,7 +193,7 @@ const Registration = (props) => {
                 api={`registration`}
                 itemTitle={{ name: "name", type: "text", collection: "" }}
                 shortName={`Registration`}
-                formMode={`single`}
+                formMode={`double`}
                 {...props}
                 attributes={attributes}
             ></ListTable>

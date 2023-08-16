@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Faq = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Faq - DataHex Security Website Portal`;
+        document.title = `Faq - DataHex Malabar Literature Fest Portal`;
     }, []);
 
     const [attributes] = useState([

@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Testimonial = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Testimonial - DataHex Security Website Portal`;
+        document.title = `Testimonial - DataHex Malabar Literature Fest Portal`;
     }, []);
 
     const [attributes] = useState([

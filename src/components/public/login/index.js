@@ -16,7 +16,7 @@ import { clearLogin, fetchLogin } from "../../../store/actions/login";
 
 const Login = (props) => {
   useEffect(() => {
-    document.title = `Diet Food Management System`;
+    document.title = `Malabar Literature Fest System`;
   }, []);
 
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Login = (props) => {
     }
   }, [user, navigate, setLoaderBox, t, props, dispatch]);
 
-  const isCreatingHandler = (value, callback) => {};
+  const isCreatingHandler = (value, callback) => { };
   const submitChange = async (post) => {
     dispatch(fetchLogin(post));
   };
