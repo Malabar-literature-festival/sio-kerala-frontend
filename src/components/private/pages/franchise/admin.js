@@ -9,7 +9,7 @@ import { Container } from "../../common/layout/styels";
 const FranchiseAdmin = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Franchise Admin - Diet Food Management Portal`;
+    document.title = `Franchise Admin - SIO Kerala Portal`;
   }, []);
 
   const [attributes] = useState([

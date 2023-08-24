@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Franchise = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Franchise - Diet Food Management Portal`;
+    document.title = `Franchise - SIO Kerala Portal`;
   }, []);
 
   const [attributes] = useState([

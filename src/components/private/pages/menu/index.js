@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Menu = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Menu - Malabar Literature Fest Portal`;
+    document.title = `Menu - DataHex SIO Kerala Portal`;
   }, []);
 
   const [attributes] = useState([

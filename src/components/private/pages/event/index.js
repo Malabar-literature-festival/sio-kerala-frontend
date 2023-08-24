@@ -4,10 +4,10 @@ import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Testimonial = (props) => {
+const Event = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Testimonial - DataHex SIO Kerala Portal`;
+        document.title = `Event - DataHex SIO Kerala Portal`;
     }, []);
 
     const [attributes] = useState([
@@ -18,21 +18,33 @@ const Testimonial = (props) => {
             validation: "",
             default: "",
             label: "Title",
-            // tag: true,
-            required: true,
+            required: false,
             view: true,
             add: true,
             update: true,
         },
         {
             type: "textarea",
-            placeholder: "Content",
-            name: "content",
+            placeholder: "Description",
+            name: "description",
             validation: "",
             default: "",
-            label: "Content",
+            label: "Description",
             tag: true,
-            required: true,
+            required: false,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "date",
+            placeholder: "Date",
+            name: "date",
+            validation: "",
+            default: "",
+            label: "Date",
+            tag: true,
+            required: false,
             view: true,
             add: true,
             update: true,
@@ -45,20 +57,7 @@ const Testimonial = (props) => {
             default: "false",
             tag: true,
             label: "Image",
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
-        {
-            type: "text",
-            placeholder: "Author",
-            name: "author",
-            validation: "",
-            default: "",
-            label: "Author",
-            tag: true,
-            required: true,
+            required: false,
             view: true,
             add: true,
             update: true,
@@ -69,9 +68,9 @@ const Testimonial = (props) => {
         <Container className="noshadow">
             <ListTable
                 // actions={actions}
-                api={`testimonial`}
+                api={`event`}
                 itemTitle={{ name: "title", type: "text", collection: "" }}
-                shortName={`Testimonial`}
+                shortName={`Event`}
                 formMode={`single`}
                 {...props}
                 attributes={attributes}
@@ -80,4 +79,4 @@ const Testimonial = (props) => {
     );
 };
 // exporting the page with parent container layout..
-export default Layout(Testimonial);
+export default Layout(Event);

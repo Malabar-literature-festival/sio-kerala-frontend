@@ -13,6 +13,8 @@ import News from "../../private/pages/news";
 import Speakers from "../../private/pages/speakers";
 import Registration from "../../private/pages/registration";
 import Testimonial from "../../private/pages/testimonial";
+import Event from "../../private/pages/event";
+import EventUser from "../../private/pages/eventUser";
 
 
 /**
@@ -150,6 +152,26 @@ const Switch = ({
     case "testimonial":
       return (
         <Testimonial
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "event":
+      return (
+        <Event
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "event-user":
+      return (
+        <EventUser
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}

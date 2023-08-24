@@ -4,47 +4,56 @@ import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
-const Faq = (props) => {
+const EventUser = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Faq - DataHex SIO Kerala Portal`;
+        document.title = `Event User - DataHex SIO Kerala Portal`;
     }, []);
 
     const [attributes] = useState([
         {
-            type: "text",
-            placeholder: "Question",
-            name: "question",
+            type: "select",
+            apiType: "API",
+            selectApi: "event/select",
+            placeholder: "Event",
+            name: "event",
             validation: "",
+            showItem: "title",
+            tag: true,
             default: "",
-            label: "Question",
-            required: true,
-            view: true,
+            label: "Event",
+            required: false,
+            view: false,
             add: true,
             update: true,
+            filter: false,
         },
         {
-            type: "text",
-            placeholder: "Answer",
-            name: "answer",
+            type: "select",
+            apiType: "API",
+            selectApi: "user/select",
+            placeholder: "Registration",
+            name: "registration",
             validation: "",
-            default: "",
-            label: "Answer",
+            showItem: "name",
             tag: true,
-            required: true,
-            view: true,
+            default: "",
+            label: "Registration",
+            required: false,
+            view: false,
             add: true,
             update: true,
+            filter: false,
         },
         {
-            type: "text",
-            placeholder: "Link",
-            name: "link",
+            type: "date",
+            placeholder: "Date",
+            name: "date",
             validation: "",
             default: "",
+            label: "Date",
             tag: true,
-            label: "Link",
-            required: true,
+            required: false,
             view: true,
             add: true,
             update: true,
@@ -55,9 +64,9 @@ const Faq = (props) => {
         <Container className="noshadow">
             <ListTable
                 // actions={actions}
-                api={`faq`}
-                itemTitle={{ name: "question", type: "text", collection: "" }}
-                shortName={`Faq`}
+                api={`event-user`}
+                itemTitle={{ name: "title", type: "text", collection: "event" }}
+                shortName={`Event User`}
                 formMode={`single`}
                 {...props}
                 attributes={attributes}
@@ -66,4 +75,4 @@ const Faq = (props) => {
     );
 };
 // exporting the page with parent container layout..
-export default Layout(Faq);
+export default Layout(EventUser);

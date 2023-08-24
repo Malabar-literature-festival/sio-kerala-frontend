@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const News = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `News - DataHex Malabar Literature Fest Portal`;
+        document.title = `News - DataHex SIO Kerala Portal`;
     }, []);
 
     const [attributes] = useState([

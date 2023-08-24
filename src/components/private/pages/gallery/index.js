@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Gallery = (props) => {
     //to update the page title
     useEffect(() => {
-        document.title = `Gallery - DataHex Malabar Literature Fest Portal`;
+        document.title = `Gallery - DataHex SIO Kerala Portal`;
     }, []);
 
     const [attributes] = useState([
