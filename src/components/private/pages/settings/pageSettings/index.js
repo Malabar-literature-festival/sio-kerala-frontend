@@ -7,7 +7,7 @@ import { Container } from "../../../common/layout/styels";
 const PageSettings = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Page Settings - Diet Food Management Portal`;
+    document.title = `Page Settings - DataHex SIO Kerala Portal`;
   }, []);
 
   const [attributes] = useState([

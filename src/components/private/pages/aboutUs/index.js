@@ -63,32 +63,6 @@ const AboutUs = (props) => {
             add: true,
             update: true,
         },
-        {
-            type: "textarea",
-            placeholder: "About Book Plus Publishers",
-            name: "aboutBookPlus",
-            validation: "",
-            default: "",
-            label: "About Book Plus Publishers",
-            tag: true,
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
-        {
-            type: "textarea",
-            placeholder: "About Malabar Literature Festival",
-            name: "aboutMlf",
-            validation: "",
-            default: "",
-            label: "About Malabar Literature Festival",
-            tag: true,
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
     ]);
 
     return (

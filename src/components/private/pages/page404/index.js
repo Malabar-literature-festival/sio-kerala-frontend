@@ -17,7 +17,7 @@ const Page404 = (props) => {
   const dispatch = useDispatch();
   //to update the page title
   useEffect(() => {
-    document.title = `404 - Diet Food Management Portal`;
+    document.title = `404 - DataHex SIO Kerala Portal`;
   }, []);
   const [meessage, setMessage] = useState({
     type: 1,
@@ -39,7 +39,7 @@ const Page404 = (props) => {
   console.log(user.data.token);
   // Use the useTranslation hook from react-i18next to handle translations
   // const parkingDuration = totalDuration > 120 ? (days > 0 ? days + `d, ` : ``) + (hours > 0 ? hours + `h, ` : ``) + (minutes + t("m")) : totalDuration.toFixed(0) + ` ` + t("minutes");
-  return user.data.token ? <MainContainer className="center"></MainContainer> : <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={() => {}} showMessage={true}></Message>;
+  return user.data.token ? <MainContainer className="center"></MainContainer> : <Message meessage={meessage} closeMessage={closeMessage} setLoaderBox={() => { }} showMessage={true}></Message>;
 };
 // exporting the page with parent container layout..
 export default Layout(Page404);

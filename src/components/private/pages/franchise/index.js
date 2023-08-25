@@ -7,7 +7,7 @@ import { Container } from "../../common/layout/styels";
 const Franchise = (props) => {
   //to update the page title
   useEffect(() => {
-    document.title = `Franchise - SIO Kerala Portal`;
+    document.title = `Franchise - DataHex SIO Kerala Portal`;
   }, []);
 
   const [attributes] = useState([
