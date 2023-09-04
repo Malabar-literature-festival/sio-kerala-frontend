@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AutoForm from "../../elements/form";
 import Footer from "../footer";
 import { FormContainer, MainContainer } from "./styles";
-import banner from "../../../images/public/banner.jpeg";
+import logo from "../../../images/public/logo.png";
 //using translation
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ import { clearLogin, fetchLogin } from "../../../store/actions/login";
 
 const Login = (props) => {
   useEffect(() => {
-    document.title = `Malabar Literature Fest System`;
+    document.title = `SIO Kerala System`;
   }, []);
 
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const Login = (props) => {
       <ColumnContainer
         className="login"
         style={{
-          backgroundImage: `linear-gradient(to right,  #f1f6f8 30%, transparent),url(${banner})`,
+          backgroundImage: `linear-gradient(to right,  #f1f6f8 30%, transparent),url(${logo})`,
           backgroundSize: "cover",
         }}
       >

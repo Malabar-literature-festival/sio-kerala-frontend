@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       {/* Copyright information */}
-      <Copy>©2023 Diet Food Management Portal</Copy>
+      <Copy>©2023 SIO Kerala Portal</Copy>
       {/* Navigation links */}
       <Nav>
         {/* Link to the privacy page */}
