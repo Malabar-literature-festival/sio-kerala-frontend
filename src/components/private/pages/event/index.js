@@ -120,7 +120,7 @@ const Event = (props) => {
         {
             type: "checkbox",
             placeholder: "Is Registration Open",
-            name: "theme",
+            name: "isEnroll",
             validation: "",
             default: "",
             label: "Is Registration Open",
