@@ -115,7 +115,7 @@ const Event = (props) => {
             add: true,
             update: true,
             apiType: "CSV",
-            selectApi: "Seminar,Workshop,Reading Session",
+            selectApi: "Seminar,Workshop,Public Discussion,Reading Session,Academic Conference,Book Talks,Online Academic Conclaves",
         },
         {
             type: "checkbox",
