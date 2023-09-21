@@ -94,13 +94,13 @@ const Registration = (props) => {
             update: true,
         },
         {
-            type: "textarea",
-            placeholder: "Address",
-            name: "address",
+            type: "text",
+            placeholder: "Place",
+            name: "place",
             validation: "",
             default: "",
             tag: true,
-            label: "Address",
+            label: "Place",
             required: false,
             view: true,
             add: true,
@@ -132,6 +132,21 @@ const Registration = (props) => {
             add: true,
             update: true,
         },
+
+        // {
+        //     type: "image",
+        //     placeholder: "Image",
+        //     name: "image",
+        //     validation: "",
+        //     default: "false",
+        //     tag: true,
+        //     label: "Image",
+        //     required: false,
+        //     view: true,
+        //     add: true,
+        //     update: true,
+        // },
+
          {
             type: "text",
             placeholder: "Institution",
@@ -145,19 +160,7 @@ const Registration = (props) => {
             add: true,
             update: true,
         },
-        {
-            type: "image",
-            placeholder: "Image",
-            name: "image",
-            validation: "",
-            default: "false",
-            tag: true,
-            label: "Image",
-            required: false,
-            view: true,
-            add: true,
-            update: true,
-        },
+
     ]);
 
     return (
