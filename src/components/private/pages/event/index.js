@@ -90,7 +90,7 @@ const Event = (props) => {
         {
             type: "select",
             placeholder: "Event Mode",
-            name: "month",
+            name: "eventMode",
             validation: "",
             default: "",
             label: "Event Mode",
