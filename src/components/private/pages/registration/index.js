@@ -132,6 +132,7 @@ const Registration = (props) => {
             add: true,
             update: true,
         },
+
         // {
         //     type: "image",
         //     placeholder: "Image",
@@ -145,6 +146,21 @@ const Registration = (props) => {
         //     add: true,
         //     update: true,
         // },
+
+         {
+            type: "text",
+            placeholder: "Institution",
+            name: "institution",
+            validation: "",
+            default: "",
+            tag: true,
+            label: "Institution",
+            required: false,
+            view: true,
+            add: true,
+            update: true,
+        },
+
     ]);
 
     return (
