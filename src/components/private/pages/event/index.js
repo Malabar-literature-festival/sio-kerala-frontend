@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
+import moment from "moment";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const Event = (props) => {
@@ -81,6 +82,7 @@ const Event = (props) => {
             validation: "",
             default: "",
             label: "Date",
+            minDate: moment().add(-70, "years").toDate(),
             tag: true,
             required: false,
             view: true,
@@ -246,7 +248,7 @@ const Event = (props) => {
             default: "",
             label: "Image",
             tag: true,
-            required: true,
+            required: false,
             view: true,
             add: true,
             update: true,

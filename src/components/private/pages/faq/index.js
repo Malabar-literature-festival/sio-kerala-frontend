@@ -36,26 +36,26 @@ const Faq = (props) => {
             add: true,
             update: true,
         },
-        {
-            type: "text",
-            placeholder: "Link",
-            name: "link",
-            validation: "",
-            default: "",
-            tag: true,
-            label: "Link",
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
+        // {
+        //     type: "text",
+        //     placeholder: "Link",
+        //     name: "link",
+        //     validation: "",
+        //     default: "",
+        //     tag: true,
+        //     label: "Link",
+        //     required: true,
+        //     view: true,
+        //     add: true,
+        //     update: true,
+        // },
     ]);
 
     return (
         <Container className="noshadow">
             <ListTable
                 // actions={actions}
-                api={`faq`}
+                api={`global-faq`}
                 itemTitle={{ name: "question", type: "text", collection: "" }}
                 shortName={`Faq`}
                 formMode={`single`}
