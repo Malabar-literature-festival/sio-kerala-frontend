@@ -45,7 +45,7 @@ const Speakers = (props) => {
             default: "false",
             tag: true,
             label: "Image",
-            required: true,
+            required: false,
             view: true,
             add: true,
             update: true,
@@ -69,7 +69,7 @@ const Speakers = (props) => {
         <Container className="noshadow">
             <ListTable
                 // actions={actions}
-                api={`speakers`}
+                api={`global-speakers`}
                 itemTitle={{ name: "name", type: "text", collection: "" }}
                 shortName={`Speakers`}
                 formMode={`single`}
