@@ -5,79 +5,66 @@ import { Container } from "../../common/layout/styels";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const Speakers = (props) => {
-    //to update the page title
-    useEffect(() => {
-        document.title = `Speakers - DataHex SIO Kerala Portal`;
-    }, []);
+  //to update the page title
+  useEffect(() => {
+    document.title = `Speakers - DataHex SIO Kerala Portal`;
+  }, []);
 
-    const [attributes] = useState([
-        {
-            type: "text",
-            placeholder: "Name",
-            name: "name",
-            validation: "",
-            default: "",
-            label: "Name",
-            // tag: true,
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
-        {
-            type: "text",
-            placeholder: "Designation",
-            name: "designation",
-            validation: "",
-            default: "",
-            tag: true,
-            label: "Designation",
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
-        {
-            type: "image",
-            placeholder: "Image",
-            name: "image",
-            validation: "",
-            default: "false",
-            tag: true,
-            label: "Image",
-            required: false,
-            view: true,
-            add: true,
-            update: true,
-        },
-        {
-            type: "checkbox",
-            placeholder: "Active",
-            name: "active",
-            validation: "",
-            default: "false",
-            label: "Active",
-            tag: true,
-            required: true,
-            view: true,
-            add: true,
-            update: true,
-        },
-    ]);
+  const [attributes] = useState([
+    {
+      type: "text",
+      placeholder: "Name",
+      name: "name",
+      validation: "",
+      default: "",
+      label: "Name",
+      // tag: true,
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "text",
+      placeholder: "Designation",
+      name: "designation",
+      validation: "",
+      default: "",
+      tag: true,
+      label: "Designation",
+      required: true,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
+      type: "image",
+      placeholder: "Image",
+      name: "photo",
+      validation: "",
+      default: "false",
+      tag: true,
+      label: "Image",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+    },
+  ]);
 
-    return (
-        <Container className="noshadow">
-            <ListTable
-                // actions={actions}
-                api={`global-speakers`}
-                itemTitle={{ name: "name", type: "text", collection: "" }}
-                shortName={`Speakers`}
-                formMode={`single`}
-                {...props}
-                attributes={attributes}
-            ></ListTable>
-        </Container>
-    );
+  return (
+    <Container className="noshadow">
+      <ListTable
+        // actions={actions}
+        api={`global-speakers`}
+        itemTitle={{ name: "name", type: "text", collection: "" }}
+        shortName={`Speakers`}
+        formMode={`single`}
+        {...props}
+        attributes={attributes}
+      ></ListTable>
+    </Container>
+  );
 };
 // exporting the page with parent container layout..
 export default Layout(Speakers);
