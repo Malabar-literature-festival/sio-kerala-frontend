@@ -15,6 +15,7 @@ import Registration from "../../private/pages/registration";
 import Testimonial from "../../private/pages/testimonial";
 import Event from "../../private/pages/event";
 import EventUser from "../../private/pages/eventUser";
+import Article from "../../private/pages/article";
 
 
 /**
@@ -122,6 +123,16 @@ const Switch = ({
     case "news":
       return (
         <News
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "article":
+      return (
+        <Article
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
