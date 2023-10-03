@@ -17,6 +17,7 @@ import Event from "../../private/pages/event";
 import EventUser from "../../private/pages/eventUser";
 import Article from "../../private/pages/article";
 import Deconquista from "../../private/pages/deconquista";
+import LeadersNote from "../../private/pages/leadersNote";
 
 
 /**
@@ -164,6 +165,16 @@ const Switch = ({
     case "testimonial":
       return (
         <Testimonial
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "leadersNote":
+      return (
+        <LeadersNote
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
