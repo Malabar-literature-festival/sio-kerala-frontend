@@ -15,6 +15,9 @@ import Registration from "../../private/pages/registration";
 import Testimonial from "../../private/pages/testimonial";
 import Event from "../../private/pages/event";
 import EventUser from "../../private/pages/eventUser";
+import Article from "../../private/pages/article";
+import Deconquista from "../../private/pages/deconquista";
+import LeadersNote from "../../private/pages/leadersNote";
 
 
 /**
@@ -129,6 +132,16 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "article":
+      return (
+        <Article
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "speakers":
       return (
         <Speakers
@@ -159,9 +172,29 @@ const Switch = ({
           updatePrivilege={updatePrivilege}
         />
       );
+    case "leadersNote":
+      return (
+        <LeadersNote
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
     case "event":
       return (
         <Event
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "deconquista":
+      return (
+        <Deconquista
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
