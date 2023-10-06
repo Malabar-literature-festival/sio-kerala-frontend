@@ -320,6 +320,46 @@ const Event = (props) => {
             update: true,
         },
     ]);
+
+    const [registeredUser] = useState([
+        {
+            type: "text",
+            placeholder: "event id",
+            name: "event",
+            validation: "",
+            default: "",
+            label: "event id",
+            required: false,
+            view: true,
+            // tag: true,
+        },
+        {
+            type: "text",
+            placeholder: "Title",
+            name: "name",
+            validation: "",
+            default: "",
+            label: "Title",
+            tag: true,
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+        {
+            type: "image",
+            placeholder: "Image",
+            name: "materialUpload",
+            validation: "",
+            default: "",
+            label: "Image",
+            tag: true,
+            required: true,
+            view: true,
+            add: true,
+            update: true,
+        },
+    ]);
  
     const [actions] = useState([
         {
@@ -396,6 +436,33 @@ const Event = (props) => {
                     collection: "",
                 },
                 shortName: "Material Details",
+                addPrivilege: true,
+                delPrivilege: true,
+                updatePrivilege: true,
+                customClass: "medium",
+                formMode: "single",
+            },
+        },
+        {
+            element: "button",
+            type: "subList",
+            id: "material",
+            itemTitle: {
+                name: "name",
+                type: "text",
+                collection: "",
+            },
+            title: "Registered User",
+            attributes: registeredUser,
+            params: {
+                api: `eventRegUser`,
+                parentReference: "event",
+                itemTitle: {
+                    name: "name",
+                    type: "text",
+                    collection: "",
+                },
+                shortName: "Registered User Details",
                 addPrivilege: true,
                 delPrivilege: true,
                 updatePrivilege: true,
