@@ -135,12 +135,12 @@ const Registration = (props) => {
 
         {
             type: "image",
-            placeholder: "Image",
-            name: "image",
+            placeholder: "QR Code",
+            name: "qrImageUrl",
             validation: "",
             default: "false",
             tag: true,
-            label: "Image",
+            label: "QR Code",
             required: false,
             view: true,
             add: true,
