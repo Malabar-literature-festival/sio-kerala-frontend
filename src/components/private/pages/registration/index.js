@@ -133,19 +133,19 @@ const Registration = (props) => {
             update: true,
         },
 
-        // {
-        //     type: "image",
-        //     placeholder: "Image",
-        //     name: "image",
-        //     validation: "",
-        //     default: "false",
-        //     tag: true,
-        //     label: "Image",
-        //     required: false,
-        //     view: true,
-        //     add: true,
-        //     update: true,
-        // },
+        {
+            type: "image",
+            placeholder: "Image",
+            name: "image",
+            validation: "",
+            default: "false",
+            tag: true,
+            label: "Image",
+            required: false,
+            view: true,
+            add: true,
+            update: true,
+        },
 
          {
             type: "text",
