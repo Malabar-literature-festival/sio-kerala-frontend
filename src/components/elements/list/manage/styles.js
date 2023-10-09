@@ -76,6 +76,13 @@ export const Page = styled.div`
     min-width: 250px;
     max-width: 100%;
   }
+  &.scan {
+    width: 60%;
+    height: 80%;
+    min-width: 250px;
+    max-width: 100%;
+    padding: 10px;
+  }
   &.full-page
   {
     height:100vh;
@@ -90,6 +97,19 @@ export const Page = styled.div`
     padding: 0;
     &.medium {
       width: 100%;
+      min-width: 250px;
+      max-width: 100%;
+      padding: 10px;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    position: relative;
+    top: 0;
+    padding: 0;
+    &.scan {
+      width: 87%;
+      height: 80%;
       min-width: 250px;
       max-width: 100%;
       padding: 10px;
