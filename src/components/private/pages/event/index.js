@@ -593,6 +593,7 @@ const Event = (props) => {
         customClass: "medium",
         formMode: "single",
         exportPrivilege: true,
+        printPrivilege:true,
       },
     },
     {
