@@ -18,6 +18,7 @@ import EventUser from "../../private/pages/eventUser";
 import Article from "../../private/pages/article";
 import Deconquista from "../../private/pages/deconquista";
 import LeadersNote from "../../private/pages/leadersNote";
+import PaidReg from "../../private/pages/paidReg";
 
 
 /**
@@ -205,6 +206,16 @@ const Switch = ({
     case "event-user":
       return (
         <EventUser
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "paid-reg":
+      return (
+        <PaidReg
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
