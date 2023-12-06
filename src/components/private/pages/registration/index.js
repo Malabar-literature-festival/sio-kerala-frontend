@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../common/layout";
 import ListTable from "../../../elements/list/list";
 import { Container } from "../../common/layout/styels";
-import { getData } from "../../../../backend/api";
+// import { getData } from "../../../../backend/api";
 //src/components/styles/page/index.js
 //if you want to write custom style wirte in above file
 const Registration = (props) => {
@@ -213,65 +213,65 @@ const Registration = (props) => {
     },
   ]);
 
-  const [actions] = useState([
-    {
-      element: "button",
-      type: "callback",
-      callback: (item, data, refreshView) => {
-        // Set the data for the clicked item and open the SetupMenu popup
-        console.log(data);
-        // setUserId(data._id)
-        getApproved(data._id, refreshView);
-      },
-      itemTitle: {
-        name: "user",
-        type: "text",
-        collection: "",
-      },
-      icon: "info",
-      title: "Approve",
-      params: {
-        api: ``,
-        parentReference: "",
-        itemTitle: {
-          name: "user",
-          type: "text",
-          collection: "",
-        },
-        shortName: "Approve",
-        addPrivilege: true,
-        delPrivilege: true,
-        updatePrivilege: true,
-        customClass: "medium",
-      },
-    },
-  ]);
+  // const [actions] = useState([
+  //   {
+  //     element: "button",
+  //     type: "callback",
+  //     callback: (item, data, refreshView) => {
+  //       // Set the data for the clicked item and open the SetupMenu popup
+  //       console.log(data);
+  //       // setUserId(data._id)
+  //       getApproved(data._id, refreshView);
+  //     },
+  //     itemTitle: {
+  //       name: "user",
+  //       type: "text",
+  //       collection: "",
+  //     },
+  //     icon: "info",
+  //     title: "Approve",
+  //     params: {
+  //       api: ``,
+  //       parentReference: "",
+  //       itemTitle: {
+  //         name: "user",
+  //         type: "text",
+  //         collection: "",
+  //       },
+  //       shortName: "Approve",
+  //       addPrivilege: true,
+  //       delPrivilege: true,
+  //       updatePrivilege: true,
+  //       customClass: "medium",
+  //     },
+  //   },
+  // ]);
 
-  const getApproved = (userId, refreshView) => {
-    props.setLoaderBox(true);
-    getData({ userId }, "approved")
-      .then((response) => {
-        props.setLoaderBox(false);
-        console.log(response);
-        if (response.data) {
-          props.setMessage({ content: response.data.message });
-          refreshView();
-        } else {
-          // Handle the case where response.data is undefined
-          console.error("Response data is undefined.");
-        }
-      })
-      .catch((error) => {
-        props.setLoaderBox(false);
-        // Handle any errors that occur during the API request
-        console.error("API request error:", error);
-      });
-  };
+  // const getApproved = (userId, refreshView) => {
+  //   props.setLoaderBox(true);
+  //   getData({ userId }, "approved")
+  //     .then((response) => {
+  //       props.setLoaderBox(false);
+  //       console.log(response);
+  //       if (response.data) {
+  //         props.setMessage({ content: response.data.message });
+  //         refreshView();
+  //       } else {
+  //         // Handle the case where response.data is undefined
+  //         console.error("Response data is undefined.");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       props.setLoaderBox(false);
+  //       // Handle any errors that occur during the API request
+  //       console.error("API request error:", error);
+  //     });
+  // };
 
   return (
     <Container className="noshadow">
       <ListTable
-        actions={actions}
+        // actions={actions}
         api={`registration`}
         itemTitle={{ name: "name", type: "text", collection: "" }}
         shortName={`Registration`}
