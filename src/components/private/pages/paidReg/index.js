@@ -250,6 +250,46 @@ const PaidReg = (props) => {
       add: true,
       update: true,
     },
+    {
+      type: "select",
+      apiType: "JSON",
+      selectApi: [
+        { id: "approved", value: "Approved" },
+        { id: "notapproved", value: "Not Approved" },
+        { id: "all", value: "All" },
+      ],
+      filter: true,
+      placeholder: "Registration Status",
+      name: "approved",
+      value: "all",
+      validation: "",
+      tag: false,
+      label: "Registration Status",
+      required: false,
+      view: false,
+      add: false,
+      update: false,
+    },
+    {
+      type: "select",
+      apiType: "JSON",
+      selectApi: [
+        { id: "all", value: "All" },
+        { id: "yes", value: "Yes" },
+        { id: "no", value: "No" }
+      ],
+      filter: true,
+      placeholder: "Payment Status",
+      name: "paymentStatus",
+      value: "all",
+      validation: "",
+      tag: false,
+      label: "Payment Status",
+      required: false,
+      view: false,
+      add: false,
+      update: false,
+    },
   ]);
 
   const [actions] = useState([
