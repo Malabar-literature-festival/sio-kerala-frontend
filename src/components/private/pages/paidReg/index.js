@@ -147,9 +147,9 @@ const PaidReg = (props) => {
       update: true,
     },
     {
-      type: "date",
+      type: "datetime",
       placeholder: "Registration Date",
-      name: "regDate",
+      name: "createdAt",
       validation: "",
       default: "",
       label: "Registration Date",
@@ -251,6 +251,19 @@ const PaidReg = (props) => {
       update: true,
     },
     {
+      type: "checkbox",
+      placeholder: "Declined",
+      name: "declined",
+      validation: "",
+      default: "false",
+      tag: true,
+      label: "Declined",
+      required: false,
+      view: true,
+      add: true,
+      update: true,
+    },
+    {
       type: "select",
       apiType: "JSON",
       selectApi: [
@@ -307,7 +320,7 @@ const PaidReg = (props) => {
         type: "text",
         collection: "",
       },
-      icon: "info",
+      icon: "checked",
       title: "Approve",
       params: {
         api: ``,
@@ -324,11 +337,63 @@ const PaidReg = (props) => {
         customClass: "medium",
       },
     },
+    {
+      element: "button",
+      type: "callback",
+      callback: (item, data, refreshView) => {
+        // Set the data for the clicked item and open the SetupMenu popup
+        console.log(data);
+        // setUserId(data._id)
+        getDeclined(data._id, refreshView);
+      },
+      itemTitle: {
+        name: "user",
+        type: "text",
+        collection: "",
+      },
+      icon: "close",
+      title: "Decline",
+      params: {
+        api: ``,
+        parentReference: "",
+        itemTitle: {
+          name: "user",
+          type: "text",
+          collection: "",
+        },
+        shortName: "Decline",
+        addPrivilege: true,
+        delPrivilege: true,
+        updatePrivilege: true,
+        customClass: "medium",
+      },
+    },
   ]);
 
   const getApproved = (userId, refreshView) => {
     props.setLoaderBox(true);
     getData({ userId }, "approved")
+      .then((response) => {
+        props.setLoaderBox(false);
+        console.log(response);
+        if (response.data) {
+          props.setMessage({ content: response.data.message });
+          refreshView();
+        } else {
+          // Handle the case where response.data is undefined
+          console.error("Response data is undefined.");
+        }
+      })
+      .catch((error) => {
+        props.setLoaderBox(false);
+        // Handle any errors that occur during the API request
+        console.error("API request error:", error);
+      });
+  };
+
+  const getDeclined = (userId, refreshView) => {
+    props.setLoaderBox(true);
+    getData({ userId }, "declined")
       .then((response) => {
         props.setLoaderBox(false);
         console.log(response);
