@@ -19,6 +19,7 @@ import Article from "../../private/pages/article";
 import Deconquista from "../../private/pages/deconquista";
 import LeadersNote from "../../private/pages/leadersNote";
 import PaidReg from "../../private/pages/paidReg";
+import Attendance from "../../private/pages/attendance";
 
 
 /**
@@ -216,6 +217,16 @@ const Switch = ({
     case "paid-reg":
       return (
         <PaidReg
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "attendance":
+      return (
+        <Attendance
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
