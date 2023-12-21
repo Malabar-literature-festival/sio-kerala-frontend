@@ -20,6 +20,7 @@ import Deconquista from "../../private/pages/deconquista";
 import LeadersNote from "../../private/pages/leadersNote";
 import PaidReg from "../../private/pages/paidReg";
 import Attendance from "../../private/pages/attendance";
+import SpeakerPoster from "../../private/pages/speakerPoster";
 
 
 /**
@@ -227,6 +228,16 @@ const Switch = ({
     case "attendance":
       return (
         <Attendance
+          key={key}
+          exportPrivilege={exportPrivilege}
+          addPrivilege={addPrivilege}
+          delPrivilege={delPrivilege}
+          updatePrivilege={updatePrivilege}
+        />
+      );
+    case "speaker-poster":
+      return (
+        <SpeakerPoster
           key={key}
           exportPrivilege={exportPrivilege}
           addPrivilege={addPrivilege}
