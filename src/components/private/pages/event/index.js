@@ -752,6 +752,7 @@ const Event = (props) => {
         addPrivilege: false,
         delPrivilege: false,
         updatePrivilege: false,
+        exportPrivilege: true,
         customClass: "medium",
         formMode: "single",
       },
